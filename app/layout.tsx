@@ -1,6 +1,6 @@
 import { Lato } from "next/font/google";
 import localFont from "next/font/local";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 const lato = Lato({
@@ -91,10 +91,6 @@ export const metadata: Metadata = {
   title: "Okoye Charles | Frontend Developer",
   description:
     "Hey! I'm Charles, A developer with experience in website and systems development. Learn everything about my skills, experience, and journey as a programmer.",
-  themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: "#000000" },
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-  ],
   keywords: [
     "Okoye Charles",
     "Charles Okoye",
@@ -113,13 +109,18 @@ export const metadata: Metadata = {
     type: "website",
     url: "https://okoyecharles.com",
     title: "Okoye Charles | Frontend Developer",
-    description: "Hey! I'm Charles, A developer with experience in website and systems development. Learn everything about my skills, experience, and journey as a programmer.",
+    description:
+      "Hey! I'm Charles, A developer with experience in website and systems development. Learn everything about my skills, experience, and journey as a programmer.",
     siteName: "Okoye Charles | Frontend Developer",
     locale: "en_GB",
-    images: [{
-      url: "https://okoyecharles.com/og.png",
-    }],
-  }
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#000000" },
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+  ],
 };
 
 export default function RootLayout({
