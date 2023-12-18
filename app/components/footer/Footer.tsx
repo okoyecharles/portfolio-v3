@@ -1,10 +1,9 @@
 import footerData from "@/app/data/footer";
 import FooterLogo from "../svg/FooterLogo";
 import navigationData from "@/app/data/navigation";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Footer() {
-  const activeMode = 1;
-
   return (
     <div className="footer-container bg-grey-ea dark:bg-grey-1 border-t border-grey-d dark:border-grey-2 px-8">
       <footer className="w-full max-w-screen-xl mx-auto flex justify-between py-8">
@@ -25,13 +24,7 @@ export default function Footer() {
             ))}
           </ul>
         </div>
-        <div className="dark-light-toggle p-1 flex ring-1 ring-grey-b dark:ring-grey-3 rounded-[20px] self-center">
-          {footerData.modes.map((mode, modeIndex) => (
-            <button key={mode.name} className={`rounded-[16px] group transition-colors ${modeIndex == activeMode && 'bg-grey-9/[35%] dark:bg-grey-2 is-active'}`}>
-              { mode.icon }
-            </button>
-          ))}
-        </div>
+        <ThemeToggle />
       </footer>
     </div>
   );
