@@ -1,3 +1,4 @@
+import Footer from "./components/footer/Footer";
 import Navigation from "./components/navigation/Navigation";
 
 export default function Page() {
@@ -7,6 +8,7 @@ export default function Page() {
       <main>
         <span className="font-visby font-extrabold">Hello World</span>
       </main>
+      <Footer />
     </>
   );
 }
