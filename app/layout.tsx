@@ -2,6 +2,7 @@ import { Lato } from "next/font/google";
 import localFont from "next/font/local";
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import Providers from "./Providers";
 
 const lato = Lato({
   weight: ["100", "300", "400", "700", "900"],
@@ -113,7 +114,7 @@ export const metadata: Metadata = {
     siteName: "Okoye Charles | Frontend Developer",
     locale: "en_GB",
   },
-  metadataBase: new URL('https://okoyecharles.com')
+  metadataBase: new URL("https://okoyecharles.com"),
 };
 
 export const viewport: Viewport = {
@@ -134,7 +135,7 @@ export default function RootLayout({
       className={` ${visby.variable} ${lato.variable} h-full overflow-y-hidden`}
     >
       <body className="bg-white dark:bg-black font-lato h-full overflow-y-scroll">
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
