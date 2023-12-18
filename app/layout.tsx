@@ -130,7 +130,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${visby.variable} ${lato.variable}`}>
-      <body>{children}</body>
+      <body className="bg-white dark:bg-black font-lato">{children}</body>
     </html>
   );
 }
