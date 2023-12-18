@@ -8,7 +8,7 @@ export default function LogoIcon() {
       xmlns="http://www.w3.org/2000/svg"
       className={`fill-grey-1 dark:fill-white`}
     >
-      <g clip-path="url(#clip0_163_1655)">
+      <g clipPath="url(#clip0_163_1655)">
         <circle cx="74" cy="29" r="6" className={`fill-blue-100 dark:fill-blue-d-100`} />
         <path
           d="M37.112 35V0.919998H45.416V12.968C46.856 10.952 49.208 9.56 52.52 9.56C57.56 9.56 61.784 12.68 61.784 20.312V35H53.48V21.752C53.48 19.16 52.232 16.904 49.4 16.904C46.616 16.904 45.416 19.16 45.416 21.752V35H37.112Z"
