@@ -57,7 +57,7 @@ export default function NavLinks({ active }: { active: number }) {
   const listItemTrail = useTrail(4, {
     ref: LIRef,
     to: {
-      y: open ? 0 : -10,
+      y: open ? 0 : -20,
     },
     config: {
       friction: 35,
@@ -118,7 +118,7 @@ export default function NavLinks({ active }: { active: number }) {
               <li className="flex relative" key={anchor.name}>
                 <a.a
                   href={anchor.link}
-                  style={listItemTrail[0]}
+                  style={listItemTrail[anchorIndex]}
                   className={`peer py-3 uppercase hover:text-black dark:hover:text-grey-d transition-colors ${
                     active == anchorIndex && "text-black dark:text-grey-d"
                   }`}

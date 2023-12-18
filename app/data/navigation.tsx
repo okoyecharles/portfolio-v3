@@ -4,7 +4,7 @@ import XIcon from "../components/svg/XIcon";
 
 interface NavigationData {
   anchors: { name: string; link: string }[];
-  socials: { name: string; icon: React.JSX.Element; link: string }[];
+  socials: { name: string; icon: React.ReactNode; link: string }[];
 }
 
 const navigationData: NavigationData = {

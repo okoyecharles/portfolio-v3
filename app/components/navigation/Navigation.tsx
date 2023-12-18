@@ -6,7 +6,7 @@ export default function Navigation() {
   const activeNavigationLink = 3;
   return (
     <>
-      <div className="navigation-container max-w-[1504px] sticky top-0 mx-auto">
+      <div className="navigation-container max-w-[1504px] sticky top-0 mx-auto z-10">
         <div className="relative">
           <NavLinks active={activeNavigationLink} />
           <DesktopNavLinks active={activeNavigationLink} />

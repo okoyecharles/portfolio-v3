@@ -4,7 +4,7 @@ import SystemmodeIcon from "../components/svg/SystemmodeIcon";
 
 interface FooterData {
   creationYear: string,
-  modes: { name: string, icon: React.JSX.Element }[]
+  modes: { name: string, icon: React.ReactNode }[]
 }
 
 const footerData: FooterData = {
