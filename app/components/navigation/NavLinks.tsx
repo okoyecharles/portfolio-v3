@@ -69,7 +69,7 @@ export default function NavLinks({ active }: { active: number }) {
 
   return (
     <a.div
-      className={`nav-container absolute top-6 right-6 h-12 w-12 bg-grey-ea dark:bg-grey-2 ring-1 dark:ring-0 ring-grey-b rounded-[10px] md:hidden overflow-hidden`}
+      className={`absolute top-6 right-6 h-12 w-12 bg-grey-ea dark:bg-grey-2 ring-1 dark:ring-0 ring-grey-b rounded-[10px] md:hidden overflow-hidden`}
       style={{
         width: to(
           [toggleMenuSpring.width, toggleMenuSpring.widthoffset],
@@ -115,7 +115,7 @@ export default function NavLinks({ active }: { active: number }) {
         <nav className="px-6">
           <ul className="flex flex-col text-base text-grey-6 dark:text-grey-b ms-[25px] font-visby font-medium">
             {navigationData.anchors.map((anchor, anchorIndex) => (
-              <li className="flex relative">
+              <li className="flex relative" key={anchor.name}>
                 <a.a
                   href={anchor.link}
                   style={listItemTrail[0]}
@@ -132,17 +132,17 @@ export default function NavLinks({ active }: { active: number }) {
                       (scale) => `translateY(-50%) scale(${scale * 100}%)`
                     ),
                   }}
-                  className={`list-marker ring-1 ring-grey-6/0 peer-hover:ring-grey-6 dark:peer-hover:ring-grey-9 absolute top-1/2  -left-[25px] w-[10px] h-[10px] bg-grey-b dark:bg-grey-5 rounded-[2.5px] transition-colors ${
+                  className={`list-marker ring-1 ring-grey-6/0 peer-hover:ring-grey-6 dark:peer-hover:ring-grey-9 absolute top-1/2  -left-[25px] w-[10px] h-[10px]  rounded-[2.5px] bg-grey-b dark:bg-grey-5 transition-colors ${
                     active == anchorIndex &&
-                    "bg-blue-200 dark:bg-blue-d-200 ring-0"
+                    "!bg-blue-200 dark:!bg-blue-d-200 !ring-0"
                   }`}
                 ></a.div>
               </li>
             ))}
           </ul>
-          <ul className="flex gap-4 absolute bottom-[12px] right-[12px]">
+          <ul className="flex 1 gap-4 absolute bottom-[12px] right-[12px]">
             {navigationData.socials.slice(0, 2).map((social) => (
-              <li>
+              <li key={social.name}>
                 <a href={social.link} rel="noopener noreferrer" target="_blank">
                   {social.icon}
                 </a>

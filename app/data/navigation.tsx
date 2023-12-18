@@ -2,12 +2,12 @@ import GithubIcon from "../components/svg/GithubIcon";
 import LinkedinIcon from "../components/svg/LinkedinIcon";
 import XIcon from "../components/svg/XIcon";
 
-interface navData {
+interface NavigationData {
   anchors: { name: string; link: string }[];
   socials: { name: string; icon: React.JSX.Element; link: string }[];
 }
 
-const navigationData: navData = {
+const navigationData: NavigationData = {
   anchors: [
     {
       name: "home",
