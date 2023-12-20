@@ -1,14 +1,12 @@
 import Footer from "./components/footer/Footer";
+import Home from "./components/sections/home/Home";
 import Navigation from "./components/navigation/Navigation";
-import HomeBackground from "./components/sections/home/HomeBackground";
 
 export default function Page() {
   return (
     <>
       <Navigation />
-      <main className="h-full  p-6 text-grey-9 flex justify-center relative">
-        <HomeBackground />
-      </main>
+      <Home />
       <Footer />
     </>
   );
