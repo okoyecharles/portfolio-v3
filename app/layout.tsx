@@ -134,7 +134,7 @@ export default function RootLayout({
       lang="en"
       className={` ${visby.variable} ${lato.variable} h-full overflow-y-hidden`}
     >
-      <body className="bg-white dark:bg-black h-full overflow-y-scroll font-lato font-normal">
+      <body className="bg-white dark:bg-black h-full overflow-y-scroll font-lato font-normal selection:bg-blue-200 dark:selection:bg-blue-d-300 selection:text-white">
         <Providers>{children}</Providers>
       </body>
     </html>
