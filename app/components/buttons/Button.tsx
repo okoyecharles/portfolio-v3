@@ -1,5 +1,3 @@
-import { ButtonHTMLAttributes, HTMLAttributes } from "react";
-
 interface ButtonProps {
   children: React.ReactNode;
   variant?: "default" | "black";
@@ -24,7 +22,7 @@ function Button({ children, variant = "default" }: ButtonProps) {
 
   return (
     <button
-      className={`group flex gap-2 items-center px-4 py-3 rounded-[5px] transition-colors ${focusClass} ${variantClass[variant]}`}
+      className={`group select-none flex gap-2 items-center px-4 py-3 rounded-[5px] transition-colors ${focusClass} ${variantClass[variant]}`}
     >
       {children}
     </button>

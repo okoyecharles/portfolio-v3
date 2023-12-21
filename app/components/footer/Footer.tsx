@@ -11,7 +11,7 @@ export default function Footer() {
           <div className="logo">
             <FooterLogo />
           </div>
-          <p className="text-sm leading-[16px] font-medium text-grey-6 dark:text-grey-9">
+          <p className="text-sm leading-[1.2] font-medium text-grey-6 dark:text-grey-9">
             @{footerData.creationYear}, Okoye Charles
           </p>
           <ul className="flex gap-4 py-1">
