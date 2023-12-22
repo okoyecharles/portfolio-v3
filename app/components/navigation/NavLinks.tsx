@@ -25,7 +25,7 @@ export default function NavLinks({ active }: { active: number }) {
     to: {
       width: open ? 100 : 0,
       widthoffset: open ? 48 : -48,
-      height: open ? 240 : 48,
+      height: open ? 244 : 48,
     },
     config: {
       friction: 27.5,
@@ -141,7 +141,7 @@ export default function NavLinks({ active }: { active: number }) {
             ))}
           </ul>
           <ul className="flex 1 gap-4 absolute bottom-[12px] right-[12px]">
-            {navigationData.socials.slice(0, 2).map((social) => (
+            {navigationData.socials.map((social) => (
               <li key={social.name}>
                 <a href={social.link} rel="noopener noreferrer" target="_blank">
                   {social.icon}

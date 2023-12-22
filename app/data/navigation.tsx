@@ -1,6 +1,8 @@
 import GithubIcon from "../components/svg/GithubIcon";
+import GmailIcon from "../components/svg/GmailIcon";
 import LinkedinIcon from "../components/svg/LinkedinIcon";
 import XIcon from "../components/svg/XIcon";
+import footerData from "./footer";
 
 interface NavigationData {
   anchors: { name: string; link: string }[];
@@ -26,22 +28,6 @@ const navigationData: NavigationData = {
       link: "#",
     },
   ],
-  socials: [
-    {
-      name: "github",
-      icon: <GithubIcon />,
-      link: "https://github.com/okoyecharles",
-    },
-    {
-      name: "linkedin",
-      icon: <LinkedinIcon />,
-      link: "https://linkedin.com/in/okoyecharles",
-    },
-    {
-      name: "x",
-      icon: <XIcon />,
-      link: "https://x.com/okoyecharlesk",
-    },
-  ],
+  socials: footerData.socials.slice(2, 4),
 };
 export default navigationData;

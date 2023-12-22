@@ -2,29 +2,55 @@ import footerData from "@/app/data/footer";
 import FooterLogo from "../svg/FooterLogo";
 import navigationData from "@/app/data/navigation";
 import ThemeToggle from "./ThemeToggle";
+import Link from "../clickable/Link";
+import HeartIcon from "../svg/HeartIcon";
 
 export default function Footer() {
   return (
     <div className="footer-container bg-grey-ea dark:bg-grey-1 border-t border-grey-d dark:border-grey-2 px-8">
-      <footer className="w-full max-w-screen-xl mx-auto flex justify-between py-8">
-        <div className="content flex flex-col gap-4">
+      <footer className="w-full max-w-screen-xl mx-auto flex flex-col gap-10 py-8 md:flex-row md:justify-between">
+        <div className="content flex justify-between md:flex-col md:gap-8">
           <div className="logo">
             <FooterLogo />
           </div>
-          <p className="text-sm leading-[16px] font-medium text-grey-6 dark:text-grey-9">
-            @{footerData.creationYear}, Okoye Charles
-          </p>
-          <ul className="flex gap-4 py-1">
-            {navigationData.socials.map((social) => (
-              <li key={social.name}>
-                <a href={social.link} rel="noopener noreferrer" target="_blank">
-                  {social.icon}
+          <ul className="flex gap-4 md:flex-col md:gap-3">
+            {footerData.socials.map((social) => (
+              <li key={social.name} className="group/icon">
+                <a
+                  href={social.link}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  className="md:flex md:gap-2 md:flex-end"
+                >
+                  <div className="flex w-[24px]">{social.icon}</div>
+                  <span
+                    className={`
+                    hidden md:inline text-grey-6 dark:text-grey-9 text-[15px] relative
+                    after:bg-grey-6 after:dark:bg-grey-9 after:pointer-events-none
+                    after:absolute after:left-0 after:-bottom-[2px]
+                    after:w-full after:h-[2px]
+                    after:opacity-0 group-hover/icon:after:opacity-100
+                  `}
+                  >
+                    {social.name}
+                  </span>
                 </a>
               </li>
             ))}
           </ul>
         </div>
-        <ThemeToggle />
+        <div className="content-2 flex flex-col gap-3 md:justify-between">
+          <div className="self-center md:self-end">
+            <ThemeToggle />
+          </div>
+          <p className="text-grey-6 dark:text-grey-9 text-[15px] text-center flex gap-1 items-center self-center md:self-end">
+            <span>Built with</span>
+            <HeartIcon />
+            <span>
+              by <Link href={footerData.sourceCode}>Okoye Charles</Link>
+            </span>
+          </p>
+        </div>
       </footer>
     </div>
   );

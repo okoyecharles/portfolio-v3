@@ -59,7 +59,7 @@ export default function HomeBackground() {
   });
 
   return (
-    <div className="home-bg grid grid-cols-7 w-[1400px] -z-10 h-fit">
+    <div className="home-bg grid grid-cols-7 w-[1400px] -z-10 h-fit absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2">
       {Array(SQUARE_COUNT)
         .fill(0)
         .map((_, index) => (

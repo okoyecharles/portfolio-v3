@@ -41,7 +41,7 @@ const config: Config = {
         'd-200': '#3291ff',
         'd-300': '#187ff6',
       },
-      'framwork': {
+      'framework': {
         'redux': '#7D47C3',
         'mongodb': '#00B425',
         'react': '#00DDFF',
