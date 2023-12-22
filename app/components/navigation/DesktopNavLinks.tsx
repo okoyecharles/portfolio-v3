@@ -45,7 +45,7 @@ export default function DesktopNavLinks({ active }: { active: number }) {
         <VerticalLineIcon />
       </div>
       <ul className="flex gap-4">
-        {navigationData.socials.slice(0, 2).map((social) => (
+        {navigationData.socials.map((social) => (
           <li key={social.name}>
             <a href={social.link} rel="noopener noreferrer" target="_blank">
               {social.icon}
