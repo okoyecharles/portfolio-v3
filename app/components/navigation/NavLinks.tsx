@@ -25,7 +25,7 @@ export default function NavLinks({ active }: { active: number }) {
     to: {
       width: open ? 100 : 0,
       widthoffset: open ? 48 : -48,
-      height: open ? 240 : 48,
+      height: open ? 244 : 48,
     },
     config: {
       friction: 27.5,
