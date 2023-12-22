@@ -1,4 +1,4 @@
-import Button from "../../buttons/Button";
+import Button from "../../clickable/Button";
 import DownloadIcon from "../../svg/DownloadIcon";
 import Section from "../Section";
 import HomeBackground from "./HomeBackground";
