@@ -5,9 +5,9 @@ import HomeBackground from "./HomeBackground";
 
 export default function Home() {
   return (
-    <Section padding="py-[150px] md:pt-[128px] md:pb-[224px]">
+    <Section padding="pt-[150px] pb-[200px] md:pt-[128px] md:pb-[256px]">
       <header className="relative md:self-center">
-        <h1 className="text-grey-1 dark:text-grey-d text-[64px] lg:text-[100px] leading-[1.1] font-visby uppercase font-extrabold ">
+        <h1 className="text-grey-1 dark:text-grey-d text-[64px] lg:text-[100px] leading-[1.1] font-visby uppercase font-extrabold">
           Okoye Charles
         </h1>
         <div className="font-extrabold text-grey-2 dark:text-grey-b text-[24px] font-mono absolute leading-[1] -top-6 -left-0 md:-top-2 lg:-top-0 md:-left-10 select-none">
