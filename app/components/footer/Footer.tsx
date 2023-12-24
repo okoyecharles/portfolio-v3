@@ -1,6 +1,5 @@
 import footerData from "@/app/data/footer";
 import FooterLogo from "../svg/FooterLogo";
-import navigationData from "@/app/data/navigation";
 import ThemeToggle from "./ThemeToggle";
 import Link from "../clickable/Link";
 import HeartIcon from "../svg/HeartIcon";
@@ -43,7 +42,7 @@ export default function Footer() {
           <div className="self-center md:self-end">
             <ThemeToggle />
           </div>
-          <p className="text-grey-6 dark:text-grey-9 text-[15px] text-center flex gap-1 items-center self-center md:self-end">
+          <p className="text-grey-6 dark:text-grey-9 text-[15px] text-center flex gap-1 items-center self-center md:self-end select-none">
             <span>Built with</span>
             <HeartIcon />
             <span>
