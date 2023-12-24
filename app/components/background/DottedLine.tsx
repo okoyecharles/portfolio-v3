@@ -1,11 +1,11 @@
 "use client";
-import { a, useSpring, to, SpringValue } from "@react-spring/web";
+import { a, useSpring, to } from "@react-spring/web";
+import { LineProps } from "./props";
 
 export default function DottedLine({
   animation,
-}: {
-  animation?: [{ size: SpringValue<string> }, { pos: SpringValue<number> }];
-}) {
+  variant = "normal"
+}: LineProps) {
   const glowLine = useSpring({
     from: { pos: 200 },
     to: { pos: 0 },
@@ -17,6 +17,11 @@ export default function DottedLine({
     to: { size: "100px" },
     delay: 200,
   });
+
+  const variantClass = {
+    normal: "stroke-grey-5 dark:stroke-grey-6",
+    bold: "stroke-black dark:stroke-grey-b"
+  }
 
   return (
     <div className="h-[100px] select-none">
@@ -38,7 +43,7 @@ export default function DottedLine({
         >
           <path
             d="M0.5 0.5L0.5 100.5"
-            className="stroke-grey-5"
+            className={variantClass[variant]}
             strokeDasharray="5 5"
           />
           <a.rect
@@ -63,15 +68,18 @@ export default function DottedLine({
             >
               <stop
                 offset="0.34"
-                className="[stop-color:#fff] dark:[stop-color:#000] [stop-opacity:0.7] dark:[stop-opacity:0.5]"
+                className={`
+                [stop-opacity:0.7] [stop-color:#fff] dark:[stop-color:#000]`}
               />
               <stop
                 offset="0.5"
-                className="[stop-color:#fff] dark:[stop-color:#000] [stop-opacity:0]"
+                className={`[stop-color:#fff] dark:[stop-color:#000]`}
+                stopOpacity={0}
               />
               <stop
                 offset="0.66"
-                className="[stop-color:#fff] dark:[stop-color:#000] [stop-opacity:0.7] dark:[stop-opacity:0.5]"
+                className={`
+                [stop-opacity:0.7] [stop-color:#fff] dark:[stop-color:#000]`}
               />
             </linearGradient>
           </defs>
