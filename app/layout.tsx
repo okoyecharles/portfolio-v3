@@ -114,7 +114,7 @@ export const metadata: Metadata = {
     siteName: "Okoye Charles | Frontend Developer",
     locale: "en_GB",
   },
-  metadataBase: new URL("https://okoyecharles.com"),
+  metadataBase: new URL(process.env.METADATA_BASEURL!),
 };
 
 export const viewport: Viewport = {
