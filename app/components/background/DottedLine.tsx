@@ -1,27 +1,16 @@
 "use client";
-import { a, useSpring, to } from "@react-spring/web";
+import { a, to } from "@react-spring/web";
 import { LineProps } from "./props";
+import animate from "./animate";
 
 export default function DottedLine({
   animation,
-  variant = "normal"
+  variant = "normal",
 }: LineProps) {
-  const glowLine = useSpring({
-    from: { pos: 200 },
-    to: { pos: 0 },
-    delay: 200,
-  });
-
-  const revealLine = useSpring({
-    from: { size: "0px" },
-    to: { size: "100px" },
-    delay: 200,
-  });
-
   const variantClass = {
     normal: "stroke-grey-5 dark:stroke-grey-6",
-    bold: "stroke-black dark:stroke-grey-b"
-  }
+    bold: "stroke-black dark:stroke-grey-b",
+  };
 
   return (
     <div className="h-[100px] select-none">
@@ -29,7 +18,7 @@ export default function DottedLine({
         className="line-unveil overflow-hidden"
         style={{
           height: to(
-            (animation ? animation[0] : revealLine).size,
+            (animation ? animation[0] : animate.lineReveal()).size,
             (h) => `${h}`
           ),
         }}
@@ -52,7 +41,7 @@ export default function DottedLine({
             fill="url(#paint0_linear_329_1886)"
             style={{
               transform: to(
-                (animation ? animation[1] : glowLine).pos,
+                (animation ? animation[1] : animate.lineGlow()).pos,
                 (y) => `translateY(-${y}px)`
               ),
             }}

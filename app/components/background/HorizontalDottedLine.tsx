@@ -1,23 +1,12 @@
 "use client";
-import { a, to, useSpring } from "@react-spring/web";
+import { a, to } from "@react-spring/web";
 import { LineProps } from "./props";
+import animate from "./animate";
 
 export default function HorizontalDottedLine({
   animation,
   variant = "normal",
 }: LineProps) {
-  const glowLine = useSpring({
-    from: { pos: 200 },
-    to: { pos: 0 },
-    delay: 200,
-  });
-
-  const revealLine = useSpring({
-    from: { size: "0px" },
-    to: { size: "100px" },
-    delay: 200,
-  });
-
   const variantClass = {
     normal: "stroke-grey-5 dark:stroke-grey-6",
     bold: "stroke-black dark:stroke-grey-b",
@@ -29,7 +18,7 @@ export default function HorizontalDottedLine({
         className="line-unveil overflow-hidden"
         style={{
           width: to(
-            (animation ? animation[0] : revealLine).size,
+            (animation ? animation[0] : animate.lineReveal()).size,
             (w) => `${w}`
           ),
         }}
@@ -55,7 +44,7 @@ export default function HorizontalDottedLine({
             fill="url(#paint0_linear_337_1890)"
             style={{
               transform: to(
-                (animation ? animation[1] : glowLine).pos,
+                (animation ? animation[1] : animate.lineGlow()).pos,
                 (x) => `translateX(${200 - x}px)`
               ),
             }}

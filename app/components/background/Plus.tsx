@@ -1,16 +1,14 @@
 "use client";
-import { a, useSpring } from "@react-spring/web";
+import { a } from "@react-spring/web";
 import { PlusProps } from "./props";
+import animate from "./animate";
 
-export default function Plus({ className, animation: customAnimation }: PlusProps) {
-  const revealPlus = useSpring({
-    from: { scale: 0 },
-    to: { scale: 1 },
-    delay: 200,
-  });
-
+export default function Plus({
+  className,
+  animation: customAnimation,
+}: PlusProps) {
   function getTransform() {
-    return customAnimation || revealPlus.scale
+    return customAnimation || animate.plusReveal().scale;
   }
 
   return (
