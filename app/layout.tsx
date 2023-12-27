@@ -1,8 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import Providers from "./Providers";
-import visby from "./components/fonts/visby";
-import lato from "./components/fonts/lato";
+import visby from "./fonts/visby";
+import lato from "./fonts/lato";
 
 export const metadata: Metadata = {
   title: "Okoye Charles | Frontend Developer",
