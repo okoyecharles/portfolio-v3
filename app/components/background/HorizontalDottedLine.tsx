@@ -8,8 +8,8 @@ export default function HorizontalDottedLine({
   variant = "normal",
 }: LineProps) {
   const variantClass = {
-    normal: "stroke-grey-5 dark:stroke-grey-6",
-    bold: "stroke-black dark:stroke-grey-b",
+    normal: "stroke-grey-5 dark:stroke-grey-8",
+    bold: "stroke-black dark:stroke-white",
   };
 
   return (
