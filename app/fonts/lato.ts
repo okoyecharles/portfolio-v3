@@ -23,7 +23,7 @@ const lato = localFont({
       style: "normal",
     },
     {
-      path: "../../public/fonts/lato/Lato-Semibold.ttf",
+      path: "../../public/fonts/lato/Lato-SemiBold.ttf",
       weight: "600",
       style: "normal",
     },
@@ -33,7 +33,7 @@ const lato = localFont({
       style: "normal",
     },
     {
-      path: "../../public/fonts/lato/Lato-Extrabold.ttf",
+      path: "../../public/fonts/lato/Lato-ExtraBold.ttf",
       weight: "800",
       style: "normal",
     },

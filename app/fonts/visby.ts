@@ -43,12 +43,12 @@ const visby = localFont({
       style: "italic",
     },
     {
-      path: "../../public/fonts/visby/Visby-Extrabold.otf",
+      path: "../../public/fonts/visby/Visby-ExtraBold.otf",
       weight: "800",
       style: "normal",
     },
     {
-      path: "../../public/fonts/visby/Visby-ExtraboldItalic.otf",
+      path: "../../public/fonts/visby/Visby-ExtraBoldItalic.otf",
       weight: "800",
       style: "italic",
     },
