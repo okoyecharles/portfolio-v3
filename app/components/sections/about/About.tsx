@@ -9,12 +9,11 @@ import DottedLine from "../../background/DottedLine";
 import Link from "../../clickable/Link";
 import aboutData from "@/app/data/about";
 import {
-  a,
-  useChain,
+  a, 
   useSpring,
-  useSpringRef,
   useTrail,
 } from "@react-spring/web";
+import { useObservedSprings } from "../../utils/useObservedSpring";
 
 export default function About() {
   return (
@@ -27,7 +26,7 @@ export default function About() {
             <h3 className="text-[18px] leading-[1.3] font-semibold text-grey-1 dark:text-grey-d mb-2">
               Introduction
             </h3>
-            <p className="mb-2">
+            <p className="mb-4">
               My name is Okoye Charles Kosisochukwu \options\, a{" "}
               <strong className="text-grey-1 dark:text-grey-d whitespace-nowrap">
                 Full-Stack Developer
@@ -112,53 +111,42 @@ function AboutList({
   items: typeof aboutData.technologies | typeof aboutData.technologies;
 }) {
   const LIST_HEIGHT = 32 * (items.length - 1);
-  const ITEM_HIGHT = 24;
 
-  const LERef = useSpringRef();
-  const lineExtendSpring = useSpring({
-    ref: LERef,
-    from: { height: 0 },
-    to: { height: LIST_HEIGHT },
-    config: {
-      friction: 35,
-      tension: 150,
-    },
-  });
-
-  const LMRef = useSpringRef();
-  const listMarkerTrail = useTrail(items.length, {
-    ref: LMRef,
-    from: { y: "-50%", scale: 0 },
-    to: { y: "-50%", scale: 1 },
-    config: {
-      friction: 35,
-      tension: 400,
-    },
-  });
-
-  const LIRef = useSpringRef();
-  const listItemTrail = useTrail(items.length, {
-    ref: LIRef,
-    from: { opacity: 0 },
-    to: { opacity: 1 },
-  });
-
-  useChain([LERef, LMRef, LIRef], [0, 0, 0.5]);
+  const { observedRef, springAnimate } = useObservedSprings(
+    [{ height: 0 }, { y: "-50%", scale: 0 }, { opacity: 0 }],
+    [
+      {
+        height: LIST_HEIGHT,
+        config: { friction: 35, tension: 150 },
+      },
+      {
+        y: "-50%",
+        scale: 1,
+        config: { friction: 35, tension: 400 },
+      },
+      { opacity: 1, delay: 250 },
+    ],
+    [
+      useSpring,
+      (cb: Function) => useTrail(items.length, cb),
+      (cb: Function) => useTrail(items.length, cb),
+    ]
+  );
 
   return (
-    <div className="relative">
+    <div className="relative" ref={observedRef}>
       <a.div
         className="list-marker-line absolute top-[12px] left-[12px] w-[2px] bg-grey-ea dark:bg-grey-2"
-        style={lineExtendSpring}
+        style={springAnimate[0]}
       />
       <ul className="grid gap-2">
         {items.map((item, itemIndex) => (
           <li className="ps-[34px] relative" key={item}>
             <a.div
               className="list-marker h-[10px] aspect-square rounded-[5px] ring-1 ring-blue-100 dark:ring-blue-200 bg-grey-ea dark:bg-grey-2 absolute top-1/2 -translate-y-1/2 left-2"
-              style={listMarkerTrail[itemIndex]} 
+              style={springAnimate[1][itemIndex]}
             />
-            <a.span className="block" style={listItemTrail[itemIndex]}>
+            <a.span className="block" style={springAnimate[2][itemIndex]}>
               {item}
             </a.span>
           </li>
