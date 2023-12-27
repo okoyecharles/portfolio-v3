@@ -1,22 +1,16 @@
 "use client";
-import { a, useSpring, to, SpringValue } from "@react-spring/web";
+import { a, to } from "@react-spring/web";
+import { LineProps } from "./props";
+import animate from "./animate";
 
 export default function DottedLine({
   animation,
-}: {
-  animation?: [{ size: SpringValue<string> }, { pos: SpringValue<number> }];
-}) {
-  const glowLine = useSpring({
-    from: { pos: 200 },
-    to: { pos: 0 },
-    delay: 200,
-  });
-
-  const revealLine = useSpring({
-    from: { size: "0px" },
-    to: { size: "100px" },
-    delay: 200,
-  });
+  variant = "normal",
+}: LineProps) {
+  const variantClass = {
+    normal: "stroke-grey-5 dark:stroke-grey-8",
+    bold: "stroke-black dark:stroke-white",
+  };
 
   return (
     <div className="h-[100px] select-none">
@@ -24,7 +18,7 @@ export default function DottedLine({
         className="line-unveil overflow-hidden"
         style={{
           height: to(
-            (animation ? animation[0] : revealLine).size,
+            (animation ? animation[0] : animate.lineReveal()).size,
             (h) => `${h}`
           ),
         }}
@@ -38,7 +32,7 @@ export default function DottedLine({
         >
           <path
             d="M0.5 0.5L0.5 100.5"
-            className="stroke-grey-5"
+            className={variantClass[variant]}
             strokeDasharray="5 5"
           />
           <a.rect
@@ -47,7 +41,7 @@ export default function DottedLine({
             fill="url(#paint0_linear_329_1886)"
             style={{
               transform: to(
-                (animation ? animation[1] : glowLine).pos,
+                (animation ? animation[1] : animate.lineGlow()).pos,
                 (y) => `translateY(-${y}px)`
               ),
             }}
@@ -63,15 +57,18 @@ export default function DottedLine({
             >
               <stop
                 offset="0.34"
-                className="[stop-color:#fff] dark:[stop-color:#000] [stop-opacity:0.7] dark:[stop-opacity:0.5]"
+                className={`
+                [stop-opacity:0.7] [stop-color:#fff] dark:[stop-color:#000]`}
               />
               <stop
                 offset="0.5"
-                className="[stop-color:#fff] dark:[stop-color:#000] [stop-opacity:0]"
+                className={`[stop-color:#fff] dark:[stop-color:#000]`}
+                stopOpacity={0}
               />
               <stop
                 offset="0.66"
-                className="[stop-color:#fff] dark:[stop-color:#000] [stop-opacity:0.7] dark:[stop-opacity:0.5]"
+                className={`
+                [stop-opacity:0.7] [stop-color:#fff] dark:[stop-color:#000]`}
               />
             </linearGradient>
           </defs>

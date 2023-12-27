@@ -54,8 +54,8 @@ export default function HomeBackground() {
     to: { scale: 1 },
     config: {
       tension: 200,
-      friction: 30
-    }
+      friction: 30,
+    },
   });
 
   return (
@@ -72,7 +72,7 @@ export default function HomeBackground() {
                 ? [0, 0, 1, 0]
                 : [0, 1, 1, 0]
             }
-            plus={(index + 1) / COLUMNS < 3 && (index + 1) % COLUMNS !== 0} 
+            plus={(index + 1) / COLUMNS < 3 && (index + 1) % COLUMNS !== 0}
             lineAnimation={[
               revealBackground[animationOrder[index]],
               glowBackground[animationOrder[index]],
@@ -91,7 +91,12 @@ interface BackgroundSquareProps {
   plusAnimation: { scale: SpringValue<number> };
 }
 
-function BackgroundSquare({ lines, lineAnimation, plus, plusAnimation }: BackgroundSquareProps) {
+function BackgroundSquare({
+  lines,
+  lineAnimation,
+  plus,
+  plusAnimation,
+}: BackgroundSquareProps) {
   return (
     <div className="bg-section w-[200px] h-[200px] relative">
       {!!lines[0] && (
@@ -116,7 +121,10 @@ function BackgroundSquare({ lines, lineAnimation, plus, plusAnimation }: Backgro
       )}
       {plus && (
         <div className="absolute left-full top-full -translate-x-1/2 -translate-y-1/2">
-          <Plus animation={plusAnimation} />
+          <Plus
+            animation={plusAnimation.scale.to([0, 0.5, 1], [0, 1, 0])}
+            className="stroke-blue-100 dark:stroke-blue-d-200"
+          />
         </div>
       )}
     </div>
