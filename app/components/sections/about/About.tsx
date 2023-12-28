@@ -17,7 +17,7 @@ import { useObservedSprings } from "../../utils/useObservedSpring";
 
 export default function About() {
   return (
-    <Section>
+    <Section name="about">
       <SectionHeader>About me</SectionHeader>
       <div className="grid gap-6 md:grid-cols-10 my-6 md:my-[96px] lg:mt-[128px] lg:mb-[256px]">
         <AboutImage />

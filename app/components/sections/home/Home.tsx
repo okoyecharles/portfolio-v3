@@ -48,6 +48,7 @@ export default function Home() {
 
   return (
     <Section
+      name="home"
       padding="pt-[150px] pb-[200px] md:pt-[128px] md:pb-[256px]"
       sectionRef={observedRef}
     >
