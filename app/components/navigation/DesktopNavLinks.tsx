@@ -2,6 +2,7 @@
 import VerticalLineIcon from "../svg/VerticalLineIcon";
 import navigationData from "../../data/navigation";
 import { a, to, useSpring } from "@react-spring/web";
+import useScrollDirection from "../utils/useScrollDirection";
 
 export default function DesktopNavLinks({ active }: { active: number }) {
   const activeMarkerMorph = [
@@ -16,9 +17,23 @@ export default function DesktopNavLinks({ active }: { active: number }) {
       x: activeMarkerMorph[active].pos,
     },
   });
+  
+  const scrollDirection = useScrollDirection();
+  const activeNavSpring = useSpring({
+    from: { y: 0 },
+    to: {
+      y: scrollDirection == 'down' ? -100 : 0,
+    },
+    delay: 250,
+    config: {
+      tension: 300,
+      friction: 40,
+    }
+  });
 
   return (
-    <nav className="absolute w-fit top-9 right-9 bg-white dark:bg-grey-2 ring-1 dark:ring-0 ring-grey-ea rounded-[10px] font-visby font-medium px-6 py-[13px] gap-6 hidden md:flex items-center overflow-hidden select-none">
+    <a.nav className="absolute w-fit top-9 right-9 bg-white dark:bg-grey-2 ring-1 dark:ring-0 ring-grey-ea rounded-[10px] font-visby font-medium px-6 py-[13px] gap-6 hidden md:flex items-center overflow-hidden select-none" style={activeNavSpring}>
+      {/* { scrollDirection } */}
       <a.div
         className="active-marker absolute left-0 bottom-0 translate-y-1/2 h-[10px] bg-blue-100 dark:bg-blue-d-200 rounded-[4px]"
         style={{
@@ -53,6 +68,6 @@ export default function DesktopNavLinks({ active }: { active: number }) {
           </li>
         ))}
       </ul>
-    </nav>
+    </a.nav>
   );
 }
