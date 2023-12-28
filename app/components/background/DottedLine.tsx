@@ -8,7 +8,7 @@ export default function DottedLine({
   variant = "normal",
 }: LineProps) {
   const variantClass = {
-    normal: "stroke-grey-5 dark:stroke-grey-8",
+    normal: "stroke-black dark:stroke-grey-8",
     bold: "stroke-black dark:stroke-white",
   };
 
@@ -58,7 +58,7 @@ export default function DottedLine({
               <stop
                 offset="0.34"
                 className={`
-                [stop-opacity:0.7] [stop-color:#fff] dark:[stop-color:#000]`}
+                [stop-opacity:0.8] dark:[stop-opacity:0.7] [stop-color:#fff] dark:[stop-color:#000]`}
               />
               <stop
                 offset="0.5"
@@ -68,7 +68,7 @@ export default function DottedLine({
               <stop
                 offset="0.66"
                 className={`
-                [stop-opacity:0.7] [stop-color:#fff] dark:[stop-color:#000]`}
+                [stop-opacity:0.8] dark:[stop-opacity:0.7] [stop-color:#fff] dark:[stop-color:#000]`}
               />
             </linearGradient>
           </defs>

@@ -8,7 +8,7 @@ export default function HorizontalDottedLine({
   variant = "normal",
 }: LineProps) {
   const variantClass = {
-    normal: "stroke-grey-5 dark:stroke-grey-8",
+    normal: "stroke-black dark:stroke-grey-8",
     bold: "stroke-black dark:stroke-white",
   };
 
@@ -60,7 +60,7 @@ export default function HorizontalDottedLine({
             >
               <stop
                 offset="0.34"
-                className={`[stop-color:#fff] dark:[stop-color:#000] [stop-opacity:0.7]`}
+                className={`[stop-color:#fff] dark:[stop-color:#000] [stop-opacity:0.8] dark:[stop-opacity:0.7]`}
               />
               <stop
                 offset="0.5"
@@ -69,7 +69,7 @@ export default function HorizontalDottedLine({
               <stop
                 offset="0.66"
                 className={`
-                [stop-color:#fff] dark:[stop-color:#000] [stop-opacity:0.7]`}
+                [stop-color:#fff] dark:[stop-color:#000] [stop-opacity:0.8] dark:[stop-opacity:0.7]`}
               />
             </linearGradient>
           </defs>
