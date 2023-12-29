@@ -12,28 +12,6 @@ export interface HomeBackgroundProps {
   }[];
 }
 
-export const homeBgAnimation = {
-  glowBackground: {
-    start: { pos: 200 },
-    end: { to: { pos: 0 }, delay: 1750 },
-  },
-  revealBackground: {
-    start: { size: "0px" },
-    end: { to: { size: "100px" }, delay: 1750 },
-  },
-  revealBackgroundPlus: {
-    start: { scale: 0 },
-    end: {
-      to: { scale: 1 },
-      config: {
-        tension: 200,
-        friction: 30,
-      },
-      delay: 750,
-    },
-  },
-};
-
 export const animationOrder: any = {
   0: 0,
   1: 1,
@@ -63,4 +41,3 @@ export const animationOrder: any = {
   25: 7,
   26: 8,
 };
-
