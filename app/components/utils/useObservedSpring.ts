@@ -10,7 +10,7 @@ interface Props {
 
 const observerConfig: IntersectionOptions = {
   threshold: 0,
-  rootMargin: "-15%",
+  rootMargin: "-48px",
 };
 
 export default function useObservedSpring(
