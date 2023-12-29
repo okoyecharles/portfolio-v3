@@ -1,21 +1,25 @@
 "use client";
 import { a } from "@react-spring/web";
 import { PlusProps } from "./props";
-import animate from "./animate";
 
 export default function Plus({
   className,
   animation: customAnimation,
+  mode = "default",
 }: PlusProps) {
-  function getTransform() {
-    return customAnimation || animate.plusReveal().scale;
+  function transformAnimation() {
+    if (mode === "flicker") {
+      return customAnimation.scale.to([0, 0.5, 1], [0, 1, 0]);
+    } else {
+      return customAnimation.scale;
+    }
   }
 
   return (
     <a.div
       className="select-none w-[25px] h-[25px]"
       style={{
-        transform: getTransform().to((s: any) => `scale(${s})`),
+        transform: transformAnimation().to((s: any) => `scale(${s})`),
       }}
     >
       <svg

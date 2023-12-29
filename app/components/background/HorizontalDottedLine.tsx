@@ -1,15 +1,14 @@
 "use client";
 import { a, to } from "@react-spring/web";
 import { LineProps } from "./props";
-import animate from "./animate";
 
 export default function HorizontalDottedLine({
-  animation,
+  animation: [revealAnimate, glowAnimate],
   variant = "normal",
 }: LineProps) {
   const variantClass = {
     normal: "stroke-black dark:stroke-grey-8",
-    bold: "stroke-black dark:stroke-white",
+    bold: "stroke-black dark:stroke-grey-b",
   };
 
   return (
@@ -18,7 +17,7 @@ export default function HorizontalDottedLine({
         className="line-unveil overflow-hidden"
         style={{
           width: to(
-            (animation ? animation[0] : animate.lineReveal()).size,
+            revealAnimate.size,
             (w) => `${w}`
           ),
         }}
@@ -44,7 +43,7 @@ export default function HorizontalDottedLine({
             fill="url(#paint0_linear_337_1890)"
             style={{
               transform: to(
-                (animation ? animation[1] : animate.lineGlow()).pos,
+                glowAnimate.pos,
                 (x) => `translateX(${200 - x}px)`
               ),
             }}

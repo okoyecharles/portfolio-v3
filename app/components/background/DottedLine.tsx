@@ -1,15 +1,14 @@
 "use client";
 import { a, to } from "@react-spring/web";
 import { LineProps } from "./props";
-import animate from "./animate";
 
 export default function DottedLine({
-  animation,
+  animation: [revealAnimate, glowAnimate],
   variant = "normal",
 }: LineProps) {
   const variantClass = {
     normal: "stroke-black dark:stroke-grey-8",
-    bold: "stroke-black dark:stroke-white",
+    bold: "stroke-black dark:stroke-grey-b",
   };
 
   return (
@@ -17,10 +16,7 @@ export default function DottedLine({
       <a.div
         className="line-unveil overflow-hidden"
         style={{
-          height: to(
-            (animation ? animation[0] : animate.lineReveal()).size,
-            (h) => `${h}`
-          ),
+          height: to(revealAnimate.size, (h) => `${h}`),
         }}
       >
         <svg
@@ -40,10 +36,7 @@ export default function DottedLine({
             height="300"
             fill="url(#paint0_linear_329_1886)"
             style={{
-              transform: to(
-                (animation ? animation[1] : animate.lineGlow()).pos,
-                (y) => `translateY(-${y}px)`
-              ),
+              transform: to(glowAnimate.pos, (y) => `translateY(-${y}px)`),
             }}
           />
           <defs>
