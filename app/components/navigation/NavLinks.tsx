@@ -13,9 +13,12 @@ import {
 } from "@react-spring/web";
 import navigationData from "@/app/data/navigation";
 import useScrollDirection from "../utils/useScrollDirection";
+import useActiveSection from "../utils/useActiveSection";
 
-export default function NavLinks({ active }: { active: number }) {
+export default function NavLinks() {
   const [open, setOpen] = useState<boolean>(false);
+  const active = useActiveSection();
+
   function toggleMenu() {
     setOpen((state) => !state);
   }

@@ -1,6 +1,6 @@
 import { UseSpringProps } from "@react-spring/web";
 import { useEffect } from "react";
-import { useInView } from "react-intersection-observer";
+import { IntersectionOptions, useInView } from "react-intersection-observer";
 
 interface Props {
   1: UseSpringProps['from'],
@@ -8,9 +8,9 @@ interface Props {
   3: Function
 }
 
-const observerConfig = {
+const observerConfig: IntersectionOptions = {
   threshold: 0,
-  rootMargin: "-125px",
+  rootMargin: "-15%",
 };
 
 export default function useObservedSpring(
