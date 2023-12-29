@@ -12,9 +12,13 @@ import {
   useTrail,
 } from "@react-spring/web";
 import navigationData from "@/app/data/navigation";
+import useScrollDirection from "../utils/useScrollDirection";
+import useActiveSection from "../utils/useActiveSection";
 
-export default function NavLinks({ active }: { active: number }) {
+export default function NavLinks() {
   const [open, setOpen] = useState<boolean>(false);
+  const active = useActiveSection();
+
   function toggleMenu() {
     setOpen((state) => !state);
   }
@@ -67,6 +71,19 @@ export default function NavLinks({ active }: { active: number }) {
 
   useChain([TMSRef, LERef, LMRef, LIRef], [0, 0.25, 0.25, 0]);
 
+  const scrollDirection = useScrollDirection();
+  const activeNavSpring = useSpring({
+    from: { y: 0 },
+    to: {
+      y: scrollDirection == 'down' && !open ? -100 : 0,
+    },
+    delay: 250,
+    config: {
+      tension: 300,
+      friction: 40,
+    }
+  });
+
   return (
     <a.div
       className={`absolute top-6 right-6 h-12 w-12 bg-grey-ea dark:bg-grey-2 ring-1 dark:ring-0 ring-grey-b rounded-[10px] md:hidden overflow-hidden`}
@@ -76,6 +93,7 @@ export default function NavLinks({ active }: { active: number }) {
           (w, offset) => `calc(${w}vw - ${offset}px)`
         ),
         height: to(toggleMenuSpring.height, (h) => h),
+        transform: to(activeNavSpring.y, (y) => `translateY(${y}px)`)
       }}
     >
       <div className="nav-positioner w-[calc(100vw-48px)] bg-grey-ea dark:bg-grey-2 absolute right-0 top-0">

@@ -1,15 +1,14 @@
 "use client";
 import { a, to } from "@react-spring/web";
 import { LineProps } from "./props";
-import animate from "./animate";
 
 export default function HorizontalDottedLine({
-  animation,
+  animation: [revealAnimate, glowAnimate],
   variant = "normal",
 }: LineProps) {
   const variantClass = {
-    normal: "stroke-grey-5 dark:stroke-grey-8",
-    bold: "stroke-black dark:stroke-white",
+    normal: "stroke-black dark:stroke-grey-8",
+    bold: "stroke-black dark:stroke-grey-b",
   };
 
   return (
@@ -18,7 +17,7 @@ export default function HorizontalDottedLine({
         className="line-unveil overflow-hidden"
         style={{
           width: to(
-            (animation ? animation[0] : animate.lineReveal()).size,
+            revealAnimate.size,
             (w) => `${w}`
           ),
         }}
@@ -44,7 +43,7 @@ export default function HorizontalDottedLine({
             fill="url(#paint0_linear_337_1890)"
             style={{
               transform: to(
-                (animation ? animation[1] : animate.lineGlow()).pos,
+                glowAnimate.pos,
                 (x) => `translateX(${200 - x}px)`
               ),
             }}
@@ -60,7 +59,7 @@ export default function HorizontalDottedLine({
             >
               <stop
                 offset="0.34"
-                className={`[stop-color:#fff] dark:[stop-color:#000] [stop-opacity:0.7]`}
+                className={`[stop-color:#fff] dark:[stop-color:#000] [stop-opacity:0.8] dark:[stop-opacity:0.7]`}
               />
               <stop
                 offset="0.5"
@@ -69,7 +68,7 @@ export default function HorizontalDottedLine({
               <stop
                 offset="0.66"
                 className={`
-                [stop-color:#fff] dark:[stop-color:#000] [stop-opacity:0.7]`}
+                [stop-color:#fff] dark:[stop-color:#000] [stop-opacity:0.8] dark:[stop-opacity:0.7]`}
               />
             </linearGradient>
           </defs>

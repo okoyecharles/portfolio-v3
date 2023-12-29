@@ -1,7 +1,3 @@
-import GithubIcon from "../components/svg/GithubIcon";
-import GmailIcon from "../components/svg/GmailIcon";
-import LinkedinIcon from "../components/svg/LinkedinIcon";
-import XIcon from "../components/svg/XIcon";
 import footerData from "./footer";
 
 interface NavigationData {
@@ -13,19 +9,19 @@ const navigationData: NavigationData = {
   anchors: [
     {
       name: "home",
-      link: "#",
+      link: "#home",
     },
     {
       name: "about",
-      link: "#",
+      link: "#about",
     },
     {
       name: "projects",
-      link: "#",
+      link: "#projects",
     },
     {
       name: "contact me",
-      link: "#",
+      link: "#contact",
     },
   ],
   socials: footerData.socials.slice(2, 4),

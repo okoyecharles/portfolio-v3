@@ -11,7 +11,7 @@ export default function ThemeToggle() {
   const toggleThemeSpring = useSpring({
     from: { x: activeTogglePos["unmounted"] },
     to: {
-      x: activeTogglePos[(theme || "unmounted") as "dark" | "light" | "system"],
+      x: activeTogglePos[theme as "dark" | "light" | "system"],
     },
     config: {
       tension: 300,
@@ -20,6 +20,10 @@ export default function ThemeToggle() {
 
   return (
     <div className="theme-toggle p-1 flex ring-1 ring-grey-b dark:ring-grey-3 rounded-[20px] relative isolate overflow-hidden self-start">
+      <a.div
+        className="toggle-active h-8 w-8 bg-grey-9/[35%] dark:bg-grey-5/[35%] rounded-[16px] absolute top-1 -z-10"
+        style={toggleThemeSpring}
+      ></a.div>
       <a.div
         className="toggle-active h-8 w-8 bg-grey-9/[35%] dark:bg-grey-5/[35%] rounded-[16px] absolute top-1 -z-10"
         style={toggleThemeSpring}

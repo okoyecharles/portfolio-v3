@@ -1,62 +1,17 @@
 "use client";
-import { SpringValue, useTrail } from "@react-spring/web";
+import { SpringValue } from "@react-spring/web";
 import DottedLine from "../../background/DottedLine";
 import HorizontalDottedLine from "../../background/HorizontalDottedLine";
 import Plus from "../../background/Plus";
+import { HomeBackgroundProps, animationOrder } from "./homeBackgroundData";
 
-export default function HomeBackground() {
+export default function HomeBackground({
+  glowBackground,
+  revealBackground,
+  revealBackgroundPlus,
+}: HomeBackgroundProps) {
   const SQUARE_COUNT = 27;
   const COLUMNS = 7;
-  const animationOrder: any = {
-    0: 0,
-    1: 1,
-    2: 2,
-    3: 3,
-    4: 4,
-    5: 5,
-    6: 6,
-    7: 1,
-    8: 2,
-    9: 3,
-    10: 4,
-    11: 5,
-    12: 6,
-    13: 7,
-    14: 2,
-    15: 3,
-    16: 4,
-    17: 5,
-    18: 6,
-    19: 7,
-    20: 8,
-    21: 3,
-    22: 4,
-    23: 5,
-    24: 6,
-    25: 7,
-    26: 8,
-  };
-
-  const glowBackground = useTrail(9, {
-    from: { pos: 200 },
-    to: { pos: 0 },
-    delay: 1000,
-  });
-
-  const revealBackground = useTrail(9, {
-    from: { size: "0px" },
-    to: { size: "100px" },
-    delay: 1000,
-  });
-
-  const revealBackgroundPlus = useTrail(9, {
-    from: { scale: 0 },
-    to: { scale: 1 },
-    config: {
-      tension: 200,
-      friction: 30,
-    },
-  });
 
   return (
     <div className="home-bg grid grid-cols-7 w-[1400px] -z-10 h-fit absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2">
@@ -122,7 +77,8 @@ function BackgroundSquare({
       {plus && (
         <div className="absolute left-full top-full -translate-x-1/2 -translate-y-1/2">
           <Plus
-            animation={plusAnimation.scale.to([0, 0.5, 1], [0, 1, 0])}
+            animation={plusAnimation}
+            mode="flicker"
             className="stroke-blue-100 dark:stroke-blue-d-200"
           />
         </div>
