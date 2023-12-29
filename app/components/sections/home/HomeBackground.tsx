@@ -1,5 +1,5 @@
 "use client";
-import { SpringValue, useTrail } from "@react-spring/web";
+import { SpringValue } from "@react-spring/web";
 import DottedLine from "../../background/DottedLine";
 import HorizontalDottedLine from "../../background/HorizontalDottedLine";
 import Plus from "../../background/Plus";
@@ -32,9 +32,7 @@ export default function HomeBackground({
               revealBackground[animationOrder[index]],
               glowBackground[animationOrder[index]],
             ]}
-            plusAnimation={
-              revealBackgroundPlus[8 - animationOrder[index]]
-            }
+            plusAnimation={revealBackgroundPlus[8 - animationOrder[index]]}
           />
         ))}
     </div>
@@ -79,7 +77,8 @@ function BackgroundSquare({
       {plus && (
         <div className="absolute left-full top-full -translate-x-1/2 -translate-y-1/2">
           <Plus
-            animation={plusAnimation.scale.to([0, 0.5, 1], [0, 1, 0])}
+            animation={plusAnimation}
+            mode="flicker"
             className="stroke-blue-100 dark:stroke-blue-d-200"
           />
         </div>
