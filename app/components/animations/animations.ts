@@ -1,5 +1,3 @@
-import { SpringProps } from "@react-spring/web";
-
 const animation = {
   bg: {
     lineGlow: {
