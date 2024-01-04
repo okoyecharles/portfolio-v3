@@ -11,6 +11,7 @@ const config: Config = {
     screens: {
       'sm': '480px',
       'md': '768px',
+      'semi-lg': '1024px',
       'lg': '1280px',
       'xl': '1440px',
     },
