@@ -240,7 +240,7 @@ function ExperienceCard({ expertise, contentReveal }: ExperienceCardProps) {
         <a.p className="mt-4" style={contentReveal[1]}>
           {expertise.details}
         </a.p>
-        <a.button style={contentReveal[2]}>
+        <a.button style={contentReveal[2]} className='w-fit'>
           <Link href={expertise.certificate}>
             Certificate of completion <NorthWestIcon />
           </Link>

@@ -68,7 +68,7 @@ const navigationData: NavigationData = {
         {
           name: "recommendations",
           title: "Recommendations",
-          link: "#more",
+          link: "#recommendations",
           icon: <QuoteIcon />
         },
       ],
