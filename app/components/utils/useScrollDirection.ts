@@ -4,7 +4,7 @@ export default function useScrollDirection() {
   const [scrollDir, setScrollDir] = useState<'up' | 'down'>("up");
 
   useEffect(() => {
-    const threshold = 0;
+    const threshold = 5;
     let lastScrollY = window.scrollY;
     let ticking = false;
 

@@ -1,8 +1,9 @@
+import { AnchorName } from '@/app/data/navigation';
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
 export interface SectionState {
-  section: 'unmounted' | 'home' | 'about' | 'projects' | 'contact'
+  section: 'unmounted' | AnchorName;
 }
 
 const initialState: SectionState = {

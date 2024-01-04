@@ -3,7 +3,49 @@
 @tailwind utilities;
 
 @layer base {
+
   html {
     -webkit-tap-highlight-color: transparent;
+    --scrollbar-bg: #fff;
+    --scrollbar-border: #eaeaea;
+    --scrollbar-thumb-bg: #eaeaea;
+    --scrollbar-thumb-border: #bbb;
+    --scrollbar-thumb-hover-bg: #ddd;
+    --scrollbar-thumb-hover-border: #bbb;
+  }
+
+  html.dark {
+    --scrollbar-bg: #000;
+    --scrollbar-border: #151515;
+    --scrollbar-thumb-bg: #151515;
+    --scrollbar-thumb-border: #333;
+    --scrollbar-thumb-hover-bg: #222;
+    --scrollbar-thumb-hover-border: #444;
+  }
+
+  ::-webkit-scrollbar {
+    width: 18px;
+    background-color: var(--scrollbar-bg);
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 0 1px var(--scrollbar-border);
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    border: solid 4px transparent;
+    box-shadow:
+    inset 0 0 0 1px var(--scrollbar-thumb-border), 
+    inset 0 0 0 8px var(--scrollbar-thumb-bg);
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    box-shadow:
+    inset 0 0 0 1px var(--scrollbar-thumb-hover-border),
+    inset 0 0 0 8px var(--scrollbar-thumb-hover-bg);
   }
 }

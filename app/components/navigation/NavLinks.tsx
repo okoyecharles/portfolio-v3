@@ -11,7 +11,7 @@ import {
   useSpringRef,
   useTrail,
 } from "@react-spring/web";
-import navigationData from "@/app/data/navigation";
+import mobileNavigationData from "@/app/data/navigation";
 import useScrollDirection from "../utils/useScrollDirection";
 import useActiveSection from "../utils/useActiveSection";
 
@@ -23,13 +23,17 @@ export default function NavLinks() {
     setOpen((state) => !state);
   }
 
+  const NAV_HEADER_HEIGHT = 48;
+  const NAV_ITEMS_HEIGHT = 48 * mobileNavigationData.anchors.length;
+  const NAV_OPEN_HEIGHT = NAV_ITEMS_HEIGHT + NAV_HEADER_HEIGHT + 6;
+
   const TMSRef = useSpringRef();
   const toggleMenuSpring = useSpring({
     ref: TMSRef,
     to: {
       width: open ? 100 : 0,
       widthoffset: open ? 48 : -48,
-      height: open ? 244 : 48,
+      height: open ? NAV_OPEN_HEIGHT : NAV_HEADER_HEIGHT,
     },
     config: {
       friction: 27.5,
@@ -46,7 +50,7 @@ export default function NavLinks() {
   });
 
   const LMRef = useSpringRef();
-  const listMarkerTrail = useTrail(4, {
+  const listMarkerTrail = useTrail(mobileNavigationData.anchors.length, {
     ref: LMRef,
     to: {
       scale: open ? 1 : 0,
@@ -58,7 +62,7 @@ export default function NavLinks() {
   });
 
   const LIRef = useSpringRef();
-  const listItemTrail = useTrail(4, {
+  const listItemTrail = useTrail(mobileNavigationData.anchors.length, {
     ref: LIRef,
     to: {
       y: open ? 0 : -20,
@@ -75,13 +79,13 @@ export default function NavLinks() {
   const activeNavSpring = useSpring({
     from: { y: 0 },
     to: {
-      y: scrollDirection == 'down' && !open ? -100 : 0,
+      y: scrollDirection == "down" && !open ? -100 : 0,
     },
     delay: 250,
     config: {
       tension: 300,
       friction: 40,
-    }
+    },
   });
 
   return (
@@ -93,7 +97,7 @@ export default function NavLinks() {
           (w, offset) => `calc(${w}vw - ${offset}px)`
         ),
         height: to(toggleMenuSpring.height, (h) => h),
-        transform: to(activeNavSpring.y, (y) => `translateY(${y}px)`)
+        transform: to(activeNavSpring.y, (y) => `translateY(${y}px)`),
       }}
     >
       <div className="nav-positioner w-[calc(100vw-48px)] bg-grey-ea dark:bg-grey-2 absolute right-0 top-0">
@@ -127,18 +131,18 @@ export default function NavLinks() {
         >
           <VerticalLineIcon
             color="stroke-grey-b dark:stroke-grey-5"
-            height={215}
+            height={NAV_OPEN_HEIGHT - 24}
           />
         </a.div>
         <nav className="px-6">
           <ul className="flex flex-col text-base text-grey-6 dark:text-grey-b ms-[25px] font-visby font-medium">
-            {navigationData.anchors.map((anchor, anchorIndex) => (
+            {mobileNavigationData.anchors.map((anchor, anchorIndex) => (
               <li className="flex relative" key={anchor.name}>
                 <a.a
                   href={anchor.link}
                   style={listItemTrail[anchorIndex]}
                   className={`peer py-3 uppercase hover:text-black dark:hover:text-grey-d transition-colors ${
-                    active == anchorIndex && "text-black dark:text-grey-d"
+                    active == anchor.name && "text-black dark:text-grey-d"
                   }`}
                 >
                   {anchor.name}
@@ -151,7 +155,7 @@ export default function NavLinks() {
                     ),
                   }}
                   className={`list-marker ring-1 ring-grey-6/0 peer-hover:ring-grey-6 dark:peer-hover:ring-grey-9 absolute top-1/2  -left-[25px] w-[10px] h-[10px]  rounded-[2.5px] bg-grey-b dark:bg-grey-5 transition-colors ${
-                    active == anchorIndex &&
+                    active == anchor.name &&
                     "!bg-blue-200 dark:!bg-blue-d-200 !ring-0"
                   }`}
                 ></a.div>
@@ -159,7 +163,7 @@ export default function NavLinks() {
             ))}
           </ul>
           <ul className="flex 1 gap-4 absolute bottom-[12px] right-[12px]">
-            {navigationData.socials.map((social) => (
+            {mobileNavigationData.socials.map((social) => (
               <li key={social.name}>
                 <a href={social.link} rel="noopener noreferrer" target="_blank">
                   {social.icon}

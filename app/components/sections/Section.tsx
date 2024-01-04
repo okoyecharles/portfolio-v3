@@ -1,3 +1,5 @@
+"use client";
+import { AnchorName } from "@/app/data/navigation";
 import { update } from "@/app/redux/section/sectionSlice";
 import { LegacyRef, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
@@ -7,7 +9,7 @@ interface SectionProps {
   padding?: string;
   sectionRef?: LegacyRef<HTMLElement>;
   children: React.ReactNode;
-  name: "home" | "about" | "projects" | "contact";
+  name: AnchorName;
   id: string;
 }
 
