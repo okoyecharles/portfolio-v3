@@ -1,6 +1,10 @@
 "use client";
 import VerticalLineIcon from "../svg/VerticalLineIcon";
-import { AnchorName, SubAnchor, navigationData } from "../../data/navigation";
+import {
+  AnchorName,
+  DropdownAnchor,
+  navigationData,
+} from "../../data/navigation";
 import { a, to, useSpring } from "@react-spring/web";
 import useScrollDirection from "../utils/useScrollDirection";
 import useActiveSection from "../utils/useActiveSection";
@@ -84,10 +88,10 @@ export default function DesktopNavLinks() {
             >
               {anchor.title}
             </a>
-            {anchor.subAnchors && (
+            {anchor.dropdownAnchors && (
               <Dropdown
                 name={anchor.name}
-                anchors={anchor.subAnchors}
+                anchors={anchor.dropdownAnchors}
                 open={anchor.name === dropdownOpen}
                 setOpen={setDropdownOpen}
               />
@@ -101,7 +105,11 @@ export default function DesktopNavLinks() {
       <ul className="flex gap-4">
         {navigationData.socials.map((social) => (
           <li key={social.name}>
-            <a href={social.link} rel="noopener noreferrer" target="_blank">
+            <a
+              href={social.link}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
               {social.icon}
             </a>
           </li>
@@ -117,7 +125,12 @@ interface DropdownProps<T> {
   open: boolean;
   setOpen: Function;
 }
-function Dropdown({ name, anchors, open, setOpen }: DropdownProps<SubAnchor>) {
+function Dropdown({
+  name,
+  anchors,
+  open,
+  setOpen,
+}: DropdownProps<DropdownAnchor>) {
   const DROPDOWN_ITEMS_HEIGHT = 34 * anchors.length;
   const DROPDOWN_OPEN_HEIGHT = DROPDOWN_ITEMS_HEIGHT + 24;
   const active = useActiveSection();

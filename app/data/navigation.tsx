@@ -1,26 +1,65 @@
 import FeaturedIcon from "../components/svg/FeaturedIcon";
 import FolderIcon from "../components/svg/FolderIcon";
+import GithubIcon from "../components/svg/GithubIcon";
+import GmailIcon from "../components/svg/GmailIcon";
+import LinkedinIcon from "../components/svg/LinkedinIcon";
 import PathIcon from "../components/svg/PathIcon";
 import ProfileIcon from "../components/svg/ProfileIcon";
 import QuoteIcon from "../components/svg/QuoteIcon";
+import XIcon from "../components/svg/XIcon";
 import footerData from "./footer";
 
-export type AnchorName = 'home' | 'about' | 'experience' | 'projects' | 'more-projects' | 'recommendations' | 'contact';
+export type AnchorName =
+  | "home"
+  | "about"
+  | "experience"
+  | "projects"
+  | "more-projects"
+  | "recommendations"
+  | "contact";
 
+export interface Social {
+  name: string;
+  icon: React.ReactNode;
+  link: string;
+}
 export interface Anchor {
   name: AnchorName;
   title: string;
   link: string;
 }
 
-export interface SubAnchor extends Anchor {
-  icon: React.ReactNode
+export interface DropdownAnchor extends Anchor {
+  icon: React.ReactNode;
 }
 
 interface NavigationData {
-  anchors: (Anchor & { subAnchors?: SubAnchor[] })[];
-  socials: { name: string; icon: React.ReactNode; link: string }[];
+  anchors: (Anchor & { dropdownAnchors?: DropdownAnchor[] })[];
+  socials: Social[];
 }
+
+export const socials: NavigationData["socials"] = [
+  {
+    name: "X",
+    icon: <XIcon />,
+    link: "https://x.com/okoyecharlesk",
+  },
+  {
+    name: "Github",
+    icon: <GithubIcon />,
+    link: "https://github.com/okoyecharles",
+  },
+  {
+    name: "Gmail",
+    icon: <GmailIcon />,
+    link: "mailto:okoyecharles509@gmail.com",
+  },
+  {
+    name: "Linkedin",
+    icon: <LinkedinIcon />,
+    link: "https://linkedin.com/in/okoyecharles",
+  },
+];
 
 const navigationData: NavigationData = {
   anchors: [
@@ -33,18 +72,18 @@ const navigationData: NavigationData = {
       name: "about",
       title: "ABOUT",
       link: "#about",
-      subAnchors: [
+      dropdownAnchors: [
         {
           name: "about",
           title: "About Me",
           link: "#about",
-          icon: <ProfileIcon />
+          icon: <ProfileIcon />,
         },
         {
           name: "experience",
           title: "My Experience as a Developer",
           link: "#experience",
-          icon: <PathIcon />
+          icon: <PathIcon />,
         },
       ],
     },
@@ -52,24 +91,24 @@ const navigationData: NavigationData = {
       name: "projects",
       title: "PROJECTS",
       link: "#projects",
-      subAnchors: [
+      dropdownAnchors: [
         {
           name: "projects",
           title: "Featured Work",
           link: "#projects",
-          icon: <FeaturedIcon />
+          icon: <FeaturedIcon />,
         },
         {
           name: "more-projects",
           title: "More Projects",
           link: "#more-projects",
-          icon: <FolderIcon />
+          icon: <FolderIcon />,
         },
         {
           name: "recommendations",
           title: "Recommendations",
           link: "#recommendations",
-          icon: <QuoteIcon />
+          icon: <QuoteIcon />,
         },
       ],
     },
@@ -79,7 +118,7 @@ const navigationData: NavigationData = {
       link: "#contact",
     },
   ],
-  socials: footerData.socials.slice(2, 4),
+  socials: socials.slice(1, 3),
 };
 
 const mobileNavigationData: NavigationData = {
