@@ -53,21 +53,23 @@ export default function DesktopNavLinks() {
 
   return (
     <a.nav
-      className="absolute w-fit top-8 right-8 bg-white dark:bg-grey-2 ring-1 dark:ring-0 ring-grey-ea rounded-[10px] font-visby font-medium px-6 py-[7px] gap-6 hidden md:flex items-center select-none overflow-x-clip overflow-y-visible"
+      className="absolute w-fit top-8 right-8 bg-white dark:bg-grey-2 ring-1 dark:ring-0 ring-grey-ea rounded-[10px] font-visby font-medium px-6 py-[7px] gap-6 hidden md:flex items-center select-none"
       style={activeNavSpring}
     >
-      <a.div
-        className="active-marker absolute left-0 top-[calc(100%-7.5px)] h-[5px] overflow-hidden"
-        style={{
-          width: to(activeMarkerSpring.width, (w) => `${w}px`),
-          transform: to(
-            activeMarkerSpring.x,
-            (x) => `translateX(calc(${x}px)) translateY(50%)`
-          ),
-        }}
-      >
-        <div className="h-[10px] bg-blue-100 dark:bg-blue-d-200 rounded-[4px] w-full" />
-      </a.div>
+      <div className="active-marker-bar absolute left-0 bottom-0 h-5 w-full overflow-hidden rounded-[10px]">
+        <div className="relative h-full">
+          <a.div
+            className="active-marker absolute left-0 bottom-0 h-[10px] rounded-[5px] bg-blue-100 dark:bg-blue-d-200"
+            style={{
+              width: to(activeMarkerSpring.width, (w) => `${w}px`),
+              transform: to(
+                activeMarkerSpring.x,
+                (x) => `translateX(calc(${x}px)) translateY(50%)`
+              ),
+            }}
+          />
+        </div>
+      </div>
       <ul className="flex items-center text-sm gap-8 leading-[1.5] text-grey-6  dark:text-grey-b">
         {navigationData.anchors.map((anchor) => (
           <li

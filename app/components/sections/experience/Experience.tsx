@@ -155,7 +155,7 @@ function ExperienceControl({
   expertiseCount,
 }: ExperienceControlProps) {
   return (
-    <aside className="flex gap-3 justify-center mt-6 lg:mt-8 lg:mb-16">
+    <aside className="flex gap-3 justify-center my-6 lg:my-8">
       {Array(expertiseCount)
         .fill(0)
         .map((_, index) => {
