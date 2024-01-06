@@ -6,7 +6,7 @@ export default function DownloadIcon() {
       viewBox="0 0 14 15"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="fill-grey-b group-hover:fill-grey-d transition-colors"
+      className="transition-colors fill-grey-b group-hover:fill-grey-d"
     >
       <path d="M12.6029 12.7905H1.07353C0.618707 12.7905 0.25 13.1592 0.25 13.614C0.25 14.0688 0.618707 14.4375 1.07353 14.4375H12.6029C13.0578 14.4375 13.4265 14.0688 13.4265 13.614C13.4265 13.1592 13.0578 12.7905 12.6029 12.7905Z" />
       <path d="M0.25 11.9669L0.25 13.614C0.25 14.0688 0.618707 14.4375 1.07353 14.4375C1.52835 14.4375 1.89706 14.0688 1.89706 13.614L1.89706 11.9669C1.89706 11.5121 1.52835 11.1434 1.07353 11.1434C0.618707 11.1434 0.25 11.5121 0.25 11.9669Z" />

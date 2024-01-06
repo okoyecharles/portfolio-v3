@@ -84,7 +84,7 @@ export default function DesktopNavLinks() {
           >
             <a
               href={anchor.link}
-              className="group-hover/nav-item:text-black dark:group-hover/nav-item:text-grey-d transition-colors"
+              className="transition-colors group-hover/nav-item:text-black dark:group-hover/nav-item:text-grey-d"
             >
               {anchor.title}
             </a>
@@ -153,7 +153,7 @@ function Dropdown({
   }
 
   return (
-    <div className="dropdown relative">
+    <div className="relative dropdown">
       <button
         className={`py-2 px-1 rounded-[5px] hover:bg-grey-ea dark:hover:bg-grey-3 group/dropdown-button transition-colors -mr-[10px]${
           open ? " is-active" : ""

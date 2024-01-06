@@ -122,7 +122,7 @@ export default function Experience() {
         I have achieved and the valuable experience I've acquired.
       </p>
       <div
-        className="experience-content flex relative"
+        className="relative flex experience-content"
         style={{ perspective: "800px" }}
       >
         <ExperienceTimeline
@@ -155,7 +155,7 @@ function ExperienceControl({
   expertiseCount,
 }: ExperienceControlProps) {
   return (
-    <aside className="flex gap-3 justify-center my-6 lg:my-8">
+    <aside className="flex justify-center gap-3 my-6 lg:my-8">
       {Array(expertiseCount)
         .fill(0)
         .map((_, index) => {
@@ -227,7 +227,7 @@ function ExperienceCard({ expertise, contentReveal }: ExperienceCardProps) {
             alt={`Logo of ${expertise.title}`}
           />
         </div>
-        <div className="heading flex flex-col gap-1">
+        <div className="flex flex-col gap-1 heading">
           <h3 className="leading-[1] text-grey-1 dark:text-grey-d font-bold">
             {expertise.title}
           </h3>
@@ -236,7 +236,7 @@ function ExperienceCard({ expertise, contentReveal }: ExperienceCardProps) {
           </p>
         </div>
       </a.header>
-      <div className="content md:pl-16 flex flex-col gap-3 mb-auto">
+      <div className="flex flex-col gap-3 mb-auto content md:pl-16">
         <a.p className="mt-4" style={contentReveal[1]}>
           {expertise.details}
         </a.p>
@@ -275,7 +275,7 @@ function ExperienceTimeline({
         className="year-timeline-container absolute top-1/2 left-[28px]"
         style={yearTimeLineScroll}
       >
-        <div className="year-timeline relative">
+        <div className="relative year-timeline">
           <div
             className={`w-[1px] bg-grey-d dark:bg-grey-3`}
             style={{ height: YEAR_TIMELINE_HEIGHT }}
@@ -317,7 +317,7 @@ function ExperienceTimeline({
         </div>
       </a.div>
       <div className="month-timeline-container h-full absolute top-0 left-[27px] md:left-[calc(34px+16px)]">
-        <div className="month-timeline relative h-full">
+        <div className="relative h-full month-timeline">
           <a.div
             className={`w-[2px] bg-blue-100 dark:bg-blue-d-200 md:bg-grey-ea dark:md:bg-grey-3 absolute left-[1px] top-1/2 -translate-y-1/2`}
             style={monthTimeLineHeight}

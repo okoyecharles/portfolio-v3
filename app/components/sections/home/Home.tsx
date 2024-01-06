@@ -79,7 +79,7 @@ export default function Home() {
         work and experience! If you are interested, I am available for hire
       </a.p>
       <a.div
-        className="call-to-action-buttons flex flex-wrap gap-6 md:self-center"
+        className="flex flex-wrap gap-6 call-to-action-buttons md:self-center"
         style={layoutReveal(4)}
       >
         <Button>Check out my work</Button>

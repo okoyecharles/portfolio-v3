@@ -81,7 +81,7 @@ export default function About() {
           lineAnimate={[bgLineReveal, bgLineGlow]}
         />
         <div
-          className="about-content md:col-span-6 grid gap-6 md:grid-cols-2"
+          className="grid gap-6 about-content md:col-span-6 md:grid-cols-2"
           ref={observedRef}
         >
           <article className="md:col-span-2">
@@ -166,10 +166,10 @@ function AboutImage({
           alt="A portrait image of Okoye Charles"
           width={300}
           height={300}
-          className="group-hover/figure:scale-105 transition-transform duration-500 delay-100"
+          className="transition-transform duration-500 delay-100 group-hover/figure:scale-105"
         />
       </a.div>
-      <div className="aesthetics absolute inset-0 -z-10">
+      <div className="absolute inset-0 aesthetics -z-10">
         <div className={`absolute top-[12.5px] left-1/2 -translate-x-1/2`}>
           <HorizontalDottedLine
             variant="bold"
@@ -201,7 +201,7 @@ function AboutImage({
             className={`absolute ${pos} group-hover/figure:rotate-[.25turn] transition-transform`}
           >
             <Plus
-              className="stroke-grey-8 dark:stroke-grey-9 group-hover/figure:stroke-blue-100 dark:group-hover/figure:stroke-blue-d-200 duration-300"
+              className="duration-300 stroke-grey-8 dark:stroke-grey-9 group-hover/figure:stroke-blue-100 dark:group-hover/figure:stroke-blue-d-200"
               animation={plusReveal[index]}
             />
           </div>

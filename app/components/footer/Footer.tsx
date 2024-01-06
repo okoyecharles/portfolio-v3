@@ -6,9 +6,9 @@ import HeartIcon from "../svg/HeartIcon";
 
 export default function Footer() {
   return (
-    <div className="footer-container bg-grey-ea dark:bg-grey-1 border-t border-grey-d dark:border-grey-2 px-8">
-      <footer className="w-full max-w-screen-xl mx-auto flex flex-col gap-10 py-8 md:flex-row md:justify-between">
-        <div className="content flex justify-between md:flex-col md:gap-8">
+    <div className="px-8 border-t footer-container bg-grey-ea dark:bg-grey-1 border-grey-d dark:border-grey-2">
+      <footer className="flex flex-col w-full max-w-screen-xl gap-10 py-8 mx-auto md:flex-row md:justify-between">
+        <div className="flex justify-between content md:flex-col md:gap-8">
           <div className="logo">
             <FooterLogo />
           </div>
@@ -38,7 +38,7 @@ export default function Footer() {
             ))}
           </ul>
         </div>
-        <div className="content-2 flex flex-col gap-3 md:justify-between">
+        <div className="flex flex-col gap-3 content-2 md:justify-between">
           <div className="self-center md:self-end">
             <ThemeToggle />
           </div>

@@ -14,7 +14,7 @@ export default function HorizontalDottedLine({
   return (
     <div className="w-[100px] select-none">
       <a.div
-        className="line-unveil overflow-hidden"
+        className="overflow-hidden line-unveil"
         style={{
           width: to(
             revealAnimate.size,

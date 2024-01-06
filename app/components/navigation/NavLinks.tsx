@@ -102,7 +102,7 @@ export default function NavLinks() {
     >
       <div className="nav-positioner w-[calc(100vw-48px)] bg-grey-ea dark:bg-grey-2 absolute right-0 top-0">
         <div className="flex flex-col items-end">
-          <button className="h-12 w-12 relative" onClick={toggleMenu}>
+          <button className="relative w-12 h-12" onClick={toggleMenu}>
             <div
               className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition ${
                 open ? "-rotate-45 opacity-0" : "rotate-0 opacity-100"
@@ -137,7 +137,7 @@ export default function NavLinks() {
         <nav className="px-6">
           <ul className="flex flex-col text-base text-grey-6 dark:text-grey-b ms-[25px] font-visby font-medium">
             {mobileNavigationData.anchors.map((anchor, anchorIndex) => (
-              <li className="flex relative" key={anchor.name}>
+              <li className="relative flex" key={anchor.name}>
                 <a.a
                   href={anchor.link}
                   style={listItemTrail[anchorIndex]}

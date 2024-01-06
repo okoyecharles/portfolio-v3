@@ -10,7 +10,7 @@ export default function Navigation() {
         <DesktopNavLinks />
       </div>
       <header id="home" className="p-6 md:p-8 w-full max-w-[1504px] mx-auto">
-        <div className="logo h-12 flex items-center w-fit">
+        <div className="flex items-center h-12 logo w-fit">
           <LogoIcon />
         </div>
       </header>

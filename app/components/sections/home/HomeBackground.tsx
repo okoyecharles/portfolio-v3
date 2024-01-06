@@ -55,27 +55,27 @@ function BackgroundSquare({
   return (
     <div className="bg-section w-[200px] h-[200px] relative">
       {!!lines[0] && (
-        <div className="absolute top-0 left-1/2 -translate-x-1/2">
+        <div className="absolute top-0 -translate-x-1/2 left-1/2">
           <HorizontalDottedLine animation={lineAnimation} />
         </div>
       )}
       {!!lines[1] && (
-        <div className="absolute right-0 top-1/2 -translate-y-1/2">
+        <div className="absolute right-0 -translate-y-1/2 top-1/2">
           <DottedLine animation={lineAnimation} />
         </div>
       )}
       {!!lines[2] && (
-        <div className="absolute top-full left-1/2 -translate-x-1/2">
+        <div className="absolute -translate-x-1/2 top-full left-1/2">
           <HorizontalDottedLine animation={lineAnimation} />
         </div>
       )}
       {!!lines[3] && (
-        <div className="absolute left-0 top-1/2 -translate-y-1/2">
+        <div className="absolute left-0 -translate-y-1/2 top-1/2">
           <DottedLine animation={lineAnimation} />
         </div>
       )}
       {plus && (
-        <div className="absolute left-full top-full -translate-x-1/2 -translate-y-1/2">
+        <div className="absolute -translate-x-1/2 -translate-y-1/2 left-full top-full">
           <Plus
             animation={plusAnimation}
             mode="flicker"

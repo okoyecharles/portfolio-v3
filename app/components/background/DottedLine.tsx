@@ -14,7 +14,7 @@ export default function DottedLine({
   return (
     <div className="h-[100px] select-none">
       <a.div
-        className="line-unveil overflow-hidden"
+        className="overflow-hidden line-unveil"
         style={{
           height: to(revealAnimate.size, (h) => `${h}`),
         }}
