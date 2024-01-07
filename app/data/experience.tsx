@@ -18,8 +18,8 @@ interface ExperienceData {
 
 const expertise: Expertise[] = [
   {
-    logo: "/assets/experience/microverse.png",
-    showcaseImage: "/assets/experience/microverse-showcase.jpg",
+    logo: "/assets/experience/microverse.webp",
+    showcaseImage: "/assets/experience/microverse-showcase.webp",
     title: "Microverse",
     subTitle: "Remote Developer Bootcamp",
     details:
@@ -29,8 +29,8 @@ const expertise: Expertise[] = [
       "https://drive.google.com/file/d/1qmUspFThqBVWXYCytHKRpRAtw8oSLQ2r/view?usp=sharing",
   },
   {
-    logo: "/assets/experience/minnesota.png",
-    showcaseImage: "/assets/experience/minnesota-showcase.jpg",
+    logo: "/assets/experience/minnesota.webp",
+    showcaseImage: "/assets/experience/minnesota-showcase.webp",
     title: "University of Minnesota",
     subTitle: "Software Development Methodologies",
     details:
@@ -40,8 +40,8 @@ const expertise: Expertise[] = [
       "https://drive.google.com/file/d/1mKBTBjbhJmdGc4j5JHFKhmthl9c6_8pQ/view?usp=sharing",
   },
   {
-    logo: "/assets/experience/linkedin-learning.png",
-    showcaseImage: "/assets/experience/linkedin-learning-showcase.jpg",
+    logo: "/assets/experience/linkedin-learning.webp",
+    showcaseImage: "/assets/experience/linkedin-learning-showcase.webp",
     title: "Linkedin Learning",
     subTitle: "Become a Software Developer",
     details:
@@ -51,8 +51,8 @@ const expertise: Expertise[] = [
       "https://drive.google.com/file/d/1_TH9jAT91AS_A-2Unh74u9BlqPWzd3f-/view?usp=sharing",
   },
   {
-    logo: "/assets/experience/gds.png",
-    showcaseImage: "/assets/experience/gds-showcase.jpg",
+    logo: "/assets/experience/gds.webp",
+    showcaseImage: "/assets/experience/gds-showcase.webp",
     title: "Google Digital Skills for Africa",
     subTitle: "Fundamentals of Digital Marketing",
     details:
