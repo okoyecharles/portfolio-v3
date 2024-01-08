@@ -11,7 +11,7 @@ import useActiveSection from "../utils/useActiveSection";
 import ExpandIcon from "../svg/ExpandIcon";
 import { useEffect, useState } from "react";
 
-export default function DesktopNavLinks() {
+export default function NavLinksDesktop() {
   const active = useActiveSection();
   const AMM_POS = [
     { pos: -24, width: 24 },
