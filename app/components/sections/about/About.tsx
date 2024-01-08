@@ -1,4 +1,6 @@
 "use client";
+import { AboutImageProps, AboutListProps } from "./props";
+import aboutData from "@/app/data/about";
 import React from "react";
 import Section from "../Section";
 import SectionHeader from "../SectionHeader";
@@ -7,8 +9,7 @@ import Plus from "../../background/Plus";
 import HorizontalDottedLine from "../../background/HorizontalDottedLine";
 import DottedLine from "../../background/DottedLine";
 import Link from "../../clickable/Link";
-import aboutData from "@/app/data/about";
-import { SpringValue, a, to, useSpring, useTrail } from "@react-spring/web";
+import { a, to, useSpring, useTrail } from "@react-spring/web";
 import { useObservedSprings } from "../../utils/useObservedSpring";
 import animation from "../../animations/animations";
 
@@ -140,14 +141,7 @@ function AboutImage({
   imageAnimate,
   plusReveal,
   lineAnimate,
-}: {
-  imageAnimate: Function;
-  plusReveal: { scale: SpringValue<number> }[];
-  lineAnimate: [
-    { size: SpringValue<string> },
-    { pos: SpringValue<number> }
-  ];
-}) {
+}: AboutImageProps) {
   const plusPositions = [
     "top-0 left-0",
     "top-0 right-0",
@@ -211,11 +205,7 @@ function AboutImage({
   );
 }
 
-function AboutList({
-  items,
-}: {
-  items: typeof aboutData.technologies | typeof aboutData.technologies;
-}) {
+function AboutList({ items }: AboutListProps) {
   const LIST_HEIGHT = 32 * (items.length - 1);
 
   const { observedRef, springAnimate } = useObservedSprings(
@@ -224,13 +214,13 @@ function AboutList({
       {
         height: LIST_HEIGHT,
         config: { friction: 35, tension: 150 },
-        delay: 500
+        delay: 500,
       },
       {
         y: "-50%",
         scale: 1,
         config: { friction: 35, tension: 400 },
-        delay: 500
+        delay: 500,
       },
       { opacity: 1, delay: 750 },
     ],

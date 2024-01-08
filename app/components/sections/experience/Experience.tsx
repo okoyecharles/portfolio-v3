@@ -1,6 +1,6 @@
 "use client";
+import { ExperienceCardProps, ExperienceControlProps, ExperienceImageProps, ExperienceTimelineProps } from "./props";
 import experienceData, {
-  Expertise,
   experienceTimelineCalculator,
 } from "@/app/data/experience";
 import Section from "../Section";
@@ -20,6 +20,7 @@ import {
   useTransition,
 } from "@react-spring/web";
 import { useInView } from "react-intersection-observer";
+import SectionDescription from "../SectionDescription";
 
 export default function Experience() {
   const [expertiseIndex, setExpertiseIndex] = useState<number>(0);
@@ -117,10 +118,10 @@ export default function Experience() {
         My <span className="text-blue-100 dark:blue-d-200">experience</span> as
         a developer
       </SectionHeader>
-      <p className="py-4 lg:py-8 self-center max-w-[700px] text-center md:text-[18px] text-grey-6 dark:text-grey-b">
+      <SectionDescription>
         A display of my growth as a frontend developer, showcasing the progress
         I have achieved and the valuable experience I've acquired.
-      </p>
+      </SectionDescription>
       <div
         className="relative flex experience-content"
         style={{ perspective: "800px" }}
@@ -141,12 +142,6 @@ export default function Experience() {
       />
     </Section>
   );
-}
-
-interface ExperienceControlProps {
-  expertiseIndex: number;
-  setExpertiseIndex: Function;
-  expertiseCount: number;
 }
 
 function ExperienceControl({
@@ -174,10 +169,6 @@ function ExperienceControl({
         })}
     </aside>
   );
-}
-
-interface ExperienceImageProps {
-  imageTransition: Function;
 }
 
 function ExperienceImage({ imageTransition }: ExperienceImageProps) {
@@ -209,11 +200,6 @@ function ExperienceImage({ imageTransition }: ExperienceImageProps) {
   );
 }
 
-interface ExperienceCardProps {
-  expertise: Expertise;
-  contentReveal: Record<string, SpringValue>[];
-}
-
 function ExperienceCard({ expertise, contentReveal }: ExperienceCardProps) {
   const dates = expertise.timeRange.map((date) => moment(date).format("MMMM"));
   return (
@@ -240,7 +226,7 @@ function ExperienceCard({ expertise, contentReveal }: ExperienceCardProps) {
         <a.p className="mt-4" style={contentReveal[1]}>
           {expertise.details}
         </a.p>
-        <a.button style={contentReveal[2]} className='w-fit'>
+        <a.button style={contentReveal[2]} className="w-fit">
           <Link href={expertise.certificate}>
             Certificate of completion <NorthWestIcon />
           </Link>
@@ -253,12 +239,7 @@ function ExperienceCard({ expertise, contentReveal }: ExperienceCardProps) {
   );
 }
 
-interface ExperienceTimelineProps {
-  expertise: Expertise;
-  yearTimeLineScroll: Record<string, SpringValue>;
-  monthTimeLineHeight: Record<string, SpringValue>;
-  monthTimeLineMarker: Record<string, SpringValue>;
-}
+
 
 function ExperienceTimeline({
   expertise,
