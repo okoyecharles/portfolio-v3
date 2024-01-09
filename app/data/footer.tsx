@@ -1,10 +1,10 @@
-import DarkmodeIcon from "../components/svg/DarkmodeIcon";
-import GithubIcon from "../components/svg/GithubIcon";
-import GmailIcon from "../components/svg/GmailIcon";
-import LightmodeIcon from "../components/svg/LightmodeIcon";
-import LinkedinIcon from "../components/svg/LinkedinIcon";
-import SystemmodeIcon from "../components/svg/SystemmodeIcon";
-import XIcon from "../components/svg/XIcon";
+import DarkmodeIcon from "../components/svg/theme/DarkmodeIcon";
+import GithubIcon from "../components/svg/icons/GithubIcon";
+import MailIcon from "../components/svg/icons/GmailIcon";
+import LightmodeIcon from "../components/svg/theme/LightmodeIcon";
+import LinkedinIcon from "../components/svg/icons/LinkedinIcon";
+import SystemmodeIcon from "../components/svg/theme/SystemmodeIcon";
+import XIcon from "../components/svg/icons/XIcon";
 import { Social, socials } from "./navigation";
 
 interface FooterData {

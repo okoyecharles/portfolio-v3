@@ -1,5 +1,5 @@
 "use client";
-import VerticalLineIcon from "../svg/VerticalLineIcon";
+import VerticalLineIcon from "../svg/abstract/VerticalLineIcon";
 import {
   AnchorName,
   DropdownAnchor,
@@ -8,8 +8,9 @@ import {
 import { a, to, useSpring } from "@react-spring/web";
 import useScrollDirection from "../utils/useScrollDirection";
 import useActiveSection from "../utils/useActiveSection";
-import ExpandIcon from "../svg/ExpandIcon";
+import ExpandIcon from "../svg/dropdown/ExpandIcon";
 import { useEffect, useState } from "react";
+import Link from "../clickable/Link";
 
 export default function NavLinksDesktop() {
   const active = useActiveSection();
@@ -17,8 +18,8 @@ export default function NavLinksDesktop() {
     { pos: -24, width: 24 },
     { pos: 24, width: 39.4 },
     { pos: 95.4, width: 45.25 },
-    { pos: 172.65, width: 64.85 },
-    { pos: 269.5, width: 85.17 },
+    { pos: 190.65, width: 64.85 },
+    { pos: 305.5, width: 85.17 },
   ];
   const activeMarkerMorph = {
     unmounted: AMM_POS[0],
@@ -60,7 +61,7 @@ export default function NavLinksDesktop() {
       className="absolute w-fit top-8 right-8 bg-white dark:bg-grey-2 ring-1 dark:ring-0 ring-grey-ea rounded-[10px] font-visby font-medium px-6 py-[7px] gap-6 hidden md:flex items-center select-none"
       style={activeNavSpring}
     >
-      <div className="active-marker-bar absolute left-0 bottom-0 h-5 w-full overflow-hidden rounded-[10px]">
+      <div className="active-marker-bar absolute left-0 bottom-0 h-5 w-full overflow-hidden rounded-[10px] pointer-events-none">
         <div className="relative h-full">
           <a.div
             className="active-marker absolute left-0 bottom-0 h-[10px] rounded-[5px] bg-blue-100 dark:bg-blue-d-200"
@@ -74,7 +75,7 @@ export default function NavLinksDesktop() {
           />
         </div>
       </div>
-      <ul className="flex items-center text-sm gap-8 leading-[1.5] text-grey-6  dark:text-grey-b">
+      <ul className="flex text-sm gap-8 leading-[1.5] text-grey-6 dark:text-grey-b">
         {navigationData.anchors.map((anchor) => (
           <li
             key={anchor.name}
@@ -102,16 +103,12 @@ export default function NavLinksDesktop() {
       <div className="divider">
         <VerticalLineIcon />
       </div>
-      <ul className="flex gap-4">
+      <ul className="flex gap-4 items-center">
         {navigationData.socials.map((social) => (
-          <li key={social.name}>
-            <a
-              href={social.link}
-              rel="noopener noreferrer"
-              target="_blank"
-            >
+          <li key={social.name} className="h-[22px]">
+            <Link href={social.link} variant="plain">
               {social.icon}
-            </a>
+            </Link>
           </li>
         ))}
       </ul>

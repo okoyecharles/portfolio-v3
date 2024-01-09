@@ -1,8 +1,8 @@
 "use client";
-import CloseMenuIcon from "../svg/CloseMenuIcon";
-import MenuIcon from "../svg/MenuIcon";
+import CloseMenuIcon from "../svg/abstract/CloseMenuIcon";
+import MenuIcon from "../svg/abstract/MenuIcon";
 import { useState } from "react";
-import VerticalLineIcon from "../svg/VerticalLineIcon";
+import VerticalLineIcon from "../svg/abstract/VerticalLineIcon";
 import {
   a,
   to,

@@ -8,7 +8,7 @@ import SectionHeader from "../SectionHeader";
 import moment from "moment";
 import Image from "next/image";
 import Link from "../../clickable/Link";
-import NorthWestIcon from "../../svg/NorthWestIcon";
+import NorthWestIcon from "../../svg/abstract/NorthWestIcon";
 import React, { useEffect, useState } from "react";
 import {
   SpringValue,
@@ -113,7 +113,7 @@ export default function Experience() {
   }));
 
   return (
-    <Section name="experience" id="experience" sectionRef={ref}>
+    <Section name="experience" id="experience" sectionRef={ref} padding="py-6 md:py-8 md:pb-[224px]">
       <SectionHeader mode="standalone">
         My <span className="text-blue-100 dark:blue-d-200">experience</span> as
         a developer
@@ -150,7 +150,7 @@ function ExperienceControl({
   expertiseCount,
 }: ExperienceControlProps) {
   return (
-    <aside className="flex justify-center gap-3 my-6 lg:my-8">
+    <aside className="flex justify-center gap-3 my-6 md:my-8">
       {Array(expertiseCount)
         .fill(0)
         .map((_, index) => {

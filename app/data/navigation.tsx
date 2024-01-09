@@ -1,13 +1,12 @@
-import FeaturedIcon from "../components/svg/FeaturedIcon";
-import FolderIcon from "../components/svg/FolderIcon";
-import GithubIcon from "../components/svg/GithubIcon";
-import GmailIcon from "../components/svg/GmailIcon";
-import LinkedinIcon from "../components/svg/LinkedinIcon";
-import PathIcon from "../components/svg/PathIcon";
-import ProfileIcon from "../components/svg/ProfileIcon";
-import QuoteIcon from "../components/svg/QuoteIcon";
-import XIcon from "../components/svg/XIcon";
-import footerData from "./footer";
+import FeaturedIcon from "../components/svg/dropdown/FeaturedIcon";
+import FolderIcon from "../components/svg/dropdown/FolderIcon";
+import GithubIcon from "../components/svg/icons/GithubIcon";
+import MailIcon from "../components/svg/icons/GmailIcon";
+import LinkedinIcon from "../components/svg/icons/LinkedinIcon";
+import PathIcon from "../components/svg/dropdown/PathIcon";
+import ProfileIcon from "../components/svg/dropdown/ProfileIcon";
+import QuoteIcon from "../components/svg/dropdown/QuoteIcon";
+import XIcon from "../components/svg/icons/XIcon";
 
 export type AnchorName =
   | "home"
@@ -51,7 +50,7 @@ export const socials: NavigationData["socials"] = [
   },
   {
     name: "Gmail",
-    icon: <GmailIcon />,
+    icon: <MailIcon />,
     link: "mailto:okoyecharles509@gmail.com",
   },
   {

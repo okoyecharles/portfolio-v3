@@ -1,7 +1,7 @@
 "use client";
 import { a, to, useTrail } from "@react-spring/web";
 import Button from "../../clickable/Button";
-import DownloadIcon from "../../svg/DownloadIcon";
+import DownloadIcon from "../../svg/icons/DownloadIcon";
 import { useObservedSprings } from "../../utils/useObservedSpring";
 import Section from "../Section";
 import HomeBackground from "./HomeBackground";
@@ -28,7 +28,7 @@ export default function Home() {
       ...animation.layout.reveal.end.map((x) => x()),
       animation.bg.lineGlow.end({ delay: 1750 }),
       animation.bg.lineReveal.end({ delay: 1750 }),
-      animation.bg.plusReveal.end({ delay: 750  }),
+      animation.bg.plusReveal.end({ delay: 750 }),
     ],
     [
       (cb: Function) => useTrail(5, cb, []),

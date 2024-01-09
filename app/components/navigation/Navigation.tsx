@@ -1,6 +1,6 @@
 import NavLinks from "./NavLinks";
 import NavLinksDesktop from "./NavLinksDesktop";
-import LogoIcon from "../svg/Logo";
+import LogoIcon from "../svg/abstract/Logo";
 
 export default function Navigation() {
   return (

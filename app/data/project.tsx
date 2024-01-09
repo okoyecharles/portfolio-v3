@@ -1,3 +1,7 @@
+import AmazonCloneLogo from "../components/svg/projects/AmazonCloneLogo";
+import BuggoLogo from "../components/svg/projects/BuggoLogo";
+import LavishCuisineLogo from "../components/svg/projects/LavishCuisineLogo";
+
 type ProjectTag =
   | "react"
   | "next-js"
@@ -5,27 +9,27 @@ type ProjectTag =
   | "javascript"
   | "redux"
   | "mongodb"
-  | "express-js"
+  | "node-js"
   | "firebase"
   | "html"
   | "css"
-  | "scss";
-// | (string & {});d
+  | "scss"
+  | (string & {});
 
-interface Project {
+export interface Project {
   name: string;
   description: string;
   tags: ProjectTag[];
   link: Record<"github" | "live", string>;
   timeRange: [Date, Date];
-  logo?: string;
+  logo?: React.ReactNode;
   image?: Record<"desktop" | "mobile", string>;
 }
 
 const projectData: Array<Project> = [
   {
     name: "Buggo",
-    logo: "/assets/projects/buggo-logo.svg",
+    logo: <BuggoLogo />,
     image: {
       desktop: "/assets/projects/buggo.webp",
       mobile: "/assets/projects/buggo-mobile.webp",
@@ -33,7 +37,7 @@ const projectData: Array<Project> = [
     timeRange: [new Date(2023, 1), new Date(2023, 2)],
     description:
       "A real-time bug tracking application that allows you to create projects and tickets, while offering advanced filtering and search options, along with secure user authentication",
-    tags: ["next-js", "redux", "express-js", "mongodb"],
+    tags: ["next-js", "redux", "node-js", "mongodb"],
     link: {
       github: "https://github.com/okoyecharles/buggo",
       live: "https://buggo.vercel.app",
@@ -41,7 +45,7 @@ const projectData: Array<Project> = [
   },
   {
     name: "Amazon Clone",
-    logo: "/assets/projects/amazon-clone-logo.svg",
+    logo: <AmazonCloneLogo />,
     image: {
       desktop: "/assets/projects/amazon-clone.webp",
       mobile: "/assets/projects/amazon-clone-mobile.webp",
@@ -57,7 +61,7 @@ const projectData: Array<Project> = [
   },
   {
     name: "Lavish Cuisine",
-    logo: "/assets/projects/lavish-cuisine-logo.svg",
+    logo: <LavishCuisineLogo />,
     image: {
       desktop: "/assets/projects/lavish-cuisine.webp",
       mobile: "/assets/projects/lavish-cuisine-mobile.webp",
@@ -76,7 +80,7 @@ const projectData: Array<Project> = [
     timeRange: [new Date(2023, 7), new Date(2023, 8)],
     description:
       "Todo list app using Express, MongoDB, and Google authentication for seamless task management across devices",
-    tags: ["next-js", "mongodb", "express-js"],
+    tags: ["next-js", "mongodb", "node-js"],
     link: {
       github: "https://github.com/okoyecharles/todo-list-nextjs",
       live: "https://the-tasks.vercel.app",
@@ -138,3 +142,4 @@ const projectData: Array<Project> = [
   },
 ];
 
+export default projectData;
