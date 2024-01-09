@@ -6,7 +6,7 @@ export default function NorthWestIcon() {
       viewBox="0 0 8 8"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="text-grey-5 group-[.link]/link:stroke-blue-200 dark:group-[.link]/link:stroke-blue-d-200"
+      className="stroke-grey-5 dark:stroke-grey-6 "
     >
       <path
         d="M1 6.65685L6.65685 1M6.65685 1H2.41421M6.65685 1V5.24264"
