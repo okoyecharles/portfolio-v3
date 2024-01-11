@@ -205,7 +205,7 @@ function ExperienceCard({ expertise, contentReveal }: ExperienceCardProps) {
   return (
     <article className="ml-[24px] md:ml-[28px] font-normal flex-1 semi-lg:flex-none semi-lg:w-[384px] lg:w-[512px] flex flex-col">
       <a.header className="flex gap-4 mt-auto" style={contentReveal[0]}>
-        <div className="logo rounded-[4px] overflow-clip min-w-[48px] aspect-square h-fit ring-1 ring-grey-ea dark:ring-0">
+        <div className="logo rounded-[4px] overflow-hidden min-w-[48px] aspect-square h-fit ring-1 ring-grey-ea dark:ring-0">
           <Image
             src={expertise.logo}
             width={48}

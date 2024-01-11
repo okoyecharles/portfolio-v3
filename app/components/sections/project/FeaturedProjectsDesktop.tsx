@@ -73,7 +73,7 @@ export default function FeaturedProjectsDesktop(props: FeaturedProjectProps) {
   }, [projectIndex]);
 
   return (
-    <div className="rounded-[10px] grid grid-cols-12 bg-white dark:bg-black isolate">
+    <div className="rounded-[10px] grid-cols-12 bg-white dark:bg-black isolate hidden md:grid">
       <FeaturedProjectList {...props} />
       <FeaturedProjectInfo
         project={projects[projectIndex]}
@@ -321,7 +321,7 @@ function FeaturedProjectList({
           </h3>
           <div className="tags flex flex-wrap gap-2">
             {project.tags.map((tag) => (
-              <FeaturedProjectTag name={tag} />
+              <FeaturedProjectTag name={tag} key={tag} />
             ))}
           </div>
         </div>
