@@ -48,7 +48,7 @@ export default function Experience() {
         y: 0,
         opacity: 1,
         delay: 500,
-        config: { tension: 350, friction: 40 },
+        config: { tension: 400, friction: 40 },
       });
       // timeline animations
       YTSApi.update({ y: -YEAR_TIMELINE_POS });
