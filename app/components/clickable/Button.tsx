@@ -22,7 +22,7 @@ function Button({ children, variant = "default" }: ButtonProps) {
 
   return (
     <button
-      className={`group select-none flex gap-2 items-center px-4 py-3 rounded-[5px] transition-colors ${focusClass} ${variantClass[variant]}`}
+      className={`group/button button select-none inline-flex gap-2 items-center px-4 py-[10px] rounded-[5px] transition-colors ${focusClass} ${variantClass[variant]}`}
     >
       {children}
     </button>
