@@ -24,6 +24,7 @@ export interface Project {
   timeRange: [Date, Date];
   logo?: React.ReactNode;
   image?: Record<"desktop" | "mobile", string>;
+  themeColor?: string;
 }
 
 const projectData: Array<Project> = [
@@ -42,6 +43,7 @@ const projectData: Array<Project> = [
       github: "https://github.com/okoyecharles/buggo",
       live: "https://buggo.vercel.app",
     },
+    themeColor: "[--color:#0079C9]"
   },
   {
     name: "Amazon Clone",
@@ -58,6 +60,7 @@ const projectData: Array<Project> = [
       github: "https://github.com/okoyecharles/amazon-clone",
       live: "https://clone-f50ae.web.app",
     },
+    themeColor: "[--color:#EC9615]"
   },
   {
     name: "Lavish Cuisine",
@@ -74,6 +77,7 @@ const projectData: Array<Project> = [
       github: "https://github.com/okoyecharles/lavish-cuisine",
       live: "https://lavish-cuisine.web.app",
     },
+    themeColor: "[--color:#C0841D]"
   },
   {
     name: "To do List",
