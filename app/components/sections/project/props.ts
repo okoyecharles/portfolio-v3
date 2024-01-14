@@ -11,13 +11,15 @@ type FeaturedProjectProps = {
   projects: FeaturedProject[];
 }
 
-export type FeaturedProjectListProps = FeaturedProjectProps;
+export type FeaturedProjectSwiperProps = FeaturedProjectProps;
 
 export type FeaturedProjectDisplayProps = {
   project: FeaturedProject;
   displayFrameTrail: Array<SpringAnimation>;
   displayTransition: TransitionFn<FeaturedProject, any>;
 }
+
+export type FeaturedProjectListProps = FeaturedProjectProps;
 
 export type FeaturedProjectInfoProps = {
   project: FeaturedProject;
@@ -26,6 +28,10 @@ export type FeaturedProjectInfoProps = {
 
 export type FeaturedProjectTagProps = {
   name: string
+}
+
+export type FeaturedProjectCardProps = {
+  project: FeaturedProject;
 }
 
 export default FeaturedProjectProps;
