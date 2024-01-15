@@ -32,6 +32,7 @@ export type FeaturedProjectTagProps = {
 
 export type FeaturedProjectCardProps = {
   project: FeaturedProject;
+  active: boolean;
 }
 
 export default FeaturedProjectProps;
