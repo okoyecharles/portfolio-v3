@@ -52,7 +52,7 @@
   /* Gradient Border */
   .rotating-gradient {
     --rotating-gradient-border: 1.5px;
-    --rotating-gradient-color: green;
+    --rotating-gradient-color: #ffffff00;
     padding: 1rem;
     overflow: hidden;
 
@@ -76,6 +76,7 @@
       transparent 72%,
       var(--rotating-gradient-color) 75%, transparent 78%);
     animation: rotate-gradient infinite linear 12.5s;
+    transition: background-image 5s ease;
   }
 
   .rotating-gradient::before {
