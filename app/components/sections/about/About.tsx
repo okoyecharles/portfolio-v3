@@ -213,16 +213,16 @@ function AboutList({ items }: AboutListProps) {
     [
       {
         height: LIST_HEIGHT,
-        config: { friction: 35, tension: 150 },
-        delay: 500,
+        config: { friction: 35, tension: 250 },
+        delay: 250,
       },
       {
         y: "-50%",
         scale: 1,
-        config: { friction: 35, tension: 400 },
-        delay: 500,
+        config: { friction: 35, tension: 500 },
+        delay: 250,
       },
-      { opacity: 1, delay: 750 },
+      { opacity: 1, delay: 450 },
     ],
     [
       useSpring,

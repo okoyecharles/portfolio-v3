@@ -26,8 +26,8 @@ export default function Experience() {
   const [expertiseIndex, setExpertiseIndex] = useState<number>(0);
   const expertise = experienceData.expertise[expertiseIndex];
   const { ref, inView } = useInView({
-    threshold: 0.5,
-    rootMargin: "-48px 0px -128px",
+    threshold: 0,
+    rootMargin: "0px 0px -512px",
   });
   const [viewed, setViewed] = useState<boolean>(false);
 

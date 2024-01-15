@@ -12,11 +12,11 @@ import Link from "../../clickable/Link";
 import Button from "../../clickable/Button";
 import LiveIcon from "../../svg/icons/LiveIcon";
 import GithubIcon from "../../svg/icons/GithubIcon";
+import NextIcon from "../../svg/icons/NextIcon";
+import PrevIcon from "../../svg/icons/PrevIcon";
 import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
 import { EffectCards } from "swiper/modules";
 import "swiper/css/effect-cards";
-import NextIcon from "../../svg/icons/NextIcon";
-import PrevIcon from "../../svg/icons/PrevIcon";
 
 export default function FeaturedProjects(props: FeaturedProjectProps) {
   return (
