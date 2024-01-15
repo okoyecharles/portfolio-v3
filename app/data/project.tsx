@@ -60,7 +60,7 @@ const projectData: Array<Project> = [
       github: "https://github.com/okoyecharles/amazon-clone",
       live: "https://clone-f50ae.web.app",
     },
-    themeColor: "[--rotating-gradient-color:#EC9615]"
+    themeColor: "[--rotating-gradient-color:#666] dark:[--rotating-gradient-color:#999]"
   },
   {
     name: "Lavish Cuisine",

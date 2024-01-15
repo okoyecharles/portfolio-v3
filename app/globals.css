@@ -68,15 +68,9 @@
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    background-image: conic-gradient(
-      from 0deg at 50% 50%,
-      transparent 22%,
-      var(--rotating-gradient-color) 25%,
-      transparent 28%,
-      transparent 72%,
-      var(--rotating-gradient-color) 75%, transparent 78%);
-    animation: rotate-gradient infinite linear 12.5s;
-    transition: background-image 5s ease;
+    background-image: conic-gradient(from 0deg at 50% 50%, transparent 17%, var(--rotating-gradient-color) 24%, transparent 32%, transparent 67%, var(--rotating-gradient-color) 76%, transparent 84%);
+    animation: rotate-gradient infinite linear 10s;
+    transition: background-image 5s ease, opacity 1s ease;
   }
 
   .rotating-gradient::before {
