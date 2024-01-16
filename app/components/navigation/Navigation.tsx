@@ -5,7 +5,7 @@ import LogoIcon from "../svg/abstract/Logo";
 export default function Navigation() {
   return (
     <>
-      <div className="navigation-container max-w-[1504px] sticky top-0 mx-auto z-10">
+      <div className="navigation-container max-w-[1504px] sticky top-0 mx-auto z-10 isolate">
         <NavLinks />
         <NavLinksDesktop />
       </div>

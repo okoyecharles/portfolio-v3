@@ -9,7 +9,7 @@ import { a, to, useSpring } from "@react-spring/web";
 import useScrollDirection from "../utils/useScrollDirection";
 import useActiveSection from "../utils/useActiveSection";
 import ExpandIcon from "../svg/dropdown/ExpandIcon";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "../clickable/Link";
 
 export default function NavLinksDesktop() {
@@ -149,8 +149,24 @@ function Dropdown({
     }
   }
 
+  const dropdownRef = useRef<any>(null);
+  function handleClickOutside(event: Event) {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setOpen(false);
+    }
+  }
+  useEffect(() => {
+    // close dropdown if click occurs elsewhere
+    if (open) {
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }
+  }, [open]);
+
   return (
-    <div className="relative dropdown">
+    <div className="relative dropdown" ref={dropdownRef}>
       <button
         className={`py-2 px-1 rounded-[5px] hover:bg-grey-ea dark:hover:bg-grey-3 group/dropdown-button transition-colors -mr-[10px]${
           open ? " is-active" : ""

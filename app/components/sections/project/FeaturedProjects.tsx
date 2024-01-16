@@ -32,7 +32,7 @@ function FeaturedProjectSwiper({ projects }: FeaturedProjectSwiperProps) {
   const swiperApi = swiperRef.current?.swiper;
 
   return (
-    <div className="relative swiper-container">
+    <div className="relative swiper-container isolate">
       <Swiper
         ref={swiperRef}
         grabCursor
