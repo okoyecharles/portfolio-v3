@@ -8,7 +8,6 @@ import FeaturedProjectProps, {
   FeaturedProjectDisplayProps,
   FeaturedProjectInfoProps,
   FeaturedProjectListProps,
-  FeaturedProjectTagProps,
 } from "./props";
 import Image from "next/image";
 import DesktopFrame from "@/public/assets/projects/desktop-frame.png";
@@ -27,6 +26,7 @@ import HorizontalDottedLine from "../../background/HorizontalDottedLine";
 import DottedLine from "../../background/DottedLine";
 import Plus from "../../background/Plus";
 import FeaturedProjectTag from "@/app/components/sections/project/FeaturedProjectsTag";
+import FullScreenIcon from "../../svg/icons/FullScreenIcon";
 
 export default function FeaturedProjectsDesktop(props: FeaturedProjectProps) {
   const { projectIndex, projects } = props;
@@ -134,16 +134,35 @@ function FeaturedProjectDisplay({
         <>
           <a.div
             className={`
-          desktop-frame row-start-1
-          col-start-3 col-[_span_16_/_span_16]
-          flex flex-col
-        `}
+              desktop-frame row-start-1
+              col-start-3 col-[_span_16_/_span_16]
+              flex flex-col
+            `}
             style={style}
           >
             <a.div
               className="frame mt-auto mb-[32px] semi-lg:mb-[64px] relative"
               style={displayFrameTrail[0]}
             >
+              <button
+                className={
+                  "bg-grey-ea dark:bg-grey-2 ring-1 ring-grey-b dark:ring-grey-3 rounded-[16px] flex group/icon items-center px-2 hover:bg-grey-d hover:ring-grey-9 dark:hover:bg-grey-2 dark:hover:ring-grey-5 absolute -top-[48px] left-[10%] transition-all"
+                }
+              >
+                <div
+                  className={`
+                    p-2 text-sm text-grey-1 dark:text-grey-d 
+                    group-hover/icon:text-black dark:group-hover/icon:text-white 
+                    border-r border-grey-b dark:border-grey-3 
+                    group-hover/icon:border-grey-9 dark:group-hover/icon:border-grey-5 leading-[16px] transition-all whitespace-nowrap
+                  `}
+                >
+                  Show Desktop
+                </div>
+                <div className={"p-2"}>
+                  <FullScreenIcon />
+                </div>
+              </button>
               <Image
                 className="-z-10 absolute w-[79%] top-[5.5%] left-1/2 -translate-x-1/2"
                 src={project.image.desktop}
@@ -161,16 +180,35 @@ function FeaturedProjectDisplay({
           </a.div>
           <a.div
             className={`
-        mobile-frame row-start-1
-        col-start-[18] col-span-5
-        flex flex-col
-      `}
+              mobile-frame row-start-1
+              col-start-[18] col-span-5
+              flex flex-col
+            `}
             style={style}
           >
             <a.div
               className="frame mt-auto mb-[54px] semi-lg:mb-[96px] relative"
               style={displayFrameTrail[1]}
             >
+              <button
+                className={
+                  "bg-grey-ea dark:bg-grey-2 ring-1 ring-grey-b dark:ring-grey-3 rounded-[16px] flex group/icon items-center px-2 hover:bg-grey-d hover:ring-grey-9 dark:hover:bg-grey-2 dark:hover:ring-grey-5 absolute -top-[48px] right-0 transition-all"
+                }
+              >
+                <div
+                  className={`
+                    p-2 text-sm text-grey-1 dark:text-grey-d 
+                    group-hover/icon:text-black dark:group-hover/icon:text-white 
+                    border-r border-grey-b dark:border-grey-3 
+                    group-hover/icon:border-grey-9 dark:group-hover/icon:border-grey-5 leading-[16px] transition-all whitespace-nowrap
+                  `}
+                >
+                  Show Mobile
+                </div>
+                <div className={"p-2"}>
+                  <FullScreenIcon />
+                </div>
+              </button>
               <Image
                 className="-z-10 absolute w-[92.4%] top-[6.95%] left-1/2 -translate-x-1/2 rounded-b-[8.2%]"
                 src={project.image.mobile}
