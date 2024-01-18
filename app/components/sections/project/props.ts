@@ -16,6 +16,7 @@ type FeaturedProjectProps = {
 export type FeaturedProjectViewerProps = {
   project: FeaturedProject;
   projectViewMode: keyof FeaturedProject['image'];
+  setProjectViewMode: Dispatch<SetStateAction<keyof FeaturedProject['image']>>;
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
 }

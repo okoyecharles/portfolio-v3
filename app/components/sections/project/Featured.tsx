@@ -16,7 +16,7 @@ export default function Featured() {
   const [projectIndex, setProjectIndex] = useState<number>(0);
   const [projectViewMode, setProjectViewMode] =
     useState<keyof FeaturedProject["image"]>("desktop");
-  const [projectViewerOpen, setProjectViewerOpen] = useState<boolean>(true);
+  const [projectViewerOpen, setProjectViewerOpen] = useState<boolean>(false);
 
   function openProjectViewer(mode: typeof projectViewMode) {
     setProjectViewMode(mode);
@@ -47,6 +47,7 @@ export default function Featured() {
           setOpen={setProjectViewerOpen}
           project={projects[projectIndex]}
           projectViewMode={projectViewMode}
+          setProjectViewMode={setProjectViewMode}
         />
       </div>
     </Section>
