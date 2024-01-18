@@ -14,7 +14,7 @@ import LiveIcon from "../../svg/icons/LiveIcon";
 import GithubIcon from "../../svg/icons/GithubIcon";
 import NextIcon from "../../svg/icons/NextIcon";
 import PrevIcon from "../../svg/icons/PrevIcon";
-import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperClass, SwiperRef, SwiperSlide } from "swiper/react";
 import { EffectCards } from "swiper/modules";
 import "swiper/css/effect-cards";
 
@@ -26,10 +26,18 @@ export default function FeaturedProjects(props: FeaturedProjectProps) {
   );
 }
 
-function FeaturedProjectSwiper({ projects }: FeaturedProjectSwiperProps) {
-  const [activeCardIndex, setActiveCardIndex] = useState<number>(0);
+function FeaturedProjectSwiper({
+  projects,
+  projectIndex,
+  setProjectIndex,
+  openProjectViewer,
+}: FeaturedProjectSwiperProps) {
   const swiperRef = useRef<SwiperRef>(null);
   const swiperApi = swiperRef.current?.swiper;
+
+  function handleSwiperChange(swiper: SwiperClass) {
+    setProjectIndex(swiper.activeIndex);
+  }
 
   return (
     <div className="relative swiper-container isolate">
@@ -41,14 +49,16 @@ function FeaturedProjectSwiper({ projects }: FeaturedProjectSwiperProps) {
         cardsEffect={{
           slideShadows: false,
         }}
-        onActiveIndexChange={(swiper) => setActiveCardIndex(swiper.activeIndex)}
+        initialSlide={projectIndex}
+        onActiveIndexChange={handleSwiperChange}
       >
         {projects.map((project, index) => (
           <SwiperSlide className="my-auto" key={project.name}>
             <FeaturedProjectCard
               project={project}
-              active={activeCardIndex === index}
-              activeOffset={Math.abs(activeCardIndex - index)}
+              active={projectIndex === index}
+              activeOffset={Math.abs(projectIndex - index)}
+              openProjectViewer={openProjectViewer}
             />
           </SwiperSlide>
         ))}
@@ -73,6 +83,7 @@ function FeaturedProjectCard({
   project,
   active,
   activeOffset,
+  openProjectViewer,
 }: FeaturedProjectCardProps) {
   const cardShadowByOffset: Record<string, `after:bg-black/${string}`> = {
     "0": "after:bg-black/0",
@@ -118,6 +129,7 @@ function FeaturedProjectCard({
             className={
               "bg-grey-ea dark:bg-grey-15 ring-1 ring-grey-b dark:ring-grey-4 rounded-[16px] flex group/icon items-center px-2 hover:bg-grey-d hover:ring-grey-9 dark:hover:bg-grey-2 dark:hover:ring-grey-6 transition-colors"
             }
+            onClick={() => openProjectViewer("desktop")}
           >
             <div
               className={`
@@ -137,6 +149,7 @@ function FeaturedProjectCard({
             className={
               "bg-grey-ea dark:bg-grey-15 ring-1 ring-grey-b dark:ring-grey-4 rounded-[16px] flex group/icon items-center px-2 hover:bg-grey-d hover:ring-grey-9 dark:hover:bg-grey-2 dark:hover:ring-grey-6 transition-colors"
             }
+            onClick={() => openProjectViewer("mobile")}
           >
             <div
               className={`

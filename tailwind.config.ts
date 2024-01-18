@@ -79,6 +79,9 @@ const config: Config = {
       gridTemplateColumns: {
         '24': 'repeat(24, minmax(0, 1fr))',
       },
+      gridTemplateRows: {
+        'auto': 'auto 1fr'
+      }
     },
   },
   plugins: [],

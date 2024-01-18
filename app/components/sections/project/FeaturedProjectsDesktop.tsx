@@ -29,7 +29,7 @@ import FeaturedProjectTag from "@/app/components/sections/project/FeaturedProjec
 import FullScreenIcon from "../../svg/icons/FullScreenIcon";
 
 export default function FeaturedProjectsDesktop(props: FeaturedProjectProps) {
-  const { projectIndex, projects } = props;
+  const { projectIndex, projects, openProjectViewer } = props;
 
   // content animations
   const [contentRevealTrail, contentRevealTrailRef] = useTrail(
@@ -84,6 +84,7 @@ export default function FeaturedProjectsDesktop(props: FeaturedProjectProps) {
         project={projects[projectIndex]}
         displayFrameTrail={displayFrameTrail}
         displayTransition={displayTransition}
+        openProjectViewer={openProjectViewer}
       />
     </div>
   );
@@ -92,6 +93,7 @@ export default function FeaturedProjectsDesktop(props: FeaturedProjectProps) {
 function FeaturedProjectDisplay({
   displayFrameTrail,
   displayTransition,
+  openProjectViewer
 }: FeaturedProjectDisplayProps) {
   // decorative animations (plus and dashes)
   const {
@@ -148,6 +150,7 @@ function FeaturedProjectDisplay({
                 className={
                   "bg-grey-ea dark:bg-grey-2 ring-1 ring-grey-b dark:ring-grey-3 rounded-[16px] flex group/icon items-center px-2 hover:bg-grey-d hover:ring-grey-9 dark:hover:bg-grey-2 dark:hover:ring-grey-5 absolute -top-[48px] left-[10%] transition-all"
                 }
+                onClick={() => openProjectViewer('desktop')}
               >
                 <div
                   className={`
@@ -202,6 +205,7 @@ function FeaturedProjectDisplay({
                     border-r border-grey-b dark:border-grey-3 
                     group-hover/icon:border-grey-9 dark:group-hover/icon:border-grey-5 leading-[16px] transition-all whitespace-nowrap
                   `}
+                  onClick={() => openProjectViewer('mobile')}
                 >
                   Show Mobile
                 </div>
