@@ -1,4 +1,6 @@
-export default function SystemmodeIcon() {
+import { svgStyles } from "../styles";
+
+export default function ThemeSystemIcon() {
   return (
     <svg
       width="32"
@@ -6,7 +8,7 @@ export default function SystemmodeIcon() {
       viewBox="0 0 32 32"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={`fill-grey-6 transition-colors hover:fill-grey-1 dark:fill-grey-9 dark:hover:fill-grey-b group-[.is-active]:fill-grey-1 group-[.is-active]:dark:fill-grey-b`}
+      className={svgStyles.create(['toggle'])}
     >
       <path
         fillRule="evenodd"

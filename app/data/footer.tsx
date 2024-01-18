@@ -1,10 +1,6 @@
-import DarkmodeIcon from "../components/svg/theme/DarkmodeIcon";
-import GithubIcon from "../components/svg/icons/GithubIcon";
-import MailIcon from "../components/svg/icons/GmailIcon";
-import LightmodeIcon from "../components/svg/theme/LightmodeIcon";
-import LinkedinIcon from "../components/svg/icons/LinkedinIcon";
-import SystemmodeIcon from "../components/svg/theme/SystemmodeIcon";
-import XIcon from "../components/svg/icons/XIcon";
+import ThemeDarkIcon from "../components/svg/icons/ThemeDarkIcon";
+import ThemeLightIcon from "../components/svg/icons/ThemeLightIcon";
+import ThemeSystemIcon from "../components/svg/icons/ThemeSystemIcon";
 import { Social, socials } from "./navigation";
 
 interface FooterData {
@@ -20,15 +16,15 @@ const footerData: FooterData = {
   themes: [
     {
       name: "dark",
-      icon: <DarkmodeIcon />,
+      icon: <ThemeDarkIcon />,
     },
     {
       name: "light",
-      icon: <LightmodeIcon />,
+      icon: <ThemeLightIcon />,
     },
     {
       name: "system",
-      icon: <SystemmodeIcon />,
+      icon: <ThemeSystemIcon />,
     },
   ],
   socials: socials,
