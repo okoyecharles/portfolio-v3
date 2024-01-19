@@ -14,6 +14,7 @@ import DesktopFrame from "@/public/assets/projects/desktop-frame.png";
 import MobileFrame from "@/public/assets/projects/mobile-frame.png";
 import {
   a,
+  to,
   useSpring,
   useSpringRef,
   useTrail,
@@ -73,8 +74,22 @@ export default function FeaturedProjectsDesktop(props: FeaturedProjectProps) {
     });
   }, [projectIndex]);
 
+  const {
+    observedRef,
+    springAnimate: [layoutTransformSpring, layoutOpacitySpring],
+  } = useObservedSprings(
+    [...animation.layout.revealSlow.start],
+    [...animation.layout.revealSlow.end.map((x) => x())],
+    [useSpring, useSpring]
+  );
+
   return (
-    <div className="rounded-[10px] grid-cols-12 bg-white dark:bg-black isolate hidden md:grid">
+    <a.div className="rounded-[10px] grid-cols-12 bg-white dark:bg-black isolate hidden md:grid" 
+    ref={observedRef}
+    style={{
+      transform: to(layoutTransformSpring.y, (y) => `translateY(${y}px)`),
+      opacity: to(layoutOpacitySpring.opacity, (op: number) => `${op}`),
+    }}>
       <FeaturedProjectList {...props} />
       <FeaturedProjectInfo
         project={projects[projectIndex]}
@@ -86,7 +101,7 @@ export default function FeaturedProjectsDesktop(props: FeaturedProjectProps) {
         displayTransition={displayTransition}
         openProjectViewer={openProjectViewer}
       />
-    </div>
+    </a.div>
   );
 }
 

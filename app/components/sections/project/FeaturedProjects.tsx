@@ -5,9 +5,8 @@ import FeaturedProjectProps, {
 } from "./props";
 import FeaturedProjectTag from "@/app/components/sections/project/FeaturedProjectsTag";
 import { formatMonthYear } from "@/app/components/utils/moment";
-import { a } from "@react-spring/web";
-import DesktopIcon from "@/app/components/svg/icons/DesktopIcon";
 import MobileIcon from "../../svg/icons/MobileIcon";
+import DesktopIcon from "@/app/components/svg/icons/DesktopIcon";
 import Link from "../../clickable/Link";
 import Button from "../../clickable/Button";
 import LiveIcon from "../../svg/icons/LiveIcon";
@@ -17,12 +16,31 @@ import PrevIcon from "../../svg/icons/PrevIcon";
 import { Swiper, SwiperClass, SwiperRef, SwiperSlide } from "swiper/react";
 import { EffectCards } from "swiper/modules";
 import "swiper/css/effect-cards";
+import animation from "../../animations/animations";
+import { a, to, useSpring } from "@react-spring/web";
+import { useObservedSprings } from "../../utils/useObservedSpring";
 
 export default function FeaturedProjects(props: FeaturedProjectProps) {
+  const {
+    observedRef,
+    springAnimate: [layoutTransformSpring, layoutOpacitySpring],
+  } = useObservedSprings(
+    [...animation.layout.revealSlow.start],
+    [...animation.layout.revealSlow.end.map((x) => x())],
+    [useSpring, useSpring]
+  );
+
   return (
-    <div className="md:hidden">
+    <a.div
+      className="md:hidden"
+      ref={observedRef}
+      style={{
+        transform: to(layoutTransformSpring.y, (y) => `translateY(${y}px)`),
+        opacity: to(layoutOpacitySpring.opacity, (op: number) => `${op}`),
+      }}
+    >
       <FeaturedProjectSwiper {...props} />
-    </div>
+    </a.div>
   );
 }
 
