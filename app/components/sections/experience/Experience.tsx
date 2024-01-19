@@ -1,5 +1,10 @@
 "use client";
-import { ExperienceCardProps, ExperienceControlProps, ExperienceImageProps, ExperienceTimelineProps } from "./props";
+import {
+  ExperienceCardProps,
+  ExperienceControlProps,
+  ExperienceImageProps,
+  ExperienceTimelineProps,
+} from "./props";
 import experienceData, {
   experienceTimelineCalculator,
 } from "@/app/data/experience";
@@ -113,7 +118,12 @@ export default function Experience() {
   }));
 
   return (
-    <Section name="experience" id="experience" sectionRef={ref} padding="py-6 md:py-8 md:pb-[224px]">
+    <Section
+      name="experience"
+      id="experience"
+      sectionRef={ref}
+      padding="py-6 md:py-8 md:pb-[224px]"
+    >
       <SectionHeader mode="standalone">
         My <span className="text-blue-100 dark:blue-d-200">experience</span> as
         a developer
@@ -238,8 +248,6 @@ function ExperienceCard({ expertise, contentReveal }: ExperienceCardProps) {
     </article>
   );
 }
-
-
 
 function ExperienceTimeline({
   expertise,

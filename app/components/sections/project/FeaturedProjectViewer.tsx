@@ -51,9 +51,9 @@ export default function FeaturedProjectViewer({
 
   const imageTransition = useTransition(projectViewMode, {
     keys: null,
-    from: { opacity: 0, config: { tension: 750 } },
+    from: { opacity: 0, config: { tension: 750, clamp: true } },
     enter: { opacity: 1 },
-    leave: { opacity: 0, config: { tension: 750 } },
+    leave: { opacity: 0, config: { tension: 750, clamp: true } },
     exitBeforeEnter: true
   });
 
