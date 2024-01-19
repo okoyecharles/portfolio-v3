@@ -1,15 +1,8 @@
-import {
-  SyntheticEvent,
-  useEffect,
-} from "react";
+import { SyntheticEvent, useEffect } from "react";
 import { FeaturedProjectViewerProps } from "./props";
 import ImageIcon from "../../svg/abstract/ImageIcon";
 import Image from "next/image";
-import {
-  a,
-  useSpring,
-  useTransition,
-} from "@react-spring/web";
+import { a, useSpring, useTransition } from "@react-spring/web";
 import DesktopIcon from "../../svg/icons/DesktopIcon";
 import MobileIcon from "../../svg/icons/MobileIcon";
 
@@ -20,6 +13,9 @@ export default function FeaturedProjectViewer({
   projectViewMode,
   setProjectViewMode,
 }: FeaturedProjectViewerProps) {
+  // How large the fullscreen image will be compared to the preview
+  const IMAGE_SIZE_FACTOR = 3;
+
   function handleBgClose(event: SyntheticEvent) {
     if (event.target === event.currentTarget) {
       setOpen(false);
@@ -54,7 +50,7 @@ export default function FeaturedProjectViewer({
     from: { opacity: 0, config: { tension: 750, clamp: true } },
     enter: { opacity: 1 },
     leave: { opacity: 0, config: { tension: 750, clamp: true } },
-    exitBeforeEnter: true
+    exitBeforeEnter: true,
   });
 
   const activeTogglePos: Record<typeof projectViewMode, number> = {
@@ -107,8 +103,16 @@ export default function FeaturedProjectViewer({
                   className="w-full h-full object-contain"
                   src={project.image[mode]}
                   alt={`${mode} view image of ${project.name}`}
-                  width={mode === "mobile" ? 1220 : 3510}
-                  height={mode === "mobile" ? 2460 : 2160}
+                  width={
+                    mode === "mobile"
+                      ? 122 * IMAGE_SIZE_FACTOR
+                      : 351 * IMAGE_SIZE_FACTOR
+                  }
+                  height={
+                    mode === "mobile"
+                      ? 246 * IMAGE_SIZE_FACTOR
+                      : 216 * IMAGE_SIZE_FACTOR
+                  }
                 />
               </a.div>
             ))}
