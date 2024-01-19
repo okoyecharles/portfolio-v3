@@ -7,9 +7,6 @@ interface HomeBackgroundProps {
   revealBackground: {
     size: SpringValue<string>;
   }[];
-  revealBackgroundPlus: {
-    scale: SpringValue<number>;
-  }[];
 }
 
 export default HomeBackgroundProps;

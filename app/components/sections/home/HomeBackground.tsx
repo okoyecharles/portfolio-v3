@@ -9,7 +9,6 @@ import { animationOrder } from "@/app/data/home-background";
 export default function HomeBackground({
   glowBackground,
   revealBackground,
-  revealBackgroundPlus,
 }: HomeBackgroundProps) {
   const SQUARE_COUNT = 27;
   const COLUMNS = 7;
@@ -33,7 +32,6 @@ export default function HomeBackground({
               revealBackground[animationOrder[index]],
               glowBackground[animationOrder[index]],
             ]}
-            plusAnimation={revealBackgroundPlus[8 - animationOrder[index]]}
           />
         ))}
     </div>
@@ -44,14 +42,11 @@ interface BackgroundSquareProps {
   lines: (0 | 1)[];
   plus: boolean;
   lineAnimation: [{ size: SpringValue<string> }, { pos: SpringValue<number> }];
-  plusAnimation: { scale: SpringValue<number> };
 }
 
 function BackgroundSquare({
   lines,
   lineAnimation,
-  plus,
-  plusAnimation,
 }: BackgroundSquareProps) {
   return (
     <div className="bg-section w-[200px] h-[200px] relative">
@@ -75,7 +70,7 @@ function BackgroundSquare({
           <DottedLine animation={lineAnimation} />
         </div>
       )}
-      {plus && (
+      {/* {plus && (
         <div className="absolute -translate-x-1/2 -translate-y-1/2 left-full top-full">
           <Plus
             animation={plusAnimation}
@@ -83,7 +78,7 @@ function BackgroundSquare({
             className="stroke-blue-100 dark:stroke-blue-d-200"
           />
         </div>
-      )}
+      )} */}
     </div>
   );
 }

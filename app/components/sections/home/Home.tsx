@@ -15,25 +15,21 @@ export default function Home() {
       layoutOpacity,
       bgLineGlow,
       bgLineReveal,
-      bgPlusReveal,
     ],
   } = useObservedSprings(
     [
       ...animation.layout.reveal.start,
       animation.bg.lineGlow.start,
       animation.bg.lineReveal.start,
-      animation.bg.plusReveal.start,
     ],
     [
       ...animation.layout.reveal.end.map((x) => x()),
-      animation.bg.lineGlow.end({ delay: 1750 }),
-      animation.bg.lineReveal.end({ delay: 1750 }),
-      animation.bg.plusReveal.end({ delay: 750 }),
+      animation.bg.lineGlow.end({ delay: 750 }),
+      animation.bg.lineReveal.end({ delay: 750 }),
     ],
     [
       (cb: Function) => useTrail(5, cb, []),
       (cb: Function) => useTrail(5, cb, []),
-      (cb: Function) => useTrail(9, cb, []),
       (cb: Function) => useTrail(9, cb, []),
       (cb: Function) => useTrail(9, cb, []),
     ]
@@ -91,7 +87,6 @@ export default function Home() {
       <HomeBackground
         glowBackground={bgLineGlow}
         revealBackground={bgLineReveal}
-        revealBackgroundPlus={bgPlusReveal}
       />
     </Section>
   );
