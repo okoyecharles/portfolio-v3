@@ -1,16 +1,16 @@
 import NavLinks from "./NavLinks";
-import DesktopNavLinks from "./DesktopNavLinks";
-import LogoIcon from "../svg/Logo";
+import NavLinksDesktop from "./NavLinksDesktop";
+import LogoIcon from "../svg/abstract/Logo";
 
 export default function Navigation() {
   return (
     <>
-      <div className="navigation-container max-w-[1504px] sticky top-0 mx-auto z-10">
+      <div className="navigation-container max-w-[1504px] sticky top-0 mx-auto z-10 isolate">
         <NavLinks />
-        <DesktopNavLinks />
+        <NavLinksDesktop />
       </div>
       <header id="home" className="p-6 md:p-8 w-full max-w-[1504px] mx-auto">
-        <div className="logo h-12 flex items-center w-fit">
+        <div className="flex items-center h-12 logo w-fit">
           <LogoIcon />
         </div>
       </header>

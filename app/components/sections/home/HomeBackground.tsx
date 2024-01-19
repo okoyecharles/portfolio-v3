@@ -3,12 +3,12 @@ import { SpringValue } from "@react-spring/web";
 import DottedLine from "../../background/DottedLine";
 import HorizontalDottedLine from "../../background/HorizontalDottedLine";
 import Plus from "../../background/Plus";
-import { HomeBackgroundProps, animationOrder } from "./homeBackgroundData";
+import HomeBackgroundProps from "./props";
+import { animationOrder } from "@/app/data/home-background";
 
 export default function HomeBackground({
   glowBackground,
   revealBackground,
-  revealBackgroundPlus,
 }: HomeBackgroundProps) {
   const SQUARE_COUNT = 27;
   const COLUMNS = 7;
@@ -32,7 +32,6 @@ export default function HomeBackground({
               revealBackground[animationOrder[index]],
               glowBackground[animationOrder[index]],
             ]}
-            plusAnimation={revealBackgroundPlus[8 - animationOrder[index]]}
           />
         ))}
     </div>
@@ -43,46 +42,43 @@ interface BackgroundSquareProps {
   lines: (0 | 1)[];
   plus: boolean;
   lineAnimation: [{ size: SpringValue<string> }, { pos: SpringValue<number> }];
-  plusAnimation: { scale: SpringValue<number> };
 }
 
 function BackgroundSquare({
   lines,
   lineAnimation,
-  plus,
-  plusAnimation,
 }: BackgroundSquareProps) {
   return (
     <div className="bg-section w-[200px] h-[200px] relative">
       {!!lines[0] && (
-        <div className="absolute top-0 left-1/2 -translate-x-1/2">
+        <div className="absolute top-0 -translate-x-1/2 left-1/2">
           <HorizontalDottedLine animation={lineAnimation} />
         </div>
       )}
       {!!lines[1] && (
-        <div className="absolute right-0 top-1/2 -translate-y-1/2">
+        <div className="absolute right-0 -translate-y-1/2 top-1/2">
           <DottedLine animation={lineAnimation} />
         </div>
       )}
       {!!lines[2] && (
-        <div className="absolute top-full left-1/2 -translate-x-1/2">
+        <div className="absolute -translate-x-1/2 top-full left-1/2">
           <HorizontalDottedLine animation={lineAnimation} />
         </div>
       )}
       {!!lines[3] && (
-        <div className="absolute left-0 top-1/2 -translate-y-1/2">
+        <div className="absolute left-0 -translate-y-1/2 top-1/2">
           <DottedLine animation={lineAnimation} />
         </div>
       )}
-      {plus && (
-        <div className="absolute left-full top-full -translate-x-1/2 -translate-y-1/2">
+      {/* {plus && (
+        <div className="absolute -translate-x-1/2 -translate-y-1/2 left-full top-full">
           <Plus
             animation={plusAnimation}
             mode="flicker"
             className="stroke-blue-100 dark:stroke-blue-d-200"
           />
         </div>
-      )}
+      )} */}
     </div>
   );
 }

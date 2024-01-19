@@ -8,3 +8,8 @@ export function getMonthDifference(date1: Date, date2: Date) {
   const diff = diffDuration.as('months');
   return Number(diff.toFixed(0));
 }
+
+export function formatMonthYear(date: Date) {
+  const momentDate = moment(date);
+  return momentDate.format("MMM YYYY")
+}

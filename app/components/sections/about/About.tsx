@@ -1,4 +1,6 @@
 "use client";
+import { AboutImageProps, AboutListProps } from "./props";
+import aboutData from "@/app/data/about";
 import React from "react";
 import Section from "../Section";
 import SectionHeader from "../SectionHeader";
@@ -7,8 +9,7 @@ import Plus from "../../background/Plus";
 import HorizontalDottedLine from "../../background/HorizontalDottedLine";
 import DottedLine from "../../background/DottedLine";
 import Link from "../../clickable/Link";
-import aboutData from "@/app/data/about";
-import { SpringValue, a, to, useSpring, useTrail } from "@react-spring/web";
+import { a, to, useSpring, useTrail } from "@react-spring/web";
 import { useObservedSprings } from "../../utils/useObservedSpring";
 import animation from "../../animations/animations";
 
@@ -81,7 +82,7 @@ export default function About() {
           lineAnimate={[bgLineReveal, bgLineGlow]}
         />
         <div
-          className="about-content md:col-span-6 grid gap-6 md:grid-cols-2"
+          className="grid gap-6 about-content md:col-span-6 md:grid-cols-2"
           ref={observedRef}
         >
           <article className="md:col-span-2">
@@ -140,14 +141,7 @@ function AboutImage({
   imageAnimate,
   plusReveal,
   lineAnimate,
-}: {
-  imageAnimate: Function;
-  plusReveal: { scale: SpringValue<number> }[];
-  lineAnimate: [
-    { size: SpringValue<string> },
-    { pos: SpringValue<number> }
-  ];
-}) {
+}: AboutImageProps) {
   const plusPositions = [
     "top-0 left-0",
     "top-0 right-0",
@@ -166,10 +160,10 @@ function AboutImage({
           alt="A portrait image of Okoye Charles"
           width={300}
           height={300}
-          className="group-hover/figure:scale-105 transition-transform duration-500 delay-100"
+          className="transition-transform duration-500 delay-100 group-hover/figure:scale-105"
         />
       </a.div>
-      <div className="aesthetics absolute inset-0 -z-10">
+      <div className="absolute inset-0 aesthetics -z-10">
         <div className={`absolute top-[12.5px] left-1/2 -translate-x-1/2`}>
           <HorizontalDottedLine
             variant="bold"
@@ -201,7 +195,7 @@ function AboutImage({
             className={`absolute ${pos} group-hover/figure:rotate-[.25turn] transition-transform`}
           >
             <Plus
-              className="stroke-grey-8 dark:stroke-grey-9 group-hover/figure:stroke-blue-100 dark:group-hover/figure:stroke-blue-d-200 duration-300"
+              className="duration-300 stroke-grey-8 dark:stroke-grey-9 group-hover/figure:stroke-blue-100 dark:group-hover/figure:stroke-blue-d-200"
               animation={plusReveal[index]}
             />
           </div>
@@ -211,11 +205,7 @@ function AboutImage({
   );
 }
 
-function AboutList({
-  items,
-}: {
-  items: typeof aboutData.technologies | typeof aboutData.technologies;
-}) {
+function AboutList({ items }: AboutListProps) {
   const LIST_HEIGHT = 32 * (items.length - 1);
 
   const { observedRef, springAnimate } = useObservedSprings(
@@ -223,16 +213,16 @@ function AboutList({
     [
       {
         height: LIST_HEIGHT,
-        config: { friction: 35, tension: 150 },
-        delay: 500
+        config: { friction: 35, tension: 250 },
+        delay: 250,
       },
       {
         y: "-50%",
         scale: 1,
-        config: { friction: 35, tension: 400 },
-        delay: 500
+        config: { friction: 35, tension: 500 },
+        delay: 250,
       },
-      { opacity: 1, delay: 750 },
+      { opacity: 1, delay: 450 },
     ],
     [
       useSpring,

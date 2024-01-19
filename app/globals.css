@@ -48,4 +48,45 @@
     inset 0 0 0 1px var(--scrollbar-thumb-hover-border),
     inset 0 0 0 8px var(--scrollbar-thumb-hover-bg);
   }
+
+  /* Gradient Border */
+  .rotating-gradient {
+    --rotating-gradient-border: 1.5px;
+    --rotating-gradient-color: #ffffff00;
+    padding: 1rem;
+    overflow: hidden;
+
+    position: relative;
+    border-radius: 10px;
+    isolation: isolate;
+  }
+
+  .rotating-gradient::after {
+    z-index: -20;
+    transform: rotate(25deg);
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background-image: conic-gradient(from 0deg at 50% 50%, transparent 17%, var(--rotating-gradient-color) 24%, transparent 32%, transparent 67%, var(--rotating-gradient-color) 76%, transparent 84%);
+    animation: rotate-gradient infinite linear 10s;
+    transition: background-image 5s ease, opacity 1s ease;
+  }
+
+  .rotating-gradient::before {
+    z-index: -10;
+    content: '';
+    position: absolute;
+    inset: var(--rotating-gradient-border);
+    border-radius: inherit;
+  }
+
+    @keyframes rotate-gradient {
+      from {
+        transform: rotate(0deg) scale(2);
+      }
+      to {
+        transform: rotate(360deg) scale(2);
+      }
+    }
 }

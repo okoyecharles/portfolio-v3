@@ -7,6 +7,13 @@ const config: Config = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  /*
+  * Include class utilities for tailwind > theme > colors > tag
+  * to enable dynamic generation without purging them
+  */
+  safelist: [
+    { pattern: /(bg|text)-tag-.(dark)?/, variants: ['dark'] }
+  ],
   theme: {
     screens: {
       'sm': '480px',
@@ -42,24 +49,38 @@ const config: Config = {
         'd-200': '#3291ff',
         'd-300': '#187ff6',
       },
-      'framework': {
+      'tag': {
         'redux': '#7D47C3',
-        'mongodb': '#00B425',
-        'react': '#00DDFF',
-        'react-dark': '#0093AA',
-        'firebase': 'FFA000',
+        'redux-dark': '#B079F7',
+        'mongodb': '#009C20',
+        'mongodb-dark': '#00B425',
+        'react': '#0093AA',
+        'react-dark': '#00DDFF',
+        'firebase': '#DC8B02',
+        'firebase-dark': '#FFA000',
         'typescript': '#007ACC',
+        'typescript-dark': '#0189E5',
         'javascript': '#FCDE00',
         'javascript-dark': '#EBAD0E',
         'html': '#FF5800',
         'css': '#0067FA',
         'scss': '#DC5F9B',
+        'node-js': '#3C823B',
+        'node-js-dark': '#4A9F49',
+        'next-js': '#666666',
+        'next-js-dark': '#bbbbbb',
       }
     },
     extend: {
       fontFamily: {
         visby: ['var(--font-visby)'],
         lato: ['var(--font-lato)'],
+      },
+      gridTemplateColumns: {
+        '24': 'repeat(24, minmax(0, 1fr))',
+      },
+      gridTemplateRows: {
+        'auto': 'auto 1fr'
       }
     },
   },

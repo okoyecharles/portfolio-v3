@@ -26,7 +26,7 @@ export default function SectionHeader({
   );
 
   return (
-    <header className="self-center items-center flex gap-3" ref={observedRef}>
+    <header className="flex items-center self-center gap-3" ref={observedRef}>
       {mode === "default" && (
         <Plus
           className="stroke-blue-100 dark:stroke-blue-d-200"

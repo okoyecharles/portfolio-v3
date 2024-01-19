@@ -1,6 +1,11 @@
 "use client";
+import {
+  ExperienceCardProps,
+  ExperienceControlProps,
+  ExperienceImageProps,
+  ExperienceTimelineProps,
+} from "./props";
 import experienceData, {
-  Expertise,
   experienceTimelineCalculator,
 } from "@/app/data/experience";
 import Section from "../Section";
@@ -8,7 +13,7 @@ import SectionHeader from "../SectionHeader";
 import moment from "moment";
 import Image from "next/image";
 import Link from "../../clickable/Link";
-import NorthWestIcon from "../../svg/NorthWestIcon";
+import NorthWestIcon from "../../svg/abstract/NorthWestIcon";
 import React, { useEffect, useState } from "react";
 import {
   SpringValue,
@@ -20,13 +25,14 @@ import {
   useTransition,
 } from "@react-spring/web";
 import { useInView } from "react-intersection-observer";
+import SectionDescription from "../SectionDescription";
 
 export default function Experience() {
   const [expertiseIndex, setExpertiseIndex] = useState<number>(0);
   const expertise = experienceData.expertise[expertiseIndex];
   const { ref, inView } = useInView({
-    threshold: 0.5,
-    rootMargin: "-48px 0px -128px",
+    threshold: 0,
+    rootMargin: "0px 0px -512px",
   });
   const [viewed, setViewed] = useState<boolean>(false);
 
@@ -47,7 +53,7 @@ export default function Experience() {
         y: 0,
         opacity: 1,
         delay: 500,
-        config: { tension: 350, friction: 40 },
+        config: { tension: 400, friction: 40 },
       });
       // timeline animations
       YTSApi.update({ y: -YEAR_TIMELINE_POS });
@@ -112,17 +118,22 @@ export default function Experience() {
   }));
 
   return (
-    <Section name="experience" id="experience" sectionRef={ref}>
+    <Section
+      name="experience"
+      id="experience"
+      sectionRef={ref}
+      padding="py-6 md:py-8 md:pb-[224px]"
+    >
       <SectionHeader mode="standalone">
         My <span className="text-blue-100 dark:blue-d-200">experience</span> as
         a developer
       </SectionHeader>
-      <p className="py-4 lg:py-8 self-center max-w-[700px] text-center md:text-[18px] text-grey-6 dark:text-grey-b">
+      <SectionDescription>
         A display of my growth as a frontend developer, showcasing the progress
         I have achieved and the valuable experience I've acquired.
-      </p>
+      </SectionDescription>
       <div
-        className="experience-content flex relative"
+        className="relative flex experience-content"
         style={{ perspective: "800px" }}
       >
         <ExperienceTimeline
@@ -143,19 +154,13 @@ export default function Experience() {
   );
 }
 
-interface ExperienceControlProps {
-  expertiseIndex: number;
-  setExpertiseIndex: Function;
-  expertiseCount: number;
-}
-
 function ExperienceControl({
   expertiseIndex,
   setExpertiseIndex,
   expertiseCount,
 }: ExperienceControlProps) {
   return (
-    <aside className="flex gap-3 justify-center mt-6 lg:mt-8 lg:mb-16">
+    <aside className="flex justify-center gap-3 my-6 md:my-8">
       {Array(expertiseCount)
         .fill(0)
         .map((_, index) => {
@@ -174,10 +179,6 @@ function ExperienceControl({
         })}
     </aside>
   );
-}
-
-interface ExperienceImageProps {
-  imageTransition: Function;
 }
 
 function ExperienceImage({ imageTransition }: ExperienceImageProps) {
@@ -209,17 +210,12 @@ function ExperienceImage({ imageTransition }: ExperienceImageProps) {
   );
 }
 
-interface ExperienceCardProps {
-  expertise: Expertise;
-  contentReveal: Record<string, SpringValue>[];
-}
-
 function ExperienceCard({ expertise, contentReveal }: ExperienceCardProps) {
   const dates = expertise.timeRange.map((date) => moment(date).format("MMMM"));
   return (
     <article className="ml-[24px] md:ml-[28px] font-normal flex-1 semi-lg:flex-none semi-lg:w-[384px] lg:w-[512px] flex flex-col">
       <a.header className="flex gap-4 mt-auto" style={contentReveal[0]}>
-        <div className="logo rounded-[4px] overflow-clip min-w-[48px] aspect-square h-fit ring-1 ring-grey-ea dark:ring-0">
+        <div className="logo rounded-[4px] overflow-hidden min-w-[48px] aspect-square h-fit ring-1 ring-grey-ea dark:ring-0">
           <Image
             src={expertise.logo}
             width={48}
@@ -227,7 +223,7 @@ function ExperienceCard({ expertise, contentReveal }: ExperienceCardProps) {
             alt={`Logo of ${expertise.title}`}
           />
         </div>
-        <div className="heading flex flex-col gap-1">
+        <div className="flex flex-col gap-1 heading">
           <h3 className="leading-[1] text-grey-1 dark:text-grey-d font-bold">
             {expertise.title}
           </h3>
@@ -236,11 +232,11 @@ function ExperienceCard({ expertise, contentReveal }: ExperienceCardProps) {
           </p>
         </div>
       </a.header>
-      <div className="content md:pl-16 flex flex-col gap-3 mb-auto">
+      <div className="flex flex-col gap-3 mb-auto content md:pl-16">
         <a.p className="mt-4" style={contentReveal[1]}>
           {expertise.details}
         </a.p>
-        <a.button style={contentReveal[2]} className='w-fit'>
+        <a.button style={contentReveal[2]} className="w-fit">
           <Link href={expertise.certificate}>
             Certificate of completion <NorthWestIcon />
           </Link>
@@ -251,13 +247,6 @@ function ExperienceCard({ expertise, contentReveal }: ExperienceCardProps) {
       </div>
     </article>
   );
-}
-
-interface ExperienceTimelineProps {
-  expertise: Expertise;
-  yearTimeLineScroll: Record<string, SpringValue>;
-  monthTimeLineHeight: Record<string, SpringValue>;
-  monthTimeLineMarker: Record<string, SpringValue>;
 }
 
 function ExperienceTimeline({
@@ -275,7 +264,7 @@ function ExperienceTimeline({
         className="year-timeline-container absolute top-1/2 left-[28px]"
         style={yearTimeLineScroll}
       >
-        <div className="year-timeline relative">
+        <div className="relative year-timeline">
           <div
             className={`w-[1px] bg-grey-d dark:bg-grey-3`}
             style={{ height: YEAR_TIMELINE_HEIGHT }}
@@ -317,7 +306,7 @@ function ExperienceTimeline({
         </div>
       </a.div>
       <div className="month-timeline-container h-full absolute top-0 left-[27px] md:left-[calc(34px+16px)]">
-        <div className="month-timeline relative h-full">
+        <div className="relative h-full month-timeline">
           <a.div
             className={`w-[2px] bg-blue-100 dark:bg-blue-d-200 md:bg-grey-ea dark:md:bg-grey-3 absolute left-[1px] top-1/2 -translate-y-1/2`}
             style={monthTimeLineHeight}

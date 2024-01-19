@@ -1,8 +1,9 @@
 import type { Metadata, Viewport } from "next";
-import "./globals.css";
 import Providers from "./Providers";
 import visby from "./fonts/visby";
 import lato from "./fonts/lato";
+import "./globals.css";
+import 'swiper/css';
 
 export const metadata: Metadata = {
   title: "Okoye Charles | Frontend Developer",
@@ -51,7 +52,7 @@ export default function RootLayout({
       lang="en"
       className={` ${visby.variable} ${lato.variable} h-full scroll-smooth`}
     >
-      <body className="bg-white dark:bg-black font-lato font-normal selection:bg-blue-200 dark:selection:bg-blue-d-300 selection:text-white">
+      <body className="font-normal bg-white dark:bg-black font-lato selection:bg-blue-200 dark:selection:bg-blue-d-300 selection:text-white">
         <Providers>{children}</Providers>
       </body>
     </html>

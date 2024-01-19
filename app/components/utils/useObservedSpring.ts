@@ -1,12 +1,11 @@
-import { UseSpringProps } from "@react-spring/web";
-import { useEffect } from "react";
+import { UseSpringProps, useSpring } from "@react-spring/web";
+import { useEffect, useState } from "react";
 import { IntersectionOptions, useInView } from "react-intersection-observer";
 
-interface Props {
-  1: UseSpringProps['from'],
-  2: UseSpringProps,
-  3: Function
-}
+type InitialObservedSpringState = UseSpringProps['from'];
+type FinalObservedSpringState = UseSpringProps;
+type SpringInitializerFn = () => InitialObservedSpringState;
+type SpringHook = (init: SpringInitializerFn, deps: Array<any>) => any;
 
 const observerConfig: IntersectionOptions = {
   threshold: 0,
@@ -14,45 +13,38 @@ const observerConfig: IntersectionOptions = {
 };
 
 export default function useObservedSpring(
-  initialState: Props[1],
-  finalState: Props[2],
-  springHook: Props[3]
+  initialState: InitialObservedSpringState,
+  finalState: FinalObservedSpringState,
+  springHook: SpringHook
 ) {
-  const { ref: observedRef, inView } = useInView(observerConfig);
-
+  const [viewed, setViewed] = useState<boolean>(false);
+  const { ref, inView } = useInView(observerConfig);
   const [springAnimate, springApi] = springHook(() => initialState, []);
-
-  const handleObserve = () => {
-    springApi.start(finalState);
-  };
 
   // execute spring when referenced element enters the viewport
   useEffect(() => {
-    if (inView) handleObserve();
+    if (inView && !viewed) {
+      springApi.start(finalState);
+      setViewed(false);
+    };
   }, [inView]);
 
-  return { observedRef, springAnimate };
+  return { observedRef: ref, springAnimate };
 }
 
 export function useObservedSprings(
-  initialStates: Props[1][],
-  finalStates: Props[2][],
-  springHooks: Props[3][]
+  initialStates: InitialObservedSpringState[],
+  finalStates: FinalObservedSpringState[],
+  springHooks: SpringHook[]
 ) {
   const { ref: observedRef, inView } = useInView(observerConfig);
 
-  const springHookValues: any[] = [];
-
-  for (let i = 0; i < springHooks.length; ++i) {
-    springHookValues.push(springHooks[i](() => initialStates[i], []));
-  }
+  const springHookValues =
+    springHooks.map((hook, hookIndex) => hook(() => initialStates[hookIndex], []));
 
   const handleObserve = () => {
     springHookValues.forEach(
-      (
-        [_springAnimate, springApi]: any,
-        springIndex
-      ) => springApi.start(finalStates[springIndex]));
+      ([_, springApi], springIndex) => springApi.start(finalStates[springIndex]));
   };
 
   // execute all springs when referenced element enters the viewport
@@ -60,5 +52,8 @@ export function useObservedSprings(
     if (inView) handleObserve();
   }, [inView]);
 
-  return { observedRef, springAnimate: springHookValues.map(([a]) => a) };
+  return {
+    observedRef,
+    springAnimate: springHookValues.map(([springValue]) => springValue)
+  };
 }
