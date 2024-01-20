@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import FeaturedProjectProps, {
   FeaturedProjectCardProps,
   FeaturedProjectSwiperProps,
-} from "./props";
+} from "./props.featured";
 import FeaturedProjectTag from "@/app/components/sections/project/FeaturedProjectsTag";
 import { formatMonthYear } from "@/app/components/utils/moment";
 import MobileIcon from "../../svg/icons/MobileIcon";

@@ -8,7 +8,7 @@ import FeaturedProjectProps, {
   FeaturedProjectDisplayProps,
   FeaturedProjectInfoProps,
   FeaturedProjectListProps,
-} from "./props";
+} from "./props.featured";
 import Image from "next/image";
 import DesktopFrame from "@/public/assets/projects/desktop-frame.png";
 import MobileFrame from "@/public/assets/projects/mobile-frame.png";

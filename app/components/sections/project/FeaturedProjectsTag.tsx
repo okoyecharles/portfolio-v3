@@ -1,4 +1,4 @@
-import {FeaturedProjectTagProps} from "@/app/components/sections/project/props";
+import {FeaturedProjectTagProps} from "./props.featured";
 
 export default function FeaturedProjectTag({ name }: FeaturedProjectTagProps) {
     const color = `text-tag-${name} dark:text-tag-${name}-dark`;

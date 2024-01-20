@@ -7,7 +7,7 @@ import projectData, { Project } from "@/app/data/project";
 import FeaturedProjects from "./FeaturedProjects";
 import FeaturedProjectsDesktop from "./FeaturedProjectsDesktop";
 import FeaturedProjectViewer from "./FeaturedProjectViewer";
-import { FeaturedProject } from "./props";
+import { FeaturedProject } from "./props.featured";
 
 export default function Featured() {
   const { current: projects } = useRef(
