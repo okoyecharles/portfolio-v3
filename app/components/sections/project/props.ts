@@ -7,3 +7,7 @@ export type ProjectGridProps = {
 export type ProjectCardProps = {
   project: Project;
 }
+
+export type ProjectCardLinksProps = {
+  link: Project['link'];
+}
