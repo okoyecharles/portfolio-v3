@@ -12,19 +12,21 @@ const variantClass = {
 interface LinkProps {
   children: React.ReactNode;
   href: string;
+  className?: string;
   variant?: keyof typeof variantClass;
 }
 
 export default function Link({
   children,
   href,
+  className,
   variant = "default",
 }: LinkProps) {
   return (
     <a
       href={href}
       className={`
-      inline-flex items-center gap-1 w-fit ${variantClass[variant]}
+      inline-flex items-center gap-1 w-fit ${variantClass[variant]} ${className}
     `}
       target="_blank"
       rel="noopener noreferrer"
