@@ -1,5 +1,5 @@
 "use client";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Section from "../Section";
 import SectionHeader from "../SectionHeader";
 import SectionDescription from "../SectionDescription";
@@ -13,9 +13,11 @@ import {
 } from "./props";
 import FeaturedProjectTag from "./FeaturedProjectsTag";
 import { formatDateTimeAttribute, formatMonthYear } from "../../utils/moment";
-import VerticalLineIcon from "../../svg/abstract/VerticalLineIcon";
 import ProjectGithub from "../../svg/abstract/ProjectGithub";
 import ProjectLive from "../../svg/abstract/ProjectLive";
+import { a, useSpring, useSpringRef, useTransition } from "@react-spring/web";
+import Button from "../../clickable/Button";
+import { useInView } from "react-intersection-observer";
 
 export default function MoreProjects() {
   const { current: projects } = useRef(projectData.slice(3));
@@ -33,12 +35,63 @@ export default function MoreProjects() {
 }
 
 function ProjectGrid({ projects }: ProjectGridProps) {
+  const INITIAL_CARD_COUNT = 3;
+  const [projectCount, setProjectCount] = useState(INITIAL_CARD_COUNT);
+  const { ref, inView } = useInView({
+    threshold: 0,
+    rootMargin: "0px 0px -128px",
+  });
+
+  const cardRevealTransRef = useSpringRef();
+  const cardRevealTransition = useTransition(projects.slice(0, projectCount), {
+    ref: cardRevealTransRef,
+    from: { opacity: 0, y: -16, config: { tension: 400 } },
+    enter: { opacity: 1, y: 0 },
+    leave: { opacity: 1, config: { duration: 0 } },
+  });
+  const [buttonRevealSpring, buttonRevealSpringRef] = useSpring(() => ({
+    opacity: 0,
+  }));
+
+  const [viewed, setViewed] = useState<boolean>(false);
+  useEffect(() => {
+    if (inView && !viewed) {
+      setViewed(true);
+    }
+  }, [inView]);
+  useEffect(() => {
+    if (inView) {
+      // card reveal animation
+      cardRevealTransRef.start();
+      // button reveal animation
+      buttonRevealSpringRef.start({ opacity: 1, delay: 250 })
+    }
+  }, [viewed, projectCount]);
+
+  function handleProjectCountToggle() {
+    setProjectCount((prev) =>
+      prev === INITIAL_CARD_COUNT ? projects.length : INITIAL_CARD_COUNT
+    );
+  }
+
   return (
-    <div className="grid gap-6 my-8 md:gap-8 project-grid grid-rows-auto md:grid-cols-2 semi-lg:grid-cols-3">
-      {projects.map((project) => (
-        <ProjectCard project={project} />
-      ))}
-    </div>
+    <>
+      <div
+        className="grid gap-6 my-8 md:gap-8 project-grid grid-rows-auto md:grid-cols-2 semi-lg:grid-cols-3 place-content-center"
+        ref={ref}
+      >
+        {cardRevealTransition((style, project) => (
+          <a.div className="project-card-container" style={style}>
+            <ProjectCard project={project} />
+          </a.div>
+        ))}
+      </div>
+      <a.div className="flex justify-center grid-control" style={buttonRevealSpring}>
+        <Button variant="black" onClick={handleProjectCountToggle}>
+          {projectCount === INITIAL_CARD_COUNT ? "Show more" : "Show less"}
+        </Button>
+      </a.div>
+    </>
   );
 }
 
@@ -46,7 +99,7 @@ function ProjectCard({ project }: ProjectCardProps) {
   return (
     <article
       className={`
-      relative group/project-card
+      h-full relative group/project-card
       p-6 flex flex-col gap-[6px] rounded-[10px]
       bg-white dark:bg-grey-1 
       hover:bg-grey-fb dark:hover:bg-grey-15
