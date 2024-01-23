@@ -2,9 +2,12 @@ import { useEffect, useRef, useState } from "react";
 import FeaturedProjectProps, {
   FeaturedProjectCardProps,
   FeaturedProjectSwiperProps,
-} from "./props";
+} from "./props.featured";
 import FeaturedProjectTag from "@/app/components/sections/project/FeaturedProjectsTag";
-import { formatMonthYear } from "@/app/components/utils/moment";
+import {
+  formatDateTimeAttribute,
+  formatMonthYear,
+} from "@/app/components/utils/moment";
 import MobileIcon from "../../svg/icons/MobileIcon";
 import DesktopIcon from "@/app/components/svg/icons/DesktopIcon";
 import Link from "../../clickable/Link";
@@ -118,14 +121,15 @@ function FeaturedProjectCard({
     >
       <article
         className={`
-        rounded-[10px] p-6
-        rotating-gradient
-        before:bg-gradient-to-b
-        bg-grey-d dark:bg-grey-4
-        before:from-grey-ea dark:before:from-grey-2
-        before:to-white dark:before:to-black max-w-[320px]
-        ${project.themeColor}
-        ${active ? "after:opacity-100" : "after:opacity-0"}`}
+          rounded-[10px] p-6
+          rotating-gradient
+          before:bg-gradient-to-b
+          bg-grey-d dark:bg-grey-4
+          before:from-grey-ea dark:before:from-grey-2
+          before:to-white dark:before:to-black max-w-[320px]
+          ${project.themeColor}
+          $-{active ? "after:opacity-100" : "after:opacity-0"}
+        `}
       >
         <header className={"grid gap-1"}>
           <div className="mb-6 logo">{project.logo}</div>
@@ -138,8 +142,13 @@ function FeaturedProjectCard({
             ))}
           </div>
           <span className="text-[14px] text-grey-9 dark:text-grey-5">
-            <time>{formatMonthYear(project.timeRange[0])}</time>-{" "}
-            <time>{formatMonthYear(project.timeRange[1])}</time>
+            <time dateTime={formatDateTimeAttribute(project.timeRange[0])}>
+              {formatMonthYear(project.timeRange[0])}
+            </time>
+            -{" "}
+            <time dateTime={formatDateTimeAttribute(project.timeRange[1])}>
+              {formatMonthYear(project.timeRange[1])}
+            </time>
           </span>
         </header>
         <div className={"flex gap-2 my-4"}>

@@ -1,3 +1,5 @@
+import { DOMAttributes } from "react";
+
 const variantClass = {
   default: `
     bg-blue-200 text-white fill-white hover:bg-blue-300
@@ -12,9 +14,10 @@ const variantClass = {
 interface ButtonProps {
   children: React.ReactNode;
   variant?: keyof typeof variantClass;
+  onClick?: DOMAttributes<HTMLButtonElement>['onClick'];
 }
 
-function Button({ children, variant = "default" }: ButtonProps) {
+function Button({ children, variant = "default", onClick }: ButtonProps) {
   const focusClass = `
     focus-visible:outline focus-visible:outline-offset-4 focus-visible:outline-2 focus-visible:outline-grey-9
     dark:focus-visible
@@ -23,6 +26,7 @@ function Button({ children, variant = "default" }: ButtonProps) {
   return (
     <button
       className={`group/button button select-none inline-flex gap-2 items-center px-4 py-[10px] rounded-[5px] transition-colors ${focusClass} ${variantClass[variant]}`}
+      onClick={onClick}
     >
       {children}
     </button>

@@ -13,3 +13,9 @@ export function formatMonthYear(date: Date) {
   const momentDate = moment(date);
   return momentDate.format("MMM YYYY")
 }
+
+// format date (...) for <time datetime={...}>Certain time</time>
+export function formatDateTimeAttribute(date: Date) {
+  const momentDate = moment(date);
+  return momentDate.format("YYYY-MM-DD hh:mm:ss")
+}

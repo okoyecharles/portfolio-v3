@@ -3,12 +3,12 @@ import Link from "../../clickable/Link";
 import GithubIcon from "../../svg/icons/GithubIcon";
 import LiveIcon from "../../svg/icons/LiveIcon";
 import NorthWestIcon from "../../svg/abstract/NorthWestIcon";
-import { formatMonthYear } from "../../utils/moment";
+import { formatDateTimeAttribute, formatMonthYear } from "../../utils/moment";
 import FeaturedProjectProps, {
   FeaturedProjectDisplayProps,
   FeaturedProjectInfoProps,
   FeaturedProjectListProps,
-} from "./props";
+} from "./props.featured";
 import Image from "next/image";
 import DesktopFrame from "@/public/assets/projects/desktop-frame.png";
 import MobileFrame from "@/public/assets/projects/mobile-frame.png";
@@ -84,12 +84,14 @@ export default function FeaturedProjectsDesktop(props: FeaturedProjectProps) {
   );
 
   return (
-    <a.div className="rounded-[10px] grid-cols-12 bg-white dark:bg-black isolate hidden md:grid" 
-    ref={observedRef}
-    style={{
-      transform: to(layoutTransformSpring.y, (y) => `translateY(${y}px)`),
-      opacity: to(layoutOpacitySpring.opacity, (op: number) => `${op}`),
-    }}>
+    <a.div
+      className="rounded-[10px] grid-cols-12 bg-white dark:bg-black isolate hidden md:grid"
+      ref={observedRef}
+      style={{
+        transform: to(layoutTransformSpring.y, (y) => `translateY(${y}px)`),
+        opacity: to(layoutOpacitySpring.opacity, (op: number) => `${op}`),
+      }}
+    >
       <FeaturedProjectList {...props} />
       <FeaturedProjectInfo
         project={projects[projectIndex]}
@@ -108,7 +110,7 @@ export default function FeaturedProjectsDesktop(props: FeaturedProjectProps) {
 function FeaturedProjectDisplay({
   displayFrameTrail,
   displayTransition,
-  openProjectViewer
+  openProjectViewer,
 }: FeaturedProjectDisplayProps) {
   // decorative animations (plus and dashes)
   const {
@@ -165,7 +167,7 @@ function FeaturedProjectDisplay({
                 className={
                   "bg-grey-ea dark:bg-grey-2 ring-1 ring-grey-b dark:ring-grey-3 rounded-[16px] flex group/icon items-center px-2 hover:bg-grey-d hover:ring-grey-9 dark:hover:bg-grey-2 dark:hover:ring-grey-5 absolute -top-[48px] left-[10%] transition-all"
                 }
-                onClick={() => openProjectViewer('desktop')}
+                onClick={() => openProjectViewer("desktop")}
               >
                 <div
                   className={`
@@ -220,7 +222,7 @@ function FeaturedProjectDisplay({
                     border-r border-grey-b dark:border-grey-3 
                     group-hover/icon:border-grey-9 dark:group-hover/icon:border-grey-5 leading-[16px] transition-all whitespace-nowrap
                   `}
-                  onClick={() => openProjectViewer('mobile')}
+                  onClick={() => openProjectViewer("mobile")}
                 >
                   Show Mobile
                 </div>
@@ -308,8 +310,13 @@ function FeaturedProjectInfo({
         className="text-[14px] text-grey-9 dark:text-grey-5 mt-2"
         style={contentRevealTrail[1]}
       >
-        <time>{formatMonthYear(project.timeRange[0])}</time> -{" "}
-        <time>{formatMonthYear(project.timeRange[1])}</time>
+        <time dateTime={formatDateTimeAttribute(project.timeRange[0])}>
+          {formatMonthYear(project.timeRange[0])}
+        </time>{" "}
+        -{" "}
+        <time dateTime={formatDateTimeAttribute(project.timeRange[1])}>
+          {formatMonthYear(project.timeRange[1])}
+        </time>
       </a.span>
       <a.p className="my-4" style={contentRevealTrail[2]}>
         {project.description}

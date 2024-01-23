@@ -95,7 +95,7 @@ const projectData: Array<Project> = [
     timeRange: [new Date(2022, 5), new Date(2022, 6)],
     description:
       "A website dedicated to supporting underprivileged children in developing countries worldwide, facilitating a positive impact on the lives of these children.",
-    tags: ["javascript"],
+    tags: ["html", "css", "javascript"],
     link: {
       github: "https://github.com/okoyecharles/save-a-child",
       live: "https://okoyecharles.github.io/save-a-child",
@@ -126,7 +126,7 @@ const projectData: Array<Project> = [
     name: "Space Traveler Hub",
     timeRange: [new Date(2022, 6), new Date(2022, 7)],
     description:
-      "An application that fetch and display real-time rocket information, join missions and reserve rockets in this intuitive SPA",
+      "An application that fetches and displays real-time rocket information, join missions and reserve rockets in this intuitive SPA",
     tags: ["react", "redux"],
     link: {
       github: "https://github.com/okoyecharles/space-travelers-hub",
@@ -137,7 +137,7 @@ const projectData: Array<Project> = [
     name: "Type Effect Library",
     timeRange: [new Date(2022, 5), new Date(2022, 6)],
     description:
-      "A light-weight, open-source typing-effect library that enables users to add typing effects to DOM elements.",
+      "A light-weight, open-source typing-effect library that enables users to add typing effects to DOM text elements.",
     tags: ["javascript"],
     link: {
       github: "https://github.com/okoyecharles/Type-Effect-Library",
