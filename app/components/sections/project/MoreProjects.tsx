@@ -23,7 +23,11 @@ export default function MoreProjects() {
   const { current: projects } = useRef(projectData.slice(3));
 
   return (
-    <Section id="more-projects" name="more-projects">
+    <Section
+      id="more-projects"
+      name="more-projects"
+      padding="py-6 md:py-8 md:pb-[224px]"
+    >
       <SectionHeader>More projects</SectionHeader>
       <SectionDescription>
         A variety of additional projects to provide a clearer view of my
@@ -64,7 +68,7 @@ function ProjectGrid({ projects }: ProjectGridProps) {
       // card reveal animation
       cardRevealTransRef.start();
       // button reveal animation
-      buttonRevealSpringRef.start({ opacity: 1, delay: 250 })
+      buttonRevealSpringRef.start({ opacity: 1, delay: 250 });
     }
   }, [viewed, projectCount]);
 
@@ -86,7 +90,10 @@ function ProjectGrid({ projects }: ProjectGridProps) {
           </a.div>
         ))}
       </div>
-      <a.div className="flex justify-center grid-control" style={buttonRevealSpring}>
+      <a.div
+        className="flex justify-center grid-control"
+        style={buttonRevealSpring}
+      >
         <Button variant="black" onClick={handleProjectCountToggle}>
           {projectCount === INITIAL_CARD_COUNT ? "Show more" : "Show less"}
         </Button>
