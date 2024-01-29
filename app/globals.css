@@ -89,4 +89,28 @@
         transform: rotate(360deg) scale(2);
       }
     }
+
+  /* repeating expanding scale */
+  .expanding-scale {
+    transform-origin: center;
+    /* transform: translate(-6px, -6px) scale(1.6); */
+    animation: expand-scale infinite linear 1250ms ;
+  }
+
+  @keyframes expand-scale {
+    from {
+      transform: translate(-6px, -6px) scale(0);
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    75% {
+      transform: translate(-6px, -6px) scale(3);
+    }
+    to {
+      transform: translate(-6px, -6px) scale(4);
+      opacity: 0;
+    }
+  }
 }
