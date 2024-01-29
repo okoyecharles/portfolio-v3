@@ -1,15 +1,20 @@
 import Image from "next/image";
 import { RecommendationCardProps } from "./props";
 import QuoteIconLarge from "../../svg/abstract/QuoteIconLarge";
+import { a } from "@react-spring/web";
 
-export default function RecommendationCard({ recommendation }: RecommendationCardProps) {
+export default function RecommendationCard({
+  cardTransition,
+  recommendation,
+}: RecommendationCardProps) {
   return (
-    <article
+    <a.article
       className={`
-      p-6 rounded-[10px] max-w-[360px] my-auto
-      bg-grey-fb dark:bg-grey-15
-      ring-1 ring-grey-b dark:ring-grey-3
-    `}
+        p-6 rounded-[10px] max-w-[480px] md:max-w-[320px] semi-lg:max-w-[360px]
+        bg-grey-fb dark:bg-grey-15
+        ring-1 ring-grey-b dark:ring-grey-3
+      `}
+      style={cardTransition}
     >
       <header className="relative flex gap-4 mb-4 isolate">
         <div className="image-container max-h-[64px] aspect-square rounded-[50%] overflow-hidden ring-1 ring-grey-b dark:ring-grey-3">
@@ -34,7 +39,11 @@ export default function RecommendationCard({ recommendation }: RecommendationCar
           <QuoteIconLarge />
         </div>
       </header>
-      <p>{recommendation.description.join("\n")}</p>
-    </article>
+      <div className="grid gap-2">
+        {recommendation.description.map((paragraph) => (
+          <p>{paragraph}</p>
+        ))}
+      </div>
+    </a.article>
   );
 }
