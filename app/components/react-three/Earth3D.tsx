@@ -27,7 +27,7 @@ function EarthMesh({ rotationSpring }: EarthMeshProps) {
   
   return (
     <animated.mesh
-      rotation={rotationSpring.rotation}
+      rotation={rotationSpring.rotation as unknown as [number, number, number]}
     >
       <sphereGeometry args={[1, 32, 32]} />
       <meshStandardMaterial map={textureMap} toneMapped={false} />
