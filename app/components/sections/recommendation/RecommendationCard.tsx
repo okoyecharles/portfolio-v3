@@ -17,7 +17,7 @@ export default function RecommendationCard({
       style={cardTransition}
     >
       <header className="relative flex gap-4 mb-4 isolate">
-        <div className="image-container max-h-[64px] aspect-square rounded-[50%] overflow-hidden ring-1 ring-grey-b dark:ring-grey-3">
+        <div className="image-container h-[64px] aspect-square rounded-[50%] overflow-hidden ring-1 ring-grey-b dark:ring-grey-3">
           <Image
             src={recommendation.image}
             width={64}
@@ -41,7 +41,7 @@ export default function RecommendationCard({
       </header>
       <div className="grid gap-2">
         {recommendation.description.map((paragraph) => (
-          <p>{paragraph}</p>
+          <p key={paragraph}>{paragraph}</p>
         ))}
       </div>
     </a.article>
