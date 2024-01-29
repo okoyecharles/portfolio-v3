@@ -44,7 +44,7 @@ export default function Home() {
     <Section
       name="home"
       id="home-section"
-      padding="pt-[150px] pb-[200px] md:pt-[128px] md:pb-[256px]"
+      padding="py-[150px] mb-[50px] md:pt-[128px] md:pb-[192px] md:mb-[64px]"
       sectionRef={observedRef}
     >
       <header className="relative md:self-center">

@@ -31,15 +31,15 @@ export default function About() {
     [
       ...animation.layout.reveal.start,
       ...animation.layout.revealSlow.start,
-      ...animation.layout.reveal.start,
+      ...animation.layout.revealSlow.start,
       animation.bg.lineGlow.start,
       animation.bg.lineReveal.start,
       animation.bg.plusReveal.start,
     ],
     [
       ...animation.layout.reveal.end.map((x) => x()),
-      ...animation.layout.revealSlow.end.map((x) => x({ delay: 500 })),
-      ...animation.layout.reveal.end.map((x) => x()),
+      ...animation.layout.revealSlow.end.map((x) => x({ delay: 200 })),
+      ...animation.layout.revealSlow.end.map((x) => x()),
       animation.bg.lineGlow.end({ config: { tension: 75 }, delay: 450 }),
       animation.bg.lineReveal.end({ delay: 450 }),
       animation.bg.plusReveal.end({ delay: 0 }),
@@ -73,7 +73,7 @@ export default function About() {
   });
 
   return (
-    <Section name="about" id="about">
+    <Section name="about" id="about" padding="pt-12 pb-16 md:py-8">
       <SectionHeader>About me</SectionHeader>
       <div className="grid gap-6 md:grid-cols-10 my-6 md:my-[96px] lg:mt-[128px] lg:mb-[256px]">
         <AboutImage

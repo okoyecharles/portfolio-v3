@@ -122,7 +122,7 @@ export default function Experience() {
       name="experience"
       id="experience"
       sectionRef={ref}
-      padding="py-6 md:py-8 md:pb-[224px]"
+      padding="pt-12 pb-16 md:pt-8 md:pb-[224px]"
     >
       <SectionHeader mode="standalone">
         My <span className="text-blue-100 dark:blue-d-200">experience</span> as
@@ -238,7 +238,7 @@ function ExperienceCard({ expertise, contentReveal }: ExperienceCardProps) {
         </a.p>
         <a.button style={contentReveal[2]} className="w-fit">
           <Link href={expertise.certificate}>
-            Certificate of completion <NorthWestIcon />
+            Certificate of completion <NorthWestIcon variant="link" />
           </Link>
         </a.button>
         <a.p className="text-sm text-grey-6 md:hidden" style={contentReveal[3]}>

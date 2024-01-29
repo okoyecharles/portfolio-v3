@@ -2,7 +2,6 @@
 import { SpringValue } from "@react-spring/web";
 import DottedLine from "../../background/DottedLine";
 import HorizontalDottedLine from "../../background/HorizontalDottedLine";
-import Plus from "../../background/Plus";
 import HomeBackgroundProps from "./props";
 import { animationOrder } from "@/app/data/home-background";
 

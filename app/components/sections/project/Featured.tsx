@@ -24,7 +24,7 @@ export default function Featured() {
   }
 
   return (
-    <Section id="projects" name="projects" padding="py-6 md:py-8 md:pb-[224px]">
+    <Section id="projects" name="projects" padding="pt-12 pb-16 md:py-8 md:pb-[224px]">
       <SectionHeader>Featured work</SectionHeader>
       <SectionDescription>
         A curated collection of my most exceptional work
