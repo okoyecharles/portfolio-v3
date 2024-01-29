@@ -26,7 +26,7 @@ export default function MoreProjects() {
     <Section
       id="more-projects"
       name="more-projects"
-      padding="py-6 md:py-8 md:pb-[224px]"
+      padding="pt-12 pb-16 md:py-8 md:pb-[224px]"
     >
       <SectionHeader>More projects</SectionHeader>
       <SectionDescription>
@@ -171,7 +171,7 @@ function ProjectCardLinks({ link }: ProjectCardLinksProps) {
   }
 
   return (
-    <div className="absolute top-0 right-0 links">
+    <div className="absolute top-0 right-0 links pointer-events-none group-hover/project-card:pointer-events-auto">
       <ul
         className={`
           relative pt-8 mr-3 isolate
