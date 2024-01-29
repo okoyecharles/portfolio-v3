@@ -23,14 +23,12 @@
     "react-intersection-observer": "^9.5.3",
     "react-redux": "^9.0.4",
     "sharp": "^0.33.1",
-    "swiper": "^11.0.5",
-    "three": "^0.160.1"
+    "swiper": "^11.0.5"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "@types/three": "^0.160.0",
     "autoprefixer": "^10.0.1",
     "leva": "^0.9.35",
     "postcss": "^8",
