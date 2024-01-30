@@ -9,7 +9,7 @@ import RecommendationControl from "./RecommendationControl";
 
 export default function Recommendation() {
   const recommedations = recommendationData;
-  const [recommedationIndex, setRecommedationIndex] = useState<number>(2);
+  const [recommedationIndex, setRecommedationIndex] = useState<number>(0);
 
   return (
     <Section
