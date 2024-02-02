@@ -113,4 +113,18 @@
       opacity: 0;
     }
   }
+
+  /* repeating rotation */
+  .rotating {
+    animation: rotate infinite ease-in-out 1250ms;
+  }
+
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
 }
