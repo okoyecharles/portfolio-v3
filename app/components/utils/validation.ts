@@ -44,6 +44,35 @@ export function validateEmail(email: string): FormValidation {
 
 export async function verifyEmail(email: string): Promise<FormValidation> {
   const returnValidation = Object.assign({}, defaultValidation);
+
+  const API_URL = `${process.env.NEXT_PUBLIC_EMAIL_VERIFICATION_API_URL!}?email=${email}`;
+  const API_KEY = process.env.NEXT_PUBLIC_EMAIL_VERIFICATION_API_KEY!;
+  const API_HOST = process.env.NEXT_PUBLIC_EMAIL_VERIFICATION_API_HOST!;
+
+  const fetchOptions = {
+    method: 'GET',
+    headers: {
+      'X-RapidAPI-Key': API_KEY,
+      'X-RapidAPI-Host': API_HOST
+    }
+  }
+
+  try {
+    const response = await fetch(API_URL, fetchOptions);
+    console.log('response', response);
+
+    if (response.status === 200) {
+      const verificationResult = await response.json();
+      if (verificationResult.status === 'invalid') {
+        assignError(returnValidation, "email", "This email does not exist");
+        return returnValidation;
+      }
+    }
+  } catch(err) {
+    assignError(returnValidation, "email", "Something went wrong");
+    return returnValidation;
+  }
+
   return returnValidation;
 }
 
@@ -55,7 +84,7 @@ export function validateMessage(message: string): FormValidation {
     assignError(
       returnValidation,
       'message',
-      `Oops! Message cannot be less than ${MIN_MESSAGE_LENGTH} characters`
+      `Message cannot be less than ${MIN_MESSAGE_LENGTH} characters`
     );
   }
 
