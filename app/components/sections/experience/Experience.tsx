@@ -130,7 +130,7 @@ export default function Experience() {
       </SectionHeader>
       <SectionDescription>
         A display of my growth as a frontend developer, showcasing the progress
-        I have achieved and the valuable experience I've acquired.
+        I have achieved and the valuable experience I've acquired
       </SectionDescription>
       <div
         className="relative flex experience-content"

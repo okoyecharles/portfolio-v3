@@ -94,7 +94,7 @@ const projectData: Array<Project> = [
     name: "Save A Child",
     timeRange: [new Date(2022, 5), new Date(2022, 6)],
     description:
-      "A website dedicated to supporting underprivileged children in developing countries worldwide, facilitating a positive impact on the lives of these children.",
+      "A website dedicated to supporting underprivileged children in developing countries worldwide, facilitating a positive impact on the lives of these children",
     tags: ["html", "css", "javascript"],
     link: {
       github: "https://github.com/okoyecharles/save-a-child",
@@ -137,7 +137,7 @@ const projectData: Array<Project> = [
     name: "Type Effect Library",
     timeRange: [new Date(2022, 5), new Date(2022, 6)],
     description:
-      "A light-weight, open-source typing-effect library that enables users to add typing effects to DOM text elements.",
+      "A light-weight, open-source typing-effect library that enables users to add typing effects to DOM text elements",
     tags: ["javascript"],
     link: {
       github: "https://github.com/okoyecharles/Type-Effect-Library",
