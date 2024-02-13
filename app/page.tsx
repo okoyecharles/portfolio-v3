@@ -6,6 +6,7 @@ import Experience from "./components/sections/experience/Experience";
 import Featured from "./components/sections/project/Featured";
 import MoreProjects from "./components/sections/project/MoreProjects";
 import Recommendation from "./components/sections/recommendation/Recommendation";
+import Contact from "./components/sections/contact/Contact";
 
 export default function Page() {
   return (
@@ -17,6 +18,7 @@ export default function Page() {
       <Featured />
       <MoreProjects />
       <Recommendation />
+      <Contact />
       <Footer />
     </>
   );
