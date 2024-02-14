@@ -30,8 +30,8 @@ const className = {
 };
 
 interface ButtonProps {
-  disabled: boolean;
   children: React.ReactNode;
+  disabled?: boolean;
   variant?: keyof (typeof className)["variant"];
   onClick?: DOMAttributes<HTMLButtonElement>["onClick"];
 }
