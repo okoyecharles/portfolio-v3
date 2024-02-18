@@ -6,7 +6,7 @@ import ContactForm from "./ContactForm";
 
 export default function Contact() {
   return (
-    <Section name="contact" id="contact">
+    <Section name="contact" id="contact" padding="pt-12 pb-16 md:py-8 md:pb-[160px]">
       <SectionHeader>Contact Me</SectionHeader>
       <SectionDescription>
         You might want to develop a website, application or discuss anything
