@@ -20,3 +20,8 @@ export type ContactFormInputProps = {
   disabled?: boolean;
   onChange: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
 }
+
+export type ContactFormSubmitButtonProps = {
+  formSending: boolean;
+  disabled: boolean;
+}
