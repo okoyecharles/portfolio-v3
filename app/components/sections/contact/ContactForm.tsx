@@ -20,7 +20,10 @@ import {
 } from "../../utils/validation";
 import Loading from "../../svg/icons/Loading";
 import contactFormStateReducer from "../../reducers/contactFormState";
-import { a, useSpringRef, useTransition } from "@react-spring/web";
+import { a, to, useSpring, useSpringRef, useTransition } from "@react-spring/web";
+import { useInView } from "react-intersection-observer";
+import animation from "../../animations/animations";
+import { useObservedSprings } from "../../utils/useObservedSpring";
 
 export default function ContactForm() {
   const initialFormData: ContactFormData = { name: "", email: "", message: "" };
@@ -142,8 +145,26 @@ export default function ContactForm() {
     setError(null);
   }
 
+  // Reveal animation
+  const {
+    observedRef,
+    springAnimate: [layoutTransformSpring, layoutOpacitySpring],
+  } = useObservedSprings(
+    [...animation.layout.revealSlow.start],
+    [...animation.layout.revealSlow.end.map((x) => x())],
+    [useSpring, useSpring]
+  );
+
   return (
-    <form className="grid" onSubmit={handleSubmit}>
+    <a.form
+      className="grid"
+      onSubmit={handleSubmit}
+      ref={observedRef}
+      style={{
+        transform: to(layoutTransformSpring.y, (y) => `translateY(${y}px)`),
+        opacity: to(layoutOpacitySpring.opacity, (op: number) => `${op}`),
+      }}
+    >
       <ContactFormInput
         id="contact-form/name"
         name="name"
@@ -185,7 +206,7 @@ export default function ContactForm() {
         Message
       </ContactFormInput>
       <ContactFormSubmitButton formSending={formSending} disabled={isSubmitDisabled} />
-    </form>
+    </a.form>
   );
 }
 
@@ -200,7 +221,7 @@ function ContactFormSubmitButton({
     from: { opacity: 0, x: formSending ? 0 : -8, scale: 0.9 },
     enter: { opacity: 1, x: 0 },
     leave: { opacity: 0, x: formSending ? 5 : 0, scale: 0.9 },
-    exitBeforeEnter: true
+    exitBeforeEnter: true,
   });
   useEffect(() => {
     submitButtonStateTransRef.start();

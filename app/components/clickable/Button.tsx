@@ -13,7 +13,7 @@ const className = {
     dark:focus-visible
   `,
   disabled: `
-    disabled:opacity-80 disabled:hover:cursor-not-allowed
+    disabled:opacity-70 disabled:hover:cursor-not-allowed
   `,
   variant: {
     default: `
