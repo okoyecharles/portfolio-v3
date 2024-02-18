@@ -1,17 +1,10 @@
-import {
-  ChangeEvent,
-  FormEvent,
-  useEffect,
-  useMemo,
-  useReducer,
-  useState,
-} from "react";
+import { ChangeEvent, FormEvent, useEffect, useMemo, useReducer, useState } from "react";
 import {
   ContactFormData,
   ContactFormInputName,
   ContactFormInputProps,
   ContactFormInputState,
-  ContactFormState,
+  ContactFormSubmitButtonProps,
 } from "./props";
 import Button from "../../clickable/Button";
 import PlaneIcon from "../../svg/icons/PlaneIcon";
@@ -19,7 +12,6 @@ import InputLoadingIcon from "../../svg/abstract/InputLoadingIcon";
 import InputVerifiedIcon from "../../svg/abstract/InputVerifiedIcon";
 import InputErrorIcon from "../../svg/abstract/InputErrorIcon";
 import {
-  FormValidation,
   FormValidationError,
   validateEmail,
   validateMessage,
@@ -27,56 +19,27 @@ import {
   verifyEmail,
 } from "../../utils/validation";
 import Loading from "../../svg/icons/Loading";
-
-type FormStateReducerAction = {
-  type: `set_${ContactFormInputState}`;
-  payload: ContactFormInputName;
-};
-function formStateReducer(
-  state: ContactFormState,
-  action: FormStateReducerAction
-): ContactFormState {
-  switch (action.type) {
-    case "set_error":
-      return { ...state, [action.payload]: "error" };
-    case "set_empty":
-      return { ...state, [action.payload]: "empty" };
-    case "set_typing":
-      return { ...state, [action.payload]: "typing" };
-    case "set_success":
-      return { ...state, [action.payload]: "success" };
-    case "set_loading":
-      return { ...state, [action.payload]: "loading" };
-    default:
-      return state;
-  }
-}
+import contactFormStateReducer from "../../reducers/contactFormState";
+import { a, useSpringRef, useTransition } from "@react-spring/web";
 
 export default function ContactForm() {
   const initialFormData: ContactFormData = { name: "", email: "", message: "" };
   const [formData, setFormData] = useState<ContactFormData>(initialFormData);
   const [formSending, setFormSending] = useState<boolean>(false);
+  const [formState, setFormState] = contactFormStateReducer();
+  const [error, setError] = useState<FormValidationError | null>(null);
+  const isSubmitDisabled = useMemo(handleSubmitDisabled, [formState]);
+  const areInputsDisabled = useMemo(handleInputsDisabled, [formState]);
+  useEffect(processInputChange, [formData]);
 
-  const initialFormState: ContactFormState = {
-    name: "empty",
-    email: "empty",
-    message: "empty",
-  };
-  const [formState, setFormState] = useReducer(
-    formStateReducer,
-    initialFormState
-  );
-
-  function handleInputChange(
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) {
+  function handleInputChange(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
   }
 
-  function processChange() {
+  function processInputChange() {
     (["name", "email", "message"] as const).forEach((input) => {
       const inputValue = formData[input];
 
@@ -87,9 +50,42 @@ export default function ContactForm() {
       }
     });
   }
-  useEffect(processChange, [formData]);
 
-  async function submitForm(e: FormEvent<HTMLFormElement>) {
+  function handleSubmitDisabled() {
+    const inputStates: Array<ContactFormInputState> = [
+      formState.name,
+      formState.email,
+      formState.message,
+    ];
+
+    const submitDisabledStates = new Set<ContactFormInputState>(["empty", "loading"]);
+    const submitDisabled = inputStates.some((state) => submitDisabledStates.has(state));
+    return submitDisabled;
+  }
+
+  function handleInputsDisabled() {
+    const inputStates: Array<ContactFormInputState> = [
+      formState.name,
+      formState.email,
+      formState.message,
+    ];
+
+    const inputsDisabledStates = new Set<ContactFormInputState>(["loading"]);
+    const inputsDisabled = inputStates.some((state) => inputsDisabledStates.has(state));
+    return inputsDisabled;
+  }
+
+  function handleError(name: ContactFormInputName, error: FormValidationError) {
+    setFormState({ type: "set_error", payload: name });
+    setError(error);
+    setFormSending(false);
+  }
+
+  function clearFormData() {
+    setFormData(initialFormData);
+  }
+
+  async function sendFormData(e: FormEvent<HTMLFormElement>) {
     const API_URL = process.env.NEXT_PUBLIC_CONTACT_FORM_API_URL!;
     const formSubmissionData = new FormData(e.target as HTMLFormElement);
 
@@ -103,16 +99,11 @@ export default function ContactForm() {
 
     try {
       await fetch(API_URL, fetchOptions);
+      clearFormData();
       setFormSending(false);
     } catch (err) {
       setFormSending(false);
     }
-  }
-
-  const [error, setError] = useState<FormValidationError | null>(null);
-  function handleError(name: ContactFormInputName, error: FormValidationError) {
-    setFormState({ type: "set_error", payload: name });
-    setError(error);
   }
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
@@ -147,36 +138,9 @@ export default function ContactForm() {
       setFormState({ type: "set_success", payload: "email" });
     }
 
-    await submitForm(e);
+    await sendFormData(e);
     setError(null);
   }
-
-  function handleSubmitDisabled() {
-    const inputStates: Array<ContactFormInputState> = [
-      formState.name,
-      formState.email,
-      formState.message,
-    ];
-
-    const someInputEmpty = inputStates.some((state) => state === "empty");
-    const someInputLoading = inputStates.some((state) => state === "loading");
-
-    if (someInputEmpty || someInputLoading) return true;
-    return false;
-  }
-  const isSubmitDisabled = useMemo(handleSubmitDisabled, [formState]);
-
-  function handleInputsDisabled() {
-    const inputStates: Array<ContactFormInputState> = [
-      formState.name,
-      formState.email,
-      formState.message,
-    ];
-
-    const someInputLoading = inputStates.some((state) => state === "loading");
-    return someInputLoading;
-  }
-  const areInputsDisabled = useMemo(handleInputsDisabled, [formState]);
 
   return (
     <form className="grid" onSubmit={handleSubmit}>
@@ -220,12 +184,37 @@ export default function ContactForm() {
       >
         Message
       </ContactFormInput>
-      <div className="flex justify-center mt-8 form-button">
-        <Button disabled={isSubmitDisabled}>
-          Send { formSending ? <Loading /> : <PlaneIcon /> }
-        </Button>
-      </div>
+      <ContactFormSubmitButton formSending={formSending} disabled={isSubmitDisabled} />
     </form>
+  );
+}
+
+function ContactFormSubmitButton({
+  formSending,
+  disabled,
+}: ContactFormSubmitButtonProps) {
+  const submitButtonStateTransRef = useSpringRef();
+  const submitButtonStateTransition = useTransition(formSending, {
+    ref: submitButtonStateTransRef,
+    keys: null,
+    from: { opacity: 0, x: formSending ? 0 : -8, scale: 0.9 },
+    enter: { opacity: 1, x: 0 },
+    leave: { opacity: 0, x: formSending ? 5 : 0, scale: 0.9 },
+    exitBeforeEnter: true
+  });
+  useEffect(() => {
+    submitButtonStateTransRef.start();
+  }, [formSending]);
+
+  return (
+    <div className="flex justify-center mt-8 form-button">
+      <Button disabled={disabled}>
+        Send{" "}
+        {submitButtonStateTransition((style, sending) => (
+          <a.div style={style}>{sending ? <Loading /> : <PlaneIcon />}</a.div>
+        ))}
+      </Button>
+    </div>
   );
 }
 
@@ -240,7 +229,7 @@ function ContactFormInput({
   state,
   error,
   onChange,
-  disabled
+  disabled,
 }: ContactFormInputProps) {
   const className = {
     shared: `
@@ -264,18 +253,32 @@ function ContactFormInput({
     `,
   };
 
+  const inputStateTransRef = useSpringRef();
+  const inputStateTransition = useTransition(state, {
+    ref: inputStateTransRef,
+    keys: null,
+    from: { opacity: 0, rotate: -20, scale: 0.9 },
+    enter: { opacity: 1, rotate: 0, scale: 1 },
+    leave: { opacity: 0, rotate: 0, scale: 0.8 },
+  });
+  useEffect(() => {
+    inputStateTransRef.start();
+  }, [state]);
+
   return (
     <>
       <label
         htmlFor={id}
         className={`
           relative
-          text-xs font-bold
+          text-xs font-semibold
           mb-2 mt-4 first-of-type:mt-0
           ${state === "error" ? "text-error dark:text-error-dark" : ""}
+          transition-colors
         `}
       >
         {children}
+        {/* temporary */}
         <span className="absolute right-0 top-0 select-none text-error dark:text-error-dark">
           {state === "error" && error ? error.message : ""}
         </span>
@@ -306,20 +309,26 @@ function ContactFormInput({
             disabled={disabled}
           />
         )}
-        <div
-          className={`
-            input-status
-            absolute top-4 right-3
-          `}
-        >
-          {state === "error" ? (
-            <InputErrorIcon />
-          ) : state === "loading" ? (
-            <InputLoadingIcon />
-          ) : state === "success" ? (
-            <InputVerifiedIcon />
-          ) : null}
-        </div>
+        {inputStateTransition((style, state) => {
+          const icons: Record<ContactFormInputState, React.ReactNode> = {
+            error: <InputErrorIcon />,
+            loading: <InputLoadingIcon />,
+            success: <InputVerifiedIcon />,
+            typing: "",
+            empty: "",
+          };
+          return (
+            <a.div
+              className={`
+                input-status
+                absolute top-4 right-3
+              `}
+              style={style}
+            >
+              {icons[state]}
+            </a.div>
+          );
+        })}
       </div>
     </>
   );
