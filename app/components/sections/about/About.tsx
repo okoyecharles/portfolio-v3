@@ -150,7 +150,7 @@ function AboutImage({
   ];
 
   return (
-    <picture className="group/figure about-image relative max-w-[350px] aspect-square p-[25px] mx-auto lg:my-auto md:col-span-4">
+    <picture className="group/picture about-image relative max-w-[350px] w-full aspect-square p-[25px] mx-auto lg:my-auto md:col-span-4">
       <a.div
         className="w-full rounded-[10px] max-w-[300px] aspect-square overflow-hidden"
         style={imageAnimate()}
@@ -160,7 +160,7 @@ function AboutImage({
           alt="A portrait image of Okoye Charles"
           width={300}
           height={300}
-          className="transition-transform duration-500 delay-100 group-hover/figure:scale-105"
+          className="transition-transform duration-500 delay-100 group-hover/picture:scale-105"
         />
       </a.div>
       <div className="absolute inset-0 aesthetics -z-10">
@@ -192,10 +192,10 @@ function AboutImage({
         {plusPositions.map((pos, index) => (
           <div
             key={pos}
-            className={`absolute ${pos} group-hover/figure:rotate-[.25turn] transition-transform`}
+            className={`absolute ${pos} duration-300 group-hover/picture:rotate-[.25turn] transition-transform`}
           >
             <Plus
-              className="duration-300 stroke-grey-8 dark:stroke-grey-9 group-hover/figure:stroke-blue-100 dark:group-hover/figure:stroke-blue-d-200"
+              className="duration-300 stroke-grey-8 dark:stroke-grey-9 group-hover/picture:stroke-blue-100 dark:group-hover/picture:stroke-blue-d-200"
               animation={plusReveal[index]}
             />
           </div>

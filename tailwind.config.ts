@@ -25,7 +25,10 @@ const config: Config = {
     colors: {
       'white': '#ffffff',
       'black': '#000000',
+      'error': '#ff3333',
+      'error-dark': '#FF6666',
       'grey': {
+        '0a': '#0a0a0a',
         '1': '#111111',
         '2': '#222222',
         '3': '#333333',

@@ -276,7 +276,7 @@ function FeaturedProjectDisplay({
         {plusPositions.map((pos, index) => (
           <div
             key={pos}
-            className={`absolute ${pos} group-hover/display:rotate-[.25turn] transition-transform`}
+            className={`absolute duration-300 ${pos} group-hover/display:rotate-[.25turn] transition-transform`}
           >
             <Plus
               className="duration-300 stroke-grey-8 dark:stroke-grey-9 group-hover/display:stroke-blue-100 dark:group-hover/display:stroke-blue-d-200"
