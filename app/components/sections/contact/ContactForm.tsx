@@ -88,9 +88,13 @@ export default function ContactForm() {
     setFormData(initialFormData);
   }
 
-  async function sendFormData(e: FormEvent<HTMLFormElement>) {
+  async function sendFormData() {
     const API_URL = process.env.NEXT_PUBLIC_CONTACT_FORM_API_URL!;
-    const formSubmissionData = new FormData(e.target as HTMLFormElement);
+
+    const formSubmissionData = new FormData();
+    Object.entries(formData).forEach(([key, value]) =>
+      formSubmissionData.append(key, value)
+    );
 
     const fetchOptions = {
       method: "POST",
@@ -141,7 +145,7 @@ export default function ContactForm() {
       setFormState({ type: "set_success", payload: "email" });
     }
 
-    await sendFormData(e);
+    await sendFormData();
     setError(null);
   }
 

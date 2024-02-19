@@ -59,7 +59,6 @@ export async function verifyEmail(email: string): Promise<FormValidation> {
 
   try {
     const response = await fetch(API_URL, fetchOptions);
-    console.log('response', response);
 
     if (response.status === 200) {
       const verificationResult = await response.json();
