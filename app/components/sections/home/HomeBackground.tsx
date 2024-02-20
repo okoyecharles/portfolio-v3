@@ -4,7 +4,6 @@ import DottedLine from "../../background/DottedLine";
 import HorizontalDottedLine from "../../background/HorizontalDottedLine";
 import HomeBackgroundProps from "./props";
 import { animationOrder } from "@/app/data/home-background";
-import Plus from "@/app/components/background/Plus";
 
 export default function HomeBackground({
   glowBackground,

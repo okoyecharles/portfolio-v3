@@ -11,7 +11,6 @@ import { percentToRadians } from "../../utils/convertion";
 export default function RecommendationSwiper({
   recommendations,
   recommendationIndex,
-  setRecommedationIndex,
 }: RecommendationSwiperProps) {
   const [earthRotating, setEarthRotating] = useState<boolean>(true);
   const [viewed, setViewed] = useState<boolean>(false);
