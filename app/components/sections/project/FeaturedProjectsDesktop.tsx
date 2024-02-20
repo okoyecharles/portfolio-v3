@@ -30,47 +30,47 @@ import FeaturedProjectTag from "@/app/components/sections/project/FeaturedProjec
 import FullScreenIcon from "../../svg/icons/FullScreenIcon";
 
 export default function FeaturedProjectsDesktop(props: FeaturedProjectProps) {
-  const { projectIndex, projects, openProjectViewer } = props;
+  const {projectIndex, projects, openProjectViewer} = props;
 
   // content animations
   const [contentRevealTrail, contentRevealTrailRef] = useTrail(
     4,
-    { from: { y: 32, opacity: 0 } },
+    {from: {y: 32, opacity: 0}},
     []
   );
 
   // display animations
   const [displayFrameTrail, displayFrameTrailRef] = useTrail(2, () => ({
-    from: { y: 32 },
+    from: {y: 32},
   }));
   const displayTransisitionRef = useSpringRef();
   const displayTransition = useTransition(projects[projectIndex], {
     ref: displayTransisitionRef,
     keys: null,
-    from: { opacity: 0, y: 48 },
+    from: {opacity: 0, y: 48},
     enter: {
       opacity: 1,
       y: 0,
       onStart() {
-        displayFrameTrailRef.set({ y: 32 });
-        displayFrameTrailRef.start({ y: 0 });
+        displayFrameTrailRef.set({y: 32});
+        displayFrameTrailRef.start({y: 0});
       },
     },
     leave: {
       opacity: 0,
       y: -64,
-      config: { tension: 300 },
+      config: {tension: 300},
     },
     exitBeforeEnter: true,
   });
 
   useEffect(() => {
     displayTransisitionRef.start();
-    contentRevealTrailRef.set({ y: 24, opacity: 0 });
+    contentRevealTrailRef.set({y: 24, opacity: 0});
     contentRevealTrailRef.start({
       y: 0,
       opacity: 1,
-      config: { tension: 400, friction: 40 },
+      config: {tension: 400, friction: 40},
     });
   }, [projectIndex]);
 
@@ -123,9 +123,9 @@ function FeaturedProjectDisplay({
       animation.bg.plusReveal.start,
     ],
     [
-      animation.bg.lineGlow.end({ config: { tension: 75 }, delay: 450 }),
-      animation.bg.lineReveal.end({ delay: 450 }),
-      animation.bg.plusReveal.end({ delay: 0 }),
+      animation.bg.lineGlow.end({config: {tension: 75}, delay: 450}),
+      animation.bg.lineReveal.end({delay: 450}),
+      animation.bg.plusReveal.end({delay: 0}),
     ],
     [useSpring, useSpring, (cb: Function) => useTrail(4, cb, [])]
   );
@@ -294,14 +294,16 @@ function FeaturedProjectInfo({
   contentRevealTrail,
 }: FeaturedProjectInfoProps) {
   return (
-    <article className="featured-project-info col-span-4 semi-lg:col-span-3 p-6 flex flex-col bg-grey-ea dark:bg-grey-12 ring-1 ring-grey-d dark:ring-grey-2 min-h-[410px] rounded-es-[10px] semi-lg:rounded-es-none">
+    <article
+      className="featured-project-info col-span-4 semi-lg:col-span-3 p-6 flex flex-col bg-grey-ea dark:bg-grey-12 ring-1 ring-grey-d dark:ring-grey-2 min-h-[410px] rounded-es-[10px] semi-lg:rounded-es-none">
       <Link href={project.link.live} variant="plain">
         <a.h3
           className="font-visby font-extrabold text-[20px] leading-[1] text-grey-1 dark:text-grey-b inline-flex gap-[2px] group/header"
           style={contentRevealTrail[0]}
         >
           <span>{project.name}</span>
-          <span className="group-hover/header:translate-x-[2px] group-hover/header:-translate-y-[2px] transition-transform">
+          <span
+            className="group-hover/header:translate-x-[2px] group-hover/header:-translate-y-[2px] transition-transform">
             <NorthWestIcon />
           </span>
         </a.h3>
@@ -312,7 +314,8 @@ function FeaturedProjectInfo({
       >
         <time dateTime={formatDateTimeAttribute(project.timeRange[0])}>
           {formatMonthYear(project.timeRange[0])}
-        </time>{" "}
+        </time>
+        {" "}
         -{" "}
         <time dateTime={formatDateTimeAttribute(project.timeRange[1])}>
           {formatMonthYear(project.timeRange[1])}
@@ -346,7 +349,7 @@ function FeaturedProjectList({
 }: FeaturedProjectListProps) {
   const PROJECT_HEIGHT = (1 / projects.length) * 100;
   const projectMarkerPos = PROJECT_HEIGHT / 2 + projectIndex * PROJECT_HEIGHT;
-  const projectMarkerSpring = useSpring({ pos: projectMarkerPos });
+  const projectMarkerSpring = useSpring({pos: projectMarkerPos});
 
   const rotatingGradientStyles = `
     rotating-gradient
@@ -355,7 +358,8 @@ function FeaturedProjectList({
     ${projects[projectIndex].themeColor}`;
 
   return (
-    <div className="featured-project-list border-b semi-lg:border-r semi-lg:border-b-0 last:border-none border-grey-d dark:border-grey-2  col-span-12 semi-lg:col-span-3 grid grid-cols-3 semi-lg:grid-cols-1 [grid-auto-rows:1fr] relative isolate z-10">
+    <div
+      className="featured-project-list border-b semi-lg:border-r semi-lg:border-b-0 last:border-none border-grey-d dark:border-grey-2  col-span-12 semi-lg:col-span-3 grid grid-cols-3 semi-lg:grid-cols-1 [grid-auto-rows:1fr] relative isolate z-10">
       <a.span
         className={`
         absolute
@@ -365,7 +369,7 @@ function FeaturedProjectList({
         hidden semi-lg:block
         ${rotatingGradientStyles}
       `}
-        style={{ top: projectMarkerSpring.pos.to((pos) => `${pos}%`) }}
+        style={{top: projectMarkerSpring.pos.to((pos) => `${pos}%`)}}
       />
       <a.span
         className={`
@@ -376,7 +380,7 @@ function FeaturedProjectList({
         hidden md:block semi-lg:hidden
         ${rotatingGradientStyles}
       `}
-        style={{ left: projectMarkerSpring.pos.to((pos) => `${pos}%`) }}
+        style={{left: projectMarkerSpring.pos.to((pos) => `${pos}%`)}}
       />
       {projects.map((project, index) => (
         <div

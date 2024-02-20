@@ -20,7 +20,7 @@ import Button from "../../clickable/Button";
 import { useInView } from "react-intersection-observer";
 
 export default function MoreProjects() {
-  const { current: projects } = useRef(projectData.slice(3));
+  const {current: projects} = useRef(projectData.slice(3));
 
   return (
     <Section
@@ -38,10 +38,10 @@ export default function MoreProjects() {
   );
 }
 
-function ProjectGrid({ projects }: ProjectGridProps) {
+function ProjectGrid({projects}: ProjectGridProps) {
   const INITIAL_CARD_COUNT = 3;
   const [projectCount, setProjectCount] = useState(INITIAL_CARD_COUNT);
-  const { ref, inView } = useInView({
+  const {ref, inView} = useInView({
     threshold: 0,
     rootMargin: "0px 0px -128px",
   });
@@ -49,9 +49,9 @@ function ProjectGrid({ projects }: ProjectGridProps) {
   const cardRevealTransRef = useSpringRef();
   const cardRevealTransition = useTransition(projects.slice(0, projectCount), {
     ref: cardRevealTransRef,
-    from: { opacity: 0, y: -16, config: { tension: 400 } },
-    enter: { opacity: 1, y: 0 },
-    leave: { opacity: 1, config: { duration: 0 } },
+    from: {opacity: 0, y: -16, config: {tension: 400}},
+    enter: {opacity: 1, y: 0},
+    leave: {opacity: 1, config: {duration: 0}},
   });
   const [buttonRevealSpring, buttonRevealSpringRef] = useSpring(() => ({
     opacity: 0,
@@ -68,7 +68,7 @@ function ProjectGrid({ projects }: ProjectGridProps) {
       // card reveal animation
       cardRevealTransRef.start();
       // button reveal animation
-      buttonRevealSpringRef.start({ opacity: 1, delay: 250 });
+      buttonRevealSpringRef.start({opacity: 1, delay: 250});
     }
   }, [viewed, projectCount]);
 
@@ -102,7 +102,7 @@ function ProjectGrid({ projects }: ProjectGridProps) {
   );
 }
 
-function ProjectCard({ project }: ProjectCardProps) {
+function ProjectCard({project}: ProjectCardProps) {
   return (
     <article
       className={`
@@ -121,9 +121,11 @@ function ProjectCard({ project }: ProjectCardProps) {
     >
       <header className="grid gap-1">
         <Link href={project.link.live} variant="plain">
-          <h3 className="font-visby font-extrabold text-[20px] leading-[1] text-grey-1 dark:text-grey-d inline-flex gap-[2px] group/header">
+          <h3
+            className="font-visby font-extrabold text-[20px] leading-[1] text-grey-1 dark:text-grey-d inline-flex gap-[2px] group/header">
             <span>{project.name}</span>
-            <span className="group-hover/header:translate-x-[2px] group-hover/header:-translate-y-[2px] transition-transform">
+            <span
+              className="group-hover/header:translate-x-[2px] group-hover/header:-translate-y-[2px] transition-transform">
               <NorthWestIcon />
             </span>
           </h3>
@@ -149,7 +151,7 @@ function ProjectCard({ project }: ProjectCardProps) {
   );
 }
 
-function ProjectCardLinks({ link }: ProjectCardLinksProps) {
+function ProjectCardLinks({link}: ProjectCardLinksProps) {
   function marker(linkName: keyof typeof link): React.ReactNode {
     return (
       <div
@@ -161,10 +163,10 @@ function ProjectCardLinks({ link }: ProjectCardLinksProps) {
           group-hover/project-card:scale-100 group-hover/project-card:opacity-100
           transition duration-300
           ${
-            linkName === "live"
-              ? "group-hover/project-card:delay-150 delay-100"
-              : "group-hover/project-card:delay-300 delay-100"
-          }
+          linkName === "live"
+            ? "group-hover/project-card:delay-150 delay-100"
+            : "group-hover/project-card:delay-300 delay-100"
+        }
         `}
       />
     );

@@ -13,34 +13,35 @@ import { useEffect, useRef, useState } from "react";
 import Link from "../clickable/Link";
 
 export default function NavLinksDesktop() {
-  const active = useActiveSection();
-  const AMM_POS = [
-    { pos: -24, width: 24 },
-    { pos: 24, width: 39.4 },
-    { pos: 95.4, width: 45.25 },
-    { pos: 190.65, width: 64.85 },
-    { pos: 305.5, width: 85.17 },
+  const activeSection = useActiveSection();
+
+  const activeSectionMarkerMorph = [
+    {pos: -24, width: 24},
+    {pos: 24, width: 39.4},
+    {pos: 95.4, width: 45.25},
+    {pos: 190.65, width: 64.85},
+    {pos: 305.5, width: 85.17},
   ];
-  const activeMarkerMorph = {
-    unmounted: AMM_POS[0],
-    home: AMM_POS[1],
-    about: AMM_POS[2],
-    experience: AMM_POS[2],
-    projects: AMM_POS[3],
-    "more-projects": AMM_POS[3],
-    recommendations: AMM_POS[3],
-    contact: AMM_POS[4],
+  const activeSectionMarker = {
+    unmounted: activeSectionMarkerMorph[0],
+    home: activeSectionMarkerMorph[1],
+    about: activeSectionMarkerMorph[2],
+    experience: activeSectionMarkerMorph[2],
+    projects: activeSectionMarkerMorph[3],
+    "more-projects": activeSectionMarkerMorph[3],
+    recommendations: activeSectionMarkerMorph[3],
+    contact: activeSectionMarkerMorph[4],
   };
-  const activeMarkerSpring = useSpring({
+  const activeSectionMarkerSpring = useSpring({
     to: {
-      width: activeMarkerMorph[active].width,
-      x: activeMarkerMorph[active].pos,
+      width: activeSectionMarker[activeSection].width,
+      x: activeSectionMarker[activeSection].pos,
     },
   });
 
   const scrollDirection = useScrollDirection();
   const activeNavSpring = useSpring({
-    from: { y: 0 },
+    from: {y: 0},
     to: {
       y: scrollDirection == "down" ? -100 : 0,
     },
@@ -61,14 +62,15 @@ export default function NavLinksDesktop() {
       className="absolute w-fit top-8 right-8 bg-white dark:bg-grey-2 ring-1 dark:ring-0 ring-grey-ea rounded-[10px] font-visby font-medium px-6 py-[7px] gap-6 hidden md:flex items-center select-none"
       style={activeNavSpring}
     >
-      <div className="active-marker-bar absolute left-0 bottom-0 h-5 w-full overflow-hidden rounded-[10px] pointer-events-none">
+      <div
+        className="active-marker-bar absolute left-0 bottom-0 h-5 w-full overflow-hidden rounded-[10px] pointer-events-none">
         <div className="relative h-full">
           <a.div
             className="active-marker absolute left-0 bottom-0 h-[10px] rounded-[5px] bg-blue-100 dark:bg-blue-d-200"
             style={{
-              width: to(activeMarkerSpring.width, (w) => `${w}px`),
+              width: to(activeSectionMarkerSpring.width, (w) => `${w}px`),
               transform: to(
-                activeMarkerSpring.x,
+                activeSectionMarkerSpring.x,
                 (x) => `translateX(calc(${x}px)) translateY(50%)`
               ),
             }}
@@ -80,7 +82,7 @@ export default function NavLinksDesktop() {
           <li
             key={anchor.name}
             className={`flex items-center gap-2 group/nav-item transition-colors ${
-              active == anchor.name && "text-black dark:text-grey-d"
+              activeSection == anchor.name && "text-black dark:text-grey-d"
             }`}
           >
             <a
@@ -122,6 +124,7 @@ interface DropdownProps<T> {
   open: boolean;
   setOpen: Function;
 }
+
 function Dropdown({
   name,
   anchors,
@@ -150,11 +153,13 @@ function Dropdown({
   }
 
   const dropdownRef = useRef<any>(null);
+
   function handleClickOutside(event: Event) {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
       setOpen(false);
     }
   }
+
   useEffect(() => {
     // close dropdown if click occurs elsewhere
     if (open) {
@@ -178,10 +183,11 @@ function Dropdown({
 
       <a.nav
         className={`dropdown-items bg-white ring-1 ring-grey-d dark:ring-0 dark:bg-grey-2 absolute w-[256px] h-[${DROPDOWN_OPEN_HEIGHT}px] top-[calc(100%+31px)] rounded-[10px] -translate-x-8 py-3 font-lato font-medium`}
-        style={{ ...openDropdownSpring, pointerEvents: open ? "all" : "none" }}
+        style={{...openDropdownSpring, pointerEvents: open ? "all" : "none"}}
       >
         <div className="relative translate-x-8">
-          <div className="dropdown-pointer absolute w-[16.9px] h-[16.9px] bg-white ring-1 ring-grey-d dark:ring-0 dark:bg-grey-2 rotate-45 rounded-[2px] -top-[12px] -translate-y-1/2"></div>
+          <div
+            className="dropdown-pointer absolute w-[16.9px] h-[16.9px] bg-white ring-1 ring-grey-d dark:ring-0 dark:bg-grey-2 rotate-45 rounded-[2px] -top-[12px] -translate-y-1/2"></div>
           <div className="bg-white dark:bg-grey-2 absolute w-[34px] h-[12px] -top-[12px] -left-[8px]"></div>
         </div>
         <ul>

@@ -1,13 +1,9 @@
 "use client";
-import { AboutImageProps, AboutListProps } from "./props";
 import aboutData from "@/app/data/about";
-import React from "react";
 import Section from "../Section";
 import SectionHeader from "../SectionHeader";
-import Image from "next/image";
-import Plus from "../../background/Plus";
-import HorizontalDottedLine from "../../background/HorizontalDottedLine";
-import DottedLine from "../../background/DottedLine";
+import AboutImage from "./AboutImage";
+import AboutList from "@/app/components/sections/about/AboutList";
 import Link from "../../clickable/Link";
 import { a, to, useSpring, useTrail } from "@react-spring/web";
 import { useObservedSprings } from "../../utils/useObservedSpring";
@@ -38,11 +34,11 @@ export default function About() {
     ],
     [
       ...animation.layout.reveal.end.map((x) => x()),
-      ...animation.layout.revealSlow.end.map((x) => x({ delay: 200 })),
+      ...animation.layout.revealSlow.end.map((x) => x({delay: 200})),
       ...animation.layout.revealSlow.end.map((x) => x()),
-      animation.bg.lineGlow.end({ config: { tension: 75 }, delay: 450 }),
-      animation.bg.lineReveal.end({ delay: 450 }),
-      animation.bg.plusReveal.end({ delay: 0 }),
+      animation.bg.lineGlow.end({config: {tension: 75}, delay: 450}),
+      animation.bg.lineReveal.end({delay: 450}),
+      animation.bg.plusReveal.end({delay: 0}),
     ],
     [
       (cb: Function) => useTrail(3, cb, []),
@@ -134,122 +130,5 @@ export default function About() {
         </div>
       </div>
     </Section>
-  );
-}
-
-function AboutImage({
-  imageAnimate,
-  plusReveal,
-  lineAnimate,
-}: AboutImageProps) {
-  const plusPositions = [
-    "top-0 left-0",
-    "top-0 right-0",
-    "bottom-0 right-0",
-    "bottom-0 left-0",
-  ];
-
-  return (
-    <picture className="group/picture about-image relative max-w-[350px] w-full aspect-square p-[25px] mx-auto lg:my-auto md:col-span-4">
-      <a.div
-        className="w-full rounded-[10px] max-w-[300px] aspect-square overflow-hidden"
-        style={imageAnimate()}
-      >
-        <Image
-          src="/assets/okoyecharles.webp"
-          alt="A portrait image of Okoye Charles"
-          width={300}
-          height={300}
-          className="transition-transform duration-500 delay-100 group-hover/picture:scale-105"
-        />
-      </a.div>
-      <div className="absolute inset-0 aesthetics -z-10">
-        <div className={`absolute top-[12.5px] left-1/2 -translate-x-1/2`}>
-          <HorizontalDottedLine
-            variant="bold"
-            animation={[lineAnimate[0], lineAnimate[1]]}
-          />
-        </div>
-        <div className={`absolute right-[12.5px] top-1/2 -translate-y-1/2`}>
-          <DottedLine
-            variant="bold"
-            animation={[lineAnimate[0], lineAnimate[1]]}
-          />
-        </div>
-        <div className={`absolute bottom-[12.5px] left-1/2 -translate-x-1/2`}>
-          <HorizontalDottedLine
-            variant="bold"
-            animation={[lineAnimate[0], lineAnimate[1]]}
-          />
-        </div>
-        <div className={`absolute left-[12.5px] top-1/2 -translate-y-1/2`}>
-          <DottedLine
-            variant="bold"
-            animation={[lineAnimate[0], lineAnimate[1]]}
-          />
-        </div>
-
-        {plusPositions.map((pos, index) => (
-          <div
-            key={pos}
-            className={`absolute ${pos} duration-300 group-hover/picture:rotate-[.25turn] transition-transform`}
-          >
-            <Plus
-              className="duration-300 stroke-grey-8 dark:stroke-grey-9 group-hover/picture:stroke-blue-100 dark:group-hover/picture:stroke-blue-d-200"
-              animation={plusReveal[index]}
-            />
-          </div>
-        ))}
-      </div>
-    </picture>
-  );
-}
-
-function AboutList({ items }: AboutListProps) {
-  const LIST_HEIGHT = 32 * (items.length - 1);
-
-  const { observedRef, springAnimate } = useObservedSprings(
-    [{ height: 0 }, { y: "-50%", scale: 0 }, { opacity: 0 }],
-    [
-      {
-        height: LIST_HEIGHT,
-        config: { friction: 35, tension: 250 },
-        delay: 250,
-      },
-      {
-        y: "-50%",
-        scale: 1,
-        config: { friction: 35, tension: 500 },
-        delay: 250,
-      },
-      { opacity: 1, delay: 450 },
-    ],
-    [
-      useSpring,
-      (cb: Function) => useTrail(items.length, cb),
-      (cb: Function) => useTrail(items.length, cb),
-    ]
-  );
-
-  return (
-    <div className="relative" ref={observedRef}>
-      <a.div
-        className="list-marker-line absolute top-[12px] left-[12px] w-[2px] bg-grey-ea dark:bg-grey-2"
-        style={springAnimate[0]}
-      />
-      <ul className="grid gap-2">
-        {items.map((item, itemIndex) => (
-          <li className="ps-[34px] relative" key={item}>
-            <a.div
-              className="list-marker h-[10px] aspect-square rounded-[5px] ring-1 ring-blue-100 dark:ring-blue-200 bg-grey-ea dark:bg-grey-2 absolute top-1/2 -translate-y-1/2 left-2"
-              style={springAnimate[1][itemIndex]}
-            />
-            <a.span className="block" style={springAnimate[2][itemIndex]}>
-              {item}
-            </a.span>
-          </li>
-        ))}
-      </ul>
-    </div>
   );
 }

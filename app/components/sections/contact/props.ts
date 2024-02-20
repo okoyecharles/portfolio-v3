@@ -5,7 +5,7 @@ export type ContactFormInputName = 'name' | 'email' | 'message';
 export type ContactFormData = Record<ContactFormInputName, string>;
 
 export type ContactFormInputState = 'empty' | 'typing' | 'loading' | 'success' | 'error';
-export type ContactFormState =  Record<ContactFormInputName, ContactFormInputState>;
+export type ContactFormState = Record<ContactFormInputName, ContactFormInputState>;
 
 export type ContactFormInputProps = {
   type?: 'input' | 'textarea';

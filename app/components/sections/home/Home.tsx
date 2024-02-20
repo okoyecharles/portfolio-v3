@@ -11,10 +11,10 @@ export default function Home() {
   const {
     observedRef,
     springAnimate: [
-      layoutTransform,
-      layoutOpacity,
-      bgLineGlow,
-      bgLineReveal,
+      layoutTransformTrail,
+      layoutOpacityTrail,
+      bgLineGlowTrail,
+      bgLineRevealTrail,
     ],
   } = useObservedSprings(
     [
@@ -24,8 +24,8 @@ export default function Home() {
     ],
     [
       ...animation.layout.reveal.end.map((x) => x()),
-      animation.bg.lineGlow.end({ delay: 750 }),
-      animation.bg.lineReveal.end({ delay: 750 }),
+      animation.bg.lineGlow.end({delay: 750}),
+      animation.bg.lineReveal.end({delay: 750}),
     ],
     [
       (cb: Function) => useTrail(5, cb, []),
@@ -36,8 +36,8 @@ export default function Home() {
   );
 
   const layoutReveal = (index: number) => ({
-    transform: to(layoutTransform[index].y, (y) => `translateY(${y}px)`),
-    opacity: to(layoutOpacity[index].opacity, (op: number) => `${op}`),
+    transform: to(layoutTransformTrail[index].y, (y) => `translateY(${y}px)`),
+    opacity: to(layoutOpacityTrail[index].opacity, (op: number) => `${op}`),
   });
 
   return (
@@ -85,8 +85,8 @@ export default function Home() {
         </Button>
       </a.div>
       <HomeBackground
-        glowBackground={bgLineGlow}
-        revealBackground={bgLineReveal}
+        glowBackground={bgLineGlowTrail}
+        revealBackground={bgLineRevealTrail}
       />
     </Section>
   );

@@ -27,9 +27,9 @@ export default function NavLinks() {
   const NAV_ITEMS_HEIGHT = 48 * mobileNavigationData.anchors.length;
   const NAV_OPEN_HEIGHT = NAV_ITEMS_HEIGHT + NAV_HEADER_HEIGHT + 6;
 
-  const TMSRef = useSpringRef();
+  const toggleMenuSpringRef = useSpringRef();
   const toggleMenuSpring = useSpring({
-    ref: TMSRef,
+    ref: toggleMenuSpringRef,
     to: {
       width: open ? 100 : 0,
       widthoffset: open ? 48 : -48,
@@ -41,17 +41,17 @@ export default function NavLinks() {
     },
   });
 
-  const LERef = useSpringRef();
+  const lineExtendSpringRef = useSpringRef();
   const lineExtendSpring = useSpring({
-    ref: LERef,
+    ref: lineExtendSpringRef,
     to: {
       scale: open ? 100 : 0,
     },
   });
 
-  const LMRef = useSpringRef();
+  const listMarkerTrailRef = useSpringRef();
   const listMarkerTrail = useTrail(mobileNavigationData.anchors.length, {
-    ref: LMRef,
+    ref: listMarkerTrailRef,
     to: {
       scale: open ? 1 : 0,
     },
@@ -61,9 +61,9 @@ export default function NavLinks() {
     },
   });
 
-  const LIRef = useSpringRef();
+  const listItemTrailRef = useSpringRef();
   const listItemTrail = useTrail(mobileNavigationData.anchors.length, {
-    ref: LIRef,
+    ref: listItemTrailRef,
     to: {
       y: open ? 0 : -20,
     },
@@ -73,11 +73,11 @@ export default function NavLinks() {
     },
   });
 
-  useChain([TMSRef, LERef, LMRef, LIRef], [0, 0.25, 0.25, 0]);
+  useChain([toggleMenuSpringRef, lineExtendSpringRef, listMarkerTrailRef, listItemTrailRef], [0, 0.25, 0.25, 0]);
 
   const scrollDirection = useScrollDirection();
   const activeNavSpring = useSpring({
-    from: { y: 0 },
+    from: {y: 0},
     to: {
       y: scrollDirection == "down" && !open ? -100 : 0,
     },

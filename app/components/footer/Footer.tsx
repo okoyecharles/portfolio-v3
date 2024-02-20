@@ -42,7 +42,8 @@ export default function Footer() {
           <div className="self-center md:self-end">
             <ThemeToggle />
           </div>
-          <p className="text-grey-6 dark:text-grey-9 text-[15px] text-center flex gap-[6px] items-center self-center md:self-end select-none">
+          <p
+            className="text-grey-6 dark:text-grey-9 text-[15px] text-center flex gap-[6px] items-center self-center md:self-end select-none">
             <span>Built with</span>
             <HeartIcon />
             <span>

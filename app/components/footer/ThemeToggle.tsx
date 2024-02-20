@@ -7,10 +7,10 @@ import useClient from "../utils/useClient";
 export default function ThemeToggle() {
   const [client, _setClient] = useClient();
 
-  const { theme, setTheme } = useTheme();
-  const activeTogglePos = { unmounted: -32, dark: 0, light: 32, system: 64 };
+  const {theme, setTheme} = useTheme();
+  const activeTogglePos = {unmounted: -32, dark: 0, light: 32, system: 64};
   const toggleThemeSpring = useSpring({
-    from: { x: activeTogglePos["unmounted"] },
+    from: {x: activeTogglePos["unmounted"]},
     to: {
       x: activeTogglePos[theme as "dark" | "light" | "system"],
     },
@@ -20,7 +20,8 @@ export default function ThemeToggle() {
   });
 
   return (
-    <div className="theme-toggle p-1 flex ring-1 ring-grey-b dark:ring-grey-3 rounded-[20px] relative isolate overflow-hidden self-start">
+    <div
+      className="theme-toggle p-1 flex ring-1 ring-grey-b dark:ring-grey-3 rounded-[20px] relative isolate overflow-hidden self-start">
       <a.div
         className="toggle-active h-8 w-8 bg-grey-9/[35%] dark:bg-grey-5/[35%] rounded-[16px] absolute top-1 -z-10"
         style={toggleThemeSpring}

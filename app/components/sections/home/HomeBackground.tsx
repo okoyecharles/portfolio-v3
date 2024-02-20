@@ -4,16 +4,19 @@ import DottedLine from "../../background/DottedLine";
 import HorizontalDottedLine from "../../background/HorizontalDottedLine";
 import HomeBackgroundProps from "./props";
 import { animationOrder } from "@/app/data/home-background";
+import Plus from "@/app/components/background/Plus";
 
 export default function HomeBackground({
   glowBackground,
   revealBackground,
 }: HomeBackgroundProps) {
-  const SQUARE_COUNT = 27;
   const COLUMNS = 7;
+  const ROWS = 4;
+  const SQUARE_COUNT = COLUMNS * ROWS - 1;
 
   return (
-    <div className="home-bg grid grid-cols-7 w-[1400px] -z-10 h-fit absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2">
+    <div
+      className="home-bg grid grid-cols-7 w-[1400px] -z-10 h-fit absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2">
       {Array(SQUARE_COUNT)
         .fill(0)
         .map((_, index) => (
@@ -23,8 +26,8 @@ export default function HomeBackground({
               (index + 1) / COLUMNS > 3
                 ? [0, 1, 0, 0]
                 : (index + 1) % COLUMNS === 0
-                ? [0, 0, 1, 0]
-                : [0, 1, 1, 0]
+                  ? [0, 0, 1, 0]
+                  : [0, 1, 1, 0]
             }
             plus={(index + 1) / COLUMNS < 3 && (index + 1) % COLUMNS !== 0}
             lineAnimation={[
@@ -69,15 +72,6 @@ function BackgroundSquare({
           <DottedLine animation={lineAnimation} />
         </div>
       )}
-      {/* {plus && (
-        <div className="absolute -translate-x-1/2 -translate-y-1/2 left-full top-full">
-          <Plus
-            animation={plusAnimation}
-            mode="flicker"
-            className="stroke-blue-100 dark:stroke-blue-d-200"
-          />
-        </div>
-      )} */}
     </div>
   );
 }

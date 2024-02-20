@@ -9,6 +9,7 @@ const variantClass = {
   `,
   plain: ``,
 };
+
 interface LinkProps {
   children: React.ReactNode;
   href: string;

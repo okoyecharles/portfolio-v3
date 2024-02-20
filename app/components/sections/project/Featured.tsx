@@ -10,7 +10,7 @@ import FeaturedProjectViewer from "./FeaturedProjectViewer";
 import { FeaturedProject } from "./props.featured";
 
 export default function Featured() {
-  const { current: projects } = useRef(
+  const {current: projects} = useRef(
     projectData.slice(0, 3) as Required<Project>[]
   );
   const [projectIndex, setProjectIndex] = useState<number>(0);

@@ -15,7 +15,7 @@ export default function RecommendationSwiper({
 }: RecommendationSwiperProps) {
   const [earthRotating, setEarthRotating] = useState<boolean>(true);
   const [viewed, setViewed] = useState<boolean>(false);
-  const { inView, ref: observedRef } = useInView({
+  const {inView, ref: observedRef} = useInView({
     threshold: 0,
     rootMargin: "0px 0px -128px",
   });
@@ -24,9 +24,9 @@ export default function RecommendationSwiper({
   const cardTransition = useTransition(recommendationIndex, {
     keys: null,
     ref: cardTransitionRef,
-    from: { opacity: 0, y: 48 },
-    enter: { opacity: 1, y: 0 },
-    leave: { opacity: 0, y: -64, config: { tension: 300 } },
+    from: {opacity: 0, y: 48},
+    enter: {opacity: 1, y: 0},
+    leave: {opacity: 0, y: -64, config: {tension: 300}},
     exitBeforeEnter: true,
   });
 
@@ -53,7 +53,7 @@ export default function RecommendationSwiper({
         ),
         onStart: () => setEarthRotating(true),
         onRest: () => setEarthRotating(false),
-        config: { tension: 350, friction: 75 },
+        config: {tension: 350, friction: 75},
       });
       earthViewedSpringRef.start({
         opacity: 1
@@ -62,7 +62,8 @@ export default function RecommendationSwiper({
   }, [viewed, recommendationIndex]);
 
   return (
-    <div className="flex flex-col md:flex-row justify-between recommendations-swiper my-8 md:my-2 semi-lg:mx-12 relative">
+    <div
+      className="flex flex-col md:flex-row justify-between recommendations-swiper my-8 md:my-2 semi-lg:mx-12 relative">
       <a.div
         className="aspect-square w-full h-full max-w-[375px] max-h-[375px] semi-lg:max-w-[450px] semi-lg:max-h-[450px] relative self-center"
         ref={observedRef}
