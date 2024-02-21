@@ -12,9 +12,7 @@ export default function Contact() {
         You might want to develop a website, application or discuss anything
         related. Feel free leave a message below
       </SectionDescription>
-      <div className="form-container mx-auto max-w-[512px] w-full mt-4 md:mt-6">
-        <ContactForm />
-      </div>
+      <ContactForm />
     </Section>
   );
 }

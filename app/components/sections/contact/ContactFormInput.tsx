@@ -57,12 +57,12 @@ export default function ContactFormInput({
       <label
         htmlFor={id}
         className={`
-                  relative
-                  text-xs font-semibold
-                  mb-2 mt-4 first-of-type:mt-0
-                  ${state === "error" ? "text-error dark:text-error-dark" : ""}
-                  transition-colors
-                `}
+          relative
+          text-xs font-semibold
+          mb-2 mt-4 first-of-type:mt-0
+          ${state === "error" ? "text-error dark:text-error-dark" : ""}
+          transition-colors
+        `}
       >
         {children}
         {/* temporary */}
@@ -107,9 +107,9 @@ export default function ContactFormInput({
           return (
             <a.div
               className={`
-                                input-status
-                                absolute top-4 right-3
-                              `}
+                input-status
+                absolute top-4 right-3
+              `}
               style={style}
             >
               {icons[state]}

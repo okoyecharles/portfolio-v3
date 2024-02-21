@@ -153,56 +153,58 @@ export default function ContactForm() {
   );
 
   return (
-    <a.form
-      className="grid"
-      onSubmit={handleSubmit}
-      ref={observedRef}
-      style={{
-        transform: to(layoutTransformSpring.y, (y) => `translateY(${y}px)`),
-        opacity: to(layoutOpacitySpring.opacity, (op: number) => `${op}`),
-      }}
-    >
-      <ContactFormInput
-        id="contact-form/name"
-        name="name"
-        value={formData.name}
-        onChange={handleInputChange}
-        placeholder="Name"
-        maxLength={100}
-        state={formState.name}
-        error={error}
-        disabled={areInputsDisabled}
+    <div className="form-container mx-auto max-w-[512px] w-full mt-4 md:mt-6">
+      <a.form
+        className="grid"
+        onSubmit={handleSubmit}
+        ref={observedRef}
+        style={{
+          transform: to(layoutTransformSpring.y, (y) => `translateY(${y}px)`),
+          opacity: to(layoutOpacitySpring.opacity, (op: number) => `${op}`),
+        }}
       >
-        Name
-      </ContactFormInput>
-      <ContactFormInput
-        id="contact-form/email"
-        name="email"
-        value={formData.email}
-        onChange={handleInputChange}
-        placeholder="Email Address"
-        maxLength={320}
-        state={formState.email}
-        error={error}
-        disabled={areInputsDisabled}
-      >
-        Email
-      </ContactFormInput>
-      <ContactFormInput
-        id="contact-form/message"
-        name="message"
-        value={formData.message}
-        onChange={handleInputChange}
-        placeholder="Message"
-        type="textarea"
-        maxLength={1500}
-        state={formState.message}
-        error={error}
-        disabled={areInputsDisabled}
-      >
-        Message
-      </ContactFormInput>
-      <ContactFormSubmitButton formSending={formSending} disabled={isSubmitDisabled} />
-    </a.form>
+        <ContactFormInput
+          id="contact-form/name"
+          name="name"
+          value={formData.name}
+          onChange={handleInputChange}
+          placeholder="Name"
+          maxLength={100}
+          state={formState.name}
+          error={error}
+          disabled={areInputsDisabled}
+        >
+          Name
+        </ContactFormInput>
+        <ContactFormInput
+          id="contact-form/email"
+          name="email"
+          value={formData.email}
+          onChange={handleInputChange}
+          placeholder="Email Address"
+          maxLength={320}
+          state={formState.email}
+          error={error}
+          disabled={areInputsDisabled}
+        >
+          Email
+        </ContactFormInput>
+        <ContactFormInput
+          id="contact-form/message"
+          name="message"
+          value={formData.message}
+          onChange={handleInputChange}
+          placeholder="Message"
+          type="textarea"
+          maxLength={1500}
+          state={formState.message}
+          error={error}
+          disabled={areInputsDisabled}
+        >
+          Message
+        </ContactFormInput>
+        <ContactFormSubmitButton formSending={formSending} disabled={isSubmitDisabled} />
+      </a.form>
+    </div>
   );
 }
