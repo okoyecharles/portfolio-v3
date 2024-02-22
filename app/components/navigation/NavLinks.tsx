@@ -91,6 +91,7 @@ export default function NavLinks() {
   return (
     <>
       <a.div
+        id={'main-menu-container'}
         className={`absolute top-6 right-6 h-12 w-12 bg-grey-ea dark:bg-grey-2 ring-1 dark:ring-0 ring-grey-b rounded-[10px] md:hidden overflow-hidden z-20`}
         style={{
           width: to(
@@ -103,7 +104,14 @@ export default function NavLinks() {
       >
         <div className="nav-positioner w-[calc(100vw-48px)] bg-grey-ea dark:bg-grey-2 absolute right-0 top-0">
           <div className="flex flex-col items-end">
-            <button className="relative w-12 h-12" onClick={toggleMenu}>
+            <button
+              className="relative w-12 h-12"
+              onClick={toggleMenu}
+              title={open ? 'Close Main Menu' : 'Open Main Menu'}
+              aria-label={open ? 'Close Main Menu' : 'Open Main Menu'}
+              aria-expanded={open}
+              aria-haspopup={'menu'}
+              aria-controls={'main-menu-container'}>
               <div
                 className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition ${
                   open ? "-rotate-45 opacity-0" : "rotate-0 opacity-100"
@@ -135,7 +143,7 @@ export default function NavLinks() {
               height={NAV_OPEN_HEIGHT - 24}
             />
           </a.div>
-          <nav className="px-6">
+          <nav className="px-6" aria-label={'Main Menu'}>
             <ul className="flex flex-col text-base text-grey-6 dark:text-grey-b ms-[25px] font-visby font-medium">
               {mobileNavigationData.anchors.map((anchor, anchorIndex) => (
                 <li className="relative flex" key={anchor.name}>
@@ -170,6 +178,8 @@ export default function NavLinks() {
                     href={social.link}
                     rel="noopener noreferrer"
                     target="_blank"
+                    title={social.name}
+                    aria-label={social.name}
                   >
                     {social.icon}
                   </a>
