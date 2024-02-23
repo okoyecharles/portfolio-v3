@@ -11,9 +11,11 @@ import useActiveSection from "../utils/useActiveSection";
 import ExpandIcon from "../svg/dropdown/ExpandIcon";
 import { useEffect, useRef, useState } from "react";
 import Link from "../clickable/Link";
+import useUserScrolling from "@/app/components/utils/useUserScrolling";
 
 export default function NavLinksDesktop() {
   const activeSection = useActiveSection();
+  const { userScrolling, setUserScrolling } = useUserScrolling();
 
   const activeSectionMarkerMorph = [
     {pos: -24, width: 24},
@@ -59,9 +61,51 @@ export default function NavLinksDesktop() {
 
   return (
     <a.nav
+      id={"main-menu"}
       className="absolute w-fit top-8 right-8 bg-white dark:bg-grey-2 ring-1 dark:ring-0 ring-grey-ea rounded-[10px] font-visby font-medium px-6 py-[7px] gap-6 hidden md:flex items-center select-none"
       style={activeNavSpring}
+      aria-label={"Main Menu"}
     >
+      { userScrolling }
+      <ul className="flex text-sm gap-8 leading-[1.5] text-grey-6 dark:text-grey-b" role={"menubar"}>
+        {navigationData.anchors.map((anchor) => (
+          <li
+            key={anchor.name}
+            id={anchor.name + "-menu-item"}
+            className={`flex items-center gap-2 group/nav-item transition-colors ${
+              activeSection == anchor.name && "text-black dark:text-grey-d"
+            }`}
+          >
+            <a
+              href={anchor.link}
+              className="transition-colors group-hover/nav-item:text-black dark:group-hover/nav-item:text-grey-d uppercase"
+              role={"menuitem"}
+            >
+              {anchor.title}
+            </a>
+            {anchor.dropdownAnchors && (
+              <Dropdown
+                name={anchor.name}
+                anchors={anchor.dropdownAnchors}
+                open={anchor.name === dropdownOpen}
+                setOpen={setDropdownOpen}
+              />
+            )}
+          </li>
+        ))}
+      </ul>
+      <div className="divider" aria-hidden>
+        <VerticalLineIcon />
+      </div>
+      <ul className="flex gap-4 items-center">
+        {navigationData.socials.map((social) => (
+          <li key={social.name} className="h-[22px]">
+            <Link href={social.link} variant="plain">
+              {social.icon}
+            </Link>
+          </li>
+        ))}
+      </ul>
       <div
         className="active-marker-bar absolute left-0 bottom-0 h-5 w-full overflow-hidden rounded-[10px] pointer-events-none">
         <div className="relative h-full">
@@ -77,43 +121,6 @@ export default function NavLinksDesktop() {
           />
         </div>
       </div>
-      <ul className="flex text-sm gap-8 leading-[1.5] text-grey-6 dark:text-grey-b">
-        {navigationData.anchors.map((anchor) => (
-          <li
-            key={anchor.name}
-            className={`flex items-center gap-2 group/nav-item transition-colors ${
-              activeSection == anchor.name && "text-black dark:text-grey-d"
-            }`}
-          >
-            <a
-              href={anchor.link}
-              className="transition-colors group-hover/nav-item:text-black dark:group-hover/nav-item:text-grey-d"
-            >
-              {anchor.title}
-            </a>
-            {anchor.dropdownAnchors && (
-              <Dropdown
-                name={anchor.name}
-                anchors={anchor.dropdownAnchors}
-                open={anchor.name === dropdownOpen}
-                setOpen={setDropdownOpen}
-              />
-            )}
-          </li>
-        ))}
-      </ul>
-      <div className="divider">
-        <VerticalLineIcon />
-      </div>
-      <ul className="flex gap-4 items-center">
-        {navigationData.socials.map((social) => (
-          <li key={social.name} className="h-[22px]">
-            <Link href={social.link} variant="plain">
-              {social.icon}
-            </Link>
-          </li>
-        ))}
-      </ul>
     </a.nav>
   );
 }
@@ -177,13 +184,20 @@ function Dropdown({
           open ? " is-active" : ""
         }`}
         onClick={handleDropdownToggle}
+        title={open ? "Close Submenu" : "Open Submenu"}
+        aria-label={open ? "Close Submenu" : "Open Submenu"}
+        aria-expanded={open}
+        aria-controls={name + "-submenu"}
       >
         <ExpandIcon />
       </button>
 
-      <a.nav
+      <a.div
+        id={name + "-submenu"}
         className={`dropdown-items bg-white ring-1 ring-grey-d dark:ring-0 dark:bg-grey-2 absolute w-[256px] h-[${DROPDOWN_OPEN_HEIGHT}px] top-[calc(100%+31px)] rounded-[10px] -translate-x-8 py-3 font-lato font-medium`}
         style={{...openDropdownSpring, pointerEvents: open ? "all" : "none"}}
+        role={"listbox"}
+        aria-label={"submenu"}
       >
         <div className="relative translate-x-8">
           <div
@@ -201,6 +215,8 @@ function Dropdown({
               <a
                 href={anchor.link}
                 className="flex gap-2 items-center py-2 text-grey-6 dark:text-grey-b group-hover/dropdown-item:text-grey-2 dark:group-hover/dropdown-item:text-grey-d group-[.is-active]/dropdown-item:text-grey-2 dark:group-[.is-active]/dropdown-item:text-grey-d"
+                aria-selected={anchor.name === active}
+                tabIndex={open ? 0 : -1}
               >
                 {anchor.icon}
                 <span className="leading-[1] block">{anchor.title}</span>
@@ -208,7 +224,7 @@ function Dropdown({
             </li>
           ))}
         </ul>
-      </a.nav>
+      </a.div>
     </div>
   );
 }

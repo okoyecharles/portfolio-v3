@@ -7,6 +7,7 @@ export default function LogoIcon() {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={`fill-grey-1 dark:fill-white`}
+      aria-label={'Okoye Charles\' Portfolio'}
     >
       <g clipPath="url(#clip0_163_1655)">
         <circle cx="74" cy="29" r="6" className={`fill-blue-100 dark:fill-blue-d-100`} />

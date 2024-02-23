@@ -64,12 +64,12 @@ const navigationData: NavigationData = {
   anchors: [
     {
       name: "home",
-      title: "HOME",
+      title: "Home",
       link: "#home",
     },
     {
       name: "about",
-      title: "ABOUT",
+      title: "About",
       link: "#about",
       dropdownAnchors: [
         {
@@ -88,7 +88,7 @@ const navigationData: NavigationData = {
     },
     {
       name: "projects",
-      title: "PROJECTS",
+      title: "Projects",
       link: "#projects",
       dropdownAnchors: [
         {
@@ -113,7 +113,7 @@ const navigationData: NavigationData = {
     },
     {
       name: "contact",
-      title: "CONTACT ME",
+      title: "Contact Me",
       link: "#contact",
     },
   ],
@@ -125,32 +125,32 @@ const mobileNavigationData: NavigationData = {
   anchors: [
     {
       name: "home",
-      title: "HOME",
+      title: "Home",
       link: "#home",
     },
     {
       name: "about",
-      title: "ABOUT ME",
+      title: "About Me",
       link: "#about",
     },
     {
       name: "experience",
-      title: "experience",
+      title: "Experience",
       link: "#experience",
     },
     {
       name: "projects",
-      title: "projects",
+      title: "Projects",
       link: "#projects",
     },
     {
       name: "recommendations",
-      title: "recommendations",
+      title: "Recommendations",
       link: "#recommendations",
     },
     {
       name: "contact",
-      title: "contact me",
+      title: "Contact Me",
       link: "#contact",
     },
   ],
