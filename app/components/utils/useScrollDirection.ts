@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function useScrollDirection() {
   const [scrollDir, setScrollDir] = useState<'up' | 'down'>("up");
@@ -8,7 +9,7 @@ export default function useScrollDirection() {
     let lastScrollY = window.scrollY;
     let ticking = false;
 
-    const updateScrollDir = () => {
+    function updateScrollDir () {
       const scrollY = window.scrollY;
 
       if (Math.abs(scrollY - lastScrollY) < threshold) {
@@ -20,7 +21,7 @@ export default function useScrollDirection() {
       ticking = false;
     };
 
-    const onScroll = () => {
+    function onScroll() {
       if (!ticking) {
         window.requestAnimationFrame(updateScrollDir);
         ticking = true;
