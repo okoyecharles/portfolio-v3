@@ -3,14 +3,7 @@ import CloseMenuIcon from "../svg/abstract/CloseMenuIcon";
 import MenuIcon from "../svg/abstract/MenuIcon";
 import { useState } from "react";
 import VerticalLineIcon from "../svg/abstract/VerticalLineIcon";
-import {
-  a,
-  to,
-  useChain,
-  useSpring,
-  useSpringRef,
-  useTrail,
-} from "@react-spring/web";
+import { a, to, useChain, useSpring, useSpringRef, useTrail, } from "@react-spring/web";
 import mobileNavigationData from "@/app/data/navigation";
 import useScrollDirection from "../utils/useScrollDirection";
 import useActiveSection from "../utils/useActiveSection";

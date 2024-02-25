@@ -1,10 +1,6 @@
 "use client";
 import VerticalLineIcon from "../svg/abstract/VerticalLineIcon";
-import {
-  AnchorName,
-  DropdownAnchor,
-  navigationData,
-} from "../../data/navigation";
+import { AnchorName, DropdownAnchor, navigationData, } from "../../data/navigation";
 import { a, to, useSpring } from "@react-spring/web";
 import useScrollDirection from "../utils/useScrollDirection";
 import useActiveSection from "../utils/useActiveSection";
