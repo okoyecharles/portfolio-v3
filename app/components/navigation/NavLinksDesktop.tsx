@@ -1,13 +1,14 @@
 "use client";
 import VerticalLineIcon from "../svg/abstract/VerticalLineIcon";
-import { AnchorName, DropdownAnchor, navigationData, } from "../../data/navigation";
+import { AnchorName, SubmenuAnchor, navigationData, } from "../../data/navigation";
 import { a, to, useSpring } from "@react-spring/web";
 import useScrollDirection from "../utils/useScrollDirection";
 import useActiveSection from "../utils/useActiveSection";
-import ExpandIcon from "../svg/dropdown/ExpandIcon";
+import ExpandIcon from "../svg/submenu/ExpandIcon";
 import { useEffect, useRef, useState } from "react";
 import Link from "../clickable/Link";
 import useUserScrolling from "@/app/components/utils/useUserScrolling";
+import { toNormalCase } from "../utils/convertion";
 
 export default function NavLinksDesktop() {
   const activeSection = useActiveSection();
@@ -50,9 +51,9 @@ export default function NavLinksDesktop() {
     },
   });
 
-  const [dropdownOpen, setDropdownOpen] = useState<AnchorName | null>(null);
+  const [submenuOpen, setSubmenuOpen] = useState<AnchorName | null>(null);
   useEffect(() => {
-    setDropdownOpen(null);
+    setSubmenuOpen(null);
   }, [scrollDirection]);
 
   return (
@@ -79,12 +80,12 @@ export default function NavLinksDesktop() {
             >
               {anchor.title}
             </a>
-            {anchor.dropdownAnchors && (
-              <Dropdown
+            {anchor.submenuAnchors && (
+              <Submenu
                 name={anchor.name}
-                anchors={anchor.dropdownAnchors}
-                open={anchor.name === dropdownOpen}
-                setOpen={setDropdownOpen}
+                anchors={anchor.submenuAnchors}
+                open={anchor.name === submenuOpen}
+                setOpen={setSubmenuOpen}
               />
             )}
           </li>
@@ -121,24 +122,25 @@ export default function NavLinksDesktop() {
   );
 }
 
-interface DropdownProps<T> {
+interface SubmenuProps<T> {
   name: AnchorName;
   anchors: T[];
   open: boolean;
   setOpen: Function;
 }
 
-function Dropdown({
+function Submenu({
   name,
   anchors,
   open,
   setOpen,
-}: DropdownProps<DropdownAnchor>) {
-  const DROPDOWN_ITEMS_HEIGHT = 34 * anchors.length;
-  const DROPDOWN_OPEN_HEIGHT = DROPDOWN_ITEMS_HEIGHT + 24;
+}: SubmenuProps<SubmenuAnchor>) {
+  const SUBMENU_ITEMS_HEIGHT = 34 * anchors.length;
+  const SUBMENU_OPEN_HEIGHT = SUBMENU_ITEMS_HEIGHT + 24;
+  const submenuName = toNormalCase(name + " submenu");
   const active = useActiveSection();
 
-  const openDropdownSpring = useSpring({
+  const openSubmenuSpring = useSpring({
     y: open ? 0 : 16,
     x: -32,
     opacity: open ? 1 : 0,
@@ -147,7 +149,7 @@ function Dropdown({
     },
   });
 
-  function handleDropdownToggle() {
+  function handleSubmenuToggle() {
     if (open) {
       setOpen(null);
     } else {
@@ -155,16 +157,16 @@ function Dropdown({
     }
   }
 
-  const dropdownRef = useRef<any>(null);
+  const submenuRef = useRef<any>(null);
 
   function handleClickOutside(event: Event) {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+    if (submenuRef.current && !submenuRef.current.contains(event.target)) {
       setOpen(false);
     }
   }
 
   useEffect(() => {
-    // close dropdown if click occurs elsewhere
+    // close submenu if click occurs elsewhere
     if (open) {
       document.addEventListener("mousedown", handleClickOutside);
       return () => {
@@ -174,14 +176,14 @@ function Dropdown({
   }, [open]);
 
   return (
-    <div className="relative dropdown" ref={dropdownRef}>
+    <div className="relative submenu" ref={submenuRef}>
       <button
-        className={`py-2 px-1 rounded-[5px] hover:bg-grey-ea dark:hover:bg-grey-3 group/dropdown-button transition-colors -mr-[10px]${
+        className={`py-2 px-1 rounded-[5px] hover:bg-grey-ea dark:hover:bg-grey-3 group/submenu-button transition-colors -mr-[10px]${
           open ? " is-active" : ""
         }`}
-        onClick={handleDropdownToggle}
-        title={open ? "Close Submenu" : "Open Submenu"}
-        aria-label={open ? "Close Submenu" : "Open Submenu"}
+        onClick={handleSubmenuToggle}
+        title={open ? "Close " + submenuName : "Open " + submenuName}
+        aria-label={open ? "Close " + submenuName : "Open " + submenuName}
         aria-expanded={open}
         aria-controls={name + "-submenu"}
       >
@@ -190,14 +192,14 @@ function Dropdown({
 
       <a.div
         id={name + "-submenu"}
-        className={`dropdown-items bg-white ring-1 ring-grey-d dark:ring-0 dark:bg-grey-2 absolute w-[256px] h-[${DROPDOWN_OPEN_HEIGHT}px] top-[calc(100%+31px)] rounded-[10px] -translate-x-8 py-3 font-lato font-medium`}
-        style={{...openDropdownSpring, pointerEvents: open ? "all" : "none"}}
+        className={`submenu-items bg-white ring-1 ring-grey-d dark:ring-0 dark:bg-grey-2 absolute w-[256px] h-[${SUBMENU_OPEN_HEIGHT}px] top-[calc(100%+31px)] rounded-[10px] -translate-x-8 py-3 font-lato font-medium`}
+        style={{...openSubmenuSpring, pointerEvents: open ? "all" : "none"}}
         role={"listbox"}
-        aria-label={"submenu"}
+        aria-label={submenuName}
       >
         <div className="relative translate-x-8">
           <div
-            className="dropdown-pointer absolute w-[16.9px] h-[16.9px] bg-white ring-1 ring-grey-d dark:ring-0 dark:bg-grey-2 rotate-45 rounded-[2px] -top-[12px] -translate-y-1/2"></div>
+            className="submenu-pointer absolute w-[16.9px] h-[16.9px] bg-white ring-1 ring-grey-d dark:ring-0 dark:bg-grey-2 rotate-45 rounded-[2px] -top-[12px] -translate-y-1/2"></div>
           <div className="bg-white dark:bg-grey-2 absolute w-[34px] h-[12px] -top-[12px] -left-[8px]"></div>
         </div>
         <ul>
@@ -206,11 +208,11 @@ function Dropdown({
               key={anchor.name}
               className={`px-4 ${
                 anchor.name === active ? "is-active " : ""
-              }group/dropdown-item hover:bg-grey-ea dark:hover:bg-grey-3 transition-colors`}
+              }group/submenu-item hover:bg-grey-ea dark:hover:bg-grey-3 transition-colors`}
             >
               <a
                 href={anchor.link}
-                className="flex gap-2 items-center py-2 text-grey-6 dark:text-grey-b group-hover/dropdown-item:text-grey-2 dark:group-hover/dropdown-item:text-grey-d group-[.is-active]/dropdown-item:text-grey-2 dark:group-[.is-active]/dropdown-item:text-grey-d"
+                className="flex gap-2 items-center py-2 text-grey-6 dark:text-grey-b group-hover/submenu-item:text-grey-2 dark:group-hover/submenu-item:text-grey-d group-[.is-active]/submenu-item:text-grey-2 dark:group-[.is-active]/submenu-item:text-grey-d"
                 aria-selected={anchor.name === active}
                 tabIndex={open ? 0 : -1}
               >

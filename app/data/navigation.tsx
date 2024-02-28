@@ -1,11 +1,11 @@
-import FeaturedIcon from "../components/svg/dropdown/FeaturedIcon";
-import FolderIcon from "../components/svg/dropdown/FolderIcon";
+import FeaturedIcon from "../components/svg/submenu/FeaturedIcon";
+import FolderIcon from "../components/svg/submenu/FolderIcon";
 import GithubIcon from "../components/svg/icons/GithubIcon";
 import MailIcon from "../components/svg/icons/GmailIcon";
 import LinkedinIcon from "../components/svg/icons/LinkedinIcon";
-import PathIcon from "../components/svg/dropdown/PathIcon";
-import ProfileIcon from "../components/svg/dropdown/ProfileIcon";
-import QuoteIcon from "../components/svg/dropdown/QuoteIcon";
+import PathIcon from "../components/svg/submenu/PathIcon";
+import ProfileIcon from "../components/svg/submenu/ProfileIcon";
+import QuoteIcon from "../components/svg/submenu/QuoteIcon";
 import XIcon from "../components/svg/icons/XIcon";
 
 export type AnchorName =
@@ -28,12 +28,12 @@ export interface Anchor {
   link: string;
 }
 
-export interface DropdownAnchor extends Anchor {
+export interface SubmenuAnchor extends Anchor {
   icon: React.ReactNode;
 }
 
 interface NavigationData {
-  anchors: (Anchor & { dropdownAnchors?: DropdownAnchor[] })[];
+  anchors: (Anchor & { submenuAnchors?: SubmenuAnchor[] })[];
   socials: Social[];
 }
 
@@ -71,7 +71,7 @@ const navigationData: NavigationData = {
       name: "about",
       title: "About",
       link: "#about",
-      dropdownAnchors: [
+      submenuAnchors: [
         {
           name: "about",
           title: "About Me",
@@ -90,7 +90,7 @@ const navigationData: NavigationData = {
       name: "projects",
       title: "Projects",
       link: "#projects",
-      dropdownAnchors: [
+      submenuAnchors: [
         {
           name: "projects",
           title: "Featured Work",
