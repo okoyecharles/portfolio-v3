@@ -5,7 +5,7 @@ import { animated } from "@react-spring/three";
 import { Earth3dProps, EarthMeshProps } from "./props";
 import { useTheme } from "next-themes";
 
-export default function Earth3D({rotationSpring}: Earth3dProps) {
+export default function EarthThree({rotationSpring}: Earth3dProps) {
   return (
     <Canvas camera={{position: [0, 0.5, 1.6]}}>
       <Suspense fallback={null}>
