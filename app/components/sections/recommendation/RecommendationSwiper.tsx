@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Earth3D from "../../react-three/Earth3D";
+import EarthThree from "../../react-three/EarthThree";
 import RecommendationCard from "./RecommendationCard";
 import { RecommendationSwiperProps } from "./props";
 import LocationIcon from "../../svg/abstract/LocationIcon";
@@ -68,7 +68,7 @@ export default function RecommendationSwiper({
         ref={observedRef}
         style={earthViewedSpring}
       >
-        <Earth3D rotationSpring={earthRotationSpring} />
+        <EarthThree rotationSpring={earthRotationSpring} />
         <div
           className={`
             group/earth-pointer
