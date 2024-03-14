@@ -7,10 +7,12 @@ import Featured from "./components/sections/project/Featured";
 import MoreProjects from "./components/sections/project/MoreProjects";
 import Recommendation from "./components/sections/recommendation/Recommendation";
 import Contact from "./components/sections/contact/Contact";
+import SkipToContent from "./components/sections/skip-to-content/SkipToContent";
 
 export default function Page() {
   return (
     <>
+      <SkipToContent />
       <Navigation />
       <Home />
       <About />

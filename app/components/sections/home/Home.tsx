@@ -43,7 +43,7 @@ export default function Home() {
   return (
     <Section
       name="home"
-      id="home-section"
+      id="content"
       padding="py-[150px] mb-[50px] md:pt-[128px] md:pb-[192px] md:mb-[64px]"
       sectionRef={observedRef}
     >
@@ -72,7 +72,7 @@ export default function Home() {
         style={layoutReveal(3)}
       >
         I can help you build a product, feature, or website. Look through my
-        work and experience! If you are interested, I am available for hire
+        work and experience! If you are interested, I am available for hire.
       </a.p>
       <a.div
         className="flex flex-wrap gap-6 call-to-action-buttons md:self-center"

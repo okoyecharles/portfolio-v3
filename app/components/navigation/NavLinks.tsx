@@ -105,7 +105,6 @@ export default function NavLinks() {
                 focus-visible:outline-2 focus-visible:outline-grey-2
                 dark:focus-visible:outline-grey-9
               `}
-              tabIndex={1}
               onClick={toggleMenu}
               title={open ? 'Close Main Menu' : 'Open Main Menu'}
               aria-label={open ? 'Close Main Menu' : 'Open Main Menu'}
