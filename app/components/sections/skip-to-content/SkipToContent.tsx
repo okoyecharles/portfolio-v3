@@ -12,7 +12,7 @@ function SkipToContent() {
     `}
     >
       <a href="#content">
-        <Button>Skip to content</Button>
+        <Button tabIndex={-1}>Skip to content</Button>
       </a>
     </div>
   );

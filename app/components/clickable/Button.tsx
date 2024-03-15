@@ -33,6 +33,7 @@ interface ButtonProps {
   children: React.ReactNode;
   disabled?: boolean;
   variant?: keyof (typeof className)["variant"];
+  tabIndex?: number;
   onClick?: DOMAttributes<HTMLButtonElement>["onClick"];
 }
 
@@ -40,6 +41,7 @@ function Button({
   disabled,
   children,
   variant = "default",
+  tabIndex,
   onClick,
 }: ButtonProps) {
   return (
@@ -50,6 +52,7 @@ function Button({
         ${className.disabled}
         ${className.variant[variant]}
       `}
+      tabIndex={tabIndex}
       onClick={onClick}
       disabled={disabled}
     >
