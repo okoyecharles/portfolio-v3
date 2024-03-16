@@ -8,6 +8,7 @@ import Link from "../../clickable/Link";
 import { a, to, useSpring, useTrail } from "@react-spring/web";
 import { useObservedSprings } from "../../utils/useObservedSpring";
 import animation from "../../animations/animations";
+import InfoIcon from "../../svg/abstract/InfoIcon";
 
 export default function About() {
   const {
@@ -34,11 +35,11 @@ export default function About() {
     ],
     [
       ...animation.layout.reveal.end.map((x) => x()),
-      ...animation.layout.revealSlow.end.map((x) => x({delay: 200})),
+      ...animation.layout.revealSlow.end.map((x) => x({ delay: 200 })),
       ...animation.layout.revealSlow.end.map((x) => x()),
-      animation.bg.lineGlow.end({config: {tension: 75}, delay: 450}),
-      animation.bg.lineReveal.end({delay: 450}),
-      animation.bg.plusReveal.end({delay: 0}),
+      animation.bg.lineGlow.end({ config: { tension: 75 }, delay: 450 }),
+      animation.bg.lineReveal.end({ delay: 450 }),
+      animation.bg.plusReveal.end({ delay: 0 }),
     ],
     [
       (cb: Function) => useTrail(3, cb, []),
@@ -90,22 +91,30 @@ export default function About() {
             </a.h3>
             <a.div style={layoutReveal()}>
               <a.p className="mb-4">
-                My name is Okoye Charles Kosisochukwu \options\, a{" "}
+                My name is{" "}
                 <strong className="text-grey-1 dark:text-grey-d whitespace-nowrap">
-                  Full-Stack Developer
+                  Okoye Charles Kosisochukwu
                 </strong>{" "}
-                (front-end heavy) based in Nigeria. I spend most of my time
-                designing graphics, coding up things for the web, and learning
-                algorithms.
+                <button
+                  className="group/info-button inline relative top-[3px]"
+                  name="show extra info"
+                  aria-expanded="false"
+                >
+                  <InfoIcon />
+                </button>{" "}
+                , I'm a{" "}
+                <strong className="text-grey-1 dark:text-grey-d whitespace-nowrap">
+                Full-Stack Developer
+                </strong>{" "}
+                (front-end heavy) based in Nigeria. I spend
+                most of my time designing graphics, coding up things for the web, and
+                learning algorithms.
               </a.p>
               <a.p>
-                My goal is to deliver, through code, unique and innovative
-                solutions to complex problems. If my portfolio interests you, or
-                you need an enthusiastic developer on your team,{" "}
-                <Link href="mailto:okoyecharles@gmail.com">
-                  I am available for hire
-                </Link>
-                .
+                My goal is to deliver, through code, unique and innovative solutions to
+                complex problems. If my portfolio interests you, or you need an
+                enthusiastic developer on your team,{" "}
+                <Link href="mailto:okoyecharles@gmail.com">I am available for hire</Link>.
               </a.p>
             </a.div>
           </article>
