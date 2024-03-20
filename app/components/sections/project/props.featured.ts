@@ -1,6 +1,6 @@
 import { Project } from "@/app/data/project";
 import { SpringValue, TransitionFn } from "@react-spring/web";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, LegacyRef, SetStateAction } from "react";
 
 export type FeaturedProject = Required<Project>;
 type SpringAnimation<T = number> = Record<string, SpringValue<T>>;
@@ -27,6 +27,7 @@ export type FeaturedProjectCardProps = {
   project: FeaturedProject;
   active: boolean;
   activeOffset: number;
+  headerRef: LegacyRef<HTMLAnchorElement>;
 } & Pick<FeaturedProjectProps, 'openProjectViewer'>
 
 //  Desktop Props

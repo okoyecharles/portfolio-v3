@@ -4,7 +4,7 @@ import Section from "../Section";
 import SectionDescription from "../SectionDescription";
 import SectionHeader from "../SectionHeader";
 import projectData, { Project } from "@/app/data/project";
-import FeaturedProjects from "./FeaturedProjects";
+import FeaturedProjectsMobile from "./FeaturedProjectsMobile";
 import FeaturedProjectsDesktop from "./FeaturedProjectsDesktop";
 import FeaturedProjectViewer from "./FeaturedProjectViewer";
 import { FeaturedProject } from "./props.featured";
@@ -30,7 +30,7 @@ export default function Featured() {
         A curated collection of my most exceptional work
       </SectionDescription>
       <div className="featured-projects-container my-8">
-        <FeaturedProjects
+        <FeaturedProjectsMobile
           projects={projects}
           projectIndex={projectIndex}
           setProjectIndex={setProjectIndex}

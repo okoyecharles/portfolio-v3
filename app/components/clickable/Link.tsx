@@ -1,3 +1,5 @@
+import { LegacyRef } from "react";
+
 const variantClass = {
   default: `
     text-blue-200 dark:text-blue-d-200 relative whitespace-nowrap transition-colors
@@ -15,22 +17,28 @@ interface LinkProps {
   href: string;
   className?: string;
   variant?: keyof typeof variantClass;
+  tabIndex?: number;
+  linkRef?: LegacyRef<HTMLAnchorElement>
 }
 
 export default function Link({
   children,
   href,
   className,
+  linkRef,
   variant = "default",
+  tabIndex
 }: LinkProps) {
   return (
     <a
       href={href}
+      ref={linkRef}
       className={`
       inline-flex items-center gap-1 w-fit ${variantClass[variant]} ${className}
     `}
       target="_blank"
       rel="noopener noreferrer"
+      tabIndex={tabIndex}
     >
       {children}
     </a>

@@ -70,7 +70,7 @@ export default function FeaturedProjectViewer({
     <div
       className={`
         project-viewer-background fixed inset-0 bg-black/30 dark:bg-black/50 z-50 transition-opacity duration-300
-        ${open ? "" : " pointer-events-none opacity-0"}
+        ${open ? "visible" : "invisible pointer-events-none"}
       `}
     >
       <div

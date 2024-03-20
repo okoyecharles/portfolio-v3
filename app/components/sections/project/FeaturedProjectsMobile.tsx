@@ -4,10 +4,7 @@ import FeaturedProjectProps, {
   FeaturedProjectSwiperProps,
 } from "./props.featured";
 import FeaturedProjectTag from "@/app/components/sections/project/FeaturedProjectsTag";
-import {
-  formatDateTimeAttribute,
-  formatMonthYear,
-} from "@/app/components/utils/moment";
+import { formatDateTimeAttribute, formatMonthYear } from "@/app/components/utils/moment";
 import MobileIcon from "../../svg/icons/MobileIcon";
 import DesktopIcon from "@/app/components/svg/icons/DesktopIcon";
 import Link from "../../clickable/Link";
@@ -22,8 +19,10 @@ import "swiper/css/effect-cards";
 import animation from "../../animations/animations";
 import { a, to, useSpring } from "@react-spring/web";
 import { useObservedSprings } from "../../utils/useObservedSpring";
+import moment from "moment";
+import NorthWestIcon from "../../svg/abstract/NorthWestIcon";
 
-export default function FeaturedProjects(props: FeaturedProjectProps) {
+export default function FeaturedProjectsMobile(props: FeaturedProjectProps) {
   const {
     observedRef,
     springAnimate: [layoutTransformSpring, layoutOpacitySpring],
@@ -55,9 +54,11 @@ function FeaturedProjectSwiper({
 }: FeaturedProjectSwiperProps) {
   const swiperRef = useRef<SwiperRef>(null);
   const swiperApi = swiperRef.current?.swiper;
+  const featuredProjectHeaderRefs = projects.map((_) => useRef<HTMLLinkElement>(null));
 
   function handleSwiperChange(swiper: SwiperClass) {
     setProjectIndex(swiper.activeIndex);
+    featuredProjectHeaderRefs[swiper.activeIndex].current?.focus();
   }
 
   return (
@@ -72,6 +73,8 @@ function FeaturedProjectSwiper({
         }}
         initialSlide={projectIndex}
         onActiveIndexChange={handleSwiperChange}
+        id="featured-projects-deck"
+        aria-label="featured projects deck"
       >
         {projects.map((project, index) => (
           <SwiperSlide className="my-auto" key={project.name}>
@@ -80,19 +83,30 @@ function FeaturedProjectSwiper({
               active={projectIndex === index}
               activeOffset={Math.abs(projectIndex - index)}
               openProjectViewer={openProjectViewer}
+              headerRef={featuredProjectHeaderRefs[index] as any}
             />
           </SwiperSlide>
         ))}
       </Swiper>
       <button
-        className="absolute w-[48px] aspect-square grid justify-center items-center bg-grey-6/20 dark:bg-grey-9/20 hover:bg-grey-6/30 dark:hover:bg-grey-9/30 rounded-[50%] top-1/2 -translate-y-1/2 left-0 -translate-x-1/4 z-10 group/icon"
+        className="absolute w-[48px] aspect-square grid justify-center items-center bg-grey-6/20 dark:bg-grey-9/20 hover:bg-grey-6/30 dark:hover:bg-grey-9/30 rounded-[50%] top-1/2 -translate-y-1/2 left-0 -translate-x-1/4 z-10 group/icon disabled:cursor-not-allowed disabled:opacity-80"
         onClick={() => swiperApi?.slidePrev(500)}
+        disabled={projectIndex === 0}
+        aria-hidden={projectIndex === 0}
+        name={`previous card - ${projects[projectIndex - 1]?.name}`}
+        aria-label={`previous card - ${projects[projectIndex - 1]?.name}`}
+        aria-controls="featured-projects-deck"
       >
         <PrevIcon />
       </button>
       <button
-        className="absolute w-[48px] aspect-square grid justify-center items-center bg-grey-6/20 dark:bg-grey-9/20 hover:bg-grey-6/30 dark:hover:bg-grey-9/30 rounded-[50%] top-1/2 -translate-y-1/2 right-0 translate-x-1/4 z-10 group/icon"
+        className="absolute w-[48px] aspect-square grid justify-center items-center bg-grey-6/20 dark:bg-grey-9/20 hover:bg-grey-6/30 dark:hover:bg-grey-9/30 rounded-[50%] top-1/2 -translate-y-1/2 right-0 translate-x-1/4 z-10 group/icon disabled:cursor-not-allowed disabled:opacity-80"
         onClick={() => swiperApi?.slideNext(500)}
+        disabled={projectIndex === projects.length - 1}
+        aria-hidden={projectIndex === projects.length - 1}
+        name={`next card - ${projects[projectIndex + 1]?.name}`}
+        aria-label={`next card - ${projects[projectIndex + 1]?.name}`}
+        aria-controls="featured-projects-deck"
       >
         <NextIcon />
       </button>
@@ -105,12 +119,17 @@ function FeaturedProjectCard({
   active,
   activeOffset,
   openProjectViewer,
+  headerRef,
 }: FeaturedProjectCardProps) {
   const cardShadowByOffset: Record<string, `after:bg-black/${string}`> = {
     "0": "after:bg-black/0",
     "1": "after:bg-black/5 dark:after:bg-black/20",
     "2": "after:bg-black/10 dark:after:bg-black/30",
   };
+  const [initialDate, endDate] = project.timeRange;
+  const dateDescription = `${moment(initialDate).format("MMMM YYYY")} to ${moment(
+    endDate
+  ).format("MMMM YYYY")}`;
 
   return (
     <div
@@ -118,6 +137,7 @@ function FeaturedProjectCard({
         card-container m-auto w-fit relative after:absolute after:inset-0 after:rounded-[10px]
         after:transition-colors after:pointer-events-none
         ${cardShadowByOffset[String(activeOffset)]}`}
+      aria-hidden={!active}
     >
       <article
         className={`
@@ -128,20 +148,33 @@ function FeaturedProjectCard({
           before:from-grey-ea dark:before:from-grey-2
           before:to-white dark:before:to-black max-w-[320px]
           ${project.themeColor}
-          $-{active ? "after:opacity-100" : "after:opacity-0"}
+          ${active ? "after:opacity-100" : "after:opacity-0"}
         `}
       >
         <header className={"grid gap-1"}>
           <div className="mb-6 logo">{project.logo}</div>
-          <h3 className="font-visby font-extrabold text-[20px] text-grey-1 dark:text-grey-d">
-            {project.name}
+          <h3 className="font-visby font-extrabold text-[20px] text-grey-1 dark:text-grey-d group/header">
+            <Link
+              href={project.link.live}
+              variant="plain"
+              tabIndex={active ? 0 : -1}
+              linkRef={headerRef}
+            >
+              <span>{project.name}</span>
+              <span className="group-hover/header:translate-x-[2px] group-hover/header:-translate-y-[2px] transition-transform">
+                <NorthWestIcon />
+              </span>
+            </Link>
           </h3>
-          <div className="flex flex-wrap gap-2 tags">
+          <div className="flex flex-wrap gap-2 tags" aria-hidden>
             {project.tags.map((tag) => (
               <FeaturedProjectTag name={tag} key={tag} />
             ))}
           </div>
-          <span className="text-[14px] text-grey-9 dark:text-grey-5">
+          <span
+            className="text-[14px] text-grey-9 dark:text-grey-5"
+            aria-label={dateDescription}
+          >
             <time dateTime={formatDateTimeAttribute(project.timeRange[0])}>
               {formatMonthYear(project.timeRange[0])}
             </time>
@@ -156,7 +189,9 @@ function FeaturedProjectCard({
             className={
               "bg-grey-ea dark:bg-grey-15 ring-1 ring-grey-b dark:ring-grey-4 rounded-[16px] flex group/icon items-center px-2 hover:bg-grey-d hover:ring-grey-9 dark:hover:bg-grey-2 dark:hover:ring-grey-6 transition-colors"
             }
+            aria-label="view on desktop"
             onClick={() => openProjectViewer("desktop")}
+            tabIndex={active ? 0 : -1}
           >
             <div
               className={`
@@ -176,7 +211,9 @@ function FeaturedProjectCard({
             className={
               "bg-grey-ea dark:bg-grey-15 ring-1 ring-grey-b dark:ring-grey-4 rounded-[16px] flex group/icon items-center px-2 hover:bg-grey-d hover:ring-grey-9 dark:hover:bg-grey-2 dark:hover:ring-grey-6 transition-colors"
             }
+            aria-label="view on mobile"
             onClick={() => openProjectViewer("mobile")}
+            tabIndex={active ? 0 : -1}
           >
             <div
               className={`
@@ -195,14 +232,14 @@ function FeaturedProjectCard({
         </div>
         <a.p className="mb-6">{project.description}</a.p>
         <div className="flex flex-wrap gap-4 action-buttons">
-          <Link href={project.link.live} variant="plain">
-            <Button>
+          <Link href={project.link.live} tabIndex={active ? 0 : -1} variant="plain">
+            <Button tabIndex={-1}>
               <span>Live Website</span>
               <LiveIcon />
             </Button>
           </Link>
-          <Link href={project.link.github} variant="plain">
-            <Button variant="black">
+          <Link href={project.link.github} tabIndex={active ? 0 : -1} variant="plain">
+            <Button variant="black" tabIndex={-1}>
               <span>View on Github</span>
               <GithubIcon />
             </Button>
