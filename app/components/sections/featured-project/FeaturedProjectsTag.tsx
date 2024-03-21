@@ -1,4 +1,4 @@
-import { FeaturedProjectTagProps } from "./props.featured";
+import { FeaturedProjectTagProps } from "./props";
 
 export default function FeaturedProjectTag({name}: FeaturedProjectTagProps) {
   const color = `text-tag-${name} dark:text-tag-${name}-dark`;

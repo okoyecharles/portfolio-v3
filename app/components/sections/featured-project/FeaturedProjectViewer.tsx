@@ -1,5 +1,5 @@
 import { SyntheticEvent, useEffect } from "react";
-import { FeaturedProjectViewerProps } from "./props.featured";
+import { FeaturedProjectViewerProps } from "./props";
 import ImageIcon from "../../svg/abstract/ImageIcon";
 import Image from "next/image";
 import { a, useSpring, useTransition } from "@react-spring/web";

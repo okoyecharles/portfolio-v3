@@ -2,8 +2,8 @@ import { useRef } from "react";
 import FeaturedProjectProps, {
   FeaturedProjectCardProps,
   FeaturedProjectSwiperProps,
-} from "./props.featured";
-import FeaturedProjectTag from "@/app/components/sections/project/FeaturedProjectsTag";
+} from "./props";
+import FeaturedProjectTag from "@/app/components/sections/featured-project/FeaturedProjectsTag";
 import { formatDateTimeAttribute, formatMonthYear } from "@/app/components/utils/moment";
 import MobileIcon from "../../svg/icons/MobileIcon";
 import DesktopIcon from "@/app/components/svg/icons/DesktopIcon";

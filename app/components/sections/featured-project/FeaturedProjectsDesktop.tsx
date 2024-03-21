@@ -8,7 +8,7 @@ import FeaturedProjectProps, {
   FeaturedProjectDisplayProps,
   FeaturedProjectInfoProps,
   FeaturedProjectListProps,
-} from "./props.featured";
+} from "./props";
 import Image from "next/image";
 import DesktopFrame from "@/public/assets/projects/desktop-frame.png";
 import MobileFrame from "@/public/assets/projects/mobile-frame.png";
@@ -26,7 +26,7 @@ import animation from "../../animations/animations";
 import HorizontalDottedLine from "../../background/HorizontalDottedLine";
 import DottedLine from "../../background/DottedLine";
 import Plus from "../../background/Plus";
-import FeaturedProjectTag from "@/app/components/sections/project/FeaturedProjectsTag";
+import FeaturedProjectTag from "@/app/components/sections/featured-project/FeaturedProjectsTag";
 import FullScreenIcon from "../../svg/icons/FullScreenIcon";
 
 export default function FeaturedProjectsDesktop(props: FeaturedProjectProps) {

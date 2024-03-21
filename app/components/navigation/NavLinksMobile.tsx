@@ -8,7 +8,7 @@ import mobileNavigationData from "@/app/data/navigation";
 import useScrollDirection from "../utils/useScrollDirection";
 import useActiveSection from "../utils/useActiveSection";
 
-export default function NavLinks() {
+export default function NavLinksMobile() {
   const [open, setOpen] = useState<boolean>(false);
   const active = useActiveSection();
 

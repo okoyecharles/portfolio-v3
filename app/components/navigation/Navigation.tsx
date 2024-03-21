@@ -1,4 +1,4 @@
-import NavLinks from "./NavLinks";
+import NavLinksMobile from "./NavLinksMobile";
 import NavLinksDesktop from "./NavLinksDesktop";
 import LogoIcon from "../svg/abstract/Logo";
 
@@ -18,7 +18,7 @@ export default function Navigation() {
         </div>
       </div>
       <header className="navigation-container max-w-[1504px] sticky top-0 mx-auto z-10 isolate">
-        <NavLinks />
+        <NavLinksMobile />
         <NavLinksDesktop />
       </header>
     </>
