@@ -7,7 +7,7 @@ import Link from "../../clickable/Link";
 import projectData from "@/app/data/project";
 import NorthWestIcon from "../../svg/abstract/NorthWestIcon";
 import { ProjectCardLinksProps, ProjectCardProps, ProjectGridProps } from "./props";
-import FeaturedProjectTag from "../featured-project/FeaturedProjectsTag";
+import FeaturedProjectTag from "../featured-project/FeaturedProjectTag";
 import { formatDateTimeAttribute, formatMonthYear } from "../../utils/moment";
 import ProjectGithub from "../../svg/abstract/ProjectGithub";
 import ProjectLive from "../../svg/abstract/ProjectLive";

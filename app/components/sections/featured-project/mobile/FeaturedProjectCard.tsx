@@ -1,120 +1,17 @@
-import { useRef } from "react";
-import FeaturedProjectProps, {
-  FeaturedProjectCardProps,
-  FeaturedProjectSwiperProps,
-} from "./props";
-import FeaturedProjectTag from "@/app/components/sections/featured-project/FeaturedProjectsTag";
-import { formatDateTimeAttribute, formatMonthYear } from "@/app/components/utils/moment";
-import MobileIcon from "../../svg/icons/MobileIcon";
-import DesktopIcon from "@/app/components/svg/icons/DesktopIcon";
-import Link from "../../clickable/Link";
-import Button from "../../clickable/Button";
-import LiveIcon from "../../svg/icons/LiveIcon";
-import GithubIcon from "../../svg/icons/GithubIcon";
-import NextIcon from "../../svg/icons/NextIcon";
-import PrevIcon from "../../svg/icons/PrevIcon";
-import { Swiper, SwiperClass, SwiperRef, SwiperSlide } from "swiper/react";
-import { EffectCards } from "swiper/modules";
-import "swiper/css/effect-cards";
-import animation from "../../animations/animations";
-import { a, to, useSpring } from "@react-spring/web";
-import { useObservedSprings } from "../../utils/useObservedSpring";
 import moment from "moment";
-import NorthWestIcon from "../../svg/abstract/NorthWestIcon";
+import Link from "@/app/components/clickable/Link";
+import FeaturedProjectTag from "../FeaturedProjectTag";
+import MobileIcon from "@/app/components/svg/icons/MobileIcon";
+import DesktopIcon from "@/app/components/svg/icons/DesktopIcon";
+import Button from "@/app/components/clickable/Button";
+import LiveIcon from "@/app/components/svg/icons/LiveIcon";
+import GithubIcon from "@/app/components/svg/icons/GithubIcon";
+import { a } from "@react-spring/web";
+import { FeaturedProjectCardProps } from "../props";
+import { formatDateTimeAttribute, formatMonthYear } from "@/app/components/utils/moment";
+import NorthWestIcon from "@/app/components/svg/abstract/NorthWestIcon";
 
-export default function FeaturedProjectsMobile(props: FeaturedProjectProps) {
-  const {
-    observedRef,
-    springAnimate: [layoutTransformSpring, layoutOpacitySpring],
-  } = useObservedSprings(
-    [...animation.layout.revealSlow.start],
-    [...animation.layout.revealSlow.end.map((x) => x())],
-    [useSpring, useSpring]
-  );
-
-  return (
-    <a.div
-      className="md:hidden"
-      ref={observedRef}
-      style={{
-        transform: to(layoutTransformSpring.y, (y) => `translateY(${y}px)`),
-        opacity: to(layoutOpacitySpring.opacity, (op: number) => `${op}`),
-      }}
-    >
-      <FeaturedProjectSwiper {...props} />
-    </a.div>
-  );
-}
-
-function FeaturedProjectSwiper({
-  projects,
-  projectIndex,
-  setProjectIndex,
-  openProjectViewer,
-}: FeaturedProjectSwiperProps) {
-  const swiperRef = useRef<SwiperRef>(null);
-  const swiperApi = swiperRef.current?.swiper;
-  const featuredProjectHeaderRefs = projects.map((_) => useRef<HTMLLinkElement>(null));
-
-  function handleSwiperChange(swiper: SwiperClass) {
-    setProjectIndex(swiper.activeIndex);
-    featuredProjectHeaderRefs[swiper.activeIndex].current?.focus();
-  }
-
-  return (
-    <div className="relative swiper-container isolate">
-      <Swiper
-        ref={swiperRef}
-        grabCursor
-        effect={"cards"}
-        modules={[EffectCards]}
-        cardsEffect={{
-          slideShadows: false,
-        }}
-        initialSlide={projectIndex}
-        onActiveIndexChange={handleSwiperChange}
-        id="featured-projects-deck"
-        aria-label="featured projects deck"
-      >
-        {projects.map((project, index) => (
-          <SwiperSlide className="my-auto" key={project.name}>
-            <FeaturedProjectCard
-              project={project}
-              active={projectIndex === index}
-              activeOffset={Math.abs(projectIndex - index)}
-              openProjectViewer={openProjectViewer}
-              headerRef={featuredProjectHeaderRefs[index] as any}
-            />
-          </SwiperSlide>
-        ))}
-      </Swiper>
-      <button
-        className="absolute w-[48px] aspect-square grid justify-center items-center bg-grey-6/20 dark:bg-grey-9/20 hover:bg-grey-6/30 dark:hover:bg-grey-9/30 rounded-[50%] top-1/2 -translate-y-1/2 left-0 -translate-x-1/4 z-10 group/icon disabled:cursor-not-allowed disabled:opacity-80"
-        onClick={() => swiperApi?.slidePrev(500)}
-        disabled={projectIndex === 0}
-        aria-hidden={projectIndex === 0}
-        name={`previous card - ${projects[projectIndex - 1]?.name}`}
-        aria-label={`previous card - ${projects[projectIndex - 1]?.name}`}
-        aria-controls="featured-projects-deck"
-      >
-        <PrevIcon />
-      </button>
-      <button
-        className="absolute w-[48px] aspect-square grid justify-center items-center bg-grey-6/20 dark:bg-grey-9/20 hover:bg-grey-6/30 dark:hover:bg-grey-9/30 rounded-[50%] top-1/2 -translate-y-1/2 right-0 translate-x-1/4 z-10 group/icon disabled:cursor-not-allowed disabled:opacity-80"
-        onClick={() => swiperApi?.slideNext(500)}
-        disabled={projectIndex === projects.length - 1}
-        aria-hidden={projectIndex === projects.length - 1}
-        name={`next card - ${projects[projectIndex + 1]?.name}`}
-        aria-label={`next card - ${projects[projectIndex + 1]?.name}`}
-        aria-controls="featured-projects-deck"
-      >
-        <NextIcon />
-      </button>
-    </div>
-  );
-}
-
-function FeaturedProjectCard({
+export default function FeaturedProjectCard({
   project,
   active,
   activeOffset,

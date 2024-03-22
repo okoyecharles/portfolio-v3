@@ -4,8 +4,8 @@ import Section from "../Section";
 import SectionDescription from "../SectionDescription";
 import SectionHeader from "../SectionHeader";
 import projectData, { Project } from "@/app/data/project";
-import FeaturedProjectsMobile from "./FeaturedProjectsMobile";
-import FeaturedProjectsDesktop from "./FeaturedProjectsDesktop";
+import FeaturedProjectsMobile from "./mobile/FeaturedProjectsMobile";
+import FeaturedProjectsDesktop from "./desktop/FeaturedProjectsDesktop";
 import FeaturedProjectViewer from "./FeaturedProjectViewer";
 import { FeaturedProject } from "./props";
 

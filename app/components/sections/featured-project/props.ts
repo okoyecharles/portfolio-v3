@@ -31,15 +31,15 @@ export type FeaturedProjectCardProps = {
 } & Pick<FeaturedProjectProps, 'openProjectViewer'>
 
 //  Desktop Props
-export type FeaturedProjectListProps = FeaturedProjectProps;
+export type FeaturedProjectTabListProps = FeaturedProjectProps;
 export type FeaturedProjectTagProps = {
-  name: string
+  name: string;
 }
-export type FeaturedProjectInfoProps = {
+export type FeaturedProjectTabPanelProps = {
   project: FeaturedProject;
   contentRevealTrail: Array<SpringAnimation>;
 }
-export type FeaturedProjectDisplayProps = {
+export type FeaturedProjectTabDisplayProps = {
   project: FeaturedProject;
   displayFrameTrail: Array<SpringAnimation>;
   displayTransition: TransitionFn<FeaturedProject, any>;
