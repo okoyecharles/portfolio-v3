@@ -37,6 +37,7 @@ export type FeaturedProjectTagProps = {
 }
 export type FeaturedProjectTabPanelProps = {
   project: FeaturedProject;
+  projectIndex: number;
   contentRevealTrail: Array<SpringAnimation>;
 }
 export type FeaturedProjectTabDisplayProps = {
