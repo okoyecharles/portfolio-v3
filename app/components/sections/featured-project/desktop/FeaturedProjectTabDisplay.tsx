@@ -26,9 +26,9 @@ export default function FeaturedProjectTabDisplay({
       animation.bg.plusReveal.start,
     ],
     [
-      animation.bg.lineGlow.end({config: {tension: 75}, delay: 450}),
-      animation.bg.lineReveal.end({delay: 450}),
-      animation.bg.plusReveal.end({delay: 0}),
+      animation.bg.lineGlow.end({ config: { tension: 75 }, delay: 450 }),
+      animation.bg.lineReveal.end({ delay: 450 }),
+      animation.bg.plusReveal.end({ delay: 0 }),
     ],
     [useSpring, useSpring, (cb: Function) => useTrail(4, cb, [])]
   );
@@ -71,6 +71,7 @@ export default function FeaturedProjectTabDisplay({
                   "bg-grey-ea dark:bg-grey-2 ring-1 ring-grey-b dark:ring-grey-3 rounded-[16px] flex group/icon items-center px-2 hover:bg-grey-d hover:ring-grey-9 dark:hover:bg-grey-2 dark:hover:ring-grey-5 absolute -top-[48px] left-[10%] transition-all"
                 }
                 onClick={() => openProjectViewer("desktop")}
+                aria-label="show desktop view"
               >
                 <div
                   className={`
@@ -93,12 +94,7 @@ export default function FeaturedProjectTabDisplay({
                 height={216}
                 alt="null"
               />
-              <Image
-                className="w-full"
-                src={DesktopFrame}
-                width={512}
-                alt="null"
-              />
+              <Image className="w-full" src={DesktopFrame} width={512} alt="null" />
             </a.div>
           </a.div>
           <a.div
@@ -117,6 +113,7 @@ export default function FeaturedProjectTabDisplay({
                 className={
                   "bg-grey-ea dark:bg-grey-2 ring-1 ring-grey-b dark:ring-grey-3 rounded-[16px] flex group/icon items-center px-2 hover:bg-grey-d hover:ring-grey-9 dark:hover:bg-grey-2 dark:hover:ring-grey-5 absolute -top-[48px] right-0 transition-all"
                 }
+                aria-label="show mobile view"
               >
                 <div
                   className={`
@@ -140,12 +137,7 @@ export default function FeaturedProjectTabDisplay({
                 height={216}
                 alt="null"
               />
-              <Image
-                className="w-full"
-                src={MobileFrame}
-                width={256}
-                alt="null"
-              />
+              <Image className="w-full" src={MobileFrame} width={256} alt="null" />
             </a.div>
           </a.div>
         </>
@@ -158,10 +150,7 @@ export default function FeaturedProjectTabDisplay({
           />
         </div>
         <div className={`absolute right-[12.5px] top-1/2 -translate-y-1/2`}>
-          <DottedLine
-            variant="bold"
-            animation={[bgLineRevealSpring, bgLineGlowSpring]}
-          />
+          <DottedLine variant="bold" animation={[bgLineRevealSpring, bgLineGlowSpring]} />
         </div>
         <div className={`absolute bottom-[12.5px] left-1/2 -translate-x-1/2`}>
           <HorizontalDottedLine
@@ -170,10 +159,7 @@ export default function FeaturedProjectTabDisplay({
           />
         </div>
         <div className={`absolute left-[12.5px] top-1/2 -translate-y-1/2`}>
-          <DottedLine
-            variant="bold"
-            animation={[bgLineRevealSpring, bgLineGlowSpring]}
-          />
+          <DottedLine variant="bold" animation={[bgLineRevealSpring, bgLineGlowSpring]} />
         </div>
 
         {plusPositions.map((pos, index) => (

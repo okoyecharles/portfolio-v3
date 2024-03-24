@@ -9,11 +9,14 @@ import GithubIcon from "@/app/components/svg/icons/GithubIcon";
 
 export default function FeaturedProjectTabPanel({
   project,
+  projectIndex,
   contentRevealTrail,
 }: FeaturedProjectTabPanelProps) {
   return (
     <article
-      className="featured-project-info col-span-4 semi-lg:col-span-3 p-6 flex flex-col bg-grey-ea dark:bg-grey-12 ring-1 ring-grey-d dark:ring-grey-2 min-h-[410px] rounded-es-[10px] semi-lg:rounded-es-none">
+      className="featured-project-info col-span-4 semi-lg:col-span-3 p-6 flex flex-col bg-grey-ea dark:bg-grey-12 ring-1 ring-grey-d dark:ring-grey-2 min-h-[410px] rounded-es-[10px] semi-lg:rounded-es-none"
+      id={`featured-project-${projectIndex + 1}`}
+      role="tabpanel">
       <Link href={project.link.live} variant="plain">
         <a.h3
           className="font-visby font-extrabold text-[20px] leading-[1] text-grey-1 dark:text-grey-b inline-flex gap-[2px] group/header"
@@ -44,13 +47,13 @@ export default function FeaturedProjectTabPanel({
       </a.p>
       <div className="flex flex-wrap gap-4 mt-auto action-buttons">
         <Link href={project.link.live} variant="plain">
-          <Button>
+          <Button tabIndex={-1}>
             <span>Live Website</span>
             <LiveIcon />
           </Button>
         </Link>
         <Link href={project.link.github} variant="plain">
-          <Button variant="black">
+          <Button variant="black" tabIndex={-1}>
             <span>View on Github</span>
             <GithubIcon />
           </Button>
