@@ -8,7 +8,7 @@ export default function FeaturedIcon() {
       viewBox="0 0 16 17"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="fill-grey-4 group-hover/dropdown-item:fill-black group-[.is-active]/dropdown-item:fill-blue-200 dark:fill-grey-b dark:group-hover/dropdown-item:fill-grey-d dark:group-[.is-active]/dropdown-item:fill-blue-d-200 transition-colors"
+      className="fill-grey-4 group-hover/submenu-item:fill-black group-[.is-active]/submenu-item:fill-blue-200 dark:fill-grey-b dark:group-hover/submenu-item:fill-grey-d dark:group-[.is-active]/submenu-item:fill-blue-d-200 transition-colors"
     >
       <path
         d="M4.73753 0.541434C4.6226 0.592715 4.59608 0.67161 4.44138 1.46056C4.08335 3.30275 3.75184 4.26921 3.24794 4.97532C3.03578 5.27118 2.57608 5.69721 2.23131 5.91811C1.90422 6.12324 1.19258 6.44671 0.573764 6.67156C0.0566086 6.85696 -0.0538947 6.95163 0.0212475 7.14493C0.0610287 7.2396 0.153851 7.29088 0.706368 7.49601C1.97936 7.96938 2.59376 8.35202 3.1286 8.99501C3.6988 9.68534 4.03915 10.6321 4.4458 12.6755C4.60934 13.5078 4.65354 13.5985 4.88339 13.5985C5.11324 13.6025 5.15744 13.5078 5.32098 12.6755C5.72763 10.6321 6.06799 9.68534 6.63818 8.99501C7.17302 8.35202 7.78741 7.96938 9.06041 7.49601C9.61293 7.29088 9.70575 7.2396 9.74553 7.14493C9.82067 6.95163 9.71017 6.85696 9.19302 6.67156C8.14103 6.29286 7.47801 5.93784 6.99621 5.49208C6.17407 4.73864 5.77626 3.78006 5.3254 1.46056C5.16628 0.651887 5.1486 0.592715 5.01599 0.541434C4.88339 0.486208 4.87013 0.486208 4.73753 0.541434Z"

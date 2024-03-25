@@ -129,7 +129,7 @@ function ProjectCard({ project }: ProjectCardProps) {
           <time dateTime={formatDateTimeAttribute(project.timeRange[0])}>
             {formatMonthYear(project.timeRange[0])}
           </time>
-          -{" "}
+          {" "}-{" "}
           <time dateTime={formatDateTimeAttribute(project.timeRange[1])}>
             {formatMonthYear(project.timeRange[1])}
           </time>
