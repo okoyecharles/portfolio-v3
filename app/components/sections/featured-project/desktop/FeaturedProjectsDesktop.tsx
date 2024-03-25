@@ -76,9 +76,11 @@ export default function FeaturedProjectsDesktop(props: FeaturedProjectProps) {
         transform: to(layoutTransformSpring.y, (y) => `translateY(${y}px)`),
         opacity: to(layoutOpacitySpring.opacity, (op: number) => `${op}`),
       }}
+      aria-label={'featured projects carousel'}
     >
       <FeaturedProjectTabList {...props} />
       <FeaturedProjectTabPanel
+        projectIndex={projectIndex}
         project={projects[projectIndex]}
         contentRevealTrail={contentRevealTrail}
       />

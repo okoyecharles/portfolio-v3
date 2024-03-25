@@ -86,7 +86,7 @@ export default function FeaturedProjectCard({
             className={
               "bg-grey-ea dark:bg-grey-15 ring-1 ring-grey-b dark:ring-grey-4 rounded-[16px] flex group/icon items-center px-2 hover:bg-grey-d hover:ring-grey-9 dark:hover:bg-grey-2 dark:hover:ring-grey-6 transition-colors"
             }
-            aria-label="view on desktop"
+            aria-label="show desktop view"
             onClick={() => openProjectViewer("desktop")}
             tabIndex={active ? 0 : -1}
           >
@@ -108,7 +108,7 @@ export default function FeaturedProjectCard({
             className={
               "bg-grey-ea dark:bg-grey-15 ring-1 ring-grey-b dark:ring-grey-4 rounded-[16px] flex group/icon items-center px-2 hover:bg-grey-d hover:ring-grey-9 dark:hover:bg-grey-2 dark:hover:ring-grey-6 transition-colors"
             }
-            aria-label="view on mobile"
+            aria-label="show mobile view"
             onClick={() => openProjectViewer("mobile")}
             tabIndex={active ? 0 : -1}
           >
