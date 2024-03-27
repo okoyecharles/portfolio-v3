@@ -3,6 +3,7 @@ import footerData from "@/app/data/footer";
 import { a, useSpring } from "@react-spring/web";
 import { useTheme } from "next-themes";
 import useClient from "../utils/useClient";
+import Button from "../clickable/Button";
 
 export default function ThemeToggle() {
   const [client, _setClient] = useClient();
@@ -27,7 +28,7 @@ export default function ThemeToggle() {
         style={toggleThemeSpring}
       ></a.div>
       {footerData.themes.map((mode) => (
-        <button
+        <Button
           key={mode.name}
           className={`
             toggle group/toggle transition-colors
@@ -36,7 +37,7 @@ export default function ThemeToggle() {
           onClick={() => setTheme(mode.name)}
         >
           {mode.icon}
-        </button>
+        </Button>
       ))}
     </div>
   );

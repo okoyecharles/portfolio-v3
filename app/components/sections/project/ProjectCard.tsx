@@ -1,3 +1,4 @@
+import moment from "moment";
 import Link from "../../clickable/Link";
 import NorthWestIcon from "../../svg/abstract/NorthWestIcon";
 import ProjectGithub from "../../svg/abstract/ProjectGithub";
@@ -7,6 +8,11 @@ import FeaturedProjectTag from "../featured-project/FeaturedProjectTag";
 import { ProjectCardLinksProps, ProjectCardProps } from "./props";
 
 export default function ProjectCard({ project }: ProjectCardProps) {
+  const [initialDate, endDate] = project.timeRange;
+  const dateDescription = `${moment(initialDate).format("MMMM YYYY")} to ${moment(
+    endDate
+  ).format("MMMM YYYY")}`;
+
   return (
     <article
       className={`
@@ -32,12 +38,15 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             </span>
           </h3>
         </Link>
-        <div className="flex flex-wrap gap-2 tags pr-[36px]">
+        <div className="flex flex-wrap gap-2 tags pr-[36px]" aria-hidden>
           {project.tags.map((tag) => (
             <FeaturedProjectTag name={tag} key={tag} />
           ))}
         </div>
-        <span className="text-[14px] text-grey-9 dark:text-grey-5">
+        <span
+          className="text-[14px] text-grey-9 dark:text-grey-5"
+          aria-label={dateDescription}
+        >
           <time dateTime={formatDateTimeAttribute(project.timeRange[0])}>
             {formatMonthYear(project.timeRange[0])}
           </time>{" "}

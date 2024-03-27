@@ -47,7 +47,7 @@ export default function FeaturedProjectTabPanel({
       </a.p>
       <div className="flex flex-wrap gap-4 mt-auto action-buttons">
         <Link href={project.link.live} variant="plain">
-          <Button tabIndex={-1}>
+          <Button variant="blue" tabIndex={-1}>
             <span>Live Website</span>
             <LiveIcon />
           </Button>

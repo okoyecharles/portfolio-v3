@@ -9,6 +9,7 @@ import MobileFrame from "@/public/assets/projects/mobile-frame.png";
 import HorizontalDottedLine from "@/app/components/background/HorizontalDottedLine";
 import DottedLine from "@/app/components/background/DottedLine";
 import Plus from "@/app/components/background/Plus";
+import Button from "@/app/components/clickable/Button";
 
 export default function FeaturedProjectTabDisplay({
   displayFrameTrail,
@@ -66,12 +67,12 @@ export default function FeaturedProjectTabDisplay({
               className="frame mt-auto mb-[32px] semi-lg:mb-[64px] relative"
               style={displayFrameTrail[0]}
             >
-              <button
+              <Button
                 className={
                   "bg-grey-ea dark:bg-grey-2 ring-1 ring-grey-b dark:ring-grey-3 rounded-[16px] flex group/icon items-center px-2 hover:bg-grey-d hover:ring-grey-9 dark:hover:bg-grey-2 dark:hover:ring-grey-5 absolute -top-[48px] left-[10%] transition-all"
                 }
                 onClick={() => openProjectViewer("desktop")}
-                aria-label="show desktop view"
+                ariaLabel="show desktop view"
               >
                 <div
                   className={`
@@ -86,7 +87,7 @@ export default function FeaturedProjectTabDisplay({
                 <div className={"p-2"}>
                   <FullScreenIcon />
                 </div>
-              </button>
+              </Button>
               <Image
                 className="-z-10 absolute w-[79%] top-[5.5%] left-1/2 -translate-x-1/2"
                 src={project.image.desktop}
@@ -109,11 +110,12 @@ export default function FeaturedProjectTabDisplay({
               className="frame mt-auto mb-[54px] semi-lg:mb-[96px] relative"
               style={displayFrameTrail[1]}
             >
-              <button
+              <Button
                 className={
                   "bg-grey-ea dark:bg-grey-2 ring-1 ring-grey-b dark:ring-grey-3 rounded-[16px] flex group/icon items-center px-2 hover:bg-grey-d hover:ring-grey-9 dark:hover:bg-grey-2 dark:hover:ring-grey-5 absolute -top-[48px] right-0 transition-all"
                 }
-                aria-label="show mobile view"
+                ariaLabel="show mobile view"
+                onClick={() => openProjectViewer("mobile")}
               >
                 <div
                   className={`
@@ -122,14 +124,13 @@ export default function FeaturedProjectTabDisplay({
                     border-r border-grey-b dark:border-grey-3 
                     group-hover/icon:border-grey-9 dark:group-hover/icon:border-grey-5 leading-[16px] transition-all whitespace-nowrap
                   `}
-                  onClick={() => openProjectViewer("mobile")}
                 >
                   Show Mobile
                 </div>
                 <div className={"p-2"}>
                   <FullScreenIcon />
                 </div>
-              </button>
+              </Button>
               <Image
                 className="-z-10 absolute w-[92.4%] top-[6.95%] left-1/2 -translate-x-1/2 rounded-b-[8.2%]"
                 src={project.image.mobile}

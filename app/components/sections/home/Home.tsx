@@ -81,7 +81,7 @@ export default function Home() {
         style={layoutReveal(4)}
       >
         <a href="#projects">
-          <Button tabIndex={-1}>Check out my work</Button>
+          <Button variant="blue" tabIndex={-1}>Check out my work</Button>
         </a>
         <Button variant="black">
           <span>Resume</span>

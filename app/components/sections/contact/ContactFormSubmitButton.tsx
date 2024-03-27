@@ -24,7 +24,7 @@ export default function ContactFormSubmitButton({
 
   return (
     <div className="flex justify-center mt-8 form-button">
-      <Button disabled={disabled}>
+      <Button variant="blue" disabled={disabled}>
         Send{" "}
         {submitButtonStateTransition((style, sending) => (
           <a.div style={style}>{sending ? <Loading /> : <PlaneIcon />}</a.div>
