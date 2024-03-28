@@ -83,7 +83,7 @@ const projectData: Array<Project> = [
     name: "To do List",
     timeRange: [new Date(2023, 7), new Date(2023, 8)],
     description:
-      "Todo list app using Express, MongoDB, and Google authentication for seamless task management across devices",
+      "To do list app using Express, MongoDB, and Google authentication for seamless task management across devices",
     tags: ["next-js", "mongodb", "node-js"],
     link: {
       github: "https://github.com/okoyecharles/todo-list-nextjs",

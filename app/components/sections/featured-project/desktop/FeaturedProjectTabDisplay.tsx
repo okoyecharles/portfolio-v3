@@ -67,12 +67,12 @@ export default function FeaturedProjectTabDisplay({
               className="frame mt-auto mb-[32px] semi-lg:mb-[64px] relative"
               style={displayFrameTrail[0]}
             >
-              <Button
+              <button
                 className={
                   "bg-grey-ea dark:bg-grey-2 ring-1 ring-grey-b dark:ring-grey-3 rounded-[16px] flex group/icon items-center px-2 hover:bg-grey-d hover:ring-grey-9 dark:hover:bg-grey-2 dark:hover:ring-grey-5 absolute -top-[48px] left-[10%] transition-all"
                 }
                 onClick={() => openProjectViewer("desktop")}
-                ariaLabel="show desktop view"
+                aria-label="show desktop view"
               >
                 <div
                   className={`
@@ -87,7 +87,7 @@ export default function FeaturedProjectTabDisplay({
                 <div className={"p-2"}>
                   <FullScreenIcon />
                 </div>
-              </Button>
+              </button>
               <Image
                 className="-z-10 absolute w-[79%] top-[5.5%] left-1/2 -translate-x-1/2"
                 src={project.image.desktop}
@@ -110,11 +110,11 @@ export default function FeaturedProjectTabDisplay({
               className="frame mt-auto mb-[54px] semi-lg:mb-[96px] relative"
               style={displayFrameTrail[1]}
             >
-              <Button
+              <button
                 className={
                   "bg-grey-ea dark:bg-grey-2 ring-1 ring-grey-b dark:ring-grey-3 rounded-[16px] flex group/icon items-center px-2 hover:bg-grey-d hover:ring-grey-9 dark:hover:bg-grey-2 dark:hover:ring-grey-5 absolute -top-[48px] right-0 transition-all"
                 }
-                ariaLabel="show mobile view"
+                aria-label="show mobile view"
                 onClick={() => openProjectViewer("mobile")}
               >
                 <div
@@ -130,7 +130,7 @@ export default function FeaturedProjectTabDisplay({
                 <div className={"p-2"}>
                   <FullScreenIcon />
                 </div>
-              </Button>
+              </button>
               <Image
                 className="-z-10 absolute w-[92.4%] top-[6.95%] left-1/2 -translate-x-1/2 rounded-b-[8.2%]"
                 src={project.image.mobile}

@@ -10,9 +10,7 @@ import FeaturedProjectViewer from "./FeaturedProjectViewer";
 import { FeaturedProject } from "./props";
 
 export default function FeaturedProjects() {
-  const {current: projects} = useRef(
-    projectData.slice(0, 3) as Required<Project>[]
-  );
+  const { current: projects } = useRef(projectData.slice(0, 3) as Required<Project>[]);
   const [projectIndex, setProjectIndex] = useState<number>(0);
   const [projectViewMode, setProjectViewMode] =
     useState<keyof FeaturedProject["image"]>("desktop");
@@ -30,6 +28,13 @@ export default function FeaturedProjects() {
         A curated collection of my most exceptional work
       </SectionDescription>
       <div className="featured-projects-container my-8">
+        <FeaturedProjectViewer
+          open={projectViewerOpen}
+          setOpen={setProjectViewerOpen}
+          project={projects[projectIndex]}
+          projectViewMode={projectViewMode}
+          setProjectViewMode={setProjectViewMode}
+        />
         <FeaturedProjectsMobile
           projects={projects}
           projectIndex={projectIndex}
@@ -41,13 +46,6 @@ export default function FeaturedProjects() {
           projectIndex={projectIndex}
           setProjectIndex={setProjectIndex}
           openProjectViewer={openProjectViewer}
-        />
-        <FeaturedProjectViewer
-          open={projectViewerOpen}
-          setOpen={setProjectViewerOpen}
-          project={projects[projectIndex]}
-          projectViewMode={projectViewMode}
-          setProjectViewMode={setProjectViewMode}
         />
       </div>
     </Section>

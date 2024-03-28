@@ -28,7 +28,7 @@ export default function ThemeToggle() {
         style={toggleThemeSpring}
       ></a.div>
       {footerData.themes.map((mode) => (
-        <Button
+        <button
           key={mode.name}
           className={`
             toggle group/toggle transition-colors
@@ -37,7 +37,7 @@ export default function ThemeToggle() {
           onClick={() => setTheme(mode.name)}
         >
           {mode.icon}
-        </Button>
+        </button>
       ))}
     </div>
   );

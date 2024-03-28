@@ -1,4 +1,4 @@
-import { SyntheticEvent, useEffect } from "react";
+import { SyntheticEvent, useEffect, useRef } from "react";
 import { FeaturedProjectViewerProps } from "./props";
 import ImageIcon from "../../svg/abstract/ImageIcon";
 import Image from "next/image";
@@ -13,6 +13,7 @@ export default function FeaturedProjectViewer({
   projectViewMode,
   setProjectViewMode,
 }: FeaturedProjectViewerProps) {
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
   // How large the fullscreen image will be compared to the preview
   const IMAGE_SIZE_FACTOR = 3;
 
@@ -32,6 +33,7 @@ export default function FeaturedProjectViewer({
   useEffect(() => {
     if (open) {
       window.addEventListener("keydown", handleMouseDown);
+      closeButtonRef.current?.focus();
       return () => {
         window.removeEventListener("keydown", handleMouseDown);
       };
@@ -92,7 +94,10 @@ export default function FeaturedProjectViewer({
               {project.name}
             </h3>
             <button
+              ref={closeButtonRef}
               className="ml-auto leading-[1] py-1 px-[6px] bg-grey-ea dark:bg-grey-1 ring-1 ring-grey-b dark:ring-grey-4 rounded-sm text-grey-1 dark:text-grey-b select-none hover:bg-grey-d dark:hover:bg-black hover:ring-grey-9 dark:hover:ring-grey-6 transition-colors"
+              aria-label="close project viewer"
+              aria-hidden={!open}
               onClick={() => setOpen(false)}
             >
               Esc
@@ -120,7 +125,7 @@ export default function FeaturedProjectViewer({
             ))}
             <div className="viewer-toggle-container absolute bottom-4 right-4">
               <div
-                className="viewer-toggle p-1 flex ring-1 ring-grey-b dark:ring-grey-4 rounded-[20px] relative isolate overflow-hidden self-start bg-white dark:bg-grey-15">
+                className="viewer-toggle p-1 flex ring-1 ring-grey-b dark:ring-grey-4 rounded-[20px] relative isolate overflow-hidden self-start bg-white dark:bg-grey-15" role="radiogroup">
                 <a.div
                   className="toggle-active h-8 w-8 bg-grey-9/[35%] dark:bg-grey-5/[50%] rounded-[16px] absolute top-1 -z-10"
                   style={toggleViewModeSpring}
@@ -130,6 +135,9 @@ export default function FeaturedProjectViewer({
                     toggle group/toggle transition-colors h-8 w-8 grid place-content-center
                     ${projectViewMode === "desktop" ? " is-active" : ""}
                   `}
+                  role="radio"
+                  aria-label="switch to desktop view"
+                  aria-checked={projectViewMode === "desktop"}
                   onClick={() => setProjectViewMode("desktop")}
                 >
                   <DesktopIcon />
@@ -139,6 +147,9 @@ export default function FeaturedProjectViewer({
                     toggle group/toggle transition-colors h-8 w-8 grid place-content-center
                     ${projectViewMode === "mobile" ? " is-active" : ""}
                   `}
+                  role="radio"
+                  aria-label="switch to mobile view"
+                  aria-checked={projectViewMode === "mobile"}
                   onClick={() => setProjectViewMode("mobile")}
                 >
                   <MobileIcon />

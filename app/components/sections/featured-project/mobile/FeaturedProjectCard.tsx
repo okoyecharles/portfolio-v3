@@ -82,11 +82,11 @@ export default function FeaturedProjectCard({
           </span>
         </header>
         <div className={"flex gap-2 my-4"}>
-          <Button
+          <button
             className={
               "bg-grey-ea dark:bg-grey-15 ring-1 ring-grey-b dark:ring-grey-4 rounded-[16px] flex group/icon items-center px-2 hover:bg-grey-d hover:ring-grey-9 dark:hover:bg-grey-2 dark:hover:ring-grey-6 transition-colors"
             }
-            ariaLabel="show desktop view"
+            aria-label="show desktop view"
             onClick={() => openProjectViewer("desktop")}
             tabIndex={active ? 0 : -1}
           >
@@ -103,12 +103,12 @@ export default function FeaturedProjectCard({
             <div className={"p-2"}>
               <DesktopIcon />
             </div>
-          </Button>
-          <Button
+          </button>
+          <button
             className={
               "bg-grey-ea dark:bg-grey-15 ring-1 ring-grey-b dark:ring-grey-4 rounded-[16px] flex group/icon items-center px-2 hover:bg-grey-d hover:ring-grey-9 dark:hover:bg-grey-2 dark:hover:ring-grey-6 transition-colors"
             }
-            ariaLabel="show mobile view"
+            aria-label="show mobile view"
             onClick={() => openProjectViewer("mobile")}
             tabIndex={active ? 0 : -1}
           >
@@ -125,7 +125,7 @@ export default function FeaturedProjectCard({
             <div className={"p-2"}>
               <MobileIcon />
             </div>
-          </Button>
+          </button>
         </div>
         <a.p className="mb-6">{project.description}</a.p>
         <div className="flex flex-wrap gap-4 action-buttons">

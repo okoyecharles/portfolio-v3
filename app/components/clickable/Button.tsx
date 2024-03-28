@@ -50,11 +50,6 @@ function Button({
   ariaLabel
 }: ButtonProps) {
   const buttonRef = useRef<HTMLButtonElement>(null);
-  function handleKeyDown(event: KeyboardEvent<HTMLButtonElement>) {
-    if (event.key === "Enter") {
-      buttonRef.current?.click();
-    }
-  }
 
   return (
     <button
@@ -68,7 +63,6 @@ function Button({
       `}
       tabIndex={tabIndex}
       onClick={onClick}
-      onKeyDown={handleKeyDown}
       disabled={disabled}
       aria-label={ariaLabel}
     >
