@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ProjectGridProps } from "./props";
 import { useInView } from "react-intersection-observer";
 import { a, useSpring, useSpringRef, useTransition } from "@react-spring/web";
@@ -7,6 +7,7 @@ import ProjectCard from "./ProjectCard";
 
 export default function ProjectGrid({ projects }: ProjectGridProps) {
   const INITIAL_CARD_COUNT = 3;
+  const projectCardHeaderRefs = projects.map(() => useRef<HTMLAnchorElement>(null));
   const [projectCount, setProjectCount] = useState(INITIAL_CARD_COUNT);
   const { ref, inView } = useInView({
     threshold: 0,
@@ -37,6 +38,9 @@ export default function ProjectGrid({ projects }: ProjectGridProps) {
       // button reveal animation
       buttonRevealSpringRef.start({ opacity: 1, delay: 250 });
     }
+    if (projectCount === projects.length) {
+      projectCardHeaderRefs[INITIAL_CARD_COUNT].current?.focus();
+    }
   }, [viewed, projectCount]);
 
   function handleProjectCountToggle() {
@@ -51,14 +55,19 @@ export default function ProjectGrid({ projects }: ProjectGridProps) {
         className="grid gap-6 my-8 md:gap-8 project-grid grid-rows-auto md:grid-cols-2 semi-lg:grid-cols-3 place-content-center"
         ref={ref}
       >
-        {cardRevealTransition((style, project) => (
+        {cardRevealTransition((style, project, _transition, index) => (
           <a.div className="project-card-container" style={style}>
-            <ProjectCard project={project} />
+            <ProjectCard project={project} headerRef={projectCardHeaderRefs[index]} />
           </a.div>
         ))}
       </div>
       <a.div className="flex justify-center grid-control" style={buttonRevealSpring}>
-        <Button variant="black" onClick={handleProjectCountToggle}>
+        <Button
+          variant="black"
+          onClick={handleProjectCountToggle}
+          ariaLabel="show additional projects"
+          tabIndex={projectCount === INITIAL_CARD_COUNT ? 0 : -1}
+        >
           {projectCount === INITIAL_CARD_COUNT ? "Show more" : "Show less"}
         </Button>
       </a.div>

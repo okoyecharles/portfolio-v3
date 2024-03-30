@@ -19,6 +19,7 @@ interface LinkProps {
   variant?: keyof typeof variantClass;
   tabIndex?: number;
   linkRef?: LegacyRef<HTMLAnchorElement>
+  ariaLabel?: string;
 }
 
 export default function Link({
@@ -27,7 +28,8 @@ export default function Link({
   className,
   linkRef,
   variant = "default",
-  tabIndex
+  tabIndex,
+  ariaLabel
 }: LinkProps) {
   return (
     <a
@@ -39,6 +41,8 @@ export default function Link({
       target="_blank"
       rel="noopener noreferrer"
       tabIndex={tabIndex}
+      aria-label={ariaLabel}
+      title={ariaLabel}
     >
       {children}
     </a>

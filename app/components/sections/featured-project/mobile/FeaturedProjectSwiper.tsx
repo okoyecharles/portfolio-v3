@@ -14,7 +14,7 @@ export default function FeaturedProjectSwiper({
 }: FeaturedProjectSwiperProps) {
   const swiperRef = useRef<SwiperRef>(null);
   const swiperApi = swiperRef.current?.swiper;
-  const featuredProjectHeaderRefs = projects.map((_) => useRef<HTMLLinkElement>(null));
+  const featuredProjectHeaderRefs = projects.map((_) => useRef<HTMLAnchorElement>(null));
 
   function handleSwiperChange(swiper: SwiperClass) {
     setProjectIndex(swiper.activeIndex);
@@ -43,7 +43,7 @@ export default function FeaturedProjectSwiper({
               active={projectIndex === index}
               activeOffset={Math.abs(projectIndex - index)}
               openProjectViewer={openProjectViewer}
-              headerRef={featuredProjectHeaderRefs[index] as any}
+              headerRef={featuredProjectHeaderRefs[index]}
             />
           </SwiperSlide>
         ))}
