@@ -10,7 +10,7 @@ export default function Contact() {
       <SectionHeader>Contact Me</SectionHeader>
       <SectionDescription>
         You might want to develop a website, application or discuss anything
-        related. Feel free leave a message below
+        related. Feel free to leave a message below
       </SectionDescription>
       <ContactForm />
     </Section>
