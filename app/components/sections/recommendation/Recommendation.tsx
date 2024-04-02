@@ -32,6 +32,7 @@ export default function Recommendation() {
         setRecommedationIndex={setRecommedationIndex}
       />
       <RecommendationControl
+        recommendations={recommedations}
         recommendationCount={recommedations.length}
         recommendationIndex={recommedationIndex}
         setRecommedationIndex={setRecommedationIndex}

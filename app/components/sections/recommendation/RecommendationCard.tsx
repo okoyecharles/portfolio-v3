@@ -6,6 +6,7 @@ import { a } from "@react-spring/web";
 export default function RecommendationCard({
   cardTransition,
   recommendation,
+  recommendationIndex
 }: RecommendationCardProps) {
   return (
     <a.article
@@ -14,6 +15,8 @@ export default function RecommendationCard({
         bg-grey-fb dark:bg-grey-15
         ring-1 ring-grey-b dark:ring-grey-3
       `}
+      id={`recommendation-item-${recommendationIndex + 1}`}
+      role="tabpanel"
       style={cardTransition}
     >
       <header className="relative flex gap-4 mb-4 isolate">

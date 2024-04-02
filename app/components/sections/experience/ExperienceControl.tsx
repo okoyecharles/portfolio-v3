@@ -31,9 +31,8 @@ export default function ExperienceControl({
           .map((_, index) => {
             const isActiveButton = index === expertiseIndex;
             return (
-              <li role="presentation">
+              <li key={index} role="presentation">
                 <button
-                  key={index}
                   role="tab"
                   ref={expertiseTabTriggerRefs[index]}
                   id={`experience-item-${index + 1}-trigger`}
