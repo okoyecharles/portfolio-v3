@@ -5,7 +5,7 @@ import Footer from "./components/footer/Footer";
 import Experience from "./components/sections/experience/Experience";
 import FeaturedProjects from "./components/sections/featured-project/FeaturedProjects";
 import Projects from "./components/sections/project/Projects";
-import Recommendation from "./components/sections/recommendation/Recommendation";
+import Recommendations from "./components/sections/recommendation/Recommendations";
 import Contact from "./components/sections/contact/Contact";
 import SkipToContent from "./components/sections/skip-to-content/SkipToContent";
 
@@ -19,7 +19,7 @@ export default function Page() {
       <Experience />
       <FeaturedProjects />
       <Projects />
-      <Recommendation />
+      <Recommendations />
       <Contact />
       <Footer />
     </>
