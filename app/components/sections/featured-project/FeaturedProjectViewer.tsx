@@ -125,7 +125,7 @@ export default function FeaturedProjectViewer({
             ))}
             <div className="viewer-toggle-container absolute bottom-4 right-4">
               <div
-                className="viewer-toggle p-1 flex ring-1 ring-grey-b dark:ring-grey-4 rounded-[20px] relative isolate overflow-hidden self-start bg-white dark:bg-grey-15" role="radiogroup">
+                className="viewer-toggle p-1 flex ring-1 ring-grey-b dark:ring-grey-4 rounded-[20px] relative isolate overflow-hidden self-start bg-white dark:bg-grey-15" role="radiogroup" aria-label="view toggle">
                 <a.div
                   className="toggle-active h-8 w-8 bg-grey-9/[35%] dark:bg-grey-5/[50%] rounded-[16px] absolute top-1 -z-10"
                   style={toggleViewModeSpring}

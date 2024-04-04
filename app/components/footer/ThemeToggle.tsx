@@ -22,7 +22,7 @@ export default function ThemeToggle() {
 
   return (
     <div
-      className="theme-toggle p-1 flex ring-1 ring-grey-b dark:ring-grey-3 rounded-[20px] relative isolate overflow-hidden self-start">
+      className="theme-toggle p-1 flex ring-1 ring-grey-b dark:ring-grey-3 rounded-[20px] relative isolate overflow-hidden self-start" role="radiogroup" aria-label="theme toggle">
       <a.div
         className="toggle-active h-8 w-8 bg-grey-9/[35%] dark:bg-grey-5/[35%] rounded-[16px] absolute top-1 -z-10"
         style={toggleThemeSpring}
@@ -30,9 +30,12 @@ export default function ThemeToggle() {
       {footerData.themes.map((mode) => (
         <button
           key={mode.name}
+          role="radio"
+          aria-label={`switch to ${mode.name} theme`}
+          aria-checked={theme === mode.name && client}
           className={`
             toggle group/toggle transition-colors
-            ${theme == mode.name && client ? " is-active" : ""}
+            ${theme === mode.name && client ? " is-active" : ""}
           `}
           onClick={() => setTheme(mode.name)}
         >

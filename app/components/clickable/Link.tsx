@@ -20,6 +20,7 @@ interface LinkProps {
   tabIndex?: number;
   linkRef?: LegacyRef<HTMLAnchorElement>
   ariaLabel?: string;
+  title?: string;
 }
 
 export default function Link({
@@ -29,7 +30,8 @@ export default function Link({
   linkRef,
   variant = "default",
   tabIndex,
-  ariaLabel
+  ariaLabel,
+  title
 }: LinkProps) {
   return (
     <a
@@ -42,7 +44,7 @@ export default function Link({
       rel="noopener noreferrer"
       tabIndex={tabIndex}
       aria-label={ariaLabel}
-      title={ariaLabel}
+      title={title}
     >
       {children}
     </a>

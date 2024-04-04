@@ -9,10 +9,15 @@ export default function Footer() {
     <div className="px-8 border-t footer-container bg-grey-ea dark:bg-grey-1 border-grey-d dark:border-grey-2">
       <footer className="flex flex-col w-full max-w-screen-xl gap-10 py-8 mx-auto md:flex-row md:justify-between">
         <div className="flex justify-between content md:flex-col md:gap-8">
-          <div className="logo">
+          <Link
+            href="/"
+            variant="plain"
+            ariaLabel="Okoye Charles' Portfolio Logo"
+            title="Okoye Charles' Portfolio"
+          >
             <FooterLogo />
-          </div>
-          <ul className="flex gap-4 md:flex-col md:gap-3">
+          </Link>
+          <ul className="flex gap-4 md:flex-col md:gap-3" aria-label="social links">
             {footerData.socials.map((social) => (
               <li key={social.name} className="group/icon">
                 <a
@@ -42,10 +47,11 @@ export default function Footer() {
           <div className="self-center md:self-end">
             <ThemeToggle />
           </div>
-          <p
-            className="text-grey-6 dark:text-grey-9 text-[15px] text-center flex gap-[6px] items-center self-center md:self-end select-none">
+          <p className="text-grey-6 dark:text-grey-9 text-[15px] text-center flex gap-[6px] items-center self-center md:self-end select-none">
             <span>Built with</span>
-            <HeartIcon />
+            <span aria-label=",passion,">
+              <HeartIcon />
+            </span>
             <span>
               by <Link href={footerData.sourceCode}>Okoye Charles</Link>
             </span>
