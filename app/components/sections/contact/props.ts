@@ -14,6 +14,7 @@ export type ContactFormInputProps = {
   value: string;
   children: string;
   placeholder: string;
+  required?: boolean;
   state: ContactFormInputState;
   maxLength?: number;
   error: FormValidationError | null;

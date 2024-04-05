@@ -173,6 +173,7 @@ export default function ContactForm() {
           state={formState.name}
           error={error}
           disabled={areInputsDisabled}
+          required
         >
           Name
         </ContactFormInput>
@@ -186,6 +187,7 @@ export default function ContactForm() {
           state={formState.email}
           error={error}
           disabled={areInputsDisabled}
+          required
         >
           Email
         </ContactFormInput>
@@ -200,6 +202,7 @@ export default function ContactForm() {
           state={formState.message}
           error={error}
           disabled={areInputsDisabled}
+          required
         >
           Message
         </ContactFormInput>
