@@ -1,4 +1,4 @@
-import { LegacyRef } from "react";
+import { LegacyRef, MouseEventHandler } from "react";
 
 const variantClass = {
   default: `
@@ -15,12 +15,14 @@ const variantClass = {
 interface LinkProps {
   children: React.ReactNode;
   href: string;
+  internal?: boolean;
   className?: string;
   variant?: keyof typeof variantClass;
   tabIndex?: number;
   linkRef?: LegacyRef<HTMLAnchorElement>
   ariaLabel?: string;
   title?: string;
+  onClick?: MouseEventHandler<HTMLAnchorElement>;
 }
 
 export default function Link({
@@ -31,7 +33,9 @@ export default function Link({
   variant = "default",
   tabIndex,
   ariaLabel,
-  title
+  title,
+  internal = false,
+  onClick,
 }: LinkProps) {
   return (
     <a
@@ -40,11 +44,12 @@ export default function Link({
       className={`
       inline-flex items-center gap-1 w-fit ${variantClass[variant]} ${className}
     `}
-      target="_blank"
-      rel="noopener noreferrer"
+      target={internal ? undefined : "_blank"}
+      rel={internal ? undefined : "noopener noreferrer"}
       tabIndex={tabIndex}
       aria-label={ariaLabel}
       title={title}
+      onClick={onClick}
     >
       {children}
     </a>
