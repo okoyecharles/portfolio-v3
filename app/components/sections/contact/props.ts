@@ -1,4 +1,4 @@
-import { ChangeEventHandler } from "react";
+import { ChangeEventHandler, Dispatch, SetStateAction } from "react";
 import { FormValidationError } from "../../utils/validation";
 
 export type ContactFormInputName = 'name' | 'email' | 'message';
@@ -20,6 +20,11 @@ export type ContactFormInputProps = {
   error: FormValidationError | null;
   disabled?: boolean;
   onChange: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
+}
+
+export type ContactFormSuccessModalProps = {
+  open: boolean,
+  setOpen: Dispatch<SetStateAction<boolean>>
 }
 
 export type ContactFormSubmitButtonProps = {
