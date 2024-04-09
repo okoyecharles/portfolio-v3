@@ -1,4 +1,4 @@
-import { DOMAttributes, KeyboardEvent, useRef } from "react";
+import { DOMAttributes, KeyboardEvent, LegacyRef, useRef } from "react";
 
 const buttonStyles = {
   default: `
@@ -38,6 +38,7 @@ interface ButtonProps {
   className?: string;
   onClick?: DOMAttributes<HTMLButtonElement>["onClick"];
   ariaLabel?: string;
+  buttonRef?: LegacyRef<HTMLButtonElement>;
 }
 
 function Button({
@@ -47,10 +48,9 @@ function Button({
   tabIndex,
   className,
   onClick,
-  ariaLabel
+  ariaLabel,
+  buttonRef
 }: ButtonProps) {
-  const buttonRef = useRef<HTMLButtonElement>(null);
-
   return (
     <button
       ref={buttonRef}
