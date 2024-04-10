@@ -12,14 +12,14 @@ export default function PlaneGraphicLarge() {
           <path
             d="M128 194V128.344L282 52L128 194Z"
             fill="#1A5B9D"
-            stroke="black"
+            className="stroke-black"
             stroke-width="2"
             stroke-linejoin="round"
           />
           <path
             d="M153 149L128 194L279 57L153 149Z"
             fill="#13457D"
-            stroke="black"
+            className="stroke-black"
             stroke-width="2"
             stroke-linejoin="round"
           />
@@ -31,7 +31,7 @@ export default function PlaneGraphicLarge() {
           <path
             d="M153 149.118L282 52L204 191L153 149.118Z"
             fill="#2584E4"
-            stroke="black"
+            className="stroke-black"
             stroke-width="2"
             stroke-linejoin="round"
           />
@@ -52,7 +52,7 @@ export default function PlaneGraphicLarge() {
           <path
             d="M282 52L70 99.3152L127.846 132L282 52Z"
             fill="#2584E4"
-            stroke="black"
+            className="stroke-black"
             stroke-width="2"
             stroke-linejoin="round"
           />
@@ -65,15 +65,15 @@ export default function PlaneGraphicLarge() {
         <circle cx="45" cy="246" r="4.5" stroke="black" />
         <path
           d="M112.863 183C73.1962 214.167 52.3628 296.5 152.363 258C209.863 231.5 322.363 233.5 233.863 293.5C147.363 355.5 135.363 306 173.863 296.5C212.363 287 239.863 316.5 205.363 335C170.863 353.5 116.863 356.5 108.863 390"
-          stroke="#999999"
+          className="stroke-grey-9 dark:stroke-grey-6"
           stroke-dasharray="5 5"
         />
-        <circle cx="90" cy="42" r="10" fill="#D9D9D9" />
-        <circle cx="93" cy="40" r="9.5" stroke="black" />
-        <circle cx="318.5" cy="94.5" r="12.5" fill="#D9D9D9" />
-        <circle cx="321.5" cy="92.5" r="12" stroke="black" />
+        <circle cx="90" cy="42" r="10" className="fill-grey-d dark:fill-grey-6" />
+        <circle cx="93" cy="40" r="9.5" className="stroke-black dark:stroke-white" />
+        <circle cx="318.5" cy="94.5" r="12.5" className="fill-grey-d dark:fill-grey-6" />
+        <circle cx="321.5" cy="92.5" r="12" className="stroke-black dark:stroke-white" />
         <circle cx="302.5" cy="178.5" r="7.5" fill="#0070F3" />
-        <circle cx="305.5" cy="176.5" r="7" stroke="black" />
+        <circle cx="305.5" cy="176.5" r="7" className="stroke-black dark:stroke-white" />
         <line
           x1="51.3565"
           y1="161.12"
