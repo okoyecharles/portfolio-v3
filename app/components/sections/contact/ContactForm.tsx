@@ -17,6 +17,7 @@ import animation from "../../animations/animations";
 import { useObservedSprings } from "../../utils/useObservedSpring";
 import ContactFormInput from "@/app/components/sections/contact/ContactFormInput";
 import ContactFormSubmitButton from "@/app/components/sections/contact/ContactFormSubmitButton";
+import ContactFormSuccessModal from "./ContactFormSuccessModal";
 
 export default function ContactForm() {
   const initialFormData: ContactFormData = {name: "", email: "", message: ""};
@@ -24,6 +25,7 @@ export default function ContactForm() {
   const [formSending, setFormSending] = useState<boolean>(false);
   const [formState, setFormState] = contactFormStateReducer();
   const [error, setError] = useState<FormValidationError | null>(null);
+  const [successModalOpen, setSuccessModalOpen] = useState<boolean>(true);
   const isSubmitDisabled = useMemo(handleSubmitDisabled, [formState]);
   const areInputsDisabled = useMemo(handleInputsDisabled, [formState]);
   useEffect(processInputChange, [formData]);
@@ -101,6 +103,7 @@ export default function ContactForm() {
       await fetch(API_URL, fetchOptions);
       clearFormData();
       setFormSending(false);
+      setSuccessModalOpen(true);
     } catch (err) {
       setFormSending(false);
     }
@@ -208,6 +211,7 @@ export default function ContactForm() {
         </ContactFormInput>
         <ContactFormSubmitButton formSending={formSending} disabled={isSubmitDisabled} />
       </a.form>
+      <ContactFormSuccessModal open={successModalOpen} setOpen={setSuccessModalOpen} />
     </div>
   );
 }
