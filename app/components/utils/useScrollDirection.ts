@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
 
 export default function useScrollDirection() {
   const [scrollDir, setScrollDir] = useState<'up' | 'down'>("up");

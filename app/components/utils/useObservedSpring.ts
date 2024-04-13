@@ -1,4 +1,4 @@
-import { UseSpringProps, useSpring } from "@react-spring/web";
+import { UseSpringProps } from "@react-spring/web";
 import { useEffect, useState } from "react";
 import { IntersectionOptions, useInView } from "react-intersection-observer";
 

@@ -1,15 +1,7 @@
-import { useRef } from "react";
-import FeaturedProjectProps, {
-  FeaturedProjectSwiperProps,
-} from "../props";
-import PrevIcon from "../../../svg/icons/PrevIcon";
-import NextIcon from "../../../svg/icons/NextIcon";
-import { EffectCards } from "swiper/modules";
-import { Swiper, SwiperClass, SwiperRef, SwiperSlide } from "swiper/react";
+import FeaturedProjectProps from "../props";
 import "swiper/css/effect-cards";
 import animation from "../../../animations/animations";
 import { a, to, useSpring } from "@react-spring/web";
-import FeaturedProjectCard from "./FeaturedProjectCard";
 import { useObservedSprings } from "../../../utils/useObservedSpring";
 import FeaturedProjectSwiper from "./FeaturedProjectSwiper";
 
