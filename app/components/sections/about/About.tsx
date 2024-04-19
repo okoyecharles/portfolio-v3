@@ -9,6 +9,7 @@ import { a, to, useSpring, useTrail } from "@react-spring/web";
 import { useObservedSprings } from "../../utils/useObservedSpring";
 import animation from "../../animations/animations";
 import InfoIcon from "../../svg/abstract/InfoIcon";
+import CustomTooltip from "../../clickable/CustomTooltip";
 
 export default function About() {
   const {
@@ -92,23 +93,30 @@ export default function About() {
             <a.div style={layoutReveal()}>
               <a.p className="mb-4">
                 My name is{" "}
-                <strong className="text-grey-1 dark:text-grey-d whitespace-nowrap">
+                <strong
+                  className="text-grey-1 dark:text-grey-d whitespace-nowrap"
+                  aria-describedby="about-info-1"
+                >
                   Okoye Charles Kosisochukwu
                 </strong>{" "}
                 <button
                   className="group/info-button inline relative top-[3px]"
                   name="show extra info"
-                  aria-expanded="false"
+                  aria-label="'Kosi' is short for 'Kosisochukwu'"
+                  data-tooltip-id="about-info-1"
                 >
                   <InfoIcon />
                 </button>{" "}
+                <CustomTooltip id="about-info-1">
+                  <span className="underline">Kosi</span> is short for{" "}
+                  <span className="underline">Kosisochukwu</span>
+                </CustomTooltip>
                 , I'm a{" "}
                 <strong className="text-grey-1 dark:text-grey-d whitespace-nowrap">
-                Full-Stack Developer
+                  Full-Stack Developer
                 </strong>{" "}
-                (front-end heavy) based in Nigeria. I spend
-                most of my time designing graphics, coding up things for the web, and
-                learning algorithms.
+                (front-end heavy) based in Nigeria. I spend most of my time designing
+                graphics, coding up things for the web, and learning algorithms.
               </a.p>
               <a.p>
                 My goal is to deliver, through code, unique and innovative solutions to
