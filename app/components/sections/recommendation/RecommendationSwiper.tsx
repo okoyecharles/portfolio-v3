@@ -9,6 +9,7 @@ import { useInView } from "react-intersection-observer";
 import { percentToRadians } from "../../utils/convertion";
 import PrevIcon from "../../svg/icons/PrevIcon";
 import NextIcon from "../../svg/icons/NextIcon";
+import CustomTooltip from "../../clickable/CustomTooltip";
 
 export default function RecommendationSwiper({
   recommendations,
@@ -76,7 +77,11 @@ export default function RecommendationSwiper({
   }
 
   return (
-    <div className="flex flex-col gap-[36px] md:flex-row justify-between recommendations-swiper my-8 md:my-2 semi-lg:mx-12 relative" id="recommendation-carousel" aria-label="recommendation carousel">
+    <div
+      className="flex flex-col gap-[36px] md:flex-row justify-between recommendations-swiper my-8 md:my-2 semi-lg:mx-12 relative"
+      id="recommendation-carousel"
+      aria-label="recommendation carousel"
+    >
       <a.div
         className="aspect-square w-full h-full max-w-[375px] max-h-[375px] semi-lg:max-w-[450px] semi-lg:max-h-[450px] relative self-center"
         ref={observedRef}
@@ -91,7 +96,11 @@ export default function RecommendationSwiper({
             -translate-x-1/2 -translate-y-1/2
           `}
         >
-          <div className="relative isolate">
+          <div
+            className="relative isolate"
+            data-tooltip-id="active-recommendation-location"
+            aria-describedby="active-recommendation-location"
+          >
             <LocationIcon />
             <div
               className={`
@@ -114,6 +123,11 @@ export default function RecommendationSwiper({
             `}
             />
           </div>
+          <CustomTooltip id="active-recommendation-location">
+            <span>
+              {recommendations[recommendationIndex].location}
+            </span>
+          </CustomTooltip>
         </div>
       </a.div>
       <div className="card-container min-h-[400px] grid place-items-center relative mr-0 md:mr-[24px] semi-lg:mr-0 px-[12px] md:px-0">
