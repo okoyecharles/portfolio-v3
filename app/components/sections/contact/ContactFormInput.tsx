@@ -7,6 +7,7 @@ import { useEffect, useRef } from "react";
 import InputErrorIcon from "@/app/components/svg/abstract/InputErrorIcon";
 import InputLoadingIcon from "@/app/components/svg/abstract/InputLoadingIcon";
 import InputVerifiedIcon from "@/app/components/svg/abstract/InputVerifiedIcon";
+import CustomTooltip from "../../clickable/CustomTooltip";
 
 export default function ContactFormInput({
   type = "input",
@@ -74,16 +75,16 @@ export default function ContactFormInput({
         `}
       >
         {children}
-        {/* temporary */}
-        <span
-          className="absolute right-0 top-0 select-none text-error dark:text-error-dark"
-          id={`contact-form/${name}_error`}
-          aria-hidden={!(state === "error" && error)}
-          aria-live="polite"
-          aria-label={`error`}
-        >
-          {state === "error" && error ? error.message : ""}
-        </span>
+        <CustomTooltip id={`contact-form/${name}_error`} mode="error" place="top-end">
+          {state === "error" && error ? (
+            <>
+              <span className="visually-hidden">. Error -</span>
+              {" "}{error.message}
+            </>
+          ) : (
+            ""
+          )}
+        </CustomTooltip>
       </label>
       <div className="relative input-container">
         {type === "input" ? (
@@ -100,9 +101,8 @@ export default function ContactFormInput({
             disabled={disabled}
             // accessibility
             aria-required={required}
-            aria-describedby={
-              state === "error" && error ? `contact-form/${name}_error` : undefined
-            }
+            aria-describedby={`contact-form/${name}_error`}
+            data-tooltip-id={`contact-form/${name}_error`}
           />
         ) : (
           <textarea
@@ -118,9 +118,8 @@ export default function ContactFormInput({
             disabled={disabled}
             // accessibility
             aria-required={required}
-            aria-describedby={
-              state === "error" && error ? `contact-form/${name}_error` : undefined
-            }
+            aria-describedby={`contact-form/${name}_error`}
+            data-tooltip-id={`contact-form/${name}_error`}
           />
         )}
         {inputStateTransition((style, state) => {
