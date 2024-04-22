@@ -12,7 +12,7 @@ import { toNormalCase } from "../utils/convertion";
 
 export default function NavLinksDesktop() {
   const activeSection = useActiveSection();
-  const { userScrolling, setUserScrolling } = useUserScrolling();
+  const { userScrolling } = useUserScrolling();
 
   const activeSectionMarkerMorph = [
     {pos: -24, width: 24},
@@ -182,7 +182,7 @@ function Submenu({
           open ? " is-active" : ""
         }`}
         onClick={handleSubmenuToggle}
-        title={open ? "Close " + submenuName : "Open " + submenuName}
+        name={open ? "Close " + submenuName : "Open " + submenuName}
         aria-label={open ? "Close " + submenuName : "Open " + submenuName}
         aria-expanded={open}
         aria-controls={name + "-submenu"}

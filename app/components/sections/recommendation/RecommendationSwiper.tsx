@@ -110,7 +110,7 @@ export default function RecommendationSwiper({
               ring-2 ring-blue-100 dark:ring-blue-d-200
               top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
               ${earthRotating ? "scale-0" : "scale-100"}
-              transition duration-300
+              transition duration-300 pointer-events-none
             `}
             />
             <div
@@ -118,7 +118,7 @@ export default function RecommendationSwiper({
               absolute -z-20
               h-[12px] aspect-square rounded-[50%]
               bg-black/20 dark:bg-white/30
-              top-1/2 left-1/2 opacity-0
+              top-1/2 left-1/2 opacity-0 pointer-events-none
               ${earthRotating ? "" : "expanding-scale"}
             `}
             />
