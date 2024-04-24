@@ -6,7 +6,7 @@ import HeartIcon from "../svg/abstract/HeartIcon";
 
 export default function Footer() {
   return (
-    <div className="px-8 border-t footer-container bg-grey-ea dark:bg-grey-1 border-grey-d dark:border-grey-2">
+    <div className="px-8 border-t footer-container bg-grey-fb dark:bg-grey-1 border-grey-d dark:border-grey-2">
       <footer className="flex flex-col w-full max-w-screen-xl gap-10 py-8 mx-auto md:flex-row md:justify-between">
         <div className="flex justify-between content md:flex-col md:gap-8">
           <Link
@@ -25,6 +25,7 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   target="_blank"
                   className="md:flex md:gap-2 md:flex-end"
+                  aria-label={social.name}
                 >
                   <div className="flex w-[24px]">{social.icon}</div>
                   <span
@@ -47,14 +48,13 @@ export default function Footer() {
           <div className="self-center md:self-end">
             <ThemeToggle />
           </div>
-          <p className="text-grey-6 dark:text-grey-9 text-[15px] text-center flex gap-[6px] items-center self-center md:self-end select-none">
-            <span>Built with</span>
-            <span aria-label=",passion,">
-              <HeartIcon />
-            </span>
-            <span>
-              by <Link href={footerData.sourceCode}>Okoye Charles</Link>
-            </span>
+          <p
+            className="text-grey-6 dark:text-grey-9 text-[15px] text-center flex gap-[6px] items-center self-center md:self-end select-none"
+            aria-label="Built with passion by Okoye Charles"
+          >
+            Built with
+            <HeartIcon />
+            by <Link href={footerData.sourceCode}>Okoye Charles</Link>
           </p>
         </div>
       </footer>

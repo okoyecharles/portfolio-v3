@@ -43,7 +43,7 @@ export default function ExperienceCard({
           </Link>
         </a.button>
         <a.p
-          className="text-sm text-grey-6 md:hidden"
+          className="text-sm text-grey-6 md:visually-hidden"
           style={contentReveal[3]}
           aria-label={dateDescription}
           id="active-experience-date"

@@ -15,12 +15,11 @@ export default function ExperienceTimeline({
   return (
     <div
       className="relative h-[550px] overflow-y-clip w-[28px] md:w-[96px]"
-      aria-labelledby="active-experience-date"
+      aria-hidden
     >
       <a.div
         className="year-timeline-container absolute top-1/2 left-[28px]"
         style={yearTimeLineScroll}
-        aria-hidden
       >
         <div className="relative year-timeline">
           <div

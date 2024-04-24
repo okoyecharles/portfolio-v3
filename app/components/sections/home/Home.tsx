@@ -62,12 +62,12 @@ export default function Home() {
           Okoye Charles
         </a.h1>
 
-        <a.h3
+        <a.h2
           className="uppercase dark:text-grey-6 font-lato font-semibold md:text-[18px] md:text-center"
           style={layoutReveal(2)}
         >
           I embrace the digital world
-        </a.h3>
+        </a.h2>
       </header>
       <a.p
         className="py-9 max-w-[700px] md:text-[18px] md:text-center md:self-center"

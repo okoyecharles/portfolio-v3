@@ -3,7 +3,7 @@ import CloseMenuIcon from "../svg/abstract/CloseMenuIcon";
 import MenuIcon from "../svg/abstract/MenuIcon";
 import { useState } from "react";
 import VerticalLineIcon from "../svg/abstract/VerticalLineIcon";
-import { a, to, useChain, useSpring, useSpringRef, useTrail, } from "@react-spring/web";
+import { a, to, useChain, useSpring, useSpringRef, useTrail } from "@react-spring/web";
 import mobileNavigationData from "@/app/data/navigation";
 import useScrollDirection from "../utils/useScrollDirection";
 import useActiveSection from "../utils/useActiveSection";
@@ -66,11 +66,14 @@ export default function NavLinksMobile() {
     },
   });
 
-  useChain([toggleMenuSpringRef, lineExtendSpringRef, listMarkerTrailRef, listItemTrailRef], [0, 0.25, 0.25, 0]);
+  useChain(
+    [toggleMenuSpringRef, lineExtendSpringRef, listMarkerTrailRef, listItemTrailRef],
+    [0, 0.25, 0.25, 0]
+  );
 
   const scrollDirection = useScrollDirection();
   const activeNavSpring = useSpring({
-    from: {y: 0},
+    from: { y: 0 },
     to: {
       y: scrollDirection == "down" && !open ? -100 : 0,
     },
@@ -84,33 +87,37 @@ export default function NavLinksMobile() {
   return (
     <>
       <a.nav
-        id={'mobile-main-menu'}
-        className={`absolute top-6 right-6 h-12 w-12 bg-grey-ea dark:bg-grey-2 ring-1 dark:ring-0 ring-grey-b rounded-[10px] md:hidden overflow-hidden z-20`}
+        id={"mobile-main-menu"}
+        className={`absolute top-6 right-6 h-12 w-12 bg-grey-fb dark:bg-grey-2 ring-1 dark:ring-0 ring-grey-9 rounded-[10px] md:hidden overflow-hidden z-20`}
         style={{
           width: to(
             [toggleMenuSpring.width, toggleMenuSpring.widthoffset],
-            (w, offset) => `calc(${w}vw - ${offset}px)`
+            (w, offset) => `calc(${w}% - ${offset}px)`
           ),
           height: to(toggleMenuSpring.height, (h) => h),
           transform: to(activeNavSpring.y, (y) => `translateY(${y}px)`),
         }}
       >
-        <div id={'mobile-main-menu-container'}
-             className="w-[calc(100vw-48px)] bg-grey-ea dark:bg-grey-2 absolute right-0 top-0">
+        <div
+          id={"mobile-main-menu-container"}
+          className="w-[calc(100%)] bg-grey-fb dark:bg-grey-2 absolute right-0 top-0 isolate"
+        >
           <div className="flex flex-col items-end">
             <button
               className={`
+                bg-grey-fb dark:bg-grey-2
                 relative w-12 h-12 rounded-[10px]
                 focus-visible:outline focus-visible:-outline-offset-2
                 focus-visible:outline-2 focus-visible:outline-grey-2
                 dark:focus-visible:outline-grey-9
               `}
               onClick={toggleMenu}
-              title={open ? 'Close Main Menu' : 'Open Main Menu'}
-              aria-label={open ? 'Close Main Menu' : 'Open Main Menu'}
+              title={open ? "Close Main Menu" : "Open Main Menu"}
+              aria-label={open ? "Close Main Menu" : "Open Main Menu"}
               aria-expanded={open}
-              aria-haspopup={'menu'}
-              aria-controls={'mobile-main-menu'}>
+              aria-haspopup={"menu"}
+              aria-controls={"mobile-main-menu"}
+            >
               <div
                 className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition ${
                   open ? "-rotate-45 opacity-0" : "rotate-0 opacity-100"
@@ -128,12 +135,9 @@ export default function NavLinksMobile() {
             </button>
           </div>
           <a.div
-            className="menu-line absolute top-0 left-[29px]"
+            className="menu-line absolute top-0 left-[29px] -z-10"
             style={{
-              transform: to(
-                lineExtendSpring.scale,
-                (scale) => `scaleY(${scale}%)`
-              ),
+              transform: to(lineExtendSpring.scale, (scale) => `scaleY(${scale}%)`),
               transformOrigin: "top",
             }}
             aria-hidden
@@ -143,16 +147,18 @@ export default function NavLinksMobile() {
               height={NAV_OPEN_HEIGHT - 24}
             />
           </a.div>
-          <ul className="px-6 flex flex-col text-base text-grey-6 dark:text-grey-b ms-[25px] font-visby font-medium" role={"menubar"}>
+          <ul
+            className="px-6 flex flex-col text-base text-grey-6 dark:text-grey-b ms-[25px] font-visby font-medium"
+            role={"menubar"}
+          >
             {mobileNavigationData.anchors.map((anchor, anchorIndex) => (
-              <li className="relative flex" key={anchor.name}>
+              <li className="relative flex" key={anchor.name} role="menuitem">
                 <a.a
                   href={anchor.link}
                   style={listItemTrail[anchorIndex]}
                   className={`peer py-3 uppercase hover:text-black dark:hover:text-grey-d transition-colors ${
                     active == anchor.name && "text-black dark:text-grey-d"
                   }`}
-                  role={"menuitem"}
                   tabIndex={open ? 0 : -1}
                 >
                   {anchor.name}
@@ -165,8 +171,7 @@ export default function NavLinksMobile() {
                     ),
                   }}
                   className={`list-marker ring-1 ring-grey-6/0 peer-hover:ring-grey-6 dark:peer-hover:ring-grey-9 absolute top-1/2  -left-[25px] w-[10px] h-[10px]  rounded-[2.5px] bg-grey-b dark:bg-grey-5 transition-colors ${
-                    active == anchor.name &&
-                    "!bg-blue-200 dark:!bg-blue-d-200 !ring-0"
+                    active == anchor.name && "!bg-blue-200 dark:!bg-blue-d-200 !ring-0"
                   }`}
                 ></a.div>
               </li>
@@ -198,6 +203,5 @@ export default function NavLinksMobile() {
         onClick={() => setOpen(false)}
       />
     </>
-  )
-    ;
+  );
 }
