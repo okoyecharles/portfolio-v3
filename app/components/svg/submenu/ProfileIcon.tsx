@@ -6,7 +6,7 @@ export default function ProfileIcon() {
       viewBox="0 0 18 18"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="fill-grey-4 group-hover/dropdown-item:fill-black group-[.is-active]/dropdown-item:fill-blue-200 dark:fill-grey-b dark:group-hover/dropdown-item:fill-grey-d dark:group-[.is-active]/dropdown-item:fill-blue-d-200 transition-colors"
+      className="fill-grey-4 group-hover/submenu-item:fill-black group-[.is-active]/submenu-item:fill-blue-200 dark:fill-grey-b dark:group-hover/submenu-item:fill-grey-d dark:group-[.is-active]/submenu-item:fill-blue-d-200 transition-colors"
     >
       <g clipPath="url(#clip0_497_1970)">
         <path

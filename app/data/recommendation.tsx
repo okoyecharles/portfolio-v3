@@ -46,7 +46,7 @@ const recommendationData: Array<Recommendation> = [
     occupation: "Web Developer",
     image: "/assets/recommendations/tracey-portrait.jpeg",
     description: [
-      "There are so many good things I can say about working with Okoye Charles. A high note for me was how impressive his technical skills are. He has expert knowledge in JavaScript, and React.js",
+      "There are so many good things I can say about working with Okoye Charles. He has expert knowledge in JavaScript, and React.js",
       "Always willing to help a teammate facing a code blocker. Such generosity with knowledge and skill is what makes him easy and fun to work with.",
     ],
     location: "Nairobi County, Kenya",

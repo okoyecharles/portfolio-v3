@@ -1,6 +1,6 @@
 import { Project } from "@/app/data/project";
 import { SpringValue, TransitionFn } from "@react-spring/web";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, LegacyRef, SetStateAction } from "react";
 
 export type FeaturedProject = Required<Project>;
 type SpringAnimation<T = number> = Record<string, SpringValue<T>>;
@@ -27,18 +27,20 @@ export type FeaturedProjectCardProps = {
   project: FeaturedProject;
   active: boolean;
   activeOffset: number;
+  headerRef: LegacyRef<HTMLAnchorElement>;
 } & Pick<FeaturedProjectProps, 'openProjectViewer'>
 
 //  Desktop Props
-export type FeaturedProjectListProps = FeaturedProjectProps;
+export type FeaturedProjectTabListProps = FeaturedProjectProps;
 export type FeaturedProjectTagProps = {
-  name: string
+  name: string;
 }
-export type FeaturedProjectInfoProps = {
+export type FeaturedProjectTabPanelProps = {
   project: FeaturedProject;
+  projectIndex: number;
   contentRevealTrail: Array<SpringAnimation>;
 }
-export type FeaturedProjectDisplayProps = {
+export type FeaturedProjectTabDisplayProps = {
   project: FeaturedProject;
   displayFrameTrail: Array<SpringAnimation>;
   displayTransition: TransitionFn<FeaturedProject, any>;

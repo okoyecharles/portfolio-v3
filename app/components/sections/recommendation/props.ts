@@ -11,9 +11,11 @@ export type RecommendationSwiperProps = {
 export type RecommendationCardProps = {
   recommendation: Recommendation;
   cardTransition: Record<string, SpringValue<number>>;
+  recommendationIndex: number;
 }
 
 export type RecommendationControlProps = {
+  recommendations: Array<Recommendation>;
   recommendationCount: number;
   recommendationIndex: number;
   setRecommedationIndex: Dispatch<SetStateAction<number>>;

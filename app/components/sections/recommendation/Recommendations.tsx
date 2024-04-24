@@ -7,7 +7,7 @@ import { useState } from "react";
 import RecommendationSwiper from "./RecommendationSwiper";
 import RecommendationControl from "./RecommendationControl";
 
-export default function Recommendation() {
+export default function Recommendations() {
   const recommedations = recommendationData;
   const [recommedationIndex, setRecommedationIndex] = useState<number>(0);
 
@@ -32,6 +32,7 @@ export default function Recommendation() {
         setRecommedationIndex={setRecommedationIndex}
       />
       <RecommendationControl
+        recommendations={recommedations}
         recommendationCount={recommedations.length}
         recommendationIndex={recommedationIndex}
         setRecommedationIndex={setRecommedationIndex}

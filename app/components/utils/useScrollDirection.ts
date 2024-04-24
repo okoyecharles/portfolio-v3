@@ -8,7 +8,7 @@ export default function useScrollDirection() {
     let lastScrollY = window.scrollY;
     let ticking = false;
 
-    const updateScrollDir = () => {
+    function updateScrollDir () {
       const scrollY = window.scrollY;
 
       if (Math.abs(scrollY - lastScrollY) < threshold) {
@@ -20,7 +20,7 @@ export default function useScrollDirection() {
       ticking = false;
     };
 
-    const onScroll = () => {
+    function onScroll() {
       if (!ticking) {
         window.requestAnimationFrame(updateScrollDir);
         ticking = true;

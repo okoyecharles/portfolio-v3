@@ -11,10 +11,10 @@ export default function Home() {
   const {
     observedRef,
     springAnimate: [
-      layoutTransform,
-      layoutOpacity,
-      bgLineGlow,
-      bgLineReveal,
+      layoutTransformTrail,
+      layoutOpacityTrail,
+      bgLineGlowTrail,
+      bgLineRevealTrail,
     ],
   } = useObservedSprings(
     [
@@ -36,57 +36,61 @@ export default function Home() {
   );
 
   const layoutReveal = (index: number) => ({
-    transform: to(layoutTransform[index].y, (y) => `translateY(${y}px)`),
-    opacity: to(layoutOpacity[index].opacity, (op: number) => `${op}`),
+    transform: to(layoutTransformTrail[index].y, (y) => `translateY(${y}px)`),
+    opacity: to(layoutOpacityTrail[index].opacity, (op: number) => `${op}`),
   });
 
   return (
     <Section
       name="home"
-      id="home-section"
-      padding="py-[150px] mb-[50px] md:pt-[128px] md:pb-[192px] md:mb-[64px]"
+      id="content"
+      padding="pt-[246px] pb-[150px] mb-[50px] md:pt-[240px] md:pb-[192px] md:mb-[64px]"
       sectionRef={observedRef}
     >
       <header className="relative md:self-center">
+        <a.div
+          className="font-extrabold text-grey-2 dark:text-grey-b text-[24px] font-mono absolute leading-[1] -top-6 -left-0 md:-top-2 lg:-top-0 md:-left-10 select-none"
+          style={layoutReveal(0)}
+          aria-label={"I am"}
+        >
+          I<span className="text-blue-200 dark:text-blue-d-200">'</span>m
+        </a.div>
         <a.h1
           className="text-grey-1 dark:text-grey-d text-[64px] lg:text-[100px] leading-[1.1] font-visby uppercase font-extrabold"
           style={layoutReveal(1)}
         >
           Okoye Charles
         </a.h1>
-        <a.div
-          className="font-extrabold text-grey-2 dark:text-grey-b text-[24px] font-mono absolute leading-[1] -top-6 -left-0 md:-top-2 lg:-top-0 md:-left-10 select-none"
-          style={layoutReveal(0)}
-        >
-          I<span className="text-blue-200 dark:text-blue-d-200">'</span>m
-        </a.div>
-        <a.h3
+
+        <a.h2
           className="uppercase dark:text-grey-6 font-lato font-semibold md:text-[18px] md:text-center"
           style={layoutReveal(2)}
         >
           I embrace the digital world
-        </a.h3>
+        </a.h2>
       </header>
       <a.p
         className="py-9 max-w-[700px] md:text-[18px] md:text-center md:self-center"
         style={layoutReveal(3)}
       >
-        I can help you build a product, feature, or website. Look through my
-        work and experience! If you are interested, I am available for hire
+        I can help you build a product, feature, or website. Look through my work and
+        experience! If you are interested, I am available for hire.
       </a.p>
       <a.div
         className="flex flex-wrap gap-6 call-to-action-buttons md:self-center"
         style={layoutReveal(4)}
       >
-        <Button>Check out my work</Button>
+        <a href="#projects">
+          <Button variant="blue" tabIndex={-1}>Check out my work</Button>
+        </a>
         <Button variant="black">
           <span>Resume</span>
           <DownloadIcon />
         </Button>
       </a.div>
       <HomeBackground
-        glowBackground={bgLineGlow}
-        revealBackground={bgLineReveal}
+        glowBackground={bgLineGlowTrail}
+        revealBackground={bgLineRevealTrail}
       />
     </Section>
   );

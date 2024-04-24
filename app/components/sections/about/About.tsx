@@ -1,17 +1,15 @@
 "use client";
-import { AboutImageProps, AboutListProps } from "./props";
 import aboutData from "@/app/data/about";
-import React from "react";
 import Section from "../Section";
 import SectionHeader from "../SectionHeader";
-import Image from "next/image";
-import Plus from "../../background/Plus";
-import HorizontalDottedLine from "../../background/HorizontalDottedLine";
-import DottedLine from "../../background/DottedLine";
+import AboutImage from "./AboutImage";
+import AboutList from "@/app/components/sections/about/AboutList";
 import Link from "../../clickable/Link";
 import { a, to, useSpring, useTrail } from "@react-spring/web";
 import { useObservedSprings } from "../../utils/useObservedSpring";
 import animation from "../../animations/animations";
+import InfoIcon from "../../svg/abstract/InfoIcon";
+import CustomTooltip from "../../clickable/CustomTooltip";
 
 export default function About() {
   const {
@@ -94,22 +92,37 @@ export default function About() {
             </a.h3>
             <a.div style={layoutReveal()}>
               <a.p className="mb-4">
-                My name is Okoye Charles Kosisochukwu \options\, a{" "}
+                My name is{" "}
+                <strong
+                  className="text-grey-1 dark:text-grey-d whitespace-nowrap"
+                  aria-describedby="about-info-1"
+                >
+                  Okoye Charles Kosisochukwu
+                </strong>{" "}
+                <button
+                  className="group/info-button inline relative top-[3px]"
+                  name="show extra info"
+                  aria-label="'Kosi' is short for 'Kosisochukwu'"
+                  data-tooltip-id="about-info-1"
+                >
+                  <InfoIcon />
+                </button>{" "}
+                <CustomTooltip id="about-info-1">
+                  <span className="underline">Kosi</span> is short for{" "}
+                  <span className="underline">Kosisochukwu</span>
+                </CustomTooltip>
+                , I'm a{" "}
                 <strong className="text-grey-1 dark:text-grey-d whitespace-nowrap">
                   Full-Stack Developer
                 </strong>{" "}
-                (front-end heavy) based in Nigeria. I spend most of my time
-                designing graphics, coding up things for the web, and learning
-                algorithms.
+                (front-end heavy) based in Nigeria. I spend most of my time designing
+                graphics, coding up things for the web, and learning algorithms.
               </a.p>
               <a.p>
-                My goal is to deliver, through code, unique and innovative
-                solutions to complex problems. If my portfolio interests you, or
-                you need an enthusiastic developer on your team,{" "}
-                <Link href="mailto:okoyecharles@gmail.com">
-                  I am available for hire
-                </Link>
-                .
+                My goal is to deliver, through code, unique and innovative solutions to
+                complex problems. If my portfolio interests you, or you need an
+                enthusiastic developer on your team,{" "}
+                <Link href="mailto:okoyecharles@gmail.com">I am available for hire</Link>.
               </a.p>
             </a.div>
           </article>
@@ -134,122 +147,5 @@ export default function About() {
         </div>
       </div>
     </Section>
-  );
-}
-
-function AboutImage({
-  imageAnimate,
-  plusReveal,
-  lineAnimate,
-}: AboutImageProps) {
-  const plusPositions = [
-    "top-0 left-0",
-    "top-0 right-0",
-    "bottom-0 right-0",
-    "bottom-0 left-0",
-  ];
-
-  return (
-    <picture className="group/picture about-image relative max-w-[350px] w-full aspect-square p-[25px] mx-auto lg:my-auto md:col-span-4">
-      <a.div
-        className="w-full rounded-[10px] max-w-[300px] aspect-square overflow-hidden"
-        style={imageAnimate()}
-      >
-        <Image
-          src="/assets/okoyecharles.webp"
-          alt="A portrait image of Okoye Charles"
-          width={300}
-          height={300}
-          className="transition-transform duration-500 delay-100 group-hover/picture:scale-105"
-        />
-      </a.div>
-      <div className="absolute inset-0 aesthetics -z-10">
-        <div className={`absolute top-[12.5px] left-1/2 -translate-x-1/2`}>
-          <HorizontalDottedLine
-            variant="bold"
-            animation={[lineAnimate[0], lineAnimate[1]]}
-          />
-        </div>
-        <div className={`absolute right-[12.5px] top-1/2 -translate-y-1/2`}>
-          <DottedLine
-            variant="bold"
-            animation={[lineAnimate[0], lineAnimate[1]]}
-          />
-        </div>
-        <div className={`absolute bottom-[12.5px] left-1/2 -translate-x-1/2`}>
-          <HorizontalDottedLine
-            variant="bold"
-            animation={[lineAnimate[0], lineAnimate[1]]}
-          />
-        </div>
-        <div className={`absolute left-[12.5px] top-1/2 -translate-y-1/2`}>
-          <DottedLine
-            variant="bold"
-            animation={[lineAnimate[0], lineAnimate[1]]}
-          />
-        </div>
-
-        {plusPositions.map((pos, index) => (
-          <div
-            key={pos}
-            className={`absolute ${pos} duration-300 group-hover/picture:rotate-[.25turn] transition-transform`}
-          >
-            <Plus
-              className="duration-300 stroke-grey-8 dark:stroke-grey-9 group-hover/picture:stroke-blue-100 dark:group-hover/picture:stroke-blue-d-200"
-              animation={plusReveal[index]}
-            />
-          </div>
-        ))}
-      </div>
-    </picture>
-  );
-}
-
-function AboutList({ items }: AboutListProps) {
-  const LIST_HEIGHT = 32 * (items.length - 1);
-
-  const { observedRef, springAnimate } = useObservedSprings(
-    [{ height: 0 }, { y: "-50%", scale: 0 }, { opacity: 0 }],
-    [
-      {
-        height: LIST_HEIGHT,
-        config: { friction: 35, tension: 250 },
-        delay: 250,
-      },
-      {
-        y: "-50%",
-        scale: 1,
-        config: { friction: 35, tension: 500 },
-        delay: 250,
-      },
-      { opacity: 1, delay: 450 },
-    ],
-    [
-      useSpring,
-      (cb: Function) => useTrail(items.length, cb),
-      (cb: Function) => useTrail(items.length, cb),
-    ]
-  );
-
-  return (
-    <div className="relative" ref={observedRef}>
-      <a.div
-        className="list-marker-line absolute top-[12px] left-[12px] w-[2px] bg-grey-ea dark:bg-grey-2"
-        style={springAnimate[0]}
-      />
-      <ul className="grid gap-2">
-        {items.map((item, itemIndex) => (
-          <li className="ps-[34px] relative" key={item}>
-            <a.div
-              className="list-marker h-[10px] aspect-square rounded-[5px] ring-1 ring-blue-100 dark:ring-blue-200 bg-grey-ea dark:bg-grey-2 absolute top-1/2 -translate-y-1/2 left-2"
-              style={springAnimate[1][itemIndex]}
-            />
-            <a.span className="block" style={springAnimate[2][itemIndex]}>
-              {item}
-            </a.span>
-          </li>
-        ))}
-      </ul>
-    </div>
   );
 }
