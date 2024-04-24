@@ -7,38 +7,38 @@ export default function PlaneGraphicLarge() {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0_760_1914)">
-        <g clip-path="url(#clip1_760_1914)">
+      <g clipPath="url(#clip0_760_1914)">
+        <g clipPath="url(#clip1_760_1914)">
           <path
             d="M128 194V128.344L282 52L128 194Z"
             fill="#1A5B9D"
             className="stroke-black"
-            stroke-width="2"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinejoin="round"
           />
           <path
             d="M153 149L128 194L279 57L153 149Z"
             fill="#13457D"
             className="stroke-black"
-            stroke-width="2"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinejoin="round"
           />
           <path
             d="M153.649 149.722L128 194L179 131L153.649 149.722Z"
             fill="#103258"
-            fill-opacity="0.8"
+            fillOpacity="0.8"
           />
           <path
             d="M153 149.118L282 52L204 191L153 149.118Z"
             fill="#2584E4"
             className="stroke-black"
-            stroke-width="2"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinejoin="round"
           />
           <path
             d="M154.5 149L278.5 56L161.5 154.5L154.5 149Z"
             fill="#1B5599"
-            fill-opacity="0.7"
+            fillOpacity="0.7"
           />
           <ellipse
             cx="209.642"
@@ -47,26 +47,26 @@ export default function PlaneGraphicLarge() {
             ry="20.0295"
             transform="rotate(32 209.642 163.253)"
             fill="#13457D"
-            fill-opacity="0.7"
+            fillOpacity="0.7"
           />
           <path
             d="M282 52L70 99.3152L127.846 132L282 52Z"
             fill="#2584E4"
             className="stroke-black"
-            stroke-width="2"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinejoin="round"
           />
           <path
             d="M273.5 55L72 99.6514L81.2735 105L273.5 55Z"
             fill="white"
-            fill-opacity="0.7"
+            fillOpacity="0.7"
           />
         </g>
         <circle cx="45" cy="246" r="4.5" stroke="black" />
         <path
           d="M112.863 183C73.1962 214.167 52.3628 296.5 152.363 258C209.863 231.5 322.363 233.5 233.863 293.5C147.363 355.5 135.363 306 173.863 296.5C212.363 287 239.863 316.5 205.363 335C170.863 353.5 116.863 356.5 108.863 390"
           className="stroke-grey-9 dark:stroke-grey-6"
-          stroke-dasharray="5 5"
+          strokeDasharray="5 5"
         />
         <circle cx="90" cy="42" r="10" className="fill-grey-d dark:fill-grey-6" />
         <circle cx="93" cy="40" r="9.5" className="stroke-black dark:stroke-white" />
@@ -80,8 +80,8 @@ export default function PlaneGraphicLarge() {
           x2="53.5395"
           y2="171.391"
           stroke="#3592FF"
-          stroke-width="2"
-          stroke-linecap="round"
+          strokeWidth="2"
+          strokeLinecap="round"
         />
         <line
           x1="47.1203"
@@ -89,8 +89,8 @@ export default function PlaneGraphicLarge() {
           x2="57.3909"
           y2="165.46"
           stroke="#3592FF"
-          stroke-width="2"
-          stroke-linecap="round"
+          strokeWidth="2"
+          strokeLinecap="round"
         />
         <line
           x1="270.436"
@@ -98,8 +98,8 @@ export default function PlaneGraphicLarge() {
           x2="268.613"
           y2="339.405"
           stroke="#EAEAEA"
-          stroke-width="2"
-          stroke-linecap="round"
+          strokeWidth="2"
+          strokeLinecap="round"
         />
         <line
           x1="264.064"
@@ -107,8 +107,8 @@ export default function PlaneGraphicLarge() {
           x2="274.405"
           y2="335.349"
           stroke="#EAEAEA"
-          stroke-width="2"
-          stroke-linecap="round"
+          strokeWidth="2"
+          strokeLinecap="round"
         />
       </g>
       <defs>
