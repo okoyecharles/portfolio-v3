@@ -43,7 +43,7 @@ const projectData: Array<Project> = [
       github: "https://github.com/okoyecharles/buggo",
       live: "https://buggo.vercel.app",
     },
-    themeColor: "[--rotating-gradient-color:#0079C9]"
+    themeColor: "[--rotating-gradient-border-color:#0079C9]",
   },
   {
     name: "Amazon Clone",
@@ -60,7 +60,8 @@ const projectData: Array<Project> = [
       github: "https://github.com/okoyecharles/amazon-clone",
       live: "https://clone-f50ae.web.app",
     },
-    themeColor: "[--rotating-gradient-color:#666] dark:[--rotating-gradient-color:#999]"
+    themeColor:
+      "[--rotating-gradient-border-color:#666] dark:[--rotating-gradient-border-color:#999]",
   },
   {
     name: "Lavish Cuisine",
@@ -77,7 +78,7 @@ const projectData: Array<Project> = [
       github: "https://github.com/okoyecharles/lavish-cuisine",
       live: "https://lavish-cuisine.web.app",
     },
-    themeColor: "[--rotating-gradient-color:#C0841D]"
+    themeColor: "[--rotating-gradient-border-color:#C0841D]",
   },
   {
     name: "To do List",
