@@ -23,6 +23,7 @@ interface LinkProps {
   ariaLabel?: string;
   title?: string;
   onClick?: MouseEventHandler<HTMLAnchorElement>;
+  download?: boolean;
 }
 
 export default function Link({
@@ -36,13 +37,14 @@ export default function Link({
   title,
   internal = false,
   onClick,
+  download
 }: LinkProps) {
   return (
     <a
       href={href}
       ref={linkRef}
       className={`
-      inline-flex items-center gap-1 w-fit ${variantClass[variant]} ${className}
+      inline-flex items-center gap-1 w-fit ${variantClass[variant]} ${className || ''}
     `}
       target={internal ? undefined : "_blank"}
       rel={internal ? undefined : "noopener noreferrer"}
@@ -50,6 +52,7 @@ export default function Link({
       aria-label={ariaLabel}
       title={title}
       onClick={onClick}
+      download={download}
     >
       {children}
     </a>
