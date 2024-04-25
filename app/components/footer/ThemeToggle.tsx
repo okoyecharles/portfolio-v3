@@ -3,7 +3,6 @@ import footerData from "@/app/data/footer";
 import { a, useSpring } from "@react-spring/web";
 import { useTheme } from "next-themes";
 import useClient from "../utils/useClient";
-import Button from "../clickable/Button";
 
 export default function ThemeToggle() {
   const [client, _setClient] = useClient();
