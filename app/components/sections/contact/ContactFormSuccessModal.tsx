@@ -80,18 +80,18 @@ export default function ContactFormSuccessModal({
                 </span>
               </header>
               <div className="grid gap-4 my-4">
-                <p>
+                <p className="text-center md:text-left">
                   I will be in touch shortly, I aim to respond to inquiries within 24
                   hours.
                 </p>
-                <p>
+                <p className="text-center md:text-left">
                   In the mean time, feel free to explore{" "}
                   <Link internal href="#more-projects" onClick={() => setOpen(false)}>
                     more projects
                   </Link>{" "}
                   I have worked on 🚀
                 </p>
-                <p>
+                <p className="text-center md:text-left">
                   Want to connect further? <br /> You can find me hanging out on{" "}
                   <Link href={socials.find((social) => social.name === "X")?.link || ""}>
                     X
