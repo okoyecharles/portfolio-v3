@@ -50,7 +50,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${visby.variable} ${lato.variable} h-full scroll-smooth`}
+      className={`${visby.variable} ${lato.className} h-full scroll-smooth`}
     >
       <body className="font-normal bg-white dark:bg-black font-lato selection:bg-blue-200 dark:selection:bg-blue-d-300 selection:text-white">
         <Providers>{children}</Providers>
