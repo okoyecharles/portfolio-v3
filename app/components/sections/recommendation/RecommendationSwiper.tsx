@@ -10,6 +10,7 @@ import { percentToRadians } from "../../utils/convertion";
 import PrevIcon from "../../svg/icons/PrevIcon";
 import NextIcon from "../../svg/icons/NextIcon";
 import CustomTooltip from "../../clickable/CustomTooltip";
+import EarthThreeLoading from "../../react-three/EarthThreeLoading";
 
 export default function RecommendationSwiper({
   recommendations,
@@ -17,6 +18,8 @@ export default function RecommendationSwiper({
   setRecommedationIndex,
 }: RecommendationSwiperProps) {
   const [earthRotating, setEarthRotating] = useState<boolean>(true);
+  const [earthLoaded, setEarthLoaded] = useState<boolean>(false);
+
   const [viewed, setViewed] = useState<boolean>(false);
   const { inView, ref: observedRef } = useInView({
     threshold: 0,
@@ -87,23 +90,24 @@ export default function RecommendationSwiper({
         ref={observedRef}
         style={earthViewedSpring}
       >
-        <EarthThree rotationSpring={earthRotationSpring} />
-        <div
-          className={`
+        <EarthThree rotationSpring={earthRotationSpring} setLoaded={setEarthLoaded} />
+        {earthLoaded ? (
+          <div
+            className={`
             group/earth-pointer
             ${earthRotating ? "is-disabled" : "is-active"}
             absolute top-1/2 left-1/2
             -translate-x-1/2 -translate-y-1/2
           `}
-        >
-          <div
-            className="relative isolate"
-            data-tooltip-id="active-recommendation-location"
-            aria-describedby="active-recommendation-location"
           >
-            <LocationIcon />
             <div
-              className={`
+              className="relative isolate"
+              data-tooltip-id="active-recommendation-location"
+              aria-describedby="active-recommendation-location"
+            >
+              <LocationIcon />
+              <div
+                className={`
               absolute -z-10
               h-[14px] aspect-square rounded-[50%]
               bg-grey-9 dark:bg-black
@@ -112,23 +116,24 @@ export default function RecommendationSwiper({
               ${earthRotating ? "scale-0" : "scale-100"}
               transition duration-300 pointer-events-none
             `}
-            />
-            <div
-              className={`
-              absolute -z-20
-              h-[12px] aspect-square rounded-[50%]
-              bg-black/20 dark:bg-white/30
-              top-1/2 left-1/2 opacity-0 pointer-events-none
-              ${earthRotating ? "" : "expanding-scale"}
-            `}
-            />
+              />
+              <div
+                className={`
+                absolute -z-20
+                h-[12px] aspect-square rounded-[50%]
+                bg-black/20 dark:bg-white/30
+                top-1/2 left-1/2 opacity-0 pointer-events-none
+                ${earthRotating ? "" : "expanding-scale"}
+              `}
+              />
+            </div>
+            {!earthRotating ? (
+              <CustomTooltip id="active-recommendation-location">
+                <span>{recommendations[recommendationIndex].location}</span>
+              </CustomTooltip>
+            ) : null}
           </div>
-          <CustomTooltip id="active-recommendation-location">
-            <span>
-              {recommendations[recommendationIndex].location}
-            </span>
-          </CustomTooltip>
-        </div>
+        ) : null}
       </a.div>
       <div className="card-container min-h-[400px] grid place-items-center relative mr-0 md:mr-[24px] semi-lg:mr-0 px-[12px] md:px-0">
         {cardTransition((style, cardIndex) => (
