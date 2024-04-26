@@ -1,6 +1,6 @@
 import NavLinksMobile from "./NavLinksMobile";
 import NavLinksDesktop from "./NavLinksDesktop";
-import LogoIcon from "../svg/abstract/Logo";
+import Logo from "../svg/abstract/Logo";
 
 export default function Navigation() {
   return (
@@ -13,7 +13,7 @@ export default function Navigation() {
             aria-label={"Okoye Charles' Portfolio Logo"}
             title={"Okoye Charles' Portfolio"}
           >
-            <LogoIcon />
+            <Logo />
           </a>
         </div>
       </div>

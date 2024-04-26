@@ -1,21 +1,27 @@
 import footerData from "@/app/data/footer";
-import FooterLogo from "../svg/abstract/FooterLogo";
+import LogoSmall from "../svg/abstract/LogoSmall";
 import ThemeToggle from "./ThemeToggle";
 import Link from "../clickable/Link";
 import HeartIcon from "../svg/abstract/HeartIcon";
+import Logo from "../svg/abstract/Logo";
 
 export default function Footer() {
   return (
     <div className="px-8 border-t footer-container bg-grey-fb dark:bg-grey-1 border-grey-d dark:border-grey-2">
       <footer className="flex flex-col w-full max-w-screen-xl gap-10 py-8 mx-auto md:flex-row md:justify-between">
-        <div className="flex justify-between content md:flex-col md:gap-8">
+        <div className="flex justify-between items-center md:items-start md:flex-col md:gap-8">
           <Link
             href="/"
             variant="plain"
             ariaLabel="Okoye Charles' Portfolio Logo"
             title="Okoye Charles' Portfolio"
           >
-            <FooterLogo />
+            <span className="inline-block md:hidden">
+              <LogoSmall />
+            </span>
+            <span className="hidden md:inline-block">
+              <Logo />
+            </span>
           </Link>
           <ul className="flex gap-4 md:flex-col md:gap-3" aria-label="social links">
             {footerData.socials.map((social) => (
