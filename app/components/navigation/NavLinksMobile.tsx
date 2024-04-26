@@ -1,7 +1,7 @@
 "use client";
 import CloseMenuIcon from "../svg/abstract/CloseMenuIcon";
 import MenuIcon from "../svg/abstract/MenuIcon";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import VerticalLineIcon from "../svg/abstract/VerticalLineIcon";
 import { a, to, useChain, useSpring, useSpringRef, useTrail } from "@react-spring/web";
 import mobileNavigationData from "@/app/data/navigation";
@@ -84,6 +84,33 @@ export default function NavLinksMobile() {
     },
   });
 
+  const menuItemRefs = mobileNavigationData.anchors.map(() =>
+    useRef<HTMLAnchorElement>(null)
+  );
+  function handleMenuItemKeyDown(
+    event: React.KeyboardEvent<HTMLAnchorElement>,
+    index: number
+  ) {
+    const menuItemCount = mobileNavigationData.anchors.length;
+
+    // navigating the menu
+    if (event.key === "ArrowLeft") {
+      let newItemIndex = (index + (menuItemCount - 1)) % menuItemCount;
+      menuItemRefs[newItemIndex].current?.focus();
+    } else if (event.key === "ArrowRight") {
+      let newItemIndex = (index + 1) % menuItemCount;
+      menuItemRefs[newItemIndex].current?.focus();
+    }
+  }
+
+  useEffect(() => {
+    if (open) {
+      requestAnimationFrame(() => {
+        menuItemRefs[0].current?.focus();
+      });
+    }
+  }, [open]);
+
   return (
     <>
       <a.nav
@@ -100,7 +127,7 @@ export default function NavLinksMobile() {
       >
         <div
           id={"mobile-main-menu-container"}
-          className="w-[calc(100%)] bg-grey-fb dark:bg-grey-2 absolute right-0 top-0 isolate"
+          className="w-[calc(100vmin-48px)] bg-grey-fb dark:bg-grey-2 absolute right-0 top-0 isolate"
         >
           <div className="flex flex-col items-end">
             <button
@@ -160,6 +187,8 @@ export default function NavLinksMobile() {
                     active == anchor.name && "text-black dark:text-grey-d"
                   }`}
                   tabIndex={open ? 0 : -1}
+                  onKeyDown={(event) => handleMenuItemKeyDown(event, anchorIndex)}
+                  ref={menuItemRefs[anchorIndex]}
                 >
                   {anchor.name}
                 </a.a>

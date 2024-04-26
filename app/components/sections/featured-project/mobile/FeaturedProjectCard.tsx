@@ -33,19 +33,21 @@ export default function FeaturedProjectCard({
       className={`
         card-container m-auto w-fit relative after:absolute after:inset-0 after:rounded-[10px]
         after:transition-colors after:pointer-events-none
-        ${cardShadowByOffset[String(activeOffset)]}`}
+        ${cardShadowByOffset[String(activeOffset)]}
+      `}
       aria-hidden={!active}
     >
       <article
         className={`
-          rounded-[10px] p-6
-          rotating-gradient
-          before:bg-gradient-to-b
-          bg-grey-d dark:bg-grey-4
-          before:from-grey-ea dark:before:from-grey-2
-          before:to-white dark:before:to-black max-w-[320px]
+          p-6 rounded-[10px] max-w-[320px]
+
+          rotating-gradient-border 
+          [--border-color:#ddd] dark:[--border-color:#444]
+          [--background-color:#eaeaea] [--background-color-2:#fff] 
+          dark:[--background-color:#222] dark:[--background-color-2:#000] 
+          ${active ? "" : "disable-rotating-gradient-border"}
+          
           ${project.themeColor}
-          ${active ? "after:opacity-100" : "after:opacity-0"}
         `}
       >
         <header className={"grid gap-1"}>

@@ -69,50 +69,61 @@
   }
 
   /* Gradient Border */
-  .rotating-gradient {
-    --rotating-gradient-border: 1.5px;
-    --rotating-gradient-color: #ffffff00;
-    padding: 1rem;
-    overflow: hidden;
-
-    position: relative;
-    border-radius: 10px;
-    isolation: isolate;
+  @property --rotating-gradient-border-angle {
+    inherits: false;
+    initial-value: 0deg;
+    syntax: "<angle>";
   }
 
-  .rotating-gradient::after {
-    z-index: -20;
-    transform: rotate(25deg);
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    background-image: conic-gradient(from 0deg at 50% 50%, transparent 17%, var(--rotating-gradient-color) 24%, transparent 32%, transparent 67%, var(--rotating-gradient-color) 76%, transparent 84%);
-    animation: rotate-gradient infinite linear 10s;
-    transition: background-image 5s ease, opacity 1s ease;
-  }
-
-  .rotating-gradient::before {
-    z-index: -10;
-    content: '';
-    position: absolute;
-    inset: var(--rotating-gradient-border);
-    border-radius: inherit;
-  }
-
-    @keyframes rotate-gradient {
-      from {
-        transform: rotate(0deg) scale(2);
-      }
-      to {
-        transform: rotate(360deg) scale(2);
-      }
+  @keyframes rotate-gradient-border {
+    to {
+      --rotating-gradient-border-angle: 180deg;
     }
+  }
+
+ 
+
+  .rotating-gradient-border {
+    --border-color: transparent;
+    --background-color: transparent;
+    --background-color-2: var(--background-color);
+    --rotating-gradient-border-width: 1.5px;
+    --rotating-gradient-border-color: transparent;
+   
+    background: 
+      linear-gradient(
+        to bottom,
+        var(--background-color),
+        var(--background-color-2)
+      ) padding-box, 
+      conic-gradient(
+        from var(--rotating-gradient-border-angle) at 50% 50%,
+        transparent 17%,
+        var(--rotating-gradient-border-color) 24%,
+        transparent 32%, transparent 67%,
+        var(--rotating-gradient-border-color) 76%,
+        transparent 84%
+      ) border-box,
+      linear-gradient(
+        var(--border-color),
+        var(--border-color)
+      ) border-box;
+    border: var(--rotating-gradient-border-width) solid transparent;
+    animation: rotate-gradient-border infinite linear 10s;
+
+    /* for browsers that don't support the @property at-rule */
+    background-color: var(--background-color);
+    /* box-shadow: 0 0 0 1px var(--border-color) inset; */
+  }
+  
+  .disable-rotating-gradient-border {
+    --rotating-gradient-border-color: #ffffff00 !important;
+    transition: background 0.25s ease;
+  }
 
   /* repeating expanding scale */
   .expanding-scale {
     transform-origin: center;
-    /* transform: translate(-6px, -6px) scale(1.6); */
     animation: expand-scale infinite linear 1250ms ;
   }
 

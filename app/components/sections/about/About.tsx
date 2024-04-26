@@ -91,6 +91,10 @@ export default function About() {
               Introduction
             </a.h3>
             <a.div style={layoutReveal()}>
+              <CustomTooltip id="about-info-1">
+                <span className="underline">Kosi</span> is short for{" "}
+                <span className="underline">Kosisochukwu</span>
+              </CustomTooltip>
               <a.p className="mb-4">
                 My name is{" "}
                 <strong
@@ -107,10 +111,6 @@ export default function About() {
                 >
                   <InfoIcon />
                 </button>{" "}
-                <CustomTooltip id="about-info-1">
-                  <span className="underline">Kosi</span> is short for{" "}
-                  <span className="underline">Kosisochukwu</span>
-                </CustomTooltip>
                 , I'm a{" "}
                 <strong className="text-grey-1 dark:text-grey-d whitespace-nowrap">
                   Full-Stack Developer

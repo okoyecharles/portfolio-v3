@@ -13,11 +13,12 @@ export default function FeaturedProjectTabList({
   const projectMarkerPos = PROJECT_HEIGHT / 2 + projectIndex * PROJECT_HEIGHT;
   const projectMarkerSpring = useSpring({ pos: projectMarkerPos });
 
-  const rotatingGradientStyles = `
-    rotating-gradient
-    bg-grey-d dark:bg-grey-3
-    before:bg-grey-ea dark:before:bg-grey-15
-    ${projects[projectIndex].themeColor}`;
+  const rotatingGradientBorderStyles = `
+    rotating-gradient-border
+    [--border-color:#ddd] dark:[--border-color:#333]
+    [--background-color:#eaeaea] dark:[--background-color:#151515]
+    ${projects[projectIndex].themeColor}
+  `;
 
   const projectTabTriggerRefs = projects.map(() => useRef<HTMLButtonElement>(null));
   function handleKeyDown(event: React.KeyboardEvent<HTMLDivElement>) {
@@ -44,7 +45,7 @@ export default function FeaturedProjectTabList({
         w-[calc(100%-24px)] h-[calc(33%-24px)]
         rounded-[5px] -z-10
         hidden semi-lg:block
-        ${rotatingGradientStyles}
+        ${rotatingGradientBorderStyles}
       `}
         style={{ top: projectMarkerSpring.pos.to((pos) => `${pos}%`) }}
       />
@@ -55,7 +56,7 @@ export default function FeaturedProjectTabList({
         h-[calc(100%-24px)] w-[calc(33%-24px)]
         rounded-[5px] -z-10
         hidden md:block semi-lg:hidden
-        ${rotatingGradientStyles}
+        ${rotatingGradientBorderStyles}
       `}
         style={{ left: projectMarkerSpring.pos.to((pos) => `${pos}%`) }}
       />
