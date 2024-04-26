@@ -103,7 +103,9 @@ export default function NavLinksMobile() {
 
   useEffect(() => {
     if (open) {
-      menuItemRefs[0].current?.focus();
+      requestAnimationFrame(() => {
+        menuItemRefs[0].current?.focus();
+      })
     }
   }, [open])
 
