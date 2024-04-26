@@ -44,44 +44,53 @@ export default function Home() {
     <Section
       name="home"
       id="content"
-      padding="pt-[246px] pb-[150px] mb-[50px] md:pt-[240px] md:pb-[192px] md:mb-[64px]"
+      padding="py-[192px] md:py-[192px]"
       sectionRef={observedRef}
     >
-      <header className="relative md:self-center">
-        <a.div
-          className="font-extrabold text-grey-2 dark:text-grey-b text-[24px] font-mono absolute leading-[1] -top-6 -left-0 md:-top-2 lg:-top-0 md:-left-10 select-none"
-          style={layoutReveal(0)}
-          aria-label={"I am"}
-        >
-          I<span className="text-blue-200 dark:text-blue-d-200">'</span>m
-        </a.div>
+      <header className="self-center text-center">
         <a.h1
-          className="text-grey-1 dark:text-grey-d text-[64px] lg:text-[100px] leading-[1.1] font-visby uppercase font-extrabold"
+          className="text-grey-1 dark:text-grey-d text-[60px] md:text-[72px] lg:text-[100px] leading-[1] font-extrabold mx-6"
           style={layoutReveal(1)}
         >
-          Okoye Charles
+          <span className="relative w-1">
+            <a.div
+              className={`
+                select-none font-extrabold font-mono
+                text-grey-2 dark:text-grey-b
+                text-[20px] md:text-[24px] 
+                absolute -top-[8px] -left-[40px]
+              `}
+              style={layoutReveal(0)}
+              aria-label={"I am"}
+            >
+              I<span className="text-blue-200 dark:text-blue-d-200">'</span>m
+            </a.div>
+          </span>
+          <span className="uppercase font-visby">Okoye Charles</span>
         </a.h1>
 
         <a.h2
-          className="uppercase dark:text-grey-6 font-lato font-semibold md:text-[18px] md:text-center"
+          className="uppercase dark:text-grey-6 font-[500] text-[15px] lg:text-base tracking-wide text-center font-lato"
           style={layoutReveal(2)}
         >
           I embrace the digital world
         </a.h2>
       </header>
       <a.p
-        className="py-9 max-w-[700px] md:text-[18px] md:text-center md:self-center"
+        className="py-9 max-w-[512px] md:max-w-[650px] lg:text-[18px] text-center self-center"
         style={layoutReveal(3)}
       >
         I can help you build a product, feature, or website. Look through my work and
         experience! If you are interested, I am available for hire.
       </a.p>
       <a.div
-        className="flex flex-wrap gap-6 call-to-action-buttons md:self-center"
+        className="flex flex-wrap gap-6 call-to-action-buttons self-center"
         style={layoutReveal(4)}
       >
         <a href="#projects">
-          <Button variant="blue" tabIndex={-1}>Check out my work</Button>
+          <Button variant="blue" tabIndex={-1}>
+            Check out my work
+          </Button>
         </a>
         <Button variant="black">
           <span>Resume</span>

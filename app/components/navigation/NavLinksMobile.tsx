@@ -84,7 +84,9 @@ export default function NavLinksMobile() {
     },
   });
 
-  const menuItemRefs = mobileNavigationData.anchors.map(() => useRef<HTMLAnchorElement>(null));
+  const menuItemRefs = mobileNavigationData.anchors.map(() =>
+    useRef<HTMLAnchorElement>(null)
+  );
   function handleMenuItemKeyDown(
     event: React.KeyboardEvent<HTMLAnchorElement>,
     index: number
@@ -105,9 +107,9 @@ export default function NavLinksMobile() {
     if (open) {
       requestAnimationFrame(() => {
         menuItemRefs[0].current?.focus();
-      })
+      });
     }
-  }, [open])
+  }, [open]);
 
   return (
     <>
@@ -125,7 +127,7 @@ export default function NavLinksMobile() {
       >
         <div
           id={"mobile-main-menu-container"}
-          className="w-[calc(100%)] bg-grey-fb dark:bg-grey-2 absolute right-0 top-0 isolate"
+          className="w-[calc(100vmin-48px)] bg-grey-fb dark:bg-grey-2 absolute right-0 top-0 isolate"
         >
           <div className="flex flex-col items-end">
             <button
