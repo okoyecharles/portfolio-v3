@@ -1,4 +1,4 @@
-import { Suspense, useMemo } from "react";
+import { Suspense, useEffect, useMemo, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
 import { useTexture } from "@react-three/drei";
 import { animated } from "@react-spring/three";
@@ -18,21 +18,29 @@ export default function EarthThree({ rotationSpring, setLoaded }: Earth3dProps) 
 }
 
 function EarthMesh({ rotationSpring, setLoaded }: EarthMeshProps) {
-  const textureURL: Record<string, string> = {
-    light: "/assets/react-three/textures/earth-white.png",
-    dark: "/assets/react-three/textures/earth-black.png",
-    unmounted: "/assets/react-three/textures/blank.png",
-  };
   const { theme } = useTheme();
-  const textureMap = useTexture(theme ? textureURL[theme] : textureURL["unmounted"]);
+  const defaultTextureMap = useTexture("/assets/react-three/textures/blank.png");
+  const lightTextureMap = useTexture("/assets/react-three/textures/earth-white.png");
+  const darkTextureMap = useTexture("/assets/react-three/textures/earth-black.png");
 
   return (
     <animated.mesh
       rotation={rotationSpring.rotation as unknown as [number, number, number]}
-      onAfterRender={() => { setLoaded(true) }}
+      onAfterRender={() => {
+        setLoaded(true);
+      }}
     >
       <sphereGeometry args={[1, 32, 32]} />
-      <meshStandardMaterial map={textureMap} toneMapped={false} />
+      <meshStandardMaterial
+        map={
+          theme === "light"
+            ? lightTextureMap
+            : theme === "dark"
+            ? darkTextureMap
+            : defaultTextureMap
+        }
+        toneMapped={false}
+      />
     </animated.mesh>
   );
 }
