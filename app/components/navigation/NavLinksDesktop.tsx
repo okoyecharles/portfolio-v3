@@ -1,25 +1,33 @@
 "use client";
 import VerticalLineIcon from "../svg/abstract/VerticalLineIcon";
-import { AnchorName, SubmenuAnchor, navigationData, } from "../../data/navigation";
+import { AnchorName, SubmenuAnchor, navigationData } from "../../data/navigation";
 import { a, to, useSpring } from "@react-spring/web";
 import useScrollDirection from "../utils/useScrollDirection";
 import useActiveSection from "../utils/useActiveSection";
 import ExpandIcon from "../svg/submenu/ExpandIcon";
-import { useEffect, useRef, useState } from "react";
+import {
+  FocusEvent,
+  FocusEventHandler,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import Link from "../clickable/Link";
 import useUserScrolling from "@/app/components/utils/useUserScrolling";
 import { toNormalCase } from "../utils/convertion";
+import { SubmenuProps } from "./props";
 
 export default function NavLinksDesktop() {
   const activeSection = useActiveSection();
   const { userScrolling } = useUserScrolling();
 
   const activeSectionMarkerMorph = [
-    {pos: -24, width: 24},
-    {pos: 24, width: 39.4},
-    {pos: 95.4, width: 45.25},
-    {pos: 190.65, width: 64.85},
-    {pos: 305.5, width: 85.17},
+    { pos: -24, width: 24 },
+    { pos: 24, width: 39.4 },
+    { pos: 95.4, width: 45.25 },
+    { pos: 190.65, width: 64.85 },
+    { pos: 305.5, width: 85.17 },
   ];
   const activeSectionMarker = {
     unmounted: activeSectionMarkerMorph[0],
@@ -40,7 +48,7 @@ export default function NavLinksDesktop() {
 
   const scrollDirection = useScrollDirection();
   const activeNavSpring = useSpring({
-    from: {y: 0},
+    from: { y: 0 },
     to: {
       y: scrollDirection == "down" ? -100 : 0,
     },
@@ -52,31 +60,84 @@ export default function NavLinksDesktop() {
   });
 
   const [submenuOpen, setSubmenuOpen] = useState<AnchorName | null>(null);
+  const menuItemRefs = navigationData.anchors.map(() => useRef<HTMLAnchorElement>(null));
+  const submenuFirstItemRefs = navigationData.anchors.map(() =>
+    useRef<HTMLAnchorElement>(null)
+  );
+
+  function handleMenuItemKeyDown(
+    event: React.KeyboardEvent<HTMLAnchorElement>,
+    index: number
+  ) {
+    const menuItemCount = navigationData.anchors.length;
+    const hasSubmenu = navigationData.anchors[index].submenuAnchors !== undefined;
+
+    // opening submenus
+    if (hasSubmenu) {
+      if (event.key === "ArrowDown") {
+        event.preventDefault();
+        setSubmenuOpen(navigationData.anchors[index].name);
+      }
+    }
+
+    // navigating the menu
+    if (event.key === "ArrowLeft") {
+      let newItemIndex = (index + (menuItemCount - 1)) % menuItemCount;
+      menuItemRefs[newItemIndex].current?.focus();
+    } else if (event.key === "ArrowRight") {
+      let newItemIndex = (index + 1) % menuItemCount;
+      menuItemRefs[newItemIndex].current?.focus();
+    }
+  }
+  function handleMenuBarBlur(event: FocusEvent<HTMLUListElement, Element>) {
+    const currentTarget = event.currentTarget;
+
+    requestAnimationFrame(() => {
+      if (!currentTarget.contains(document.activeElement)) {
+        setSubmenuOpen(null);
+      }
+    });
+  }
+
   useEffect(() => {
     setSubmenuOpen(null);
   }, [scrollDirection]);
+  useEffect(() => {
+    if (submenuOpen) {
+      let anchorIndex = navigationData.anchors.findIndex(
+        (anchor) => anchor.name === submenuOpen
+      );
+      submenuFirstItemRefs[anchorIndex].current?.focus();
+    }
+  }, [submenuOpen]);
 
   return (
     <a.nav
       id={"main-menu"}
-      className="absolute w-fit top-8 right-8 bg-white dark:bg-grey-2 ring-1 dark:ring-0 ring-grey-ea rounded-[10px] font-visby font-medium px-6 py-[7px] gap-6 hidden md:flex items-center select-none"
+      className="absolute w-fit top-8 right-8 bg-white dark:bg-grey-2 ring-1 dark:ring-0 ring-grey-ea rounded-[10px] font-medium px-6 py-[7px] gap-6 hidden md:flex items-center select-none"
       style={activeNavSpring}
       aria-label={"Main Menu"}
     >
-      { userScrolling }
-      <ul className="flex text-sm gap-8 leading-[1.5] text-grey-6 dark:text-grey-b" role={"menubar"}>
-        {navigationData.anchors.map((anchor) => (
+      {userScrolling}
+      <ul
+        className="flex text-sm gap-8 leading-[1.5] text-grey-6 dark:text-grey-b"
+        role={"menubar"}
+        onBlur={handleMenuBarBlur}
+      >
+        {navigationData.anchors.map((anchor, index) => (
           <li
             key={anchor.name}
             id={anchor.name + "-menu-item"}
             className={`flex items-center gap-2 group/nav-item transition-colors ${
               activeSection == anchor.name && "text-black dark:text-grey-d"
             }`}
+            role={"menuitem"}
           >
             <a
               href={anchor.link}
-              className="transition-colors group-hover/nav-item:text-black dark:group-hover/nav-item:text-grey-d uppercase"
-              role={"menuitem"}
+              className="transition-colors group-hover/nav-item:text-black dark:group-hover/nav-item:text-grey-d uppercase font-visby"
+              ref={menuItemRefs[index]}
+              onKeyDown={(event) => handleMenuItemKeyDown(event, index)}
             >
               {anchor.title}
             </a>
@@ -86,6 +147,7 @@ export default function NavLinksDesktop() {
                 anchors={anchor.submenuAnchors}
                 open={anchor.name === submenuOpen}
                 setOpen={setSubmenuOpen}
+                submenuItemRef={submenuFirstItemRefs[index]}
               />
             )}
           </li>
@@ -97,14 +159,13 @@ export default function NavLinksDesktop() {
       <ul className="flex gap-4 items-center">
         {navigationData.socials.map((social) => (
           <li key={social.name} className="h-[22px]">
-            <Link href={social.link} variant="plain">
+            <Link href={social.link} variant="plain" ariaLabel={social.name}>
               {social.icon}
             </Link>
           </li>
         ))}
       </ul>
-      <div
-        className="active-marker-bar absolute left-0 bottom-0 h-5 w-full overflow-hidden rounded-[10px] pointer-events-none">
+      <div className="active-marker-bar absolute left-0 bottom-0 h-5 w-full overflow-hidden rounded-[10px] pointer-events-none">
         <div className="relative h-full">
           <a.div
             className="active-marker absolute left-0 bottom-0 h-[10px] rounded-[5px] bg-blue-100 dark:bg-blue-d-200"
@@ -122,18 +183,12 @@ export default function NavLinksDesktop() {
   );
 }
 
-interface SubmenuProps<T> {
-  name: AnchorName;
-  anchors: T[];
-  open: boolean;
-  setOpen: Function;
-}
-
 function Submenu({
   name,
   anchors,
   open,
   setOpen,
+  submenuItemRef,
 }: SubmenuProps<SubmenuAnchor>) {
   const SUBMENU_ITEMS_HEIGHT = 34 * anchors.length;
   const SUBMENU_OPEN_HEIGHT = SUBMENU_ITEMS_HEIGHT + 24;
@@ -192,18 +247,16 @@ function Submenu({
 
       <a.div
         id={name + "-submenu"}
-        className={`submenu-items bg-white ring-1 ring-grey-d dark:ring-0 dark:bg-grey-2 absolute w-[256px] h-[${SUBMENU_OPEN_HEIGHT}px] top-[calc(100%+31px)] rounded-[10px] -translate-x-8 py-3 font-lato font-medium`}
-        style={{...openSubmenuSpring, pointerEvents: open ? "all" : "none"}}
-        role={"listbox"}
+        className={`submenu-items bg-white ring-1 ring-grey-d dark:ring-0 dark:bg-grey-2 absolute w-[256px] h-[${SUBMENU_OPEN_HEIGHT}px] top-[calc(100%+31px)] rounded-[10px] -translate-x-8 py-3 font-medium`}
+        style={{ ...openSubmenuSpring, pointerEvents: open ? "all" : "none" }}
         aria-label={submenuName}
       >
         <div className="relative translate-x-8">
-          <div
-            className="submenu-pointer absolute w-[16.9px] h-[16.9px] bg-white ring-1 ring-grey-d dark:ring-0 dark:bg-grey-2 rotate-45 rounded-[2px] -top-[12px] -translate-y-1/2"></div>
+          <div className="submenu-pointer absolute w-[16.9px] h-[16.9px] bg-white ring-1 ring-grey-d dark:ring-0 dark:bg-grey-2 rotate-45 rounded-[2px] -top-[12px] -translate-y-1/2"></div>
           <div className="bg-white dark:bg-grey-2 absolute w-[34px] h-[12px] -top-[12px] -left-[8px]"></div>
         </div>
         <ul>
-          {anchors.map((anchor) => (
+          {anchors.map((anchor, index) => (
             <li
               key={anchor.name}
               className={`px-4 ${
@@ -213,8 +266,8 @@ function Submenu({
               <a
                 href={anchor.link}
                 className="flex gap-2 items-center py-2 text-grey-6 dark:text-grey-b group-hover/submenu-item:text-grey-2 dark:group-hover/submenu-item:text-grey-d group-[.is-active]/submenu-item:text-grey-2 dark:group-[.is-active]/submenu-item:text-grey-d"
-                aria-selected={anchor.name === active}
                 tabIndex={open ? 0 : -1}
+                ref={index === 0 ? submenuItemRef : undefined}
               >
                 {anchor.icon}
                 <span className="leading-[1] block">{anchor.title}</span>

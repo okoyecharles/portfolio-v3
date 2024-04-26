@@ -1,7 +1,7 @@
 "use client";
 import CloseMenuIcon from "../svg/abstract/CloseMenuIcon";
 import MenuIcon from "../svg/abstract/MenuIcon";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import VerticalLineIcon from "../svg/abstract/VerticalLineIcon";
 import { a, to, useChain, useSpring, useSpringRef, useTrail } from "@react-spring/web";
 import mobileNavigationData from "@/app/data/navigation";
@@ -84,6 +84,29 @@ export default function NavLinksMobile() {
     },
   });
 
+  const menuItemRefs = mobileNavigationData.anchors.map(() => useRef<HTMLAnchorElement>(null));
+  function handleMenuItemKeyDown(
+    event: React.KeyboardEvent<HTMLAnchorElement>,
+    index: number
+  ) {
+    const menuItemCount = mobileNavigationData.anchors.length;
+
+    // navigating the menu
+    if (event.key === "ArrowLeft") {
+      let newItemIndex = (index + (menuItemCount - 1)) % menuItemCount;
+      menuItemRefs[newItemIndex].current?.focus();
+    } else if (event.key === "ArrowRight") {
+      let newItemIndex = (index + 1) % menuItemCount;
+      menuItemRefs[newItemIndex].current?.focus();
+    }
+  }
+
+  useEffect(() => {
+    if (open) {
+      menuItemRefs[0].current?.focus();
+    }
+  }, [open])
+
   return (
     <>
       <a.nav
@@ -160,6 +183,8 @@ export default function NavLinksMobile() {
                     active == anchor.name && "text-black dark:text-grey-d"
                   }`}
                   tabIndex={open ? 0 : -1}
+                  onKeyDown={(event) => handleMenuItemKeyDown(event, anchorIndex)}
+                  ref={menuItemRefs[anchorIndex]}
                 >
                   {anchor.name}
                 </a.a>
