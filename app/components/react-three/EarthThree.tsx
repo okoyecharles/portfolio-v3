@@ -18,10 +18,14 @@ export default function EarthThree({ rotationSpring, setLoaded }: Earth3dProps) 
 }
 
 function EarthMesh({ rotationSpring, setLoaded }: EarthMeshProps) {
-  const { theme } = useTheme();
-  const defaultTextureMap = useTexture("/assets/react-three/textures/blank.png");
-  const lightTextureMap = useTexture("/assets/react-three/textures/earth-white.png");
-  const darkTextureMap = useTexture("/assets/react-three/textures/earth-black.png");
+  const { resolvedTheme: theme } = useTheme();
+
+  const textures = useRef<Record<string, any>>({
+    unmounted: useTexture("/assets/react-three/textures/blank.png"),
+    light: useTexture("/assets/react-three/textures/earth-white.png"),
+    dark: useTexture("/assets/react-three/textures/earth-black.png"),
+  });
+  const textureMap = textures.current[theme || "unmounted"];
 
   return (
     <animated.mesh
@@ -31,16 +35,7 @@ function EarthMesh({ rotationSpring, setLoaded }: EarthMeshProps) {
       }}
     >
       <sphereGeometry args={[1, 32, 32]} />
-      <meshStandardMaterial
-        map={
-          theme === "light"
-            ? lightTextureMap
-            : theme === "dark"
-            ? darkTextureMap
-            : defaultTextureMap
-        }
-        toneMapped={false}
-      />
+      <meshStandardMaterial map={textureMap} toneMapped={false} />
     </animated.mesh>
   );
 }
