@@ -6,8 +6,12 @@ import { useObservedSprings } from "../../utils/useObservedSpring";
 import Section from "../Section";
 import HomeBackground from "./HomeBackground";
 import animation from "../../animations/animations";
+import Link from "../../clickable/Link";
 
 export default function Home() {
+  const exportFormat = "pdf";
+  const resumeDownloadLink = `https://docs.google.com/document/d/${process.env.NEXT_PUBLIC_RESUME_GOOGLE_DOC_ID}/export?format=${exportFormat}`;
+
   const {
     observedRef,
     springAnimate: [
@@ -87,15 +91,17 @@ export default function Home() {
         className="flex flex-wrap gap-6 call-to-action-buttons self-center"
         style={layoutReveal(4)}
       >
-        <a href="#projects">
+        <Link href="#projects" internal variant="plain">
           <Button variant="blue" tabIndex={-1}>
             Check out my work
           </Button>
-        </a>
-        <Button variant="black">
-          <span>Resume</span>
-          <DownloadIcon />
-        </Button>
+        </Link>
+        <Link href={resumeDownloadLink} variant="plain" download ariaLabel="download resume">
+          <Button variant="black">
+            <span>Resume</span>
+            <DownloadIcon />
+          </Button>
+        </Link>
       </a.div>
       <HomeBackground
         glowBackground={bgLineGlowTrail}
