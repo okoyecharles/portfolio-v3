@@ -135,7 +135,7 @@ export default function RecommendationSwiper({
           </div>
         ) : null}
       </a.div>
-      <div className="card-container min-h-[400px] grid place-items-center relative mr-0 md:mr-[24px] semi-lg:mr-0 px-[12px] md:px-0">
+      <div className="card-container min-h-[400px] grid place-items-center relative mr-0 md:mr-[24px] semi-lg:mr-0 px-[12px] md:px-0 isolate">
         {cardTransition((style, cardIndex) => (
           <RecommendationCard
             recommendation={recommendations[cardIndex]}
@@ -146,11 +146,18 @@ export default function RecommendationSwiper({
         <button
           className={`
             z-10 group/icon 
-            w-[48px] aspect-square rounded-[50%] grid place-items-center 
-            absolute top-1/2 left-0 -translate-y-1/2 -translate-x-[12px] md:-translate-x-[36px] semi-lg:-translate-x-[60px]
-            bg-grey-6/20 dark:bg-grey-9/20 
-            hover:bg-grey-6/30 dark:hover:bg-grey-9/30 
-            disabled:cursor-not-allowed disabled:opacity-80
+            w-[48px] aspect-square rounded-[50%] grid place-items-center
+            absolute top-1/2 left-0 -translate-y-1/2 -translate-x-[12px] md:-translate-x-[36px] semi-lg:-translate-x-[60px] backdrop-blur-sm
+
+            ring-1 ring-grey-b dark:ring-grey-4
+            bg-grey-d/50 dark:bg-grey-3/50
+            
+            hover:ring-grey-9 dark:hover:ring-grey-5
+            hover:bg-grey-d/75 dark:hover:bg-grey-5/50
+
+            disabled:pointer-events-none
+            disabled:opacity-0 disabled:scale-75
+            transition
           `}
           onClick={previousRecommendation}
           disabled={recommendationIndex === 0}
@@ -165,10 +172,17 @@ export default function RecommendationSwiper({
           className={`
             z-10 group/icon 
             w-[48px] aspect-square rounded-[50%] grid place-items-center 
-            absolute top-1/2 right-0 -translate-y-1/2 translate-x-[12px] md:translate-x-[36px] semi-lg:translate-x-[60px]
-            bg-grey-6/20 dark:bg-grey-9/20 
-            hover:bg-grey-6/30 dark:hover:bg-grey-9/30 
-            disabled:cursor-not-allowed disabled:opacity-80
+            absolute top-1/2 right-0 -translate-y-1/2 translate-x-[12px] md:translate-x-[36px] semi-lg:translate-x-[60px] backdrop-blur-[2px]
+
+            ring-1 ring-grey-b dark:ring-grey-4
+            bg-grey-d/50 dark:bg-grey-3/50
+            
+            hover:ring-grey-9 dark:hover:ring-grey-5
+            hover:bg-grey-d/75 dark:hover:bg-grey-5/50
+
+            disabled:pointer-events-none
+            disabled:opacity-0 disabled:scale-75
+            transition
           `}
           onClick={nextRecommendation}
           disabled={recommendationIndex === recommendations.length - 1}

@@ -13,7 +13,7 @@ const buttonStyles = {
     dark:focus-visible
   `,
   disabled: `
-    disabled:opacity-70 disabled:hover:cursor-not-allowed
+    disabled:opacity-75 disabled:hover:cursor-not-allowed
   `,
   variant: {
     blue: `

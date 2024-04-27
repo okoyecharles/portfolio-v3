@@ -49,7 +49,17 @@ export default function FeaturedProjectSwiper({
         ))}
       </Swiper>
       <button
-        className="absolute w-[48px] aspect-square grid justify-center items-center bg-grey-6/20 dark:bg-grey-9/20 hover:bg-grey-6/30 dark:hover:bg-grey-9/30 rounded-[50%] top-1/2 -translate-y-1/2 left-0 -translate-x-1/4 z-10 group/icon disabled:cursor-not-allowed disabled:opacity-80"
+        className="absolute w-[48px] aspect-square grid justify-center items-center rounded-[50%] top-1/2 -translate-y-1/2 left-0 -translate-x-1/4 z-10 group/icon backdrop-blur-sm
+
+        ring-1 ring-grey-b dark:ring-grey-4
+        bg-grey-d/50 dark:bg-grey-3/50
+        
+        hover:ring-grey-9 dark:hover:ring-grey-5
+        hover:bg-grey-d/75 dark:hover:bg-grey-5/50
+
+        disabled:pointer-events-none
+        disabled:opacity-0 disabled:scale-75
+        transition"
         onClick={() => swiperApi?.slidePrev(500)}
         disabled={projectIndex === 0}
         aria-hidden={projectIndex === 0}
@@ -60,7 +70,17 @@ export default function FeaturedProjectSwiper({
         <PrevIcon />
       </button>
       <button
-        className="absolute w-[48px] aspect-square grid justify-center items-center bg-grey-6/20 dark:bg-grey-9/20 hover:bg-grey-6/30 dark:hover:bg-grey-9/30 rounded-[50%] top-1/2 -translate-y-1/2 right-0 translate-x-1/4 z-10 group/icon disabled:cursor-not-allowed disabled:opacity-80"
+        className="absolute w-[48px] aspect-square grid justify-center items-center rounded-[50%] top-1/2 -translate-y-1/2 right-0 translate-x-1/4 z-10 group/icon backdrop-blur-sm
+
+        ring-1 ring-grey-b dark:ring-grey-4
+        bg-grey-d/50 dark:bg-grey-3/50
+        
+        hover:ring-grey-9 dark:hover:ring-grey-5
+        hover:bg-grey-d/75 dark:hover:bg-grey-5/50
+
+        disabled:pointer-events-none
+        disabled:opacity-0 disabled:scale-75
+        transition"
         onClick={() => swiperApi?.slideNext(500)}
         disabled={projectIndex === projects.length - 1}
         aria-hidden={projectIndex === projects.length - 1}
