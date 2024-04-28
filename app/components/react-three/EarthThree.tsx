@@ -6,6 +6,15 @@ import { Earth3dProps, EarthMeshProps } from "./props";
 import { useTheme } from "next-themes";
 import EarthThreeLoading from "./EarthThreeLoading";
 
+const LightTextureURL = "/assets/react-three/textures/earth-white.png";
+const DarkTextureURL = "/assets/react-three/textures/earth-black.png";
+const BlankTextureURL = "/assets/react-three/textures/earth-black.png";
+
+// preloads textures making sure they're available when needed.
+useTexture.preload(DarkTextureURL);
+useTexture.preload(LightTextureURL);
+useTexture.preload(BlankTextureURL);
+
 export default function EarthThree({ rotationSpring, setLoaded }: Earth3dProps) {
   return (
     <Suspense fallback={<EarthThreeLoading />}>
@@ -20,12 +29,13 @@ export default function EarthThree({ rotationSpring, setLoaded }: Earth3dProps) 
 function EarthMesh({ rotationSpring, setLoaded }: EarthMeshProps) {
   const { resolvedTheme: theme } = useTheme();
 
-  const textures = useRef<Record<string, any>>({
-    unmounted: useTexture("/assets/react-three/textures/blank.png"),
-    light: useTexture("/assets/react-three/textures/earth-white.png"),
-    dark: useTexture("/assets/react-three/textures/earth-black.png"),
-  });
-  const textureMap = textures.current[theme || "unmounted"];
+  const textureURL =
+    theme === "light"
+      ? LightTextureURL
+      : theme === "dark"
+      ? DarkTextureURL
+      : BlankTextureURL;
+  const textureMap = useTexture(textureURL);
 
   return (
     <animated.mesh
