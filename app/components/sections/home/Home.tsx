@@ -56,7 +56,7 @@ export default function Home() {
           className="text-grey-1 dark:text-grey-d text-[60px] md:text-[72px] lg:text-[100px] leading-[1] font-extrabold mx-6"
           style={layoutReveal(1)}
         >
-          <span className="relative w-1">
+          <span className="relative">
             <a.div
               className={`
                 select-none font-extrabold font-mono
