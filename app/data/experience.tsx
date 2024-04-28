@@ -71,31 +71,36 @@ const experienceData: ExperienceData = {
 
 export function experienceTimelineCalculator(expertise: Expertise) {
   const MONTH_HEIGHT = 32;
+  const YEAR_HEIGHT = MONTH_HEIGHT * 12;
   const MONTH_DIFFERENCE = getMonthDifference(
     experienceData.startTime,
     experienceData.endTime
   );
+  const YEAR_DIFFERENCE = Math.ceil(MONTH_DIFFERENCE / 12);
 
   const ACTIVE_EXPERTISE_MONTH_DIFFERENCE = getMonthDifference(
     expertise.timeRange[0],
     expertise.timeRange[1]
   );
-  const MONTH_TIMELINE_HEIGHT =
-    MONTH_HEIGHT * ACTIVE_EXPERTISE_MONTH_DIFFERENCE;
+  const MONTH_TIMELINE_HEIGHT = MONTH_HEIGHT * ACTIVE_EXPERTISE_MONTH_DIFFERENCE;
   const MONTH_TIMELINE_POS =
-    getMonthDifference(experienceData.startTime, expertise.timeRange[0]) *
-    MONTH_HEIGHT;
+    getMonthDifference(experienceData.startTime, expertise.timeRange[0]) * MONTH_HEIGHT;
 
   const YEAR_TIMELINE_HEIGHT = MONTH_HEIGHT * MONTH_DIFFERENCE;
   const YEAR_TIMELINE_POS = MONTH_TIMELINE_POS + MONTH_TIMELINE_HEIGHT / 2;
+
+  const FIRST_YEAR = experienceData.startTime.getFullYear();
 
   return {
     YEAR_TIMELINE_POS,
     MONTH_TIMELINE_HEIGHT,
     YEAR_TIMELINE_HEIGHT,
     MONTH_DIFFERENCE,
-    MONTH_HEIGHT
-  }
+    MONTH_HEIGHT,
+    YEAR_HEIGHT,
+    YEAR_DIFFERENCE,
+    FIRST_YEAR
+  };
 }
 
 export default experienceData;

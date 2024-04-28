@@ -107,7 +107,9 @@ export default function NavLinksMobile() {
     <>
       <a.nav
         id={"mobile-main-menu"}
-        className={`absolute top-6 right-6 h-12 w-12 bg-grey-fb dark:bg-grey-2 ring-1 dark:ring-0 ring-grey-9 rounded-[10px] md:hidden overflow-hidden z-20`}
+        className={`absolute top-6 right-6 h-12 w-12 bg-grey-fb dark:bg-grey-2 ring-1 dark:ring-0 rounded-[10px] md:hidden overflow-hidden z-20 transition-colors ${
+          open ? "ring-grey-9" : "ring-grey-b"
+        }`}
         style={{
           width: to(
             [toggleMenuSpring.width, toggleMenuSpring.widthoffset],

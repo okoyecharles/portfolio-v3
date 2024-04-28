@@ -2,6 +2,7 @@ import { ExperienceTimelineProps } from "@/app/components/sections/experience/pr
 import experienceData, { experienceTimelineCalculator } from "@/app/data/experience";
 import { a } from "@react-spring/web";
 import moment from "moment/moment";
+import ExperienceTimelineMarkers from "../../svg/experience/ExperienceTimelineMarkers";
 
 export default function ExperienceTimeline({
   expertise,
@@ -9,66 +10,33 @@ export default function ExperienceTimeline({
   monthTimeLineHeight,
   monthTimeLineMarker,
 }: ExperienceTimelineProps) {
-  const { YEAR_TIMELINE_HEIGHT, MONTH_DIFFERENCE, MONTH_HEIGHT } =
+  const { YEAR_HEIGHT, YEAR_DIFFERENCE, FIRST_YEAR } =
     experienceTimelineCalculator(expertise);
 
   return (
-    <div
-      className="relative h-[550px] overflow-y-clip w-[28px] md:w-[96px]"
-      aria-hidden
-    >
-      <a.div
-        className="year-timeline-container absolute top-1/2 left-[28px]"
-        style={yearTimeLineScroll}
-      >
-        <div className="relative year-timeline">
-          <div
-            className={`w-[1px] bg-grey-d dark:bg-grey-3`}
-            style={{ height: YEAR_TIMELINE_HEIGHT }}
-          />
+    <div className="relative h-[550px] w-[34px] md:w-[96px] flex overflow-hidden">
+      <a.div className="absolute w-[34px] top-1/2 h-full" style={yearTimeLineScroll}>
+        {Array(YEAR_DIFFERENCE + 1)
+          .fill(null)
+          .map((_, currentYear) => (
+            <span
+              className={`
+                absolute -left-[8px] top-0 -translate-y-1/2 -rotate-[.25turn] text-sm text-grey-6 dark:text-grey-9 leading-[1] select-none font-visby font-extrabold
+              `}
+              style={{ top: currentYear * YEAR_HEIGHT }}
+            >
+              {FIRST_YEAR + currentYear}
+            </span>
+          ))}
 
-          {Array(MONTH_DIFFERENCE + 1)
-            .fill(null)
-            .map((_, index) => {
-              // 34 (length year-timeline)
-              const date = moment(experienceData.startTime);
-              const month = date.add(index, "month");
-              const isNewYear = month.format("MMMM") === "January";
-
-              function lineStyles() {
-                const styles: string[] = [];
-                styles.push(isNewYear ? "w-[12px]" : "w-[8px]");
-                styles.push(
-                  isNewYear ? "bg-grey-6 dark:bg-grey-5" : "bg-grey-d dark:bg-grey-3"
-                );
-                return styles.join(" ");
-              }
-
-              return (
-                <div
-                  className={`h-[1px] absolute -translate-x-1/2 ${lineStyles()}`}
-                  style={{ top: index * MONTH_HEIGHT }}
-                  key={index}
-                >
-                  {isNewYear && (
-                    <div className="relative year-container">
-                      <span className="text-sm text-grey-6 dark:text-grey-9 leading-[1] select-none absolute top-0 -translate-y-1/2 -rotate-[.25turn] -left-[calc(100%+14px+8px)] font-visby font-extrabold">
-                        {date.year()}
-                      </span>
-                    </div>
-                  )}
-                </div>
-              );
-            })}
+        <div className="year-marker-container w-fit absolute top-0 right-0">
+          <ExperienceTimelineMarkers yearCount={YEAR_DIFFERENCE} />
         </div>
       </a.div>
-      <div
-        className="month-timeline-container h-full absolute top-0 left-[27px] md:left-[calc(34px+16px)]"
-        aria-hidden
-      >
-        <div className="relative h-full month-timeline">
+      <div className="h-full hidden md:block flex-1" aria-hidden>
+        <div className="relative h-full month-timeline-container ml-[34px]">
           <a.div
-            className={`w-[2px] bg-blue-100 dark:bg-blue-d-200 md:bg-grey-ea dark:md:bg-grey-3 absolute left-[1px] top-1/2 -translate-y-1/2`}
+            className={`w-[2px] bg-blue-100 dark:bg-blue-d-200 md:bg-grey-ea dark:md:bg-grey-3 absolute left-[18px] top-1/2 -translate-y-1/2`}
             style={monthTimeLineHeight}
           >
             <div className="relative h-full text-[14px] text-grey-9">
