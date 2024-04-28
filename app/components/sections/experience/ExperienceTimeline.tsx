@@ -20,6 +20,7 @@ export default function ExperienceTimeline({
           .fill(null)
           .map((_, currentYear) => (
             <span
+              key={currentYear}
               className={`
                 absolute -left-[8px] top-0 -translate-y-1/2 -rotate-[.25turn] text-sm text-grey-6 dark:text-grey-9 leading-[1] select-none font-visby font-extrabold
               `}

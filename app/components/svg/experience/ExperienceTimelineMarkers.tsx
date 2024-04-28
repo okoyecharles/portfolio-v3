@@ -23,9 +23,9 @@ export default function ExperienceTimelineMarkers({
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0_806_1909)">
+      <g clipPath="url(#clip0_806_1909)">
         {YEAR_COUNT.map((_, currentYear) => (
-          <g>
+          <g key={currentYear}>
             <line
               x1="6"
               y1={currentYear * YEAR_HEIGHT}
@@ -35,7 +35,7 @@ export default function ExperienceTimelineMarkers({
             />
 
             {MONTH_COUNT.map((_, currentMonth) => (
-              <line
+              <line key={currentMonth}
                 x1="2"
                 x2="10"
                 y1={currentYear * YEAR_HEIGHT + currentMonth * MONTH_GAP - 0.5}
