@@ -3,7 +3,7 @@ import Providers from "./Providers";
 import visby from "./fonts/visby";
 import lato from "./fonts/lato";
 import "./globals.css";
-import 'swiper/css';
+import "swiper/css";
 
 export const metadata: Metadata = {
   title: "Okoye Charles | Frontend Developer",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   robots: "index, follow",
   openGraph: {
     type: "website",
-    url: "https://okoyecharles.com",
+    url: process.env.METADATA_BASEURL!,
     title: "Okoye Charles | Frontend Developer",
     description:
       "Hey! I'm Charles, A developer with experience in website and systems development. Learn everything about my skills, experience, and journey as a programmer.",
@@ -33,6 +33,9 @@ export const metadata: Metadata = {
     locale: "en_GB",
   },
   metadataBase: new URL(process.env.METADATA_BASEURL!),
+  other: {
+    "google-site-verification": process.env.NEXT_PUBLIC_GOOGLE_SEARCH_CONSOLE_ID!,
+  },
 };
 
 export const viewport: Viewport = {
@@ -42,11 +45,7 @@ export const viewport: Viewport = {
   ],
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en"
