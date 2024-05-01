@@ -68,8 +68,8 @@ export default function ContactFormSuccessModal({
                 </div>
               </div>
               <header className="flex flex-col items-center md:items-start">
-                <h3 className="font-visby font-extrabold text-[22px] md:text-[24px] leading-[1] text-grey-1 dark:text-grey-d">
-                  Thanks for reaching out <span className="font-lato font-black">!</span>
+                <h3 className=" font-extrabold text-[22px] md:text-[24px] leading-[1] text-grey-1 dark:text-grey-d">
+                  <span className="font-visby">Thanks for reaching out</span> <span className="font-black">!</span>
                 </h3>
                 <span
                   className="text-sm text-grey-9 dark:text-grey-6"
