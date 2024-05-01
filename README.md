@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<div align="center">
 
-## Getting Started
+  <img src="/app/icon1.png" height="64" alt="Logo" />
+  
+  # okoyecharles.com - v3
+  
+  The third iteration of [okoyecharles.com](https://okoyecharles.com)
+  
+  Previous iterations: [v1](https://github.com/okoyecharles/portfolio), [v2](https://github.com/okoyecharles/portfolio-v2)
+  
+</div>
 
-First, run the development server:
+<div align="center">
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+  [![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org) [![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com) [![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white)](https://redux.js.org) [![Threejs](https://img.shields.io/badge/threejs-black?style=for-the-badge&logo=three.js&logoColor=white)](https://docs.pmnd.rs/react-three-fiber)
+    
+</div>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ♻️ Attribution
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+This iteration of my website is a culmination of my efforts, late nights, and a genuine passion for design and programming, and all I ask of you all is to not claim this effort as your own.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+So, if you find something useful here, please feel free to use it! but give me appropriate credit by linking back to [okoyecharles.com](https://okoyecharles.com).
 
-## Learn More
+<br>
 
-To learn more about Next.js, take a look at the following resources:
+## 🛠 Installation & Set Up
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<ul>
+  <li>
+    <p>Install the correct version of Node using NVM</p>
+    <pre>nvm install</pre>
+  </li>
+  <li>
+    <p>Install dependencies</p>
+    <pre>npm install</pre>
+  </li>
+  <li>
+    <p>Start the development server</p>
+    <pre>npm run dev</pre>
+  </li>
+</ul>
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+<br>
 
-## Deploy on Vercel
+## 🚀 Building and Running for Production
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<ul>
+  <li>
+    <p>Generate a static production build</p>
+    <pre>npm run build</pre>
+  </li>
+  <li>
+    <p>Preview the site as it will appear once deployed</p>
+    <pre>npm run start</pre>
+  </li>
+</ul>

@@ -2,26 +2,165 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
+@layer base {
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+  html {
+    -webkit-tap-highlight-color: transparent;
+    --scrollbar-bg: #fff;
+    --scrollbar-border: #eaeaea;
+    --scrollbar-thumb-bg: #eaeaea;
+    --scrollbar-thumb-border: #bbb;
+    --scrollbar-thumb-hover-bg: #ddd;
+    --scrollbar-thumb-hover-border: #bbb;
+
+    --input-autofill-color: #444;
   }
-}
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  html.dark {
+    --scrollbar-bg: #000;
+    --scrollbar-border: #151515;
+    --scrollbar-thumb-bg: #151515;
+    --scrollbar-thumb-border: #333;
+    --scrollbar-thumb-hover-bg: #222;
+    --scrollbar-thumb-hover-border: #444;
+
+    --input-autofill-color: #bbb;
+  }
+
+  ::-webkit-scrollbar {
+    width: 18px;
+    background-color: var(--scrollbar-bg);
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 0 1px var(--scrollbar-border);
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    border: solid 4px transparent;
+    box-shadow:
+    inset 0 0 0 1px var(--scrollbar-thumb-border), 
+    inset 0 0 0 8px var(--scrollbar-thumb-bg);
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    box-shadow:
+    inset 0 0 0 1px var(--scrollbar-thumb-hover-border),
+    inset 0 0 0 8px var(--scrollbar-thumb-hover-bg);
+  }
+
+  /* Visually Hidden but aria accessible [from MDN Web Docs] */
+  .visually-hidden {
+    border: 0 !important;
+    clip: rect(1px,1px,1px,1px) !important;
+    -webkit-clip-path: inset(50%) !important;
+    clip-path: inset(50%) !important;
+    height: 1px !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    position: absolute !important;
+    white-space: nowrap !important;
+    width: 1px !important;
+  }
+
+  /* Gradient Border */
+  @property --rotating-gradient-border-angle {
+    inherits: false;
+    initial-value: 0deg;
+    syntax: "<angle>";
+  }
+
+  @keyframes rotate-gradient-border {
+    to {
+      --rotating-gradient-border-angle: 180deg;
+    }
+  }
+
+ 
+
+  .rotating-gradient-border {
+    --border-color: transparent;
+    --background-color: transparent;
+    --background-color-2: var(--background-color);
+    --rotating-gradient-border-width: 1.5px;
+    --rotating-gradient-border-color: transparent;
+   
+    background: 
+      linear-gradient(
+        to bottom,
+        var(--background-color),
+        var(--background-color-2)
+      ) padding-box, 
+      conic-gradient(
+        from var(--rotating-gradient-border-angle) at 50% 50%,
+        transparent 17%,
+        var(--rotating-gradient-border-color) 24%,
+        transparent 32%, transparent 67%,
+        var(--rotating-gradient-border-color) 76%,
+        transparent 84%
+      ) border-box,
+      linear-gradient(
+        var(--border-color),
+        var(--border-color)
+      ) border-box;
+    border: var(--rotating-gradient-border-width) solid transparent;
+    animation: rotate-gradient-border infinite linear 10s;
+
+    /* for browsers that don't support the @property at-rule */
+    background-color: var(--background-color);
+    /* box-shadow: 0 0 0 1px var(--border-color) inset; */
+  }
+  
+  .disable-rotating-gradient-border {
+    --rotating-gradient-border-color: #ffffff00 !important;
+    transition: background 0.25s ease;
+  }
+
+  /* repeating expanding scale */
+  .expanding-scale {
+    transform-origin: center;
+    animation: expand-scale infinite linear 1250ms ;
+  }
+
+  @keyframes expand-scale {
+    from {
+      transform: translate(-6px, -6px) scale(0);
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    75% {
+      transform: translate(-6px, -6px) scale(3);
+    }
+    to {
+      transform: translate(-6px, -6px) scale(4);
+      opacity: 0;
+    }
+  }
+
+  /* repeating rotation */
+  .rotating {
+    animation: rotate infinite ease-in-out 1250ms;
+  }
+
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Change Autocomplete styles in Chrome*/
+  input:-webkit-autofill {
+    -webkit-text-fill-color: var(--input-autofill-color);
+    transition: background-color 5000s ease-in-out 0s;
+  }
 }
