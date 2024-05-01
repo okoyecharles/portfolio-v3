@@ -56,21 +56,22 @@ export default function Home() {
           className="text-grey-1 dark:text-grey-d text-[60px] md:text-[72px] lg:text-[100px] leading-[1] font-extrabold mx-6"
           style={layoutReveal(1)}
         >
-          <span className="font-visby relative">
+          <div className="inline-block relative w-0">
             <a.div
               className={`
                 select-none font-extrabold font-mono
                 text-grey-2 dark:text-grey-b
                 text-[20px] md:text-[24px] 
-                absolute -top-[16px] -left-[40px]
+                absolute -top-[8px] -left-[40px]
               `}
               style={layoutReveal(0)}
               aria-label={"I AM"}
             >
               I<span className="text-blue-200 dark:text-blue-d-200">'</span>m
             </a.div>
-            OKOYE CHARLES
-          </span>
+            <span className="invisible">I'm</span>
+          </div>
+          <span className="font-visby">OKOYE CHARLES</span>
         </a.h1>
 
         <a.h2

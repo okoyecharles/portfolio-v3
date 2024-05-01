@@ -182,6 +182,7 @@ export default function NavLinksMobile() {
                   }`}
                   tabIndex={open ? 0 : -1}
                   onKeyDown={(event) => handleMenuItemKeyDown(event, anchorIndex)}
+                  onClick={() => setOpen(false)}
                   ref={menuItemRefs[anchorIndex]}
                 >
                   {anchor.name}
