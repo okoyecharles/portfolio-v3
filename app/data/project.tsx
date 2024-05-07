@@ -99,7 +99,7 @@ const projectData: Array<Project> = [
     tags: ["html", "css", "javascript"],
     link: {
       github: "https://github.com/okoyecharles/save-a-child",
-      live: "https://okoyecharles.github.io/save-a-child",
+      live: "https://saveachild.vercel.app",
     },
   },
   {
