@@ -134,8 +134,8 @@ export default function FeaturedProjectTabDisplay({
               <Image
                 className="-z-10 absolute w-[92.4%] top-[6.95%] left-1/2 -translate-x-1/2 rounded-b-[8.2%]"
                 src={project.image.mobile}
-                width={351}
-                height={216}
+                width={122}
+                height={246}
                 alt="null"
               />
               <Image className="w-full" src={MobileFrame} width={256} alt="null" />
