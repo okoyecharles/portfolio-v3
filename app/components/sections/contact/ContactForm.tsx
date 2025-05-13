@@ -90,6 +90,9 @@ export default function ContactForm() {
     Object.entries(formData).forEach(([key, value]) =>
       formSubmissionData.append(key, value)
     );
+    formSubmissionData.append("_next", window.location.href);
+    formSubmissionData.append("_subject", "Portfolio - Contact Form Submission");
+    formSubmissionData.append("_captcha", "false");
 
     const fetchOptions = {
       method: "POST",
