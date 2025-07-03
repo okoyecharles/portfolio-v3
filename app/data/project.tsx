@@ -1,6 +1,7 @@
 import AmazonCloneLogo from "../components/svg/projects/AmazonCloneLogo";
 import BuggoLogo from "../components/svg/projects/BuggoLogo";
 import LavishCuisineLogo from "../components/svg/projects/LavishCuisineLogo";
+import SaveAChildLogo from "../components/svg/projects/SaveAChildLogo";
 
 type ProjectTag =
   | "react"
@@ -45,23 +46,41 @@ const projectData: Array<Project> = [
     },
     themeColor: "[--rotating-gradient-border-color:#0079C9]",
   },
+  // {
+  //   name: "Amazon Clone",
+  //   logo: <AmazonCloneLogo />,
+  //   image: {
+  //     desktop: "/assets/projects/amazon-clone.webp",
+  //     mobile: "/assets/projects/amazon-clone-mobile.webp",
+  //   },
+  //   timeRange: [new Date(2022, 9), new Date(2022, 11)],
+  //   description:
+  //     "Explore an Amazon-inspired clone website with authentication, purchase capabilities, and a Redux-powered cart system",
+  //   tags: ["react", "redux", "firebase"],
+  //   link: {
+  //     github: "https://github.com/okoyecharles/amazon-clone",
+  //     live: "https://clone-f50ae.web.app",
+  //   },
+  //   themeColor:
+  //     "[--rotating-gradient-border-color:#666] dark:[--rotating-gradient-border-color:#999]",
+  // },
   {
-    name: "Amazon Clone",
-    logo: <AmazonCloneLogo />,
+    name: "Save A Child",
+    logo: <SaveAChildLogo />,
+    timeRange: [new Date(2022, 5), new Date(2022, 6)],
     image: {
-      desktop: "/assets/projects/amazon-clone.webp",
-      mobile: "/assets/projects/amazon-clone-mobile.webp",
+      desktop: "/assets/projects/save-a-child.webp",
+      mobile: "/assets/projects/save-a-child-mobile.webp",
     },
-    timeRange: [new Date(2022, 9), new Date(2022, 11)],
     description:
-      "Explore an Amazon-inspired clone website with authentication, purchase capabilities, and a Redux-powered cart system",
-    tags: ["react", "redux", "firebase"],
+      "A website dedicated to supporting underprivileged children in developing countries worldwide, facilitating a positive impact on the lives of these children",
+    tags: ["html", "css", "javascript"],
     link: {
-      github: "https://github.com/okoyecharles/amazon-clone",
-      live: "https://clone-f50ae.web.app",
+      github: "https://github.com/okoyecharles/save-a-child",
+      live: "https://saveachild.vercel.app",
     },
     themeColor:
-      "[--rotating-gradient-border-color:#666] dark:[--rotating-gradient-border-color:#999]",
+      "[--rotating-gradient-border-color:#EC5242]",
   },
   {
     name: "Lavish Cuisine",
@@ -89,17 +108,6 @@ const projectData: Array<Project> = [
     link: {
       github: "https://github.com/okoyecharles/todo-list-nextjs",
       live: "https://the-tasks.vercel.app",
-    },
-  },
-  {
-    name: "Save A Child",
-    timeRange: [new Date(2022, 5), new Date(2022, 6)],
-    description:
-      "A website dedicated to supporting underprivileged children in developing countries worldwide, facilitating a positive impact on the lives of these children",
-    tags: ["html", "css", "javascript"],
-    link: {
-      github: "https://github.com/okoyecharles/save-a-child",
-      live: "https://saveachild.vercel.app",
     },
   },
   {
