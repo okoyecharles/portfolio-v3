@@ -1,18 +1,15 @@
 "use client";
 import VerticalLineIcon from "../svg/abstract/VerticalLineIcon";
-import { AnchorName, SubmenuAnchor, navigationData } from "../../data/navigation";
+import {
+  AnchorName,
+  SubmenuAnchor,
+  navigationData,
+} from "../../data/navigation";
 import { a, to, useSpring } from "@react-spring/web";
 import useScrollDirection from "../utils/useScrollDirection";
 import useActiveSection from "../utils/useActiveSection";
 import ExpandIcon from "../svg/submenu/ExpandIcon";
-import {
-  FocusEvent,
-  FocusEventHandler,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { FocusEvent, useEffect, useRef, useState } from "react";
 import Link from "../clickable/Link";
 import useUserScrolling from "@/app/components/utils/useUserScrolling";
 import { toNormalCase } from "../utils/convertion";
@@ -60,17 +57,20 @@ export default function NavLinksDesktop() {
   });
 
   const [submenuOpen, setSubmenuOpen] = useState<AnchorName | null>(null);
-  const menuItemRefs = navigationData.anchors.map(() => useRef<HTMLAnchorElement>(null));
+  const menuItemRefs = navigationData.anchors.map(() =>
+    useRef<HTMLAnchorElement>(null),
+  );
   const submenuFirstItemRefs = navigationData.anchors.map(() =>
-    useRef<HTMLAnchorElement>(null)
+    useRef<HTMLAnchorElement>(null),
   );
 
   function handleMenuItemKeyDown(
     event: React.KeyboardEvent<HTMLAnchorElement>,
-    index: number
+    index: number,
   ) {
     const menuItemCount = navigationData.anchors.length;
-    const hasSubmenu = navigationData.anchors[index].submenuAnchors !== undefined;
+    const hasSubmenu =
+      navigationData.anchors[index].submenuAnchors !== undefined;
 
     // opening submenus
     if (hasSubmenu) {
@@ -105,7 +105,7 @@ export default function NavLinksDesktop() {
   useEffect(() => {
     if (submenuOpen) {
       let anchorIndex = navigationData.anchors.findIndex(
-        (anchor) => anchor.name === submenuOpen
+        (anchor) => anchor.name === submenuOpen,
       );
       submenuFirstItemRefs[anchorIndex].current?.focus();
     }
@@ -114,7 +114,7 @@ export default function NavLinksDesktop() {
   return (
     <a.nav
       id={"main-menu"}
-      className="absolute w-fit top-8 right-8 bg-white dark:bg-grey-2 ring-1 dark:ring-0 ring-grey-ea rounded-[10px] font-medium px-6 py-[7px] gap-6 hidden md:flex items-center select-none"
+      className="absolute w-fit top-8 right-8 bg-grey-fb dark:bg-grey-1a ring-1 ring-grey-d dark:ring-grey-3 rounded-[10px] font-medium px-6 py-[7px] gap-6 hidden md:flex items-center select-none"
       style={activeNavSpring}
       aria-label={"Main Menu"}
     >
@@ -173,7 +173,7 @@ export default function NavLinksDesktop() {
               width: to(activeSectionMarkerSpring.width, (w) => `${w}px`),
               transform: to(
                 activeSectionMarkerSpring.x,
-                (x) => `translateX(calc(${x}px)) translateY(50%)`
+                (x) => `translateX(calc(${x}px)) translateY(50%)`,
               ),
             }}
           />

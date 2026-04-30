@@ -40,6 +40,7 @@ const config: Config = {
         '9': '#999999',
         '12': '#121212',
         '15': '#151515',
+				'1a': '#1a1a1a',
         'b': '#bbbbbb',
         'd': '#dddddd',
         'ea': '#eaeaea',
