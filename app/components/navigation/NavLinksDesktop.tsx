@@ -247,13 +247,13 @@ function Submenu({
 
       <a.div
         id={name + "-submenu"}
-        className={`submenu-items bg-white ring-1 ring-grey-d dark:ring-0 dark:bg-grey-2 absolute w-[256px] h-[${SUBMENU_OPEN_HEIGHT}px] top-[calc(100%+31px)] rounded-[10px] -translate-x-8 py-3 font-medium`}
+        className={`submenu-items bg-grey-fb dark:bg-grey-1a ring-1 ring-grey-d dark:ring-grey-3 absolute w-[256px] h-[${SUBMENU_OPEN_HEIGHT}px] top-[calc(100%+31px)] rounded-[10px] -translate-x-8 py-3 font-medium`}
         style={{ ...openSubmenuSpring, pointerEvents: open ? "all" : "none" }}
         aria-label={submenuName}
       >
         <div className="relative translate-x-8">
-          <div className="submenu-pointer absolute w-[16.9px] h-[16.9px] bg-white ring-1 ring-grey-d dark:ring-0 dark:bg-grey-2 rotate-45 rounded-[2px] -top-[12px] -translate-y-1/2"></div>
-          <div className="bg-white dark:bg-grey-2 absolute w-[34px] h-[12px] -top-[12px] -left-[8px]"></div>
+          <div className="submenu-pointer absolute w-[16.9px] h-[16.9px] bg-grey-fb dark:bg-grey-1a ring-1 ring-inset ring-grey-d dark:ring-grey-3 rotate-45 rounded-[4px] -top-[12px] -translate-y-1/2"></div>
+          <div className="bg-grey-fb dark:bg-grey-1a absolute w-[34px] h-[12px] -top-[12px] -left-[8px]"></div>
         </div>
         <ul>
           {anchors.map((anchor, index) => (
