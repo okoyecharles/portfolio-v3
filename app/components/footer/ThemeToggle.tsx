@@ -3,6 +3,7 @@ import footerData from "@/app/data/footer";
 import { a, useSpring } from "@react-spring/web";
 import { useTheme } from "next-themes";
 import useClient from "../utils/useClient";
+import { Theme } from "@/app/data/theme";
 
 export default function ThemeToggle() {
   const [client, _setClient] = useClient();
@@ -12,7 +13,7 @@ export default function ThemeToggle() {
   const toggleThemeSpring = useSpring({
     from: {x: activeTogglePos["unmounted"]},
     to: {
-      x: activeTogglePos[theme as "dark" | "light" | "system"],
+      x: activeTogglePos[theme as Theme],
     },
     config: {
       tension: 300,
