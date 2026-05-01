@@ -2,10 +2,10 @@ import { DOMAttributes, KeyboardEvent, LegacyRef, useRef } from "react";
 
 const buttonStyles = {
   default: `
-    group/button button
+    group/button
     select-none px-4 py-[10px] rounded-[5px]
     inline-flex gap-2 items-center
-    transition-colors
+    transition-all
   `,
   focus: `
     focus-visible:outline focus-visible:outline-offset-4
@@ -17,16 +17,17 @@ const buttonStyles = {
   `,
   variant: {
     blue: `
-      bg-blue-200 text-white fill-white hover:bg-blue-300
+button
+bg-blue-200 text-white/95 hover:text-white fill-white hover:bg-blue-300
       dark:bg-blue-d-300 dark:hover:bg-blue-d-300/90
       disabled:bg-blue-200 dark:disabled:bg-blue-d-300
     `,
     black: `
-      bg-grey-1 text-grey-d fill-grey-d hover:bg-black hover:text-white hover:fill-white
-      dark:bg-black dark:ring-1 dark:ring-grey-5 dark:hover:bg-grey-15 dark:hover:ring-grey-6 dark:active:bg-black
-      disabled:bg-grey-1
+			button-black
+			bg-grey-1a text-grey-d fill-grey-8 hover:text-white active:bg-grey-2
+      dark:ring-1 dark:ring-grey-2 dark:hover:ring-grey-3
     `,
-    plain: ``
+    plain: `button`,
   },
 };
 
@@ -49,13 +50,13 @@ function Button({
   className,
   onClick,
   ariaLabel,
-  buttonRef
+  buttonRef,
 }: ButtonProps) {
   return (
     <button
       ref={buttonRef}
       className={`
-        ${variant !== "plain" ? buttonStyles.default : ''}
+        ${variant !== "plain" ? buttonStyles.default : ""}
         ${buttonStyles.focus}
         ${buttonStyles.disabled}
         ${buttonStyles.variant[variant]}

@@ -37,7 +37,6 @@ export default function Page() {
 
       <SkipToContent />
       <Navigation />
-			<GridInteractive width={400} height={400} />
       <Home />
       <About />
       <Experience />

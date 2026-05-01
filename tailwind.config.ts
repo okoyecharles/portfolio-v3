@@ -30,8 +30,8 @@ const config: Config = {
       'grey': {
         '0a': '#0a0a0a',
         '1': '#111111',
-        '2': '#222222',
-        '3': '#333333',
+        '2': '#2a2a2a',
+        '3': '#3b3b3b',
         '4': '#444444',
         '5': '#555555',
         '6': '#666666',
@@ -41,7 +41,7 @@ const config: Config = {
         '12': '#121212',
         '15': '#151515',
 				'1a': '#1a1a1a',
-        'b': '#bbbbbb',
+        'b': '#b3b3b3',
         'd': '#dddddd',
         'ea': '#eaeaea',
         'fb': '#fbfbfb',
@@ -83,6 +83,7 @@ const config: Config = {
       fontFamily: {
         visby: ['var(--font-visby)'],
         lato: ['var(--font-lato)'],
+				fira: ['var(--font-fira-mono)'],
       },
       gridTemplateColumns: {
         '24': 'repeat(24, minmax(0, 1fr))',

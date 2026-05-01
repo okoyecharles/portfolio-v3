@@ -6,6 +6,7 @@ import { useInView } from "react-intersection-observer";
 import { useDispatch } from "react-redux";
 
 interface SectionProps {
+	gap?: string;
   padding?: string;
   sectionRef?: LegacyRef<HTMLElement>;
   children: React.ReactNode;
@@ -16,6 +17,7 @@ interface SectionProps {
 export default function Section({
   children,
   padding,
+	gap,
   sectionRef,
   name,
   id
@@ -38,6 +40,9 @@ export default function Section({
         className={`w-full max-w-screen-lg mx-auto flex flex-col text-grey-6 dark:text-grey-9 relative overflow-hidden px-6 md:px-8 leading-[1.5] ${
           padding ? padding : "py-6 md:py-8"
         }`}
+				style={{
+          gap: gap
+        }}
       >
         {children}
         <div ref={ref} className="section-observer absolute top-[50vh] w-0 left-1/2" />
