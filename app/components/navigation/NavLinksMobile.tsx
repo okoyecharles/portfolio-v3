@@ -188,7 +188,7 @@ nav-background fixed inset-0 bg-white/50 backdrop-blur-[2px] dark:backdrop-blur-
             />
           </a.div>
           <ul
-            className="px-6 flex flex-col text-base text-grey-6 dark:text-grey-b ms-[25px] font-visby font-medium"
+            className="px-6 flex flex-col text-base text-grey-6 dark:text-grey-b ms-[25px] font-visby font-semibold"
             role={"menubar"}
           >
             {mobileNavigationData.anchors.map((anchor, anchorIndex) => (

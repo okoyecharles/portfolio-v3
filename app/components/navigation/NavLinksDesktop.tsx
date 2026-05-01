@@ -135,7 +135,7 @@ export default function NavLinksDesktop() {
           >
             <a
               href={anchor.link}
-              className="transition-colors group-hover/nav-item:text-black dark:group-hover/nav-item:text-grey-d uppercase font-visby"
+              className="transition-colors group-hover/nav-item:text-black dark:group-hover/nav-item:text-grey-d uppercase font-visby font-semibold"
               ref={menuItemRefs[index]}
               onKeyDown={(event) => handleMenuItemKeyDown(event, index)}
             >
