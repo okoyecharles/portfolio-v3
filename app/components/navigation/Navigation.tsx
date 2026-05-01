@@ -5,7 +5,7 @@ import Logo from "../svg/abstract/Logo";
 export default function Navigation() {
   return (
     <>
-      <div id="home" className="w-full max-w-[1504px] mx-auto relative">
+      <div id="home" className="w-full max-w-[1504px] mx-auto relative z-10">
         <div className="p-6 md:p-8">
           <a
             className="flex items-center logo w-fit h-12"

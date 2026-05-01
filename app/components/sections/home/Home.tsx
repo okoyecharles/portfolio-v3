@@ -18,8 +18,6 @@ export default function Home() {
     springAnimate: [
       layoutTransformTrail,
       layoutOpacityTrail,
-      bgLineGlowTrail,
-      bgLineRevealTrail,
     ],
   } = useObservedSprings(
     [
@@ -50,7 +48,8 @@ export default function Home() {
       name="home"
       id="content"
       gap="32px"
-      padding="py-[192px] md:py-[192px]"
+      padding="justify-center"
+			fillScreen
       sectionRef={observedRef}
     >
       <header className="md:self-center md:text-center">
@@ -123,10 +122,6 @@ export default function Home() {
           </Button>
         </Link>
       </a.div>
-      <HomeBackground
-        glowBackground={bgLineGlowTrail}
-        revealBackground={bgLineRevealTrail}
-      />
     </Section>
   );
 }

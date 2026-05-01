@@ -54,8 +54,9 @@ const InteractiveCanvasGrid = ({
   useEffect(() => {
     const backgroundColor: RGB =
       theme === Theme.Dark ? { r: 0, g: 0, b: 0 } : { r: 255, g: 255, b: 255 };
-    const circleBaseColor: RGB = theme === Theme.Dark ? { r: 200, g: 200, b: 200 } : { r: 0, g: 0, b: 0 };
-		const intensityMultiplier = theme === Theme.Dark ? 0.3 : 0.5;
+    const circleBaseColor: RGB =
+      theme === Theme.Dark ? { r: 200, g: 200, b: 200 } : { r: 0, g: 0, b: 0 };
+    const intensityMultiplier = theme === Theme.Dark ? 0.3 : 0.5;
 
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -113,34 +114,47 @@ const InteractiveCanvasGrid = ({
     return () => cancelAnimationFrame(animationFrameId);
   }, [width, height, gridPoints, glowRadius, springX, springY, opacity, theme]);
 
-  // Handlers to pipe events into the Spring API
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!canvasRef.current) return;
-    const rect = canvasRef.current.getBoundingClientRect();
-    api.start({
-      springX: e.clientX - rect.left,
-      springY: e.clientY - rect.top,
-      opacity: 1, // Ensure the light is on while moving
-    });
-  };
+  // Global mouse event listener to fix the z-index/layering blocking issue
+  useEffect(() => {
+    const handleGlobalMouseMove = (e: MouseEvent) => {
+      if (!canvasRef.current) return;
 
-  const handleMouseLeave = () => {
-    // Smoothly turn off the light, leaving the cursor position as is
-    api.start({ opacity: 0 });
-  };
+      const rect = canvasRef.current.getBoundingClientRect();
 
-  const handleMouseEnter = () => {
-    api.start({ opacity: 1 });
-  };
+      // Calculate the mouse position relative to the canvas layout
+      api.start({
+        springX: e.clientX - rect.left,
+        springY: e.clientY - rect.top,
+        opacity: 1, // Keep the light on while moving inside the window
+      });
+    };
+
+    const handleGlobalMouseOut = (e: MouseEvent) => {
+      // Fade out smoothly if the mouse leaves the browser window entirely
+      if (
+        e.clientY <= 0 ||
+        e.clientX <= 0 ||
+        e.clientX >= window.innerWidth ||
+        e.clientY >= window.innerHeight
+      ) {
+        api.start({ opacity: 0 });
+      }
+    };
+
+    window.addEventListener("mousemove", handleGlobalMouseMove);
+    window.addEventListener("mouseout", handleGlobalMouseOut);
+
+    return () => {
+      window.removeEventListener("mousemove", handleGlobalMouseMove);
+      window.removeEventListener("mouseout", handleGlobalMouseOut);
+    };
+  }, [api]);
 
   return (
     <canvas
       ref={canvasRef}
       width={width}
       height={height}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      onMouseEnter={handleMouseEnter}
       style={{
         display: "block",
       }}

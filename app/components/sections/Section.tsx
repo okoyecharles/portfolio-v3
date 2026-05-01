@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 interface SectionProps {
 	gap?: string;
   padding?: string;
+	fillScreen?: boolean;
   sectionRef?: LegacyRef<HTMLElement>;
   children: React.ReactNode;
   name: AnchorName;
@@ -18,6 +19,7 @@ export default function Section({
   children,
   padding,
 	gap,
+	fillScreen = false,
   sectionRef,
   name,
   id
@@ -37,9 +39,9 @@ export default function Section({
       <section
         id={`${id}`}
         ref={sectionRef || null}
-        className={`w-full max-w-screen-lg mx-auto flex flex-col text-grey-6 dark:text-grey-9 relative overflow-hidden px-6 md:px-8 leading-[1.5] ${
+        className={`container mx-auto flex flex-col text-grey-6 dark:text-grey-9 relative isolate px-6 md:px-8 leading-[1.5] ${
           padding ? padding : "py-6 md:py-8"
-        }`}
+        } ${fillScreen ? "min-h-screen" : ""}`}
 				style={{
           gap: gap
         }}
