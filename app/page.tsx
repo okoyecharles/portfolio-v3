@@ -11,6 +11,7 @@ import SkipToContent from "./components/sections/skip-to-content/SkipToContent";
 import Script from "next/script";
 import GridInteractive from "./components/background/Grid";
 import HomeBackground from "./components/sections/home/HomeBackground";
+import MagneticCursor from "./components/background/MagneticCursor";
 
 export default function Page() {
   return (

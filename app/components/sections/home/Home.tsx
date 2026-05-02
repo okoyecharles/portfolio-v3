@@ -8,6 +8,7 @@ import HomeBackground from "./HomeBackground";
 import animation from "../../animations/animations";
 import Link from "../../clickable/Link";
 import BlueCursorIcon from "../../svg/home/BlueCursor";
+import MagneticCursor from "../../background/MagneticCursor";
 
 export default function Home() {
   const exportFormat = "pdf";
@@ -15,10 +16,7 @@ export default function Home() {
 
   const {
     observedRef,
-    springAnimate: [
-      layoutTransformTrail,
-      layoutOpacityTrail,
-    ],
+    springAnimate: [layoutTransformTrail, layoutOpacityTrail],
   } = useObservedSprings(
     [
       ...animation.layout.reveal.start,
@@ -48,13 +46,13 @@ export default function Home() {
       name="home"
       id="content"
       gap="32px"
-      padding="justify-center"
-			fillScreen
+      padding="justify-center relative -top-[96px] md:-top-[112px]"
+      fillScreen
       sectionRef={observedRef}
     >
       <header className="md:self-center md:text-center">
         <a.h1
-          className="text-grey-1 dark:text-grey-d mb-2 relative"
+          className="text-grey-1 dark:text-grey-d mb-2 relative z-10"
           style={layoutReveal(1)}
         >
           <div className="inline-block w-0 absolute -top-6 md:-top-3 md:-left-9">
@@ -78,8 +76,9 @@ export default function Home() {
               <span>CH</span>
               <span className="relative inline-block">
                 <span className="opacity-0">A</span>
-                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 origin-bottom  -translate-y-[5px] scale-[.625] sm:scale-75 lg:scale-100">
-                  <BlueCursorIcon />
+                <span className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
+                  {/* .625 sm:75 lg:100 */}
+                  <MagneticCursor />
                 </span>
               </span>
               <span>RLES</span>

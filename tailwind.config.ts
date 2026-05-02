@@ -42,6 +42,7 @@ const config: Config = {
         '15': '#151515',
 				'1a': '#1a1a1a',
         'b': '#b3b3b3',
+        'c': '#cccccc',
         'd': '#dddddd',
         'ea': '#eaeaea',
         'fb': '#fbfbfb',
