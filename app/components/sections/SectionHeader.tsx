@@ -27,16 +27,10 @@ export default function SectionHeader({
 
   return (
     <header className="flex items-center self-center gap-3" ref={observedRef}>
-      {mode === "default" && (
-        <Plus
-          className="stroke-blue-100 dark:stroke-blue-d-200"
-          animation={bgPlusReveal[0]}
-        />
-      )}
       <a.h2
-        className={`font-visby font-extrabold text-[24px] text-grey-1 dark:text-grey-d leading-[1.2] ${
-          mode === "default" ? "uppercase " : "text-center "
-        }lg:text-[32px]`}
+				className={`font-visby font-black text-xl lg:text-2xl text-grey-1 dark:text-grey-d leading-[1.2] text-center ${
+          mode === "default" ? "uppercase" : ""
+        }`}
         style={{
           transform: to(layoutTransform.y, (y) => `translateY(${y}px)`),
           opacity: to(layoutOpacity.opacity, (op: number) => `${op}`),
@@ -44,12 +38,6 @@ export default function SectionHeader({
       >
         {children}
       </a.h2>
-      {mode === "default" && (
-        <Plus
-          className="stroke-blue-100 dark:stroke-blue-d-200"
-          animation={bgPlusReveal[1]}
-        />
-      )}
     </header>
   );
 }

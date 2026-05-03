@@ -1,9 +1,5 @@
-interface AboutData {
-  technologies: string[];
-  tools: string[];
-}
-
-const aboutData: AboutData = {
+const aboutData = {
+	email: "okoyecharles509@gmail.com",
   technologies: [
     "JavaScript",
     "TypeScript",

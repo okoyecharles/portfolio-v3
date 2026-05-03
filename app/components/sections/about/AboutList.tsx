@@ -1,11 +1,11 @@
 import { AboutListProps } from "@/app/components/sections/about/props";
 import { useObservedSprings } from "@/app/components/utils/useObservedSpring";
-import { a, useSpring, useTrail } from "@react-spring/web";
+import { a, config, useSpring, useTrail } from "@react-spring/web";
 
 export default function AboutList({items}: AboutListProps) {
   const LIST_HEIGHT = 32 * (items.length - 1);
   const {observedRef, springAnimate} = useObservedSprings(
-    [{height: 0}, {y: "-50%", scale: 0}, {opacity: 0}],
+    [{height: 0}, {y: "-50%", scale: 0}, {opacity: 0, y: 20}],
     [
       {
         height: LIST_HEIGHT,
@@ -18,7 +18,7 @@ export default function AboutList({items}: AboutListProps) {
         config: {friction: 35, tension: 500},
         delay: 250,
       },
-      {opacity: 1, delay: 450},
+			{opacity: 1, y: 0, delay: 450, config: config.stiff},
     ],
     [
       useSpring,
@@ -30,14 +30,14 @@ export default function AboutList({items}: AboutListProps) {
   return (
     <div className="relative" ref={observedRef}>
       <a.div
-        className="list-marker-line absolute top-[12px] left-[12px] w-[2px] bg-grey-ea dark:bg-grey-2"
+        className="list-marker-line absolute top-[12px] left-[12px] w-[2px] bg-grey-c dark:bg-grey-3"
         style={springAnimate[0]}
       />
       <ul className="grid gap-2">
         {items.map((item, itemIndex) => (
           <li className="ps-[34px] relative" key={item}>
             <a.div
-              className="list-marker h-[10px] aspect-square rounded-[5px] ring-1 ring-blue-100 dark:ring-blue-200 bg-grey-ea dark:bg-grey-2 absolute top-1/2 -translate-y-1/2 left-2"
+							className="list-marker h-[10px] aspect-square rounded-full ring-1 ring-blue-100 dark:ring-blue-200 bg-blue-ghost dark:bg-blue-d-ghost absolute top-1/2 -translate-y-1/2 left-2"
               style={springAnimate[1][itemIndex]}
             />
             <a.span className="block" style={springAnimate[2][itemIndex]}>

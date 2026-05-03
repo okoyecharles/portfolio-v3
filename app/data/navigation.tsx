@@ -7,6 +7,7 @@ import PathIcon from "../components/svg/submenu/PathIcon";
 import ProfileIcon from "../components/svg/submenu/ProfileIcon";
 import QuoteIcon from "../components/svg/submenu/QuoteIcon";
 import XIcon from "../components/svg/icons/XIcon";
+import aboutData from "./about";
 
 export type AnchorName =
   | "home"
@@ -51,7 +52,7 @@ export const socials: NavigationData["socials"] = [
   {
     name: "Gmail",
     icon: <MailIcon />,
-    link: "mailto:okoyecharles509@gmail.com",
+    link: `mailto:${aboutData.email}`,
   },
   {
     name: "Linkedin",

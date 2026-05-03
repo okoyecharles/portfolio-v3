@@ -47,6 +47,7 @@ const MagneticCursor = ({ radius = 100 }) => {
 
   return (
     <div
+			className="isolate"
       ref={containerRef}
       style={{
         width: containerSize,
@@ -59,16 +60,16 @@ const MagneticCursor = ({ radius = 100 }) => {
       }}
     >
       <div
-        className={`absolute w-4 h-4 bg-blue-100/25 border-2 border-blue-d-300 top-0 left-0 -translate-x-1/2 -translate-y-1/2 ${isHovering ? "opacity-1" : "opacity-0"} transition-all duration-300`}
+        className={`absolute w-4 h-4 bg-blue-ghost dark:bg-blue-d-ghost border-2 border-blue-d-300 top-0 left-0 -translate-x-1/2 -translate-y-1/2 ${isHovering ? "opacity-1" : "opacity-0"} transition-all duration-300 rounded-[3px] z-10`}
       />
       <div
-        className={`absolute w-4 h-4 bg-blue-100/25 border-2 border-blue-d-300 top-0 right-0 translate-x-1/2 -translate-y-1/2 ${isHovering ? "opacity-1" : "opacity-0"} transition-all duration-300`}
+        className={`absolute w-4 h-4 bg-blue-ghost dark:bg-blue-d-ghost border-2 border-blue-d-300 top-0 right-0 translate-x-1/2 -translate-y-1/2 ${isHovering ? "opacity-1" : "opacity-0"} transition-all duration-300 rounded-[3px] z-10`}
       />
       <div
-        className={`absolute w-4 h-4 bg-blue-100/25 border-2 border-blue-d-300 bottom-0 right-0 translate-x-1/2 translate-y-1/2 ${isHovering ? "opacity-1" : "opacity-0"} transition-all duration-300`}
+        className={`absolute w-4 h-4 bg-blue-ghost dark:bg-blue-d-ghost border-2 border-blue-d-300 bottom-0 right-0 translate-x-1/2 translate-y-1/2 ${isHovering ? "opacity-1" : "opacity-0"} transition-all duration-300 rounded-[3px] z-10`}
       />
       <div
-        className={`absolute w-4 h-4 bg-blue-100/25 border-2 border-blue-d-300 bottom-0 left-0 -translate-x-1/2 translate-y-1/2 ${isHovering ? "opacity-1" : "opacity-0"} transition-all duration-300`}
+        className={`absolute w-4 h-4 bg-blue-ghost dark:bg-blue-d-ghost border-2 border-blue-d-300 bottom-0 left-0 -translate-x-1/2 translate-y-1/2 ${isHovering ? "opacity-1" : "opacity-0"} transition-all duration-300 rounded-[3px] z-10`}
       />
       <div
         className={`absolute w-[calc(100%-15px)] h-[1.5px] bg-grey-c dark:bg-grey-3 top-0 left-2 ${isHovering ? "opacity-1" : "opacity-0"} transition-all duration-300`}
@@ -84,6 +85,7 @@ const MagneticCursor = ({ radius = 100 }) => {
       />
 
       <animated.div
+				className={"z-20"}
         style={{
           position: "absolute",
           top: 0,

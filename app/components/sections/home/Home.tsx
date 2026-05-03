@@ -94,7 +94,7 @@ export default function Home() {
         </a.h2>
       </header>
       <a.p
-        className="max-w-sm md:max-w-[650px] text-lg md:text-center md:self-center"
+        className="max-w-sm md:max-w-[550px] md:text-center md:self-center"
         style={layoutReveal(3)}
       >
         I can help you build a product, feature, or website. Look through my

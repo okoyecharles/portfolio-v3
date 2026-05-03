@@ -8,8 +8,6 @@ import Link from "../../clickable/Link";
 import { a, to, useSpring, useTrail } from "@react-spring/web";
 import { useObservedSprings } from "../../utils/useObservedSpring";
 import animation from "../../animations/animations";
-import InfoIcon from "../../svg/abstract/InfoIcon";
-import CustomTooltip from "../../clickable/CustomTooltip";
 
 export default function About() {
   const {
@@ -52,7 +50,7 @@ export default function About() {
       useSpring,
       useSpring,
       (cb: Function) => useTrail(4, cb, []),
-    ]
+    ],
   );
 
   const headerReveal = (index: number) => ({
@@ -73,56 +71,58 @@ export default function About() {
   return (
     <Section name="about" id="about" padding="pt-12 pb-16 md:py-8">
       <SectionHeader>About me</SectionHeader>
-      <div className="grid gap-6 md:grid-cols-10 my-6 md:my-[96px] lg:mt-[128px] lg:mb-[256px]">
+      <div className="grid gap-6 semi-lg:grid-cols-10 my-6 semi-lg:my-[96px] semi-lg:mt-[128px] semi-lg:mb-[256px]">
         <AboutImage
           imageAnimate={imageReveal}
           plusReveal={bgPlusReveal}
           lineAnimate={[bgLineReveal, bgLineGlow]}
         />
         <div
-          className="grid gap-6 about-content md:col-span-6 md:grid-cols-2"
+          className="grid gap-6 about-content semi-lg:col-span-6 semi-lg:grid-cols-2"
           ref={observedRef}
         >
           <article className="md:col-span-2">
             <a.h3
-              className="text-[18px] leading-[1.3] font-semibold text-grey-1 dark:text-grey-d mb-2"
+              className="text-lg leading-[1.3] font-semibold text-grey-1 dark:text-grey-d mb-2"
               style={headerReveal(0)}
             >
               Introduction
             </a.h3>
-            <a.div style={layoutReveal()}>
-              <CustomTooltip id="about-info-1">
-                <span className="underline">Kosi</span> is short for{" "}
-                <span className="underline">Kosisochukwu</span>
-              </CustomTooltip>
-              <a.p className="mb-4">
+            <a.div
+              style={layoutReveal()}
+              className={"leading-[1.5]"}
+            >
+              <a.p className="mb-4 ">
                 My name is{" "}
                 <strong
                   className="text-grey-1 dark:text-grey-d whitespace-nowrap"
                   aria-describedby="about-info-1"
                 >
                   Okoye Charles Kosisochukwu
-                </strong>{" "}
-                <button
-                  className="group/info-button inline relative top-[3px]"
-                  name="show extra info"
-                  aria-label="'Kosi' is short for 'Kosisochukwu'"
-                  data-tooltip-id="about-info-1"
-                >
-                  <InfoIcon />
-                </button>{" "}
-                , I'm a{" "}
+                </strong>,{" "}
+                A{" "}
                 <strong className="text-grey-1 dark:text-grey-d whitespace-nowrap">
-                  Full-Stack Developer
+                  Frontend Developer
                 </strong>{" "}
-                (front-end heavy) based in Nigeria. I spend most of my time designing
-                graphics, coding up things for the web, and learning algorithms.
+                based in Nigeria
+                <span className="h-4 w-6 inline-flex items-center align-middle ml-1">
+                  <span className="w-2 h-4 bg-green/80 animate-[wave_2s_ease-in-out_infinite]" />
+
+                  <span className="w-2 h-4 bg-grey-ea dark:bg-white animate-[wave_2s_ease-in-out_infinite] [animation-delay:0.5s]" />
+
+                  <span className="w-2 h-4 bg-green/80 animate-[wave_2s_ease-in-out_infinite] [animation-delay:1s]" />
+                </span>
+                <span className="opacity-0 inline">.</span> I spend most of my
+                time designing cool stuff and coding them up.
               </a.p>
               <a.p>
-                My goal is to deliver, through code, unique and innovative solutions to
-                complex problems. If my portfolio interests you, or you need an
-                enthusiastic developer on your team,{" "}
-                <Link href="mailto:okoyecharles@gmail.com">I am available for hire</Link>.
+                My goal is to deliver, through code, unique and innovative
+                solutions to complex problems. If my portfolio interests you, or
+                you need an enthusiastic developer on your team,{" "}
+								<Link href={`mailto:${aboutData.email}`}>
+                  I am available for hire
+                </Link>
+                .
               </a.p>
             </a.div>
           </article>

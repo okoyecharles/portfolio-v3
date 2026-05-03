@@ -27,6 +27,7 @@ const config: Config = {
       'black': '#000000',
       'error': '#ff3333',
       'error-dark': '#FF6666',
+			'green': '#00b500',
       'grey': {
         '0a': '#0a0a0a',
         '1': '#111111',
@@ -51,9 +52,11 @@ const config: Config = {
         '100': '#3592FF',
         '200': '#0070F3',
         '300': '#0061D2',
+				'ghost': '#C5DFFD',
         'd-100': '#3C96ff',
         'd-200': '#3291ff',
         'd-300': '#187ff6',
+				'd-ghost': '#06203E',
       },
       'tag': {
         'redux': '#7D47C3',

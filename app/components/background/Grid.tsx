@@ -14,6 +14,7 @@ const InteractiveCanvasGrid = ({
   width = 1500,
   height = 1000,
   glowRadius = 150,
+	baseDotAlpha = 0.1,
 }) => {
   const { theme } = useTheme();
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -48,7 +49,7 @@ const InteractiveCanvasGrid = ({
     springX: width / 2,
     springY: height / 2,
     opacity: 0,
-    config: { mass: 5, tension: 150, friction: 25 },
+    config: { tension: 150, friction: 1, mass: 1 },
   }));
 
   useEffect(() => {
@@ -95,11 +96,11 @@ const InteractiveCanvasGrid = ({
           const intensity = falloff * currentOpacity;
 
           // Interpolate alpha from a base dim grey to a bright grey/white
-          const alpha = 0.1 + intensityMultiplier * intensity;
+          const alpha = baseDotAlpha + intensityMultiplier * intensity;
           ctx.fillStyle = `rgba(${circleBaseColor.r}, ${circleBaseColor.g}, ${circleBaseColor.b}, ${alpha})`;
         } else {
           // Base unlit state
-          ctx.fillStyle = `rgba(${circleBaseColor.r}, ${circleBaseColor.g}, ${circleBaseColor.b}, 0.1)`;
+          ctx.fillStyle = `rgba(${circleBaseColor.r}, ${circleBaseColor.g}, ${circleBaseColor.b}, ${baseDotAlpha})`;
         }
 
         ctx.fill();

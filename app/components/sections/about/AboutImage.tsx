@@ -1,75 +1,133 @@
 import { AboutImageProps } from "@/app/components/sections/about/props";
-import { a } from "@react-spring/web";
-import Image from "next/image";
-import HorizontalDottedLine from "@/app/components/background/HorizontalDottedLine";
-import DottedLine from "@/app/components/background/DottedLine";
-import Plus from "@/app/components/background/Plus";
+import { a, animated, config, to, useSpring } from "@react-spring/web";
+import InteractiveCanvasGrid from "../../background/Grid";
+import Corner, { CornerPosition } from "../../background/Corner";
+import { useRef, useEffect } from "react";
+import {
+  getReverseAngleFromCenter,
+} from "@/app/util/math/angles";
 
-export default function AboutImage({
-  imageAnimate,
-  plusReveal,
-  lineAnimate,
-}: AboutImageProps) {
-  const plusPositions = [
-    "top-0 left-0",
-    "top-0 right-0",
-    "bottom-0 right-0",
-    "bottom-0 left-0",
-  ];
+export default function AboutImage({ imageAnimate }: AboutImageProps) {
+  const pictureRef = useRef<HTMLPictureElement>(null);
+  const [{ rx, ry }, api] = useSpring(() => ({
+    rx: 0,
+    ry: 0,
+    config: { tension: 20, friction: 0 },
+  }));
+
+  const [{ gradient }, gradientApi] = useSpring(() => ({
+    gradient: 180,
+  }));
+
+  useEffect(() => {
+    if (!pictureRef.current) return;
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!pictureRef.current) return;
+
+      const pictureRect = pictureRef.current.getBoundingClientRect();
+      const x = e.clientX - pictureRect.left;
+      const y = e.clientY - pictureRect.top;
+
+      const magnetStrength = 20;
+
+      const xRatio = (x / pictureRect.width) * 2 - 1;
+      const yRatio = (y / pictureRect.height) * 2 - 1;
+      const rotateY =
+        Math.sign(xRatio) * Math.pow(Math.abs(xRatio), 1.5) * magnetStrength;
+      const rotateX =
+        -Math.sign(yRatio) * Math.pow(Math.abs(yRatio), 1.5) * magnetStrength;
+
+      // calculate gradient angle from mouse position around the origin center
+      // 0deg top, 90deg right, 180deg bottom, 270deg left
+      const gradientAngle = getReverseAngleFromCenter(
+        x,
+        y,
+        pictureRect.width,
+        pictureRect.height,
+      );
+
+      api.start({
+        rx: rotateX,
+        ry: rotateY,
+      });
+      gradientApi.start({
+        gradient: gradientAngle,
+				config: { duration: 100}
+      });
+    };
+
+    const handleMouseOut = () => {
+      api.start({
+        rx: 0,
+        ry: 0,
+      });
+      gradientApi.start({
+        gradient: 180,
+        config: config.stiff,
+      });
+    };
+
+    pictureRef.current.addEventListener("mouseout", handleMouseOut);
+    pictureRef.current.addEventListener("mousemove", handleMouseMove);
+    return () => {
+      pictureRef.current?.removeEventListener("mouseout", handleMouseOut);
+      pictureRef.current?.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, [pictureRef]);
 
   return (
     <picture
-      className="group/picture about-image relative max-w-[350px] w-full aspect-square p-[25px] mx-auto lg:my-auto md:col-span-4">
+      className="group/picture about-image relative max-w-[350px] w-full aspect-square mx-auto semi-lg:my-auto semi-lg:col-span-4 isolate overflow-hidden group/corners grid place-items-center"
+      ref={pictureRef}
+    >
       <a.div
-        className="w-full rounded-[10px] max-w-[300px] aspect-square overflow-hidden"
+        className="w-full max-w-[250px] aspect-square transition-all relative isolate"
         style={imageAnimate()}
       >
-        <Image
+        <a.div
+					className="z-10 inset-0 absolute rounded-[10px] opacity-25 dark:opacity-50"
+          style={{
+            background: to(
+              [gradient],
+              (gradient) =>
+                `linear-gradient(
+    ${gradient}deg,
+    rgba(255,255,255,0.15) 0%,
+    rgba(255,255,255,0.08) 18%,
+    rgba(255,255,255,0.02) 35%,
+    rgba(0,0,0,0.00) 48%,
+    rgba(0,0,0,0.08) 65%,
+    rgba(0,0,0,0.22) 82%,
+    rgba(0,0,0,0.38) 100%
+  )`,
+            ),
+            transform: to(
+              [rx, ry],
+              (rx, ry) => `rotateX(${rx}deg) rotateY(${ry}deg)`,
+            ),
+          }}
+        />
+        <animated.img
           src="/assets/okoyecharles.webp"
           alt="A portrait image of Okoye Charles"
-          width={300}
-          height={300}
-          className="transition-transform duration-500 delay-100 group-hover/picture:scale-105"
+          width={250}
+          height={250}
+          className={"rounded-[10px]"}
+          style={{
+            transform: to(
+              [rx, ry],
+              (rx, ry) => `rotateX(${rx}deg) rotateY(${ry}deg)`,
+            ),
+          }}
         />
       </a.div>
-      <div className="absolute inset-0 aesthetics -z-10">
-        <div className={`absolute top-[12.5px] left-1/2 -translate-x-1/2`}>
-          <HorizontalDottedLine
-            variant="bold"
-            animation={[lineAnimate[0], lineAnimate[1]]}
-          />
-        </div>
-        <div className={`absolute right-[12.5px] top-1/2 -translate-y-1/2`}>
-          <DottedLine
-            variant="bold"
-            animation={[lineAnimate[0], lineAnimate[1]]}
-          />
-        </div>
-        <div className={`absolute bottom-[12.5px] left-1/2 -translate-x-1/2`}>
-          <HorizontalDottedLine
-            variant="bold"
-            animation={[lineAnimate[0], lineAnimate[1]]}
-          />
-        </div>
-        <div className={`absolute left-[12.5px] top-1/2 -translate-y-1/2`}>
-          <DottedLine
-            variant="bold"
-            animation={[lineAnimate[0], lineAnimate[1]]}
-          />
-        </div>
-
-        {plusPositions.map((pos, index) => (
-          <div
-            key={pos}
-            className={`absolute ${pos} duration-300 group-hover/picture:rotate-[.25turn] transition-transform`}
-          >
-            <Plus
-              className="duration-300 stroke-grey-8 dark:stroke-grey-9 group-hover/picture:stroke-blue-100 dark:group-hover/picture:stroke-blue-d-200"
-              animation={plusReveal[index]}
-            />
-          </div>
-        ))}
+      <div className="absolute top-3 left-3 w-[calc(100%-24px)] h-[calc(100%-24px)] -z-10 overflow-hidden">
+        <InteractiveCanvasGrid width={350} height={350} baseDotAlpha={0} />
       </div>
+      <Corner position={CornerPosition.TopLeft} />
+      <Corner position={CornerPosition.TopRight} />
+      <Corner position={CornerPosition.BottomRight} />
+      <Corner position={CornerPosition.BottomLeft} />
     </picture>
   );
 }
