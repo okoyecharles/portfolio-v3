@@ -1,25 +1,26 @@
 import { SpringValue } from '@react-spring/web';
-import { Expertise } from './../../../data/experience';
+import { Experience } from './../../../data/experience';
 
 export interface ExperienceImageProps {
+	experiences: Experience[];
   imageTransition: Function;
 }
 
 export interface ExperienceCardProps {
-  expertise: Expertise;
+  experience: Experience;
   contentReveal: Record<string, SpringValue>[];
 }
 
 export interface ExperienceTimelineProps {
-  expertise: Expertise;
+	currentIndex: number;
+  experiences: Array<Experience>;
   yearTimeLineScroll: Record<string, SpringValue>;
   monthTimeLineHeight: Record<string, SpringValue>;
   monthTimeLineMarker: Record<string, SpringValue>;
 }
 
 export interface ExperienceControlProps {
-  expertiseIndex: number;
-  setExpertiseIndex: Function;
-  expertiseCount: number;
-  expertiseData: Expertise[];
+  currentIndex: number;
+  setCurrentIndex: Function;
+  experiences: Experience[];
 }

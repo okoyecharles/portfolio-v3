@@ -24,7 +24,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${visby.variable} ${firaMono.variable} ${lato.variable} h-full scroll-smooth`}
+      className={`${visby.variable} ${firaMono.variable} ${lato.variable} scroll-smooth h-full overflow-x-hidden`}
     >
       <body className="font-normal bg-white dark:bg-black font-lato selection:bg-blue-200 dark:selection:bg-blue-d-300 selection:text-white relative">
         <Providers>{children}</Providers>

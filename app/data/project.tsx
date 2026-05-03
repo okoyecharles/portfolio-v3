@@ -1,4 +1,4 @@
-import AmazonCloneLogo from "../components/svg/projects/AmazonCloneLogo";
+import moment, { Moment } from "moment";
 import BuggoLogo from "../components/svg/projects/BuggoLogo";
 import LavishCuisineLogo from "../components/svg/projects/LavishCuisineLogo";
 import SaveAChildLogo from "../components/svg/projects/SaveAChildLogo";
@@ -22,7 +22,7 @@ export interface Project {
   description: string;
   tags: ProjectTag[];
   link: Record<"github" | "live", string>;
-  timeRange: [Date, Date];
+  timeRange: [Moment, Moment];
   logo?: React.ReactNode;
   image?: Record<"desktop" | "mobile", string>;
   themeColor?: string;
@@ -36,7 +36,7 @@ const projectData: Array<Project> = [
       desktop: "/assets/projects/buggo.webp",
       mobile: "/assets/projects/buggo-mobile.webp",
     },
-    timeRange: [new Date(2023, 1), new Date(2023, 2)],
+    timeRange: [moment([2023, 1]), moment([2023, 2])],
     description:
       "A real-time bug tracking application that allows you to create projects and tickets, while offering advanced filtering and search options, along with secure user authentication",
     tags: ["next-js", "redux", "node-js", "mongodb"],
@@ -48,12 +48,12 @@ const projectData: Array<Project> = [
   },
   // {
   //   name: "Amazon Clone",
-  //   logo: <AmazonCloneLogo />,
+  //   logo: <AmazonCloneLogo />, 
   //   image: {
   //     desktop: "/assets/projects/amazon-clone.webp",
   //     mobile: "/assets/projects/amazon-clone-mobile.webp",
   //   },
-  //   timeRange: [new Date(2022, 9), new Date(2022, 11)],
+  //   timeRange: [moment([2022, 9]), moment([2022, 11])],
   //   description:
   //     "Explore an Amazon-inspired clone website with authentication, purchase capabilities, and a Redux-powered cart system",
   //   tags: ["react", "redux", "firebase"],
@@ -67,7 +67,7 @@ const projectData: Array<Project> = [
   {
     name: "Save A Child",
     logo: <SaveAChildLogo />,
-    timeRange: [new Date(2022, 5), new Date(2022, 6)],
+    timeRange: [moment([2022, 5]), moment([2022, 6])],
     image: {
       desktop: "/assets/projects/save-a-child.webp",
       mobile: "/assets/projects/save-a-child-mobile.webp",
@@ -89,7 +89,7 @@ const projectData: Array<Project> = [
       desktop: "/assets/projects/lavish-cuisine.webp",
       mobile: "/assets/projects/lavish-cuisine-mobile.webp",
     },
-    timeRange: [new Date(2022, 7), new Date(2022, 8)],
+    timeRange: [moment([2022, 7]), moment([2022, 8])],
     description:
       "Explore global cuisines with a meal-based website, categorizing dishes by countries and enabling ingredient-based meal searches",
     tags: ["react", "redux", "typescript"],
@@ -101,7 +101,7 @@ const projectData: Array<Project> = [
   },
   {
     name: "To do List",
-    timeRange: [new Date(2023, 7), new Date(2023, 8)],
+    timeRange: [moment([2023, 7]), moment([2023, 8])],
     description:
       "To do list app using Express, MongoDB, and Google authentication for seamless task management across devices",
     tags: ["next-js", "mongodb", "node-js"],
@@ -112,7 +112,7 @@ const projectData: Array<Project> = [
   },
   {
     name: "Ex Portfolio",
-    timeRange: [new Date(2022, 11), new Date(2023, 1)],
+    timeRange: [moment([2022, 11]), moment([2023, 1])],
     description: "My previous portfolio",
     tags: ["next-js", "redux", "typescript", "scss"],
     link: {
@@ -122,7 +122,7 @@ const projectData: Array<Project> = [
   },
   {
     name: "Nethub",
-    timeRange: [new Date(2022, 6), new Date(2022, 8)],
+    timeRange: [moment([2022, 6]), moment([2022, 8])],
     description:
       "A dynamic website featuring an extensive collection of movies sourced from a movie API implemented with robust filter and search capabilities",
     tags: ["html", "css", "javascript"],
@@ -133,7 +133,7 @@ const projectData: Array<Project> = [
   },
   {
     name: "Space Traveler Hub",
-    timeRange: [new Date(2022, 6), new Date(2022, 7)],
+    timeRange: [moment([2022, 6]), moment([2022, 7])],
     description:
       "An application that fetches and displays real-time rocket information, join missions and reserve rockets in this intuitive SPA",
     tags: ["react", "redux"],
@@ -144,7 +144,7 @@ const projectData: Array<Project> = [
   },
   {
     name: "Type Effect Library",
-    timeRange: [new Date(2022, 5), new Date(2022, 6)],
+    timeRange: [moment([2022, 5]), moment([2022, 6])],
     description:
       "A light-weight, open-source typing-effect library that enables users to add typing effects to DOM text elements",
     tags: ["javascript"],

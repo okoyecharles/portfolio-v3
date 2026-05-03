@@ -2,10 +2,10 @@ import Link from "@/app/components/clickable/Link";
 import { FeaturedProjectTabPanelProps } from "../props";
 import { a } from "@react-spring/web";
 import NorthWestIcon from "@/app/components/svg/abstract/NorthWestIcon";
-import { formatDateTimeAttribute, formatMonthYear } from "@/app/components/utils/moment";
 import Button from "@/app/components/clickable/Button";
 import LiveIcon from "@/app/components/svg/icons/LiveIcon";
 import GithubIcon from "@/app/components/svg/icons/GithubIcon";
+import { formatDateTimeAttribute, formatMonthYear } from "@/app/util/dates/date";
 
 export default function FeaturedProjectTabPanel({
   project,

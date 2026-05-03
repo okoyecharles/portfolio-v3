@@ -22,7 +22,7 @@ export default function SectionDescription({
   return (
     <a.p
       ref={observedRef}
-      className="my-4 lg:my-8 self-center max-w-[550px] text-center md:text-[18px] text-grey-6 dark:text-grey-b"
+      className="my-4 lg:my-8 self-center max-w-[600px] text-center text-grey-6 dark:text-grey-b"
       style={{
         transform: to(layoutTransformSpring.y, (y) => `translateY(${y}px)`),
         opacity: to(layoutOpacitySpring.opacity, (op: number) => `${op}`),

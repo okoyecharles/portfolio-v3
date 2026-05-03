@@ -22,7 +22,7 @@ export default function FeaturedProjectSwiper({
   }
 
   return (
-    <div className="relative swiper-container isolate">
+    <div className="relative swiper-container isolate w-full">
       <Swiper
         ref={swiperRef}
         grabCursor

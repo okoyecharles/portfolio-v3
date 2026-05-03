@@ -6,13 +6,13 @@ import Link from "@/app/components/clickable/Link";
 import NorthWestIcon from "@/app/components/svg/abstract/NorthWestIcon";
 
 export default function ExperienceCard({
-  expertise,
+  experience,
   contentReveal,
 }: ExperienceCardProps) {
-  const dates = expertise.timeRange.map((date) => moment(date).format("MMMM"));
-  const [initialDate, endDate] = expertise.timeRange;
+  const dates = experience.timeRange.map((date) => moment(date).format("MMMM"));
+  const [initialDate, endDate] = experience.timeRange;
   const dateDescription = `${moment(initialDate).format("MMMM YYYY")} to ${moment(
-    endDate
+    endDate,
   ).format("MMMM YYYY")}`;
 
   return (
@@ -20,25 +20,27 @@ export default function ExperienceCard({
       <a.header className="flex gap-4 mt-auto" style={contentReveal[0]}>
         <div className="logo rounded-[4px] overflow-hidden min-w-[48px] aspect-square h-fit ring-1 ring-grey-ea dark:ring-0">
           <Image
-            src={expertise.logo}
+            src={experience.logo}
             width={48}
             height={48}
-            alt={`Logo of ${expertise.title}`}
+            alt={`Logo of ${experience.title}`}
           />
         </div>
         <div className="flex flex-col gap-1 heading">
           <h3 className="leading-[1] text-grey-1 dark:text-grey-d font-bold">
-            {expertise.title}
+            {experience.title}
           </h3>
-          <p className="leading-[1.3] text-sm md:text-base">{expertise.subTitle}</p>
+          <p className="leading-[1.3] text-sm md:text-base">
+            {experience.subTitle}
+          </p>
         </div>
       </a.header>
       <div className="flex flex-col gap-3 mb-auto content md:pl-16">
         <a.p className="mt-4" style={contentReveal[1]}>
-          {expertise.details}
+          {experience.details}
         </a.p>
         <a.button style={contentReveal[2]} className="w-fit" tabIndex={-1}>
-          <Link href={expertise.certificate}>
+          <Link href={experience.certificate}>
             Certificate of completion <NorthWestIcon variant="link" />
           </Link>
         </a.button>

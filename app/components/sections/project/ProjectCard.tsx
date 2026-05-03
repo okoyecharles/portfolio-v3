@@ -3,9 +3,9 @@ import Link from "../../clickable/Link";
 import NorthWestIcon from "../../svg/abstract/NorthWestIcon";
 import ProjectGithub from "../../svg/abstract/ProjectGithub";
 import ProjectLive from "../../svg/abstract/ProjectLive";
-import { formatDateTimeAttribute, formatMonthYear } from "../../utils/moment";
 import FeaturedProjectTag from "../featured-project/FeaturedProjectTag";
 import { ProjectCardLinksProps, ProjectCardProps } from "./props";
+import { formatDateTimeAttribute, formatMonthYear } from "@/app/util/dates/date";
 
 export default function ProjectCard({ project, headerRef }: ProjectCardProps) {
   const [initialDate, endDate] = project.timeRange;
