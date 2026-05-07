@@ -1,7 +1,6 @@
 "use client";
 import { a, to, useSpring, useTrail } from "@react-spring/web";
 import animation from "../animations/animations";
-import Plus from "../background/Plus";
 import { useObservedSprings } from "../utils/useObservedSpring";
 
 interface SectionHeaderProps {
@@ -15,7 +14,7 @@ export default function SectionHeader({
 }: SectionHeaderProps) {
   const {
     observedRef,
-    springAnimate: [layoutTransform, layoutOpacity, bgPlusReveal],
+    springAnimate: [layoutTransform, layoutOpacity],
   } = useObservedSprings(
     [...animation.layout.revealSlow.start, animation.bg.plusReveal.start],
     [
