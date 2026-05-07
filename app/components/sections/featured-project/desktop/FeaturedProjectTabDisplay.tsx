@@ -6,10 +6,8 @@ import FullScreenIcon from "@/app/components/svg/icons/FullScreenIcon";
 import Image from "next/image";
 import DesktopFrame from "@/public/assets/projects/desktop-frame.png";
 import MobileFrame from "@/public/assets/projects/mobile-frame.png";
-import HorizontalDottedLine from "@/app/components/background/HorizontalDottedLine";
-import DottedLine from "@/app/components/background/DottedLine";
-import Plus from "@/app/components/background/Plus";
-import Button from "@/app/components/clickable/Button";
+import Corner, { CornerPosition } from "@/app/components/background/Corner";
+import InteractiveCanvasGrid from "@/app/components/background/Grid";
 
 export default function FeaturedProjectTabDisplay({
   displayFrameTrail,
@@ -19,7 +17,6 @@ export default function FeaturedProjectTabDisplay({
   // decorative animations (plus and dashes)
   const {
     observedRef,
-    springAnimate: [bgLineGlowSpring, bgLineRevealSpring, bgPlusRevealTrail],
   } = useObservedSprings(
     [
       animation.bg.lineGlow.start,
@@ -31,15 +28,8 @@ export default function FeaturedProjectTabDisplay({
       animation.bg.lineReveal.end({ delay: 450 }),
       animation.bg.plusReveal.end({ delay: 0 }),
     ],
-    [useSpring, useSpring, (cb: Function) => useTrail(4, cb, [])]
+    [useSpring, useSpring, (cb: Function) => useTrail(4, cb, [])],
   );
-
-  const plusPositions = [
-    "top-0 left-0",
-    "top-0 right-0",
-    "bottom-0 right-0",
-    "bottom-0 left-0",
-  ];
 
   return (
     <div
@@ -49,7 +39,7 @@ export default function FeaturedProjectTabDisplay({
         grid grid-cols-24
         ring-1 ring-grey-ea dark:ring-grey-2
         rounded-ee-[10px] semi-lg:rounded-e-[10px]
-        overflow-hidden isolate group/display
+        overflow-hidden isolate group/display group/corners
       `}
       ref={observedRef}
     >
@@ -59,12 +49,12 @@ export default function FeaturedProjectTabDisplay({
             className={`
               desktop-frame row-start-1
               col-start-3 col-[_span_16_/_span_16]
-              flex flex-col
+              flex flex-col z-[2]
             `}
             style={style}
           >
             <a.div
-              className="frame mt-auto mb-[32px] semi-lg:mb-[64px] relative"
+							className="frame mt-auto mb-12 semi-lg:mb-20 xl:mb-8 relative"
               style={displayFrameTrail[0]}
             >
               <button
@@ -95,7 +85,12 @@ export default function FeaturedProjectTabDisplay({
                 height={216}
                 alt="null"
               />
-              <Image className="w-full" src={DesktopFrame} width={512} alt="null" />
+              <Image
+                className="w-full"
+                src={DesktopFrame}
+                width={512}
+                alt="null"
+              />
             </a.div>
           </a.div>
           <a.div
@@ -107,7 +102,7 @@ export default function FeaturedProjectTabDisplay({
             style={style}
           >
             <a.div
-              className="frame mt-auto mb-[54px] semi-lg:mb-[96px] relative"
+              className="frame mt-auto mb-[80px] semi-lg:mb-28 xl:mb-16 relative"
               style={displayFrameTrail[1]}
             >
               <button
@@ -138,43 +133,23 @@ export default function FeaturedProjectTabDisplay({
                 height={246}
                 alt="null"
               />
-              <Image className="w-full" src={MobileFrame} width={256} alt="null" />
+              <Image
+                className="w-full"
+                src={MobileFrame}
+                width={256}
+                alt="null"
+              />
             </a.div>
           </a.div>
         </>
       ))}
-      <div className="aesthetics -z-10">
-        <div className={`absolute top-[12.5px] left-1/2 -translate-x-1/2`}>
-          <HorizontalDottedLine
-            variant="bold"
-            animation={[bgLineRevealSpring, bgLineGlowSpring]}
-          />
-        </div>
-        <div className={`absolute right-[12.5px] top-1/2 -translate-y-1/2`}>
-          <DottedLine variant="bold" animation={[bgLineRevealSpring, bgLineGlowSpring]} />
-        </div>
-        <div className={`absolute bottom-[12.5px] left-1/2 -translate-x-1/2`}>
-          <HorizontalDottedLine
-            variant="bold"
-            animation={[bgLineRevealSpring, bgLineGlowSpring]}
-          />
-        </div>
-        <div className={`absolute left-[12.5px] top-1/2 -translate-y-1/2`}>
-          <DottedLine variant="bold" animation={[bgLineRevealSpring, bgLineGlowSpring]} />
-        </div>
-
-        {plusPositions.map((pos, index) => (
-          <div
-            key={pos}
-            className={`absolute duration-300 ${pos} group-hover/display:rotate-[.25turn] transition-transform`}
-          >
-            <Plus
-              className="duration-300 stroke-grey-8 dark:stroke-grey-9 group-hover/display:stroke-blue-100 dark:group-hover/display:stroke-blue-d-200"
-              animation={bgPlusRevealTrail[index]}
-            />
-          </div>
-        ))}
+      <div className="absolute top-0 left-0 w-full h-full -z-10 overflow-hidden">
+        <InteractiveCanvasGrid width={680} height={410} baseDotAlpha={0} />
       </div>
+      <Corner position={CornerPosition.TopLeft} />
+      <Corner position={CornerPosition.TopRight} />
+      <Corner position={CornerPosition.BottomRight} />
+      <Corner position={CornerPosition.BottomLeft} />
     </div>
   );
 }

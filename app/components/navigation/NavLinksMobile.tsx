@@ -1,7 +1,7 @@
 "use client";
 import CloseMenuIcon from "../svg/abstract/CloseMenuIcon";
 import MenuIcon from "../svg/abstract/MenuIcon";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import VerticalLineIcon from "../svg/abstract/VerticalLineIcon";
 import {
   a,

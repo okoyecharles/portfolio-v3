@@ -39,7 +39,7 @@ export default function Section({
       <section
         id={`${id}`}
         ref={sectionRef || null}
-        className={`container mx-auto flex flex-col text-grey-6 dark:text-grey-9 relative isolate px-6 md:px-8 leading-[1.5] ${
+        className={`container mx-auto flex flex-col text-grey-6 dark:text-grey-9 relative px-6 md:px-8 leading-[1.5] ${
           padding ? padding : "py-6 md:py-8"
         } ${fillScreen ? "min-h-screen" : ""}`}
 				style={{

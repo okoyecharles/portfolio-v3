@@ -71,7 +71,7 @@ export default function FeaturedProjectViewer({
   return (
     <div
       className={`
-        project-viewer-background fixed inset-0 bg-black/30 dark:bg-black/50 z-50 transition-opacity duration-300
+        project-viewer-background fixed inset-0 bg-white/50 backdrop-blur-[2px] dark:backdrop-blur-0 dark:bg-black/40 z-[999] transition-opacity duration-300
         ${open ? "visible" : "invisible pointer-events-none"}
       `}
     >
