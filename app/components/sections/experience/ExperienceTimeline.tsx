@@ -21,6 +21,7 @@ export default function ExperienceTimeline({
 
   return (
     <div className="relative h-[550px] w-[34px] md:w-[96px] flex overflow-hidden">
+      {/* Timeline */}
       <a.div
         className="absolute w-[34px] top-1/2 h-full"
         style={yearTimeLineScroll}
@@ -43,10 +44,11 @@ export default function ExperienceTimeline({
           <ExperienceTimelineMarkers yearCount={totalYears} />
         </div>
       </a.div>
-      <div className="h-full hidden md:block flex-1" aria-hidden>
-        <div className="relative h-full month-timeline-container ml-[34px]">
+			{/* Current Experience Marker */}
+      <div className="h-full flex-1" aria-hidden>
+				<div className="relative h-full month-timeline-container ml-[9px] md:ml-[34px]">
           <a.div
-            className={`w-[2px] bg-blue-100 dark:bg-blue-d-200 md:bg-grey-ea dark:md:bg-grey-3 absolute left-[18px] top-1/2 -translate-y-1/2`}
+            className={`w-[2px] bg-blue-100 dark:bg-blue-d-200 md:bg-grey-c dark:md:bg-grey-3 absolute left-[18px] top-1/2 -translate-y-1/2`}
             style={monthTimeLineHeight}
           >
             <div className="relative h-full text-[14px] text-grey-9">
@@ -62,8 +64,8 @@ export default function ExperienceTimeline({
               >
                 {moment(experiences[currentIndex].timeRange[1]).format("MMM")}
               </a.span>
-              <div className="absolute -translate-x-1/2 top-0 -translate-y-1/2 w-[10px] h-[1px] md:h-[10px] md:rounded-[5px] ring-0 md:ring-1 ring-blue-100 dark:ring-blue-d-200 bg-blue-100 md:bg-grey-ea dark:bg-blue-d-200 md:dark:bg-grey-2" />
-              <div className="absolute -translate-x-1/2 bottom-0 translate-y-1/2 w-[10px] h-[1px] md:h-[10px] md:rounded-[5px] ring-0 md:ring-1 ring-blue-100 dark:ring-blue-d-200 bg-blue-100 md:bg-grey-ea dark:bg-blue-d-200 md:dark:bg-grey-2" />
+							<div className="absolute -translate-x-1/2 top-0 left-[1px] -translate-y-1/2 w-[10px] h-[1px] md:h-[10px] md:rounded-[5px] ring-0 md:ring-1 ring-blue-100 dark:ring-blue-d-200 bg-blue-100 md:bg-blue-ghost dark:bg-blue-d-200 md:dark:bg-blue-d-ghost" />
+              <div className="absolute -translate-x-1/2 bottom-0 left-[1px] translate-y-1/2 w-[10px] h-[1px] md:h-[10px] md:rounded-[5px] ring-0 md:ring-1 ring-blue-100 dark:ring-blue-d-200 bg-blue-100 md:bg-blue-ghost dark:bg-blue-d-200 md:dark:bg-blue-d-ghost" />
             </div>
           </a.div>
         </div>

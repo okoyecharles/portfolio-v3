@@ -4,10 +4,8 @@ import Button from "../../clickable/Button";
 import DownloadIcon from "../../svg/icons/DownloadIcon";
 import { useObservedSprings } from "../../utils/useObservedSpring";
 import Section from "../Section";
-import HomeBackground from "./HomeBackground";
 import animation from "../../animations/animations";
 import Link from "../../clickable/Link";
-import BlueCursorIcon from "../../svg/home/BlueCursor";
 import MagneticCursor from "../../background/MagneticCursor";
 
 export default function Home() {

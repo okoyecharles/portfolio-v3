@@ -7,7 +7,7 @@ export default function ExperienceControl({
   experiences,
 }: ExperienceControlProps) {
 	const experienceCount = experiences.length;
-  const experienceTabTriggerRefs = experiences.map(() => useRef<HTMLButtonElement>(null));
+  const experienceTabTriggersRef = useRef<(HTMLButtonElement | null)[]>([]);
   function handleKeyDown(event: React.KeyboardEvent<HTMLUListElement>) {
     let newExpertiseIndex = -1;
     if (event.key === "ArrowLeft") {
@@ -16,7 +16,7 @@ export default function ExperienceControl({
       newExpertiseIndex = (currentIndex + 1) % experienceCount;
     } else return;
     setCurrentIndex(newExpertiseIndex);
-    experienceTabTriggerRefs[newExpertiseIndex].current?.focus();
+    experienceTabTriggersRef.current[newExpertiseIndex]?.focus();
   }
 
   return (
@@ -34,7 +34,7 @@ export default function ExperienceControl({
               <li key={index} role="presentation">
                 <button
                   role="tab"
-                  ref={experienceTabTriggerRefs[index]}
+									ref={(el) => { experienceTabTriggersRef.current[index] = el }}
                   id={`experience-item-${index + 1}-trigger`}
                   tabIndex={index === currentIndex ? 0 : -1}
                   name={`item ${index + 1} - ${experiences[index].title}`}

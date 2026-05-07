@@ -40,7 +40,7 @@ export default function ExperienceCard({
           {experience.details}
         </a.p>
         <a.button style={contentReveal[2]} className="w-fit" tabIndex={-1}>
-          <Link href={experience.certificate}>
+          <Link href={experience.link}>
             Certificate of completion <NorthWestIcon variant="link" />
           </Link>
         </a.button>

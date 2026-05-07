@@ -14,10 +14,27 @@ import {
   useTrail,
   useTransition,
 } from "@react-spring/web";
-import { experiences } from "@/app/data/experience";
+import { certifications, Experience as TExperience, ExperienceType, works } from "@/app/data/experience";
 import { experienceTimelineCalculator } from "@/app/util/components/experience/timelineCalculator";
+import ExperienceToggle from "./ExperienceToggle";
 
 export default function Experience() {
+  const [experienceType, setExperienceType] = useState<ExperienceType>(
+    ExperienceType.WORK,
+  );
+	const { experiences, expCalc: { experiencesInfo } } = useMemo(() => {
+		let exp: TExperience[] = [];
+    if (experienceType === ExperienceType.CERTIFICATE) {
+      exp = certifications;
+    } else if (experienceType === ExperienceType.WORK) {
+      exp = works;
+    }
+    return {
+      experiences: exp,
+      expCalc: experienceTimelineCalculator(exp),
+    };
+  }, [experienceType]);
+
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const { ref, inView } = useInView({
     threshold: 0,
@@ -25,9 +42,6 @@ export default function Experience() {
   });
   const [viewed, setViewed] = useState<boolean>(false);
 
-	const { experiencesInfo } = useMemo(() => {
-    return experienceTimelineCalculator(experiences);
-	}, [experiences]);
   useEffect(() => {
     if (inView && !viewed) {
       setViewed(true);
@@ -123,7 +137,11 @@ export default function Experience() {
         certifications I’ve achieved with the real-world work that brought those
         skills to life.
       </SectionDescription>
-      <div aria-label="experience carousel">
+      <ExperienceToggle experienceType={experienceType} setExperienceType={setExperienceType} />
+      <div
+        aria-label="experience carousel"
+        className="w-full max-w-screen-lg mx-auto"
+      >
         <div
           className="relative flex experience-content"
           id={`experience-item-${currentIndex + 1}`}
@@ -131,14 +149,20 @@ export default function Experience() {
           style={{ perspective: "800px" }}
         >
           <ExperienceTimeline
-						currentIndex={currentIndex}
-						experiences={experiences}
+            currentIndex={currentIndex}
+            experiences={experiences}
             yearTimeLineScroll={yearTimeLineScroll}
             monthTimeLineHeight={monthTimeLineHeight}
             monthTimeLineMarker={monthTimeLineMarker}
           />
-          <ExperienceCard experience={experiences[currentIndex]} contentReveal={contentReveal} />
-          <ExperienceImage imageTransition={imageTransition} experiences={experiences} />
+          <ExperienceCard
+            experience={experiences[currentIndex]}
+            contentReveal={contentReveal}
+          />
+          <ExperienceImage
+            imageTransition={imageTransition}
+            experiences={experiences}
+          />
         </div>
       </div>
       <ExperienceControl
