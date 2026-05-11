@@ -49,13 +49,13 @@ export default function ExperienceTimelineMarkers({
                 y1={currentYear * YEAR_HEIGHT}
                 y2={currentYear * YEAR_HEIGHT}
                 x2="12"
-                className="stroke-grey-b dark:stroke-grey-5"
+                className="stroke-grey-d dark:stroke-grey-3"
               />
               <line
                 y1={currentYear * YEAR_HEIGHT + YEAR_HEIGHT}
                 y2={currentYear * YEAR_HEIGHT + YEAR_HEIGHT}
                 x2="12"
-                className="stroke-grey-b dark:stroke-grey-5"
+                className="stroke-grey-d dark:stroke-grey-3"
               />
             </g>
           </g>

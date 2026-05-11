@@ -88,6 +88,20 @@ export const certifications: Experience[] = [
 
 export const works: Experience[] = [
   {
+    logo: "/assets/experience/cm.webp",
+    showcaseImage: "/assets/experience/cm-showcase.webp",
+    title: "Citizen Monitors",
+    subTitle: "Frontend Developer",
+    details:
+      'Collaborated closely with product designers and backend engineers to build responsive, user-focused interfaces for the civic-tech platform.<br class="my-1"> Developed all frontend experiences across the landing page, multi-step onboarding and verification systems, electoral dashboards, and data visualization interfaces.',
+    timeRange: [
+      moment({ year: 2024, month: 4 }),
+      moment({ year: 2025, month: 4 }),
+    ],
+    link: "https://citizenmonitors.com",
+    linkText: "View website",
+  },
+  {
     logo: "/assets/experience/clinops.webp",
     showcaseImage: "/assets/experience/clinops-showcase.webp",
     title: "Clinops Academy",
@@ -99,20 +113,6 @@ export const works: Experience[] = [
       moment({ year: 2025, month: 1 }),
     ],
     link: "https://www.clinopsacademy.net",
-    linkText: "View website",
-  },
-  {
-    logo: "/assets/experience/cm.webp",
-    showcaseImage: "/assets/experience/cm-showcase.webp",
-    title: "Citizen Monitors",
-    subTitle: "Frontend Developer",
-    details:
-      "Collaborated closely with product designers and backend engineers to build responsive, user-focused interfaces for the civic-tech platform.<br class=\"my-1\"> Developed all frontend experiences across the landing page, multi-step onboarding and verification systems, electoral dashboards, and data visualization interfaces.",
-    timeRange: [
-      moment({ year: 2024, month: 4 }),
-      moment({ year: 2025, month: 4 }),
-    ],
-    link: "https://citizenmonitors.com",
     linkText: "View website",
   },
 ];

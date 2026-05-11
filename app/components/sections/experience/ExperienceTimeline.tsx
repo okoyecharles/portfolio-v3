@@ -48,7 +48,7 @@ export default function ExperienceTimeline({
       <div className="h-full flex-1" aria-hidden>
 				<div className="relative h-full month-timeline-container ml-[9px] md:ml-[34px]">
           <a.div
-            className={`w-[2px] bg-blue-100 dark:bg-blue-d-200 md:bg-grey-c dark:md:bg-grey-3 absolute left-[18px] top-1/2 -translate-y-1/2`}
+            className={`w-[2px] bg-blue-100 dark:bg-blue-d-200 md:bg-grey-d dark:md:bg-grey-3 absolute left-[18px] top-1/2 -translate-y-1/2`}
             style={monthTimeLineHeight}
           >
             <div className="relative h-full text-[14px] text-grey-9">

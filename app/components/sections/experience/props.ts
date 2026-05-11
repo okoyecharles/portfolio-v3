@@ -1,5 +1,5 @@
+import { Experience } from '@/app/data/experience';
 import { SpringValue } from '@react-spring/web';
-import { Experience } from './../../../data/experience';
 
 export interface ExperienceImageProps {
 	experiences: Experience[];
@@ -7,7 +7,9 @@ export interface ExperienceImageProps {
 }
 
 export interface ExperienceCardProps {
-  experience: Experience;
+  experiences: Experience[];
+  currentIndex: number;
+  setCurrentIndex: Function;
   contentReveal: Record<string, SpringValue>[];
 }
 

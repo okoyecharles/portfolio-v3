@@ -15,8 +15,8 @@ export default function FeaturedProjectTabList({
 
   const rotatingGradientBorderStyles = `
     rotating-gradient-border
-    [--border-color:#ddd] dark:[--border-color:#333]
-    [--background-color:#eaeaea] dark:[--background-color:#151515]
+    [--border-color:#ddd] dark:[--border-color:#222]
+    [--background-color:#fbfbfb] dark:[--background-color:#111111]
     ${projects[projectIndex].themeColor}
   `;
 

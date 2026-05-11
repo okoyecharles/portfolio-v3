@@ -22,7 +22,7 @@ export default function Recommendations() {
         <span className="text-blue-100 dark:blue-d-200">remotely</span> with
         professionals across the globe
       </SectionHeader>
-      <SectionDescription>
+      <SectionDescription width="450px">
         Recommendations from talented developers with whom I have had the
         privilege of collaborating
       </SectionDescription>

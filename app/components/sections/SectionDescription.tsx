@@ -5,10 +5,12 @@ import { useObservedSprings } from "../utils/useObservedSpring";
 
 interface SectionDescriptionProps {
   children: React.ReactNode;
+	width?: string;
 }
 
 export default function SectionDescription({
   children,
+	width,
 }: SectionDescriptionProps) {
   const {
     observedRef,
@@ -24,6 +26,7 @@ export default function SectionDescription({
       ref={observedRef}
       className="my-4 lg:my-8 self-center max-w-[600px] text-center text-grey-6 dark:text-grey-b"
       style={{
+				maxWidth: width,
         transform: to(layoutTransformSpring.y, (y) => `translateY(${y}px)`),
         opacity: to(layoutOpacitySpring.opacity, (op: number) => `${op}`),
       }}

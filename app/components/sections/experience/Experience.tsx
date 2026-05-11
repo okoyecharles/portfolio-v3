@@ -173,7 +173,9 @@ export default function Experience() {
             monthTimeLineMarker={monthTimeLineMarker}
           />
           <ExperienceCard
-            experience={experiences[currentIndex]}
+            experiences={experiences}
+						currentIndex={currentIndex}
+            setCurrentIndex={setCurrentIndex}
             contentReveal={contentReveal}
           />
           <ExperienceImage

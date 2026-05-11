@@ -14,7 +14,7 @@ export default function FeaturedProjectTabPanel({
 }: FeaturedProjectTabPanelProps) {
   return (
     <article
-      className="featured-project-info col-span-4 semi-lg:col-span-3 p-6 flex flex-col bg-grey-ea dark:bg-grey-12 ring-1 ring-grey-d dark:ring-grey-2 min-h-[410px] rounded-es-[10px] semi-lg:rounded-es-none"
+      className="featured-project-info col-span-4 semi-lg:col-span-3 p-6 flex flex-col bg-grey-fb dark:bg-grey-1 ring-1 ring-grey-d dark:ring-grey-2 min-h-[410px] rounded-es-[10px] semi-lg:rounded-es-none"
       id={`featured-project-${projectIndex + 1}`}
       role="tabpanel">
       <Link href={project.link.live} variant="plain">

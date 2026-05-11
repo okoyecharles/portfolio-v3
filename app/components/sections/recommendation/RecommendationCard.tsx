@@ -12,8 +12,8 @@ export default function RecommendationCard({
     <a.article
       className={`
         p-6 rounded-[10px] max-w-[480px] md:max-w-[320px] semi-lg:max-w-[360px]
-        bg-grey-fb dark:bg-grey-15
-        ring-1 ring-grey-b dark:ring-grey-3
+        bg-grey-fb dark:bg-grey-1a
+        ring-1 ring-grey-d dark:ring-grey-3
       `}
       id={`recommendation-item-${recommendationIndex + 1}`}
       role="tabpanel"
