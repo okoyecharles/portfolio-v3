@@ -1,8 +1,8 @@
-import Link from "@/app/components/clickable/Link";
+import Link from "@/app/components/core/Link";
 import { FeaturedProjectTabPanelProps } from "../props";
 import { a } from "@react-spring/web";
 import NorthWestIcon from "@/app/components/svg/abstract/NorthWestIcon";
-import Button from "@/app/components/clickable/Button";
+import Button from "@/app/components/core/Button";
 import LiveIcon from "@/app/components/svg/icons/LiveIcon";
 import GithubIcon from "@/app/components/svg/icons/GithubIcon";
 import { formatDateTimeAttribute, formatMonthYear } from "@/app/util/dates/date";

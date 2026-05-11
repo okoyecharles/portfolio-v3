@@ -25,7 +25,7 @@ function assignError(
   }
 }
 
-export function validateName(name: string): FormValidation {
+export function validateName(): FormValidation {
   const returnValidation = Object.assign({}, defaultValidation);
   return returnValidation;
 }
@@ -67,7 +67,7 @@ export async function verifyEmail(email: string): Promise<FormValidation> {
         return returnValidation;
       }
     }
-  } catch(err) {
+  } catch {
     assignError(returnValidation, "email", "Something went wrong");
     return returnValidation;
   }

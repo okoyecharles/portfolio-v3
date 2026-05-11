@@ -20,6 +20,6 @@ export function getReverseAngleFromCenter(x: number, y: number, width = 300, hei
   const dy = y - centerY;
   // atan2 normally starts at right (0°) and goes CCW
   // We swap dx/dy so 0° starts at top
-  let angle = Math.atan2(-dx, dy) * (180 / Math.PI);
+  const angle = Math.atan2(-dx, dy) * (180 / Math.PI);
   return angle;
 }

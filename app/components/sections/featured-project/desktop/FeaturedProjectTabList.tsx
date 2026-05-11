@@ -20,16 +20,17 @@ export default function FeaturedProjectTabList({
     ${projects[projectIndex].themeColor}
   `;
 
-  const projectTabTriggerRefs = projects.map(() => useRef<HTMLButtonElement>(null));
+  const projectTabTriggerRefs = useRef<(HTMLButtonElement | null)[]>([]);
   function handleKeyDown(event: React.KeyboardEvent<HTMLDivElement>) {
     let newProjectIndex = -1;
     if (event.key === "ArrowLeft") {
-      newProjectIndex = (projectIndex + (projects.length - 1)) % projects.length;
+      newProjectIndex =
+        (projectIndex + (projects.length - 1)) % projects.length;
     } else if (event.key === "ArrowRight") {
       newProjectIndex = (projectIndex + 1) % projects.length;
     } else return;
     setProjectIndex(newProjectIndex);
-    projectTabTriggerRefs[newProjectIndex].current?.focus();
+    projectTabTriggerRefs.current[newProjectIndex]?.focus();
   }
 
   return (
@@ -64,7 +65,9 @@ export default function FeaturedProjectTabList({
         <button
           className="project-item ring-1 ring-grey-ea dark:ring-grey-2 hover:ring-grey-b dark:hover:ring-grey-4 p-6 flex flex-col items-start gap-2 cursor-pointer first-of-type:rounded-ss-[10px] last-of-type:rounded-se-[10px] semi-lg:last-of-type:rounded-es-[10px] semi-lg:last-of-type:rounded-se-none transition-shadow"
           role="tab"
-          ref={projectTabTriggerRefs[index]}
+          ref={(el) => {
+            projectTabTriggerRefs.current[index] = el;
+          }}
           id={`featured-project-${index + 1}-trigger`}
           key={project.name}
           tabIndex={index === projectIndex ? 0 : -1}

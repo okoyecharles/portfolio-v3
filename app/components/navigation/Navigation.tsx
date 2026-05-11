@@ -17,7 +17,7 @@ export default function Navigation() {
           </a>
         </div>
       </div>
-      <header className="navigation-container max-w-[1504px] sticky top-0 mx-auto z-10 isolate -mt-[96px] md:-mt-[112px] mb-[96px] md:mb-[112px]">
+      <header className="navigation-container max-w-[1504px] sticky top-0 mx-auto z-30 isolate -mt-[96px] md:-mt-[112px] mb-[96px] md:mb-[112px]">
         <NavLinksMobile />
         <NavLinksDesktop />
       </header>

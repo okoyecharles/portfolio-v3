@@ -1,4 +1,4 @@
-import { DOMAttributes, KeyboardEvent, LegacyRef, useRef } from "react";
+import { DOMAttributes, LegacyRef } from "react";
 
 const buttonStyles = {
   default: `

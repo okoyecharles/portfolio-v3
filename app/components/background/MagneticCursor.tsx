@@ -1,6 +1,6 @@
 "use client";
 import React, { useRef, useState, useEffect } from "react";
-import { useSpring, animated, to, config } from "@react-spring/web";
+import { useSpring, animated, to } from "@react-spring/web";
 import BlueCursorIcon from "../svg/home/BlueCursor";
 
 const MagneticCursor = ({ radius = 100 }) => {

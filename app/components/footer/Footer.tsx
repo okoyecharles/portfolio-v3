@@ -1,7 +1,7 @@
 import footerData from "@/app/data/footer";
 import LogoSmall from "../svg/abstract/LogoSmall";
 import ThemeToggle from "./ThemeToggle";
-import Link from "../clickable/Link";
+import Link from "../core/Link";
 import HeartIcon from "../svg/abstract/HeartIcon";
 import Logo from "../svg/abstract/Logo";
 

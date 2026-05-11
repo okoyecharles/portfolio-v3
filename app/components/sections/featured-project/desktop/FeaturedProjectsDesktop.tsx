@@ -8,12 +8,11 @@ import {
   useTransition,
 } from "@react-spring/web";
 import { useEffect } from "react";
-import { useObservedSprings } from "../../../utils/useObservedSpring";
+import { useObservedSprings } from "../../../../hooks/useObservedSprings";
 import animation from "../../../animations/animations";
 import FeaturedProjectTabList from "./FeaturedProjectTabList";
 import FeaturedProjectTabPanel from "./FeaturedProjectTabPanel";
 import FeaturedProjectTabDisplay from "./FeaturedProjectTabDisplay";
-import useWindowSize from "@/app/hooks/useWindowSize";
 
 export default function FeaturedProjectsDesktop(props: FeaturedProjectProps) {
   const { projectIndex, projects, openProjectViewer } = props;
@@ -65,22 +64,30 @@ export default function FeaturedProjectsDesktop(props: FeaturedProjectProps) {
     });
   }, [projectIndex]);
 
-  const {
-    observedRef,
-    springAnimate: [layoutTransformSpring, layoutOpacitySpring],
-  } = useObservedSprings(
-    [...animation.layout.revealSlow.start],
-    [...animation.layout.revealSlow.end.map((x) => x())],
-    [useSpring, useSpring],
-  );
+  const transformRef = useSpringRef();
+  const opacityRef = useSpringRef();
+
+  const layoutTransform = useSpring({
+    ref: transformRef,
+    from: animation.layout.revealSlow.start[0],
+    ...animation.layout.revealSlow.end[0](),
+  });
+
+  const layoutOpacity = useSpring({
+    ref: opacityRef,
+    from: animation.layout.revealSlow.start[1],
+    ...animation.layout.revealSlow.end[1](),
+  });
+
+  const { observedRef } = useObservedSprings([transformRef, opacityRef]);
 
   return (
     <a.div
       className="rounded-[10px] grid-cols-12 bg-white dark:bg-black isolate hidden md:grid"
       ref={observedRef}
       style={{
-        transform: to(layoutTransformSpring.y, (y) => `translateY(${y}px)`),
-        opacity: to(layoutOpacitySpring.opacity, (op: number) => `${op}`),
+        transform: to(layoutTransform.y, (y) => `translateY(${y}px)`),
+        opacity: to(layoutOpacity.opacity, (op: number) => `${op}`),
       }}
       aria-label={"featured projects carousel"}
     >

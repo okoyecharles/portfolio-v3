@@ -2,7 +2,7 @@
 import footerData from "@/app/data/footer";
 import { a, useSpring } from "@react-spring/web";
 import { useTheme } from "next-themes";
-import useClient from "../utils/useClient";
+import useClient from "../../hooks/useClient";
 import { Theme } from "@/app/data/theme";
 
 export default function ThemeToggle() {

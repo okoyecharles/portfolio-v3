@@ -14,9 +14,9 @@ const InteractiveCanvasGrid = ({
   width = 1500,
   height = 1000,
   glowRadius = 150,
-	baseDotAlpha = 0.1,
+  baseDotAlpha = 0.1,
 }) => {
-	const { resolvedTheme: theme } = useTheme();
+  const { resolvedTheme: theme } = useTheme();
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   // Math setup based on your constraints
@@ -47,10 +47,10 @@ const InteractiveCanvasGrid = ({
     springX: width / 2,
     springY: height / 2,
     opacity: 0,
-		config: {
+    config: {
       tension: 220,
       friction: 25,
-		},
+    },
   }));
 
   useEffect(() => {
@@ -114,7 +114,18 @@ const InteractiveCanvasGrid = ({
     render();
 
     return () => cancelAnimationFrame(animationFrameId);
-  }, [width, height, gridPoints, glowRadius, springX, springY, opacity, theme]);
+  }, [
+    width,
+    height,
+    gridPoints,
+    glowRadius,
+    springX,
+    springY,
+    opacity,
+    theme,
+    baseDotAlpha,
+    CIRCLE_RADIUS,
+  ]);
 
   // Global mouse event listener to fix the z-index/layering blocking issue
   useEffect(() => {

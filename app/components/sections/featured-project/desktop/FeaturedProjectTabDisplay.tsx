@@ -1,7 +1,5 @@
-import { useObservedSprings } from "@/app/components/utils/useObservedSpring";
 import { FeaturedProjectTabDisplayProps } from "../props";
-import animation from "@/app/components/animations/animations";
-import { a, useSpring, useTrail } from "@react-spring/web";
+import { a } from "@react-spring/web";
 import FullScreenIcon from "@/app/components/svg/icons/FullScreenIcon";
 import Image from "next/image";
 import DesktopFrame from "@/public/assets/projects/desktop-frame.png";
@@ -14,23 +12,6 @@ export default function FeaturedProjectTabDisplay({
   displayTransition,
   openProjectViewer,
 }: FeaturedProjectTabDisplayProps) {
-  // decorative animations (plus and dashes)
-  const {
-    observedRef,
-  } = useObservedSprings(
-    [
-      animation.bg.lineGlow.start,
-      animation.bg.lineReveal.start,
-      animation.bg.plusReveal.start,
-    ],
-    [
-      animation.bg.lineGlow.end({ config: { tension: 75 }, delay: 450 }),
-      animation.bg.lineReveal.end({ delay: 450 }),
-      animation.bg.plusReveal.end({ delay: 0 }),
-    ],
-    [useSpring, useSpring, (cb: Function) => useTrail(4, cb, [])],
-  );
-
   return (
     <div
       className={`
@@ -41,7 +22,6 @@ export default function FeaturedProjectTabDisplay({
         rounded-ee-[10px] semi-lg:rounded-e-[10px]
         overflow-hidden isolate group/display group/corners
       `}
-      ref={observedRef}
     >
       {displayTransition((style, project) => (
         <>

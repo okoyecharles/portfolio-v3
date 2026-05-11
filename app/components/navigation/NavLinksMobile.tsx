@@ -12,8 +12,8 @@ import {
   useTrail,
 } from "@react-spring/web";
 import mobileNavigationData from "@/app/data/navigation";
-import useScrollDirection from "../utils/useScrollDirection";
-import useActiveSection from "../utils/useActiveSection";
+import useScrollDirection from "../../hooks/useScrollDirection";
+import useActiveSection from "../../hooks/useActiveSection";
 
 export default function NavLinksMobile() {
   const [open, setOpen] = useState<boolean>(false);
@@ -96,9 +96,7 @@ export default function NavLinksMobile() {
     },
   });
 
-  const menuItemRefs = mobileNavigationData.anchors.map(() =>
-    useRef<HTMLAnchorElement>(null),
-  );
+  const menuItemRefs = useRef<(HTMLAnchorElement | null)[]>([]);
   function handleMenuItemKeyDown(
     event: React.KeyboardEvent<HTMLAnchorElement>,
     index: number,
@@ -107,11 +105,11 @@ export default function NavLinksMobile() {
 
     // navigating the menu
     if (event.key === "ArrowLeft") {
-      let newItemIndex = (index + (menuItemCount - 1)) % menuItemCount;
-      menuItemRefs[newItemIndex].current?.focus();
+      const newItemIndex = (index + (menuItemCount - 1)) % menuItemCount;
+      menuItemRefs.current[newItemIndex]?.focus();
     } else if (event.key === "ArrowRight") {
-      let newItemIndex = (index + 1) % menuItemCount;
-      menuItemRefs[newItemIndex].current?.focus();
+      const newItemIndex = (index + 1) % menuItemCount;
+      menuItemRefs.current[newItemIndex]?.focus();
     }
   }
 
@@ -197,14 +195,18 @@ nav-background fixed inset-0 bg-white/50 backdrop-blur-[2px] dark:backdrop-blur-
                   href={anchor.link}
                   style={listItemTrail[anchorIndex]}
                   className={`peer py-3 uppercase hover:text-black dark:hover:text-grey-d transition-colors ${
-active == anchor.name ? "text-black dark:text-grey-d" : "text-grey-9 dark:text-grey-8"
+                    active == anchor.name
+                      ? "text-black dark:text-grey-d"
+                      : "text-grey-9 dark:text-grey-8"
                   }`}
                   tabIndex={open ? 0 : -1}
                   onKeyDown={(event) =>
                     handleMenuItemKeyDown(event, anchorIndex)
                   }
                   onClick={() => setOpen(false)}
-                  ref={menuItemRefs[anchorIndex]}
+                  ref={(el) => {
+                    menuItemRefs.current[anchorIndex] = el;
+                  }}
                 >
                   {anchor.name}
                 </a.a>

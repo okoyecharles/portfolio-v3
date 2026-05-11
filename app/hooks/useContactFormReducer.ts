@@ -1,5 +1,5 @@
 import { useReducer } from "react";
-import { ContactFormInputName, ContactFormInputState, ContactFormState } from "../sections/contact/props";
+import { ContactFormInputState, ContactFormInputName, ContactFormState } from "../components/sections/contact/props";
 
 type FormStateReducerAction = {
   type: `set_${ContactFormInputState}`;
@@ -32,5 +32,5 @@ function formStateReducer(
   }
 }
 
-const contactFormStateReducer = () => useReducer(formStateReducer, initialFormState);
-export default contactFormStateReducer;
+const useContactFormReducer = () => useReducer(formStateReducer, initialFormState);
+export default useContactFormReducer;

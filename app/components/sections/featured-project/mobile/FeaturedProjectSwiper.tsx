@@ -14,13 +14,11 @@ export default function FeaturedProjectSwiper({
 }: FeaturedProjectSwiperProps) {
   const swiperRef = useRef<SwiperRef>(null);
   const swiperApi = swiperRef.current?.swiper;
-  const featuredProjectHeaderRefs = projects.map((_) =>
-    useRef<HTMLAnchorElement>(null),
-  );
+  const featuredProjectHeaderRefs = useRef<(HTMLAnchorElement | null)[]>([]);
 
   function handleSwiperChange(swiper: SwiperClass) {
     setProjectIndex(swiper.activeIndex);
-    featuredProjectHeaderRefs[swiper.activeIndex].current?.focus();
+    featuredProjectHeaderRefs.current[swiper.activeIndex]?.focus();
   }
 
   return (
@@ -45,7 +43,9 @@ export default function FeaturedProjectSwiper({
               active={projectIndex === index}
               activeOffset={Math.abs(projectIndex - index)}
               openProjectViewer={openProjectViewer}
-              headerRef={featuredProjectHeaderRefs[index]}
+              headerRef={(el) => {
+                featuredProjectHeaderRefs.current[index] = el;
+              }}
             />
           </SwiperSlide>
         ))}

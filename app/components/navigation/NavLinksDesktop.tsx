@@ -6,13 +6,13 @@ import {
   navigationData,
 } from "../../data/navigation";
 import { a, to, useSpring } from "@react-spring/web";
-import useScrollDirection from "../utils/useScrollDirection";
-import useActiveSection from "../utils/useActiveSection";
+import useScrollDirection from "../../hooks/useScrollDirection";
+import useActiveSection from "../../hooks/useActiveSection";
 import ExpandIcon from "../svg/submenu/ExpandIcon";
 import { FocusEvent, useEffect, useRef, useState } from "react";
-import Link from "../clickable/Link";
-import useUserScrolling from "@/app/components/utils/useUserScrolling";
-import { toNormalCase } from "../utils/convertion";
+import Link from "../core/Link";
+import useUserScrolling from "@/app/hooks/useUserScrolling";
+import { toNormalCase } from "../../util/string/convertion";
 import { SubmenuProps } from "./props";
 
 export default function NavLinksDesktop() {
@@ -57,12 +57,14 @@ export default function NavLinksDesktop() {
   });
 
   const [submenuOpen, setSubmenuOpen] = useState<AnchorName | null>(null);
-  const menuItemRefs = navigationData.anchors.map(() =>
-    useRef<HTMLAnchorElement>(null),
-  );
-  const submenuFirstItemRefs = navigationData.anchors.map(() =>
-    useRef<HTMLAnchorElement>(null),
-  );
+  // const menuItemRefs = navigationData.anchors.map(() =>
+  //   useRef<HTMLAnchorElement>(null),
+  // );
+  const menuItemRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+  // const submenuFirstItemRefs = navigationData.anchors.map(() =>
+  //   useRef<HTMLAnchorElement>(null),
+  // );
+  const submenuFirstItemRefs = useRef<(HTMLAnchorElement | null)[]>([]);
 
   function handleMenuItemKeyDown(
     event: React.KeyboardEvent<HTMLAnchorElement>,
@@ -82,11 +84,11 @@ export default function NavLinksDesktop() {
 
     // navigating the menu
     if (event.key === "ArrowLeft") {
-      let newItemIndex = (index + (menuItemCount - 1)) % menuItemCount;
-      menuItemRefs[newItemIndex].current?.focus();
+      const newItemIndex = (index + (menuItemCount - 1)) % menuItemCount;
+      menuItemRefs.current[newItemIndex]?.focus();
     } else if (event.key === "ArrowRight") {
-      let newItemIndex = (index + 1) % menuItemCount;
-      menuItemRefs[newItemIndex].current?.focus();
+      const newItemIndex = (index + 1) % menuItemCount;
+      menuItemRefs.current[newItemIndex]?.focus();
     }
   }
   function handleMenuBarBlur(event: FocusEvent<HTMLUListElement, Element>) {
@@ -104,12 +106,12 @@ export default function NavLinksDesktop() {
   }, [scrollDirection]);
   useEffect(() => {
     if (submenuOpen) {
-      let anchorIndex = navigationData.anchors.findIndex(
+      const anchorIndex = navigationData.anchors.findIndex(
         (anchor) => anchor.name === submenuOpen,
       );
-      submenuFirstItemRefs[anchorIndex].current?.focus();
+      submenuFirstItemRefs.current[anchorIndex]?.focus();
     }
-  }, [submenuOpen]);
+  }, [submenuOpen, submenuFirstItemRefs]);
 
   return (
     <a.nav
@@ -136,7 +138,9 @@ export default function NavLinksDesktop() {
             <a
               href={anchor.link}
               className="transition-colors group-hover/nav-item:text-black dark:group-hover/nav-item:text-grey-d uppercase font-visby font-semibold"
-              ref={menuItemRefs[index]}
+              ref={(el) => {
+                menuItemRefs.current[index] = el;
+              }}
               onKeyDown={(event) => handleMenuItemKeyDown(event, index)}
             >
               {anchor.title}
@@ -147,7 +151,9 @@ export default function NavLinksDesktop() {
                 anchors={anchor.submenuAnchors}
                 open={anchor.name === submenuOpen}
                 setOpen={setSubmenuOpen}
-                submenuItemRef={submenuFirstItemRefs[index]}
+                submenuItemRef={(el) => {
+                  submenuFirstItemRefs.current[index] = el;
+                }}
               />
             )}
           </li>
@@ -216,7 +222,7 @@ function Submenu({
 
   function handleClickOutside(event: Event) {
     if (submenuRef.current && !submenuRef.current.contains(event.target)) {
-      setOpen(false);
+      setOpen(null);
     }
   }
 

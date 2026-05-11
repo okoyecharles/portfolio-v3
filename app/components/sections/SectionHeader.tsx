@@ -1,7 +1,7 @@
 "use client";
-import { a, to, useSpring, useTrail } from "@react-spring/web";
+import { a, to, useSpring, useSpringRef } from "@react-spring/web";
 import animation from "../animations/animations";
-import { useObservedSprings } from "../utils/useObservedSpring";
+import { useObservedSprings } from "../../hooks/useObservedSprings";
 
 interface SectionHeaderProps {
   children: React.ReactNode;
@@ -12,22 +12,29 @@ export default function SectionHeader({
   children,
   mode = "default",
 }: SectionHeaderProps) {
-  const {
-    observedRef,
-    springAnimate: [layoutTransform, layoutOpacity],
-  } = useObservedSprings(
-    [...animation.layout.revealSlow.start, animation.bg.plusReveal.start],
-    [
-      ...animation.layout.revealSlow.end.map((x) => x()),
-      animation.bg.plusReveal.end({ delay: 500 }),
-    ],
-    [useSpring, useSpring, (cb: Function) => useTrail(2, cb, [])]
+  const transformRef = useSpringRef();
+  const opacityRef = useSpringRef();
+
+  const layoutTransform = useSpring({
+    ref: transformRef,
+    from: animation.layout.revealSlow.start[0],
+    ...animation.layout.revealSlow.end[0](),
+  });
+
+  const layoutOpacity = useSpring({
+    ref: opacityRef,
+    from: animation.layout.revealSlow.start[1],
+    ...animation.layout.revealSlow.end[1](),
+  });
+
+  const { observedRef } = useObservedSprings(
+    [transformRef, opacityRef],
   );
 
   return (
     <header className="flex items-center self-center gap-3" ref={observedRef}>
       <a.h2
-				className={`font-visby font-black text-xl lg:text-2xl text-grey-1 dark:text-grey-d leading-[1.2] text-center ${
+        className={`font-visby font-black text-xl lg:text-2xl text-grey-1 dark:text-grey-d leading-[1.2] text-center ${
           mode === "default" ? "uppercase" : ""
         }`}
         style={{

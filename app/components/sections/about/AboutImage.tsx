@@ -94,15 +94,15 @@ export default function AboutImage({ imageAnimate }: AboutImageProps) {
               [gradient],
               (gradient) =>
                 `linear-gradient(
-    ${gradient}deg,
-    rgba(255,255,255,0.15) 0%,
-    rgba(255,255,255,0.08) 18%,
-    rgba(255,255,255,0.02) 35%,
-    rgba(0,0,0,0.00) 48%,
-    rgba(0,0,0,0.08) 65%,
-    rgba(0,0,0,0.22) 82%,
-    rgba(0,0,0,0.38) 100%
-  )`,
+								${gradient}deg,
+								rgba(255,255,255,0.15) 0%,
+								rgba(255,255,255,0.08) 18%,
+								rgba(255,255,255,0.02) 35%,
+								rgba(0,0,0,0.00) 48%,
+								rgba(0,0,0,0.08) 65%,
+								rgba(0,0,0,0.22) 82%,
+								rgba(0,0,0,0.38) 100%
+							)`,
             ),
             transform: to(
               [rx, ry],

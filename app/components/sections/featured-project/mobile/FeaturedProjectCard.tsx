@@ -1,9 +1,9 @@
 import moment from "moment";
-import Link from "@/app/components/clickable/Link";
+import Link from "@/app/components/core/Link";
 import FeaturedProjectTag from "../FeaturedProjectTag";
 import MobileIcon from "@/app/components/svg/icons/MobileIcon";
 import DesktopIcon from "@/app/components/svg/icons/DesktopIcon";
-import Button from "@/app/components/clickable/Button";
+import Button from "@/app/components/core/Button";
 import LiveIcon from "@/app/components/svg/icons/LiveIcon";
 import GithubIcon from "@/app/components/svg/icons/GithubIcon";
 import { a } from "@react-spring/web";

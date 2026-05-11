@@ -1,5 +1,5 @@
 import moment from "moment";
-import Link from "../../clickable/Link";
+import Link from "../../core/Link";
 import NorthWestIcon from "../../svg/abstract/NorthWestIcon";
 import ProjectGithub from "../../svg/abstract/ProjectGithub";
 import ProjectLive from "../../svg/abstract/ProjectLive";

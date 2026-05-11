@@ -4,53 +4,65 @@ import Section from "../Section";
 import SectionHeader from "../SectionHeader";
 import AboutImage from "./AboutImage";
 import AboutList from "@/app/components/sections/about/AboutList";
-import Link from "../../clickable/Link";
-import { a, to, useSpring, useTrail } from "@react-spring/web";
-import { useObservedSprings } from "../../utils/useObservedSpring";
+import Link from "../../core/Link";
+import { a, to, useSpring, useSpringRef, useTrail } from "@react-spring/web";
+import { useObservedSprings } from "../../../hooks/useObservedSprings";
 import animation from "../../animations/animations";
 
 export default function About() {
-  const {
-    observedRef,
-    springAnimate: [
-      headerTransform,
-      headerOpacity,
-      layoutTransform,
-      layoutOpacity,
-      imageTransform,
-      imageOpacity,
-      bgLineGlow,
-      bgLineReveal,
-      bgPlusReveal,
-    ],
-  } = useObservedSprings(
+  const headerTRef = useSpringRef();
+  const headerORef = useSpringRef();
+  const layoutTRef = useSpringRef();
+  const layoutORef = useSpringRef();
+  const imageTRef = useSpringRef();
+  const imageORef = useSpringRef();
+
+  const headerTransform = useTrail(3, {
+    ref: headerTRef,
+    from: animation.layout.reveal.start[0],
+    ...animation.layout.reveal.end[0](),
+  });
+
+  const headerOpacity = useTrail(3, {
+    ref: headerORef,
+    from: animation.layout.reveal.start[1],
+    ...animation.layout.reveal.end[1](),
+  });
+
+  const layoutTransform = useSpring({
+    ref: layoutTRef,
+    from: animation.layout.revealSlow.start[0],
+    ...animation.layout.revealSlow.end[0](),
+  });
+
+  const layoutOpacity = useSpring({
+    ref: layoutORef,
+    from: animation.layout.revealSlow.start[1],
+    ...animation.layout.revealSlow.end[1](),
+  });
+
+  const imageTransform = useSpring({
+    ref: imageTRef,
+    from: animation.layout.reveal.start[0],
+    ...animation.layout.reveal.end[0](),
+  });
+
+  const imageOpacity = useSpring({
+    ref: imageORef,
+    from: animation.layout.reveal.start[1],
+    ...animation.layout.reveal.end[1](),
+  });
+
+  const { observedRef } = useObservedSprings(
     [
-      ...animation.layout.reveal.start,
-      ...animation.layout.revealSlow.start,
-      ...animation.layout.revealSlow.start,
-      animation.bg.lineGlow.start,
-      animation.bg.lineReveal.start,
-      animation.bg.plusReveal.start,
+      headerTRef,
+      headerORef,
+      layoutTRef,
+      layoutORef,
+      imageTRef,
+      imageORef,
     ],
-    [
-      ...animation.layout.reveal.end.map((x) => x()),
-      ...animation.layout.revealSlow.end.map((x) => x({ delay: 200 })),
-      ...animation.layout.revealSlow.end.map((x) => x()),
-      animation.bg.lineGlow.end({ config: { tension: 75 }, delay: 450 }),
-      animation.bg.lineReveal.end({ delay: 450 }),
-      animation.bg.plusReveal.end({ delay: 0 }),
-    ],
-    [
-      (cb: Function) => useTrail(3, cb, []),
-      (cb: Function) => useTrail(3, cb, []),
-      useSpring,
-      useSpring,
-      useSpring,
-      useSpring,
-      useSpring,
-      useSpring,
-      (cb: Function) => useTrail(4, cb, []),
-    ],
+    [0.5, 0.5, 0.7, 0.7, 0, 0],
   );
 
   const headerReveal = (index: number) => ({
@@ -74,8 +86,6 @@ export default function About() {
       <div className="grid gap-6 semi-lg:grid-cols-10 my-6 semi-lg:my-[96px] semi-lg:mt-[128px] semi-lg:mb-[256px]">
         <AboutImage
           imageAnimate={imageReveal}
-          plusReveal={bgPlusReveal}
-          lineAnimate={[bgLineReveal, bgLineGlow]}
         />
         <div
           className="grid gap-6 about-content semi-lg:col-span-6 semi-lg:grid-cols-2"
@@ -88,10 +98,7 @@ export default function About() {
             >
               Introduction
             </a.h3>
-            <a.div
-              style={layoutReveal()}
-              className={"leading-[1.5]"}
-            >
+            <a.div style={layoutReveal()} className={"leading-[1.5]"}>
               <a.p className="mb-4 ">
                 My name is{" "}
                 <strong
@@ -99,8 +106,8 @@ export default function About() {
                   aria-describedby="about-info-1"
                 >
                   Okoye Charles Kosisochukwu
-                </strong>,{" "}
-                A{" "}
+                </strong>
+                , A{" "}
                 <strong className="text-grey-1 dark:text-grey-d whitespace-nowrap">
                   Frontend Developer
                 </strong>{" "}
@@ -119,7 +126,7 @@ export default function About() {
                 My goal is to deliver, through code, unique and innovative
                 solutions to complex problems. If my portfolio interests you, or
                 you need an enthusiastic developer on your team,{" "}
-								<Link href={`mailto:${aboutData.email}`}>
+                <Link href={`mailto:${aboutData.email}`}>
                   I am available for hire
                 </Link>
                 .

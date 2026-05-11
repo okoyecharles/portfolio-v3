@@ -5,6 +5,6 @@ export type SubmenuProps<T> = {
   name: AnchorName;
   anchors: T[];
   open: boolean;
-  setOpen: Function;
+	setOpen: React.Dispatch<React.SetStateAction<AnchorName | null>>;
   submenuItemRef: LegacyRef<HTMLAnchorElement>; 
 }

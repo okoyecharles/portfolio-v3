@@ -1,5 +1,5 @@
 import { Project } from "@/app/data/project";
-import { RefObject } from "react";
+import { LegacyRef } from "react";
 
 export type ProjectGridProps = {
   projects: Array<Project>;
@@ -7,7 +7,7 @@ export type ProjectGridProps = {
 
 export type ProjectCardProps = {
   project: Project;
-  headerRef: RefObject<HTMLAnchorElement>;
+  headerRef: LegacyRef<HTMLAnchorElement>;
 }
 
 export type ProjectCardLinksProps = {

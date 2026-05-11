@@ -6,10 +6,10 @@ import LocationIcon from "../../svg/abstract/LocationIcon";
 import { a, useSpring, useSpringRef, useTransition } from "@react-spring/web";
 import { useSpring as useThreeSpring } from "@react-spring/three";
 import { useInView } from "react-intersection-observer";
-import { percentToRadians } from "../../utils/convertion";
+import { percentToRadians } from "../../../util/string/convertion";
 import PrevIcon from "../../svg/icons/PrevIcon";
 import NextIcon from "../../svg/icons/NextIcon";
-import CustomTooltip from "../../clickable/CustomTooltip";
+import CustomTooltip from "../../core/CustomTooltip";
 
 export default function RecommendationSwiper({
   recommendations,

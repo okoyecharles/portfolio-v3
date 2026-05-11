@@ -32,7 +32,7 @@ export default function Section({
   const dispatch = useDispatch();
   useEffect(() => {
     if (inView) dispatch(update(name));
-  }, [inView]);
+  }, [inView, dispatch, name]);
 
   return (
     <>

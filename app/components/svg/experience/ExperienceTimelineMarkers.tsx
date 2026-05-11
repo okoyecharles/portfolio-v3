@@ -1,4 +1,3 @@
-import { current } from "@reduxjs/toolkit";
 import React from "react";
 
 type ExperienceTimelineMarkersProps = {

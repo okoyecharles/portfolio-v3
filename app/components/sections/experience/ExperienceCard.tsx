@@ -2,7 +2,7 @@ import { ExperienceCardProps } from "@/app/components/sections/experience/props"
 import moment from "moment/moment";
 import { a } from "@react-spring/web";
 import Image from "next/image";
-import Link from "@/app/components/clickable/Link";
+import Link from "@/app/components/core/Link";
 import NorthWestIcon from "@/app/components/svg/abstract/NorthWestIcon";
 import PrevIcon from "../../svg/icons/PrevIcon";
 import NextIcon from "../../svg/icons/NextIcon";

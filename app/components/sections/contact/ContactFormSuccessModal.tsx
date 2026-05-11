@@ -1,9 +1,9 @@
 import { SyntheticEvent, useEffect, useRef } from "react";
 import { ContactFormSuccessModalProps } from "./props";
 import { a, useSpring } from "@react-spring/web";
-import Link from "../../clickable/Link";
+import Link from "../../core/Link";
 import { socials } from "@/app/data/navigation";
-import Button from "../../clickable/Button";
+import Button from "../../core/Button";
 import PlaneGraphicLarge from "../../svg/abstract/PlaneGraphicLarge";
 import PlaneGraphicSmall from "../../svg/abstract/PlaneGraphicSmall";
 
