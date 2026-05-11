@@ -16,7 +16,7 @@ const InteractiveCanvasGrid = ({
   glowRadius = 150,
 	baseDotAlpha = 0.1,
 }) => {
-  const { theme } = useTheme();
+	const { resolvedTheme: theme } = useTheme();
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   // Math setup based on your constraints
@@ -43,13 +43,14 @@ const InteractiveCanvasGrid = ({
     return points;
   }, [width, height, CELL_SIZE]);
 
-  // Set up React Spring for the trailing cursor and fade-out effects
-  // We use a bit of mass and friction to create the "drag behind" feel
   const [{ springX, springY, opacity }, api] = useSpring(() => ({
     springX: width / 2,
     springY: height / 2,
     opacity: 0,
-    config: { tension: 150, friction: 1, mass: 1 },
+		config: {
+      tension: 220,
+      friction: 25,
+		},
   }));
 
   useEffect(() => {

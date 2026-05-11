@@ -12,7 +12,10 @@ export default function AboutImage({ imageAnimate }: AboutImageProps) {
   const [{ rx, ry }, api] = useSpring(() => ({
     rx: 0,
     ry: 0,
-    config: { tension: 20, friction: 0 },
+		config: {
+      tension: 240,
+      friction: 25,
+		},
   }));
 
   const [{ gradient }, gradientApi] = useSpring(() => ({
