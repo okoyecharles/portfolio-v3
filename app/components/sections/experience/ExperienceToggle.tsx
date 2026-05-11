@@ -7,7 +7,7 @@ export default function ExperienceToggle({
   setExperienceType,
 }: {
   experienceType: ExperienceType;
-  setExperienceType: React.Dispatch<React.SetStateAction<ExperienceType>>;
+  setExperienceType: (type: ExperienceType) => void;
 }) {
   const MIN_TAB_WIDTH = 40;
   const tabsRectMap = useMemo(() => {

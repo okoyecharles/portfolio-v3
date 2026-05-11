@@ -14,16 +14,25 @@ import {
   useTrail,
   useTransition,
 } from "@react-spring/web";
-import { certifications, Experience as TExperience, ExperienceType, works } from "@/app/data/experience";
+import {
+  certifications,
+  Experience as TExperience,
+  ExperienceType,
+  works,
+} from "@/app/data/experience";
 import { experienceTimelineCalculator } from "@/app/util/components/experience/timelineCalculator";
 import ExperienceToggle from "./ExperienceToggle";
+import { config } from "@/app/data/config";
 
 export default function Experience() {
-  const [experienceType, setExperienceType] = useState<ExperienceType>(
+  const [experienceType, _setExperienceType] = useState<ExperienceType>(
     ExperienceType.WORK,
   );
-	const { experiences, expCalc: { experiencesInfo } } = useMemo(() => {
-		let exp: TExperience[] = [];
+  const {
+    experiences,
+    expCalc: { experiencesInfo },
+  } = useMemo(() => {
+    let exp: TExperience[] = [];
     if (experienceType === ExperienceType.CERTIFICATE) {
       exp = certifications;
     } else if (experienceType === ExperienceType.WORK) {
@@ -41,6 +50,11 @@ export default function Experience() {
     rootMargin: "0px 0px -512px",
   });
   const [viewed, setViewed] = useState<boolean>(false);
+
+  function handleExperienceTypeChange(type: ExperienceType) {
+    setCurrentIndex(0);
+		_setExperienceType(type);
+  }
 
   useEffect(() => {
     if (inView && !viewed) {
@@ -81,7 +95,7 @@ export default function Experience() {
       rotateY: -24,
       rotateZ: 5,
       y: "-50%",
-      delay: 500,
+      delay: config.EXPERIENCE_IMAGE_DELAY,
     },
     leave: {
       opacity: 0,
@@ -137,7 +151,10 @@ export default function Experience() {
         certifications I’ve achieved with the real-world work that brought those
         skills to life.
       </SectionDescription>
-      <ExperienceToggle experienceType={experienceType} setExperienceType={setExperienceType} />
+      <ExperienceToggle
+        experienceType={experienceType}
+        setExperienceType={handleExperienceTypeChange}
+      />
       <div
         aria-label="experience carousel"
         className="w-full max-w-screen-lg mx-auto"

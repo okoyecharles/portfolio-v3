@@ -1,3 +1,4 @@
 export const config = {
 	EXPERIENCE_MONTH_HEIGHT: 32,
+	EXPERIENCE_IMAGE_DELAY: 500,
 }

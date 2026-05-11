@@ -30,18 +30,23 @@ export default function ExperienceCard({
           <h3 className="leading-[1] text-grey-1 dark:text-grey-d font-bold">
             {experience.title}
           </h3>
-          <p className="leading-[1.3] text-sm md:text-base">
+          <p className="leading-[1.3] text-grey-2 dark:text-grey-c text-sm md:text-base">
             {experience.subTitle}
           </p>
         </div>
       </a.header>
       <div className="flex flex-col gap-3 mb-auto content md:pl-16">
-        <a.p className="mt-4" style={contentReveal[1]}>
-          {experience.details}
-        </a.p>
+        <a.p
+          className="mt-4"
+          style={contentReveal[1]}
+          dangerouslySetInnerHTML={{ __html: experience.details }}
+        />{" "}
         <a.button style={contentReveal[2]} className="w-fit" tabIndex={-1}>
           <Link href={experience.link}>
-            Certificate of completion <NorthWestIcon variant="link" />
+            {experience.linkText
+              ? experience.linkText
+              : "Certificate of completion"}{" "}
+            <NorthWestIcon variant="link" />
           </Link>
         </a.button>
         <a.p

@@ -9,6 +9,7 @@ export default function ExperienceImage({
   return imageTransition(
     (style: Record<string, SpringValue>, index: number) => {
       const experience = experiences[index];
+			if (!experience) return null;
       return (
         <a.div
           className="-z-10 absolute right-0 top-1/2 hidden semi-lg:block md:w-[256px] semi-lg:w-[384px] lg:w-[480px]"
@@ -23,7 +24,7 @@ export default function ExperienceImage({
         >
           <Image
             alt={`Certificate of ${experience.title}`}
-            className="rounded-[4px] relative after:absolute after:inset-0 after:bg-grey-5 -z-10 ring-1 ring-grey-ea dark:ring-0"
+            className="rounded-[4px] relative after:absolute after:inset-0 after:bg-grey-5 -z-10 ring-2 ring-grey-ea dark:ring-grey-3 scale-[0.95]"
             src={experience.showcaseImage}
             width={720}
             height={556.49}
