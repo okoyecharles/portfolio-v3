@@ -25,7 +25,7 @@ export default function ContactForm() {
   const [formSending, setFormSending] = useState<boolean>(false);
   const [formState, setFormState] = contactFormStateReducer();
   const [error, setError] = useState<FormValidationError | null>(null);
-  const [successModalOpen, setSuccessModalOpen] = useState<boolean>(true);
+  const [successModalOpen, setSuccessModalOpen] = useState<boolean>(false);
   const isSubmitDisabled = useMemo(handleSubmitDisabled, [formState]);
   const areInputsDisabled = useMemo(handleInputsDisabled, [formState]);
   useEffect(processInputChange, [formData]);
