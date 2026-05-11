@@ -1,11 +1,11 @@
-import Link from "@/app/components/clickable/Link";
+import Link from "@/app/components/core/Link";
 import { FeaturedProjectTabPanelProps } from "../props";
 import { a } from "@react-spring/web";
 import NorthWestIcon from "@/app/components/svg/abstract/NorthWestIcon";
-import { formatDateTimeAttribute, formatMonthYear } from "@/app/components/utils/moment";
-import Button from "@/app/components/clickable/Button";
+import Button from "@/app/components/core/Button";
 import LiveIcon from "@/app/components/svg/icons/LiveIcon";
 import GithubIcon from "@/app/components/svg/icons/GithubIcon";
+import { formatDateTimeAttribute, formatMonthYear } from "@/app/util/dates/date";
 
 export default function FeaturedProjectTabPanel({
   project,
@@ -14,7 +14,7 @@ export default function FeaturedProjectTabPanel({
 }: FeaturedProjectTabPanelProps) {
   return (
     <article
-      className="featured-project-info col-span-4 semi-lg:col-span-3 p-6 flex flex-col bg-grey-ea dark:bg-grey-12 ring-1 ring-grey-d dark:ring-grey-2 min-h-[410px] rounded-es-[10px] semi-lg:rounded-es-none"
+      className="featured-project-info col-span-4 semi-lg:col-span-3 p-6 flex flex-col bg-grey-fb dark:bg-grey-1 ring-1 ring-grey-d dark:ring-grey-2 min-h-[410px] rounded-es-[10px] semi-lg:rounded-es-none"
       id={`featured-project-${projectIndex + 1}`}
       role="tabpanel">
       <Link href={project.link.live} variant="plain">

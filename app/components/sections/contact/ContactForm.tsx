@@ -10,27 +10,31 @@ import {
   validateMessage,
   validateName,
   verifyEmail,
-} from "../../utils/validation";
-import contactFormStateReducer from "../../reducers/contactFormState";
-import { a, to, useSpring } from "@react-spring/web";
+} from "../../../util/components/form/validation";
+import { a, to, useSpring, useSpringRef } from "@react-spring/web";
 import animation from "../../animations/animations";
-import { useObservedSprings } from "../../utils/useObservedSpring";
+import {
+  useObservedSprings,
+} from "../../../hooks/useObservedSprings";
 import ContactFormInput from "@/app/components/sections/contact/ContactFormInput";
 import ContactFormSubmitButton from "@/app/components/sections/contact/ContactFormSubmitButton";
 import ContactFormSuccessModal from "./ContactFormSuccessModal";
+import useContactFormReducer from "@/app/hooks/useContactFormReducer";
 
 export default function ContactForm() {
-  const initialFormData: ContactFormData = {name: "", email: "", message: ""};
+  const initialFormData: ContactFormData = { name: "", email: "", message: "" };
   const [formData, setFormData] = useState<ContactFormData>(initialFormData);
   const [formSending, setFormSending] = useState<boolean>(false);
-  const [formState, setFormState] = contactFormStateReducer();
+  const [formState, setFormState] = useContactFormReducer();
   const [error, setError] = useState<FormValidationError | null>(null);
   const [successModalOpen, setSuccessModalOpen] = useState<boolean>(false);
   const isSubmitDisabled = useMemo(handleSubmitDisabled, [formState]);
   const areInputsDisabled = useMemo(handleInputsDisabled, [formState]);
   useEffect(processInputChange, [formData]);
 
-  function handleInputChange(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+  function handleInputChange(
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -42,9 +46,9 @@ export default function ContactForm() {
       const inputValue = formData[input];
 
       if (inputValue.trim()) {
-        setFormState({type: "set_typing", payload: input});
+        setFormState({ type: "set_typing", payload: input });
       } else {
-        setFormState({type: "set_empty", payload: input});
+        setFormState({ type: "set_empty", payload: input });
       }
     });
   }
@@ -56,8 +60,13 @@ export default function ContactForm() {
       formState.message,
     ];
 
-    const submitDisabledStates = new Set<ContactFormInputState>(["empty", "loading"]);
-    const submitDisabled = inputStates.some((state) => submitDisabledStates.has(state));
+    const submitDisabledStates = new Set<ContactFormInputState>([
+      "empty",
+      "loading",
+    ]);
+    const submitDisabled = inputStates.some((state) =>
+      submitDisabledStates.has(state),
+    );
     return submitDisabled;
   }
 
@@ -69,12 +78,14 @@ export default function ContactForm() {
     ];
 
     const inputsDisabledStates = new Set<ContactFormInputState>(["loading"]);
-    const inputsDisabled = inputStates.some((state) => inputsDisabledStates.has(state));
+    const inputsDisabled = inputStates.some((state) =>
+      inputsDisabledStates.has(state),
+    );
     return inputsDisabled;
   }
 
   function handleError(name: ContactFormInputName, error: FormValidationError) {
-    setFormState({type: "set_error", payload: name});
+    setFormState({ type: "set_error", payload: name });
     setError(error);
     setFormSending(false);
   }
@@ -88,10 +99,13 @@ export default function ContactForm() {
 
     const formSubmissionData = new FormData();
     Object.entries(formData).forEach(([key, value]) =>
-      formSubmissionData.append(key, value)
+      formSubmissionData.append(key, value),
     );
     formSubmissionData.append("_next", window.location.href);
-    formSubmissionData.append("_subject", "Portfolio - Contact Form Submission");
+    formSubmissionData.append(
+      "_subject",
+      "Portfolio - Contact Form Submission",
+    );
     formSubmissionData.append("_captcha", "false");
 
     const fetchOptions = {
@@ -107,7 +121,7 @@ export default function ContactForm() {
       clearFormData();
       setFormSending(false);
       setSuccessModalOpen(true);
-    } catch (err) {
+    } catch {
       setFormSending(false);
     }
   }
@@ -115,9 +129,9 @@ export default function ContactForm() {
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setFormSending(true);
-    const {name, email, message} = formData;
+    const { email, message } = formData;
 
-    const isNameValidated = validateName(name);
+    const isNameValidated = validateName();
     if (isNameValidated.error) {
       handleError("name", isNameValidated.error);
       return;
@@ -135,28 +149,34 @@ export default function ContactForm() {
       return;
     }
 
-    setFormState({type: "set_loading", payload: "email"});
+    setFormState({ type: "set_loading", payload: "email" });
     const isEmailVerified = await verifyEmail(email);
     if (isEmailVerified.error) {
       handleError("email", isEmailVerified.error);
       return;
     } else {
-      setFormState({type: "set_success", payload: "email"});
+      setFormState({ type: "set_success", payload: "email" });
     }
 
     await sendFormData();
     setError(null);
   }
 
-  // Reveal animation
-  const {
-    observedRef,
-    springAnimate: [layoutTransformSpring, layoutOpacitySpring],
-  } = useObservedSprings(
-    [...animation.layout.revealSlow.start],
-    [...animation.layout.revealSlow.end.map((x) => x())],
-    [useSpring, useSpring]
-  );
+  const transformRef = useSpringRef();
+  const opacityRef = useSpringRef();
+
+  const layoutTransformSpring = useSpring({
+    ref: transformRef,
+    from: animation.layout.revealSlow.start[0],
+    ...animation.layout.revealSlow.end[0](),
+  });
+  const layoutOpacitySpring = useSpring({
+    ref: opacityRef,
+    from: animation.layout.revealSlow.start[1],
+    ...animation.layout.revealSlow.end[1](),
+  });
+
+  const { observedRef } = useObservedSprings([transformRef, opacityRef]);
 
   return (
     <div className="form-container mx-auto max-w-[512px] w-full mt-4 md:mt-6">
@@ -212,9 +232,15 @@ export default function ContactForm() {
         >
           Message
         </ContactFormInput>
-        <ContactFormSubmitButton formSending={formSending} disabled={isSubmitDisabled} />
+        <ContactFormSubmitButton
+          formSending={formSending}
+          disabled={isSubmitDisabled}
+        />
       </a.form>
-      <ContactFormSuccessModal open={successModalOpen} setOpen={setSuccessModalOpen} />
+      <ContactFormSuccessModal
+        open={successModalOpen}
+        setOpen={setSuccessModalOpen}
+      />
     </div>
   );
 }

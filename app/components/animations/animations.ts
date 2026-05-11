@@ -29,8 +29,8 @@ const animation = {
         {opacity: 0}
       ],
       end: [
-        (options?: any) => ({to: {y: 0}, config: {tension: 420, friction: 35}, ...options}),
-        (options?: any) => ({to: {opacity: 1}, config: {tension: 250, friction: 40}, ...options})
+        (options?: any) => ({to: {y: 0}, config: {tension: 250, friction: 25}, ...options}),
+        (options?: any) => ({to: {opacity: 1}, config: {tension: 250, friction: 25}, ...options})
       ]
     },
     revealSlow: {

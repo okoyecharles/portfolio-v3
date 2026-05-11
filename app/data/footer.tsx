@@ -2,6 +2,7 @@ import ThemeDarkIcon from "../components/svg/icons/ThemeDarkIcon";
 import ThemeLightIcon from "../components/svg/icons/ThemeLightIcon";
 import ThemeSystemIcon from "../components/svg/icons/ThemeSystemIcon";
 import { Social, socials } from "./navigation";
+import { Theme } from "./theme";
 
 interface FooterData {
   creationYear: string;
@@ -15,15 +16,15 @@ const footerData: FooterData = {
   sourceCode: "https://github.com/okoyecharles/portfolio-v3",
   themes: [
     {
-      name: "dark",
+      name: Theme.Dark,
       icon: <ThemeDarkIcon />,
     },
     {
-      name: "light",
+      name: Theme.Light,
       icon: <ThemeLightIcon />,
     },
     {
-      name: "system",
+      name: Theme.System,
       icon: <ThemeSystemIcon />,
     },
   ],

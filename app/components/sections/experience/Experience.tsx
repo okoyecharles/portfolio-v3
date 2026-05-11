@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Section from "../Section";
 import SectionHeader from "../SectionHeader";
 import SectionDescription from "../SectionDescription";
@@ -8,20 +8,54 @@ import ExperienceControl from "./ExperienceControl";
 import ExperienceCard from "./ExperienceCard";
 import ExperienceTimeline from "./ExperienceTimeline";
 import { useInView } from "react-intersection-observer";
-import experienceData, { experienceTimelineCalculator } from "@/app/data/experience";
-import { useSpring, useSpringRef, useTrail, useTransition } from "@react-spring/web";
+import {
+  useSpring,
+  useSpringRef,
+  useTrail,
+  useTransition,
+} from "@react-spring/web";
+import {
+  certifications,
+  Experience as TExperience,
+  ExperienceType,
+  works,
+} from "@/app/data/experience";
+import { experienceTimelineCalculator } from "@/app/util/components/experience/timelineCalculator";
+import ExperienceToggle from "./ExperienceToggle";
+import { config } from "@/app/data/config";
 
 export default function Experience() {
-  const [expertiseIndex, setExpertiseIndex] = useState<number>(0);
-  const expertise = experienceData.expertise[expertiseIndex];
+  const [experienceType, _setExperienceType] = useState<ExperienceType>(
+    ExperienceType.WORK,
+  );
+  const {
+    experiences,
+    expCalc: { experiencesInfo },
+  } = useMemo(() => {
+    let exp: TExperience[] = [];
+    if (experienceType === ExperienceType.CERTIFICATE) {
+      exp = certifications;
+    } else if (experienceType === ExperienceType.WORK) {
+      exp = works;
+    }
+    return {
+      experiences: exp,
+      expCalc: experienceTimelineCalculator(exp),
+    };
+  }, [experienceType]);
+
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
   const { ref, inView } = useInView({
     threshold: 0,
     rootMargin: "0px 0px -512px",
   });
   const [viewed, setViewed] = useState<boolean>(false);
 
-  const { YEAR_TIMELINE_POS, MONTH_TIMELINE_HEIGHT } =
-    experienceTimelineCalculator(expertise);
+  function handleExperienceTypeChange(type: ExperienceType) {
+    setCurrentIndex(0);
+		_setExperienceType(type);
+  }
+
   useEffect(() => {
     if (inView && !viewed) {
       setViewed(true);
@@ -40,18 +74,18 @@ export default function Experience() {
         config: { tension: 400, friction: 40 },
       });
       // timeline animations
-      YTSApi.update({ y: -YEAR_TIMELINE_POS });
+      YTSApi.update({ y: -experiencesInfo[currentIndex].timelineCenter });
       YTSApi.start();
-      MTHApi.update({ height: MONTH_TIMELINE_HEIGHT });
+      MTHApi.update({ height: experiencesInfo[currentIndex].timelineHeight });
       MTHApi.start();
       MTMApi.set({ opacity: 0 });
       MTMApi.start({ opacity: 1 });
     }
-  }, [viewed, expertiseIndex]);
+  }, [viewed, currentIndex]);
 
   // Image Animations
   const imageTransRef = useSpringRef();
-  const imageTransition = useTransition(expertiseIndex, {
+  const imageTransition = useTransition(currentIndex, {
     ref: imageTransRef,
     keys: null,
     from: { opacity: 0, rotateX: 0, rotateY: 0, rotateZ: 0, y: "-40%" },
@@ -61,7 +95,7 @@ export default function Experience() {
       rotateY: -24,
       rotateZ: 5,
       y: "-50%",
-      delay: 500,
+      delay: config.EXPERIENCE_IMAGE_DELAY,
     },
     leave: {
       opacity: 0,
@@ -79,7 +113,7 @@ export default function Experience() {
     {
       from: { y: 32, opacity: 0 },
     },
-    []
+    [],
   );
 
   // Timeline Animations
@@ -87,14 +121,14 @@ export default function Experience() {
     () => ({
       from: { y: -275 },
     }),
-    []
+    [],
   );
 
   const [monthTimeLineHeight, MTHApi] = useSpring(
     () => ({
       from: { height: 0 },
     }),
-    []
+    [],
   );
 
   const [monthTimeLineMarker, MTMApi] = useSpring(() => ({
@@ -109,35 +143,51 @@ export default function Experience() {
       padding="pt-12 pb-16 md:pt-8 md:pb-[224px]"
     >
       <SectionHeader mode="standalone">
-        My <span className="text-blue-100 dark:blue-d-200">experience</span> as a
-        developer
+        My <span className="text-blue-100 dark:blue-d-200">experience</span> as
+        a developer
       </SectionHeader>
       <SectionDescription>
-        A display of my growth as a frontend developer, showcasing the progress I have
-        achieved and the valuable experience I've acquired
+        A walkthrough of my progress as a frontend developer, combining the
+        certifications I’ve achieved with the real-world work that brought those
+        skills to life.
       </SectionDescription>
-      <div aria-label="experience carousel">
+      <ExperienceToggle
+        experienceType={experienceType}
+        setExperienceType={handleExperienceTypeChange}
+      />
+      <div
+        aria-label="experience carousel"
+        className="w-full max-w-screen-lg mx-auto"
+      >
         <div
           className="relative flex experience-content"
-          id={`experience-item-${expertiseIndex + 1}`}
+          id={`experience-item-${currentIndex + 1}`}
           role="tabpanel"
           style={{ perspective: "800px" }}
         >
           <ExperienceTimeline
-            expertise={expertise}
+            currentIndex={currentIndex}
+            experiences={experiences}
             yearTimeLineScroll={yearTimeLineScroll}
             monthTimeLineHeight={monthTimeLineHeight}
             monthTimeLineMarker={monthTimeLineMarker}
           />
-          <ExperienceCard expertise={expertise} contentReveal={contentReveal} />
-          <ExperienceImage imageTransition={imageTransition} />
+          <ExperienceCard
+            experiences={experiences}
+						currentIndex={currentIndex}
+            setCurrentIndex={setCurrentIndex}
+            contentReveal={contentReveal}
+          />
+          <ExperienceImage
+            imageTransition={imageTransition}
+            experiences={experiences}
+          />
         </div>
       </div>
       <ExperienceControl
-        expertiseData={experienceData.expertise}
-        expertiseIndex={expertiseIndex}
-        setExpertiseIndex={setExpertiseIndex}
-        expertiseCount={experienceData.expertise.length}
+        experiences={experiences}
+        currentIndex={currentIndex}
+        setCurrentIndex={setCurrentIndex}
       />
     </Section>
   );

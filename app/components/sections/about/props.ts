@@ -1,14 +1,13 @@
-import { SpringValue } from "@react-spring/web";
+import { Interpolation } from "@react-spring/web";
 
 export interface AboutImageProps {
-  imageAnimate: Function;
-  plusReveal: { scale: SpringValue<number> }[];
-  lineAnimate: [
-    { size: SpringValue<string> },
-    { pos: SpringValue<number> }
-  ];
+  imageAnimate: () => {
+    transform: Interpolation<string, any>;
+    opacity: Interpolation<string, any>;
+  };
 }
 
 export interface AboutListProps {
   items: string[];
 }
+

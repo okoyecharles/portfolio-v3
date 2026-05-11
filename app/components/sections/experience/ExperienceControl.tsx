@@ -2,21 +2,21 @@ import { ExperienceControlProps } from "@/app/components/sections/experience/pro
 import React, { useRef } from "react";
 
 export default function ExperienceControl({
-  expertiseIndex,
-  setExpertiseIndex,
-  expertiseCount,
-  expertiseData,
+  currentIndex,
+  setCurrentIndex,
+  experiences,
 }: ExperienceControlProps) {
-  const expertiseTabTriggerRefs = expertiseData.map(() => useRef<HTMLButtonElement>(null));
+	const experienceCount = experiences.length;
+  const experienceTabTriggersRef = useRef<(HTMLButtonElement | null)[]>([]);
   function handleKeyDown(event: React.KeyboardEvent<HTMLUListElement>) {
     let newExpertiseIndex = -1;
     if (event.key === "ArrowLeft") {
-      newExpertiseIndex = (expertiseIndex + (expertiseCount - 1)) % expertiseCount;
+      newExpertiseIndex = (currentIndex + (experienceCount - 1)) % experienceCount;
     } else if (event.key === "ArrowRight") {
-      newExpertiseIndex = (expertiseIndex + 1) % expertiseCount;
+      newExpertiseIndex = (currentIndex + 1) % experienceCount;
     } else return;
-    setExpertiseIndex(newExpertiseIndex);
-    expertiseTabTriggerRefs[newExpertiseIndex].current?.focus();
+    setCurrentIndex(newExpertiseIndex);
+    experienceTabTriggersRef.current[newExpertiseIndex]?.focus();
   }
 
   return (
@@ -26,27 +26,27 @@ export default function ExperienceControl({
         role="tablist"
         onKeyDown={handleKeyDown}
       >
-        {Array(expertiseCount)
+        {Array(experienceCount)
           .fill(0)
           .map((_, index) => {
-            const isActiveButton = index === expertiseIndex;
+            const isActiveButton = index === currentIndex;
             return (
               <li key={index} role="presentation">
                 <button
                   role="tab"
-                  ref={expertiseTabTriggerRefs[index]}
+									ref={(el) => { experienceTabTriggersRef.current[index] = el }}
                   id={`experience-item-${index + 1}-trigger`}
-                  tabIndex={index === expertiseIndex ? 0 : -1}
-                  name={`item ${index + 1} - ${expertiseData[index].title}`}
-                  aria-label={`item ${index + 1} - ${expertiseData[index].title}`}
+                  tabIndex={index === currentIndex ? 0 : -1}
+                  name={`item ${index + 1} - ${experiences[index].title}`}
+                  aria-label={`item ${index + 1} - ${experiences[index].title}`}
                   aria-controls={`experience-item-${index + 1}`}
-                  aria-selected={index === expertiseIndex}
+                  aria-selected={index === currentIndex}
                   className={`w-[12px] aspect-square rounded-[50%] ring-grey-b dark:ring-grey-5 ${
                     isActiveButton
                       ? "bg-blue-100 dark:bg-blue-d-200"
                       : "bg-grey-d dark:bg-grey-2 hover:ring-1"
                   }`}
-                  onClick={() => setExpertiseIndex(index)}
+                  onClick={() => setCurrentIndex(index)}
                 />
               </li>
             );

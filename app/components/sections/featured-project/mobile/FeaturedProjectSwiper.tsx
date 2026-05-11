@@ -14,15 +14,15 @@ export default function FeaturedProjectSwiper({
 }: FeaturedProjectSwiperProps) {
   const swiperRef = useRef<SwiperRef>(null);
   const swiperApi = swiperRef.current?.swiper;
-  const featuredProjectHeaderRefs = projects.map((_) => useRef<HTMLAnchorElement>(null));
+  const featuredProjectHeaderRefs = useRef<(HTMLAnchorElement | null)[]>([]);
 
   function handleSwiperChange(swiper: SwiperClass) {
     setProjectIndex(swiper.activeIndex);
-    featuredProjectHeaderRefs[swiper.activeIndex].current?.focus();
+    featuredProjectHeaderRefs.current[swiper.activeIndex]?.focus();
   }
 
   return (
-    <div className="relative swiper-container isolate">
+    <div className="relative swiper-container isolate w-full">
       <Swiper
         ref={swiperRef}
         grabCursor
@@ -43,7 +43,9 @@ export default function FeaturedProjectSwiper({
               active={projectIndex === index}
               activeOffset={Math.abs(projectIndex - index)}
               openProjectViewer={openProjectViewer}
-              headerRef={featuredProjectHeaderRefs[index]}
+              headerRef={(el) => {
+                featuredProjectHeaderRefs.current[index] = el;
+              }}
             />
           </SwiperSlide>
         ))}
@@ -51,11 +53,10 @@ export default function FeaturedProjectSwiper({
       <button
         className="absolute w-[48px] aspect-square grid justify-center items-center rounded-[50%] top-1/2 -translate-y-1/2 left-0 -translate-x-1/4 z-10 group/icon backdrop-blur-sm
 
-        ring-1 ring-grey-b dark:ring-grey-4
-        bg-grey-d/50 dark:bg-grey-3/50
-        
-        hover:ring-grey-9 dark:hover:ring-grey-5
-        hover:bg-grey-d/75 dark:hover:bg-grey-5/50
+            ring-1 ring-grey-d dark:ring-grey-3
+            bg-grey-fb dark:bg-grey-1a
+            
+            hover:bg-[#f9f9f9] dark:hover:bg-grey-2
 
         disabled:pointer-events-none
         disabled:opacity-0 disabled:scale-75
@@ -72,11 +73,10 @@ export default function FeaturedProjectSwiper({
       <button
         className="absolute w-[48px] aspect-square grid justify-center items-center rounded-[50%] top-1/2 -translate-y-1/2 right-0 translate-x-1/4 z-10 group/icon backdrop-blur-sm
 
-        ring-1 ring-grey-b dark:ring-grey-4
-        bg-grey-d/50 dark:bg-grey-3/50
-        
-        hover:ring-grey-9 dark:hover:ring-grey-5
-        hover:bg-grey-d/75 dark:hover:bg-grey-5/50
+            ring-1 ring-grey-d dark:ring-grey-3
+            bg-grey-fb dark:bg-grey-1a
+            
+            hover:bg-[#f9f9f9] dark:hover:bg-grey-2
 
         disabled:pointer-events-none
         disabled:opacity-0 disabled:scale-75

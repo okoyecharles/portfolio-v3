@@ -1,12 +1,19 @@
 "use client";
 import CloseMenuIcon from "../svg/abstract/CloseMenuIcon";
 import MenuIcon from "../svg/abstract/MenuIcon";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import VerticalLineIcon from "../svg/abstract/VerticalLineIcon";
-import { a, to, useChain, useSpring, useSpringRef, useTrail } from "@react-spring/web";
+import {
+  a,
+  to,
+  useChain,
+  useSpring,
+  useSpringRef,
+  useTrail,
+} from "@react-spring/web";
 import mobileNavigationData from "@/app/data/navigation";
-import useScrollDirection from "../utils/useScrollDirection";
-import useActiveSection from "../utils/useActiveSection";
+import useScrollDirection from "../../hooks/useScrollDirection";
+import useActiveSection from "../../hooks/useActiveSection";
 
 export default function NavLinksMobile() {
   const [open, setOpen] = useState<boolean>(false);
@@ -67,8 +74,13 @@ export default function NavLinksMobile() {
   });
 
   useChain(
-    [toggleMenuSpringRef, lineExtendSpringRef, listMarkerTrailRef, listItemTrailRef],
-    [0, 0.25, 0.25, 0]
+    [
+      toggleMenuSpringRef,
+      lineExtendSpringRef,
+      listMarkerTrailRef,
+      listItemTrailRef,
+    ],
+    [0, 0.25, 0.25, 0],
   );
 
   const scrollDirection = useScrollDirection();
@@ -84,36 +96,39 @@ export default function NavLinksMobile() {
     },
   });
 
-  const menuItemRefs = mobileNavigationData.anchors.map(() =>
-    useRef<HTMLAnchorElement>(null)
-  );
+  const menuItemRefs = useRef<(HTMLAnchorElement | null)[]>([]);
   function handleMenuItemKeyDown(
     event: React.KeyboardEvent<HTMLAnchorElement>,
-    index: number
+    index: number,
   ) {
     const menuItemCount = mobileNavigationData.anchors.length;
 
     // navigating the menu
     if (event.key === "ArrowLeft") {
-      let newItemIndex = (index + (menuItemCount - 1)) % menuItemCount;
-      menuItemRefs[newItemIndex].current?.focus();
+      const newItemIndex = (index + (menuItemCount - 1)) % menuItemCount;
+      menuItemRefs.current[newItemIndex]?.focus();
     } else if (event.key === "ArrowRight") {
-      let newItemIndex = (index + 1) % menuItemCount;
-      menuItemRefs[newItemIndex].current?.focus();
+      const newItemIndex = (index + 1) % menuItemCount;
+      menuItemRefs.current[newItemIndex]?.focus();
     }
   }
 
   return (
     <>
+      <div
+        className={`
+nav-background fixed inset-0 bg-white/50 backdrop-blur-[2px] dark:backdrop-blur-0 dark:bg-black/40 z-10 transition-opacity duration-300
+          ${open ? "" : " pointer-events-none opacity-0"}
+        `}
+        onClick={() => setOpen(false)}
+      />
       <a.nav
         id={"mobile-main-menu"}
-        className={`absolute top-6 right-6 h-12 w-12 bg-grey-fb dark:bg-grey-2 ring-1 dark:ring-0 rounded-[10px] md:hidden overflow-hidden z-20 transition-colors ${
-          open ? "ring-grey-9" : "ring-grey-b"
-        }`}
+        className={`absolute top-6 right-6 h-12 w-12 bg-grey-fb dark:bg-grey-1a ring-grey-d dark:ring-grey-3 ring-1 rounded-[10px] md:hidden overflow-hidden z-20 transition-colors`}
         style={{
           width: to(
             [toggleMenuSpring.width, toggleMenuSpring.widthoffset],
-            (w, offset) => `calc(${w}% - ${offset}px)`
+            (w, offset) => `calc(${w}% - ${offset}px)`,
           ),
           height: to(toggleMenuSpring.height, (h) => h),
           transform: to(activeNavSpring.y, (y) => `translateY(${y}px)`),
@@ -121,12 +136,11 @@ export default function NavLinksMobile() {
       >
         <div
           id={"mobile-main-menu-container"}
-          className="w-[calc(100vmin-48px)] bg-grey-fb dark:bg-grey-2 absolute right-0 top-0 isolate"
+          className="w-[calc(100vmin-48px)] absolute right-0 top-0 isolate"
         >
           <div className="flex flex-col items-end">
             <button
               className={`
-                bg-grey-fb dark:bg-grey-2
                 relative w-12 h-12 rounded-[10px]
                 focus-visible:outline focus-visible:-outline-offset-2
                 focus-visible:outline-2 focus-visible:outline-grey-2
@@ -158,18 +172,21 @@ export default function NavLinksMobile() {
           <a.div
             className="menu-line absolute top-0 left-[29px] -z-10"
             style={{
-              transform: to(lineExtendSpring.scale, (scale) => `scaleY(${scale}%)`),
+              transform: to(
+                lineExtendSpring.scale,
+                (scale) => `scaleY(${scale}%)`,
+              ),
               transformOrigin: "top",
             }}
             aria-hidden
           >
             <VerticalLineIcon
-              color="stroke-grey-b dark:stroke-grey-5"
+              color="stroke-grey-d dark:stroke-grey-3"
               height={NAV_OPEN_HEIGHT - 24}
             />
           </a.div>
           <ul
-            className="px-6 flex flex-col text-base text-grey-6 dark:text-grey-b ms-[25px] font-visby font-medium"
+            className="px-6 flex flex-col text-base text-grey-6 dark:text-grey-b ms-[25px] font-visby font-semibold"
             role={"menubar"}
           >
             {mobileNavigationData.anchors.map((anchor, anchorIndex) => (
@@ -178,12 +195,18 @@ export default function NavLinksMobile() {
                   href={anchor.link}
                   style={listItemTrail[anchorIndex]}
                   className={`peer py-3 uppercase hover:text-black dark:hover:text-grey-d transition-colors ${
-                    active == anchor.name && "text-black dark:text-grey-d"
+                    active == anchor.name
+                      ? "text-black dark:text-grey-d"
+                      : "text-grey-9 dark:text-grey-8"
                   }`}
                   tabIndex={open ? 0 : -1}
-                  onKeyDown={(event) => handleMenuItemKeyDown(event, anchorIndex)}
+                  onKeyDown={(event) =>
+                    handleMenuItemKeyDown(event, anchorIndex)
+                  }
                   onClick={() => setOpen(false)}
-                  ref={menuItemRefs[anchorIndex]}
+                  ref={(el) => {
+                    menuItemRefs.current[anchorIndex] = el;
+                  }}
                 >
                   {anchor.name}
                 </a.a>
@@ -191,11 +214,12 @@ export default function NavLinksMobile() {
                   style={{
                     transform: to(
                       listMarkerTrail[anchorIndex].scale,
-                      (scale) => `translateY(-50%) scale(${scale * 100}%)`
+                      (scale) => `translateY(-50%) scale(${scale * 100}%)`,
                     ),
                   }}
-                  className={`list-marker ring-1 ring-grey-6/0 peer-hover:ring-grey-6 dark:peer-hover:ring-grey-9 absolute top-1/2  -left-[25px] w-[10px] h-[10px]  rounded-[2.5px] bg-grey-b dark:bg-grey-5 transition-colors ${
-                    active == anchor.name && "!bg-blue-200 dark:!bg-blue-d-200 !ring-0"
+                  className={`list-marker ring-1 ring-grey-6/0 peer-hover:ring-grey-b dark:peer-hover:ring-grey-5 absolute top-1/2 -left-[25px] w-[10px] h-[10px] rounded-[2.5px] bg-grey-d dark:bg-grey-3 transition-colors ${
+                    active == anchor.name &&
+                    "!bg-blue-200 dark:!bg-blue-d-200 !ring-0"
                   }`}
                 ></a.div>
               </li>
@@ -219,13 +243,6 @@ export default function NavLinksMobile() {
           </ul>
         </div>
       </a.nav>
-      <div
-        className={`
-          nav-background fixed inset-0 bg-black/30 dark:bg-black/50 z-10 transition-opacity duration-300
-          ${open ? "" : " pointer-events-none opacity-0"}
-        `}
-        onClick={() => setOpen(false)}
-      />
     </>
   );
 }

@@ -2,12 +2,12 @@ import { useEffect, useRef, useState } from "react";
 import { ProjectGridProps } from "./props";
 import { useInView } from "react-intersection-observer";
 import { a, useSpring, useSpringRef, useTransition } from "@react-spring/web";
-import Button from "../../clickable/Button";
+import Button from "../../core/Button";
 import ProjectCard from "./ProjectCard";
 
 export default function ProjectGrid({ projects }: ProjectGridProps) {
   const INITIAL_CARD_COUNT = 3;
-  const projectCardHeaderRefs = projects.map(() => useRef<HTMLAnchorElement>(null));
+  const projectCardHeaderRefs = useRef<(HTMLAnchorElement | null)[]>([]);
   const [projectCount, setProjectCount] = useState(INITIAL_CARD_COUNT);
   const { ref, inView } = useInView({
     threshold: 0,
@@ -39,13 +39,13 @@ export default function ProjectGrid({ projects }: ProjectGridProps) {
       buttonRevealSpringRef.start({ opacity: 1, delay: 250 });
     }
     if (projectCount === projects.length) {
-      projectCardHeaderRefs[INITIAL_CARD_COUNT].current?.focus();
+      projectCardHeaderRefs.current[INITIAL_CARD_COUNT]?.focus();
     }
   }, [viewed, projectCount]);
 
   function handleProjectCountToggle() {
     setProjectCount((prev) =>
-      prev === INITIAL_CARD_COUNT ? projects.length : INITIAL_CARD_COUNT
+      prev === INITIAL_CARD_COUNT ? projects.length : INITIAL_CARD_COUNT,
     );
   }
 
@@ -57,11 +57,19 @@ export default function ProjectGrid({ projects }: ProjectGridProps) {
       >
         {cardRevealTransition((style, project, _transition, index) => (
           <a.div className="project-card-container" style={style}>
-            <ProjectCard project={project} headerRef={projectCardHeaderRefs[index]} />
+            <ProjectCard
+              project={project}
+              headerRef={(el) => {
+                projectCardHeaderRefs.current[index] = el;
+              }}
+            />
           </a.div>
         ))}
       </div>
-      <a.div className="flex justify-center grid-control" style={buttonRevealSpring}>
+      <a.div
+        className="flex justify-center grid-control"
+        style={buttonRevealSpring}
+      >
         <Button
           variant="black"
           onClick={handleProjectCountToggle}

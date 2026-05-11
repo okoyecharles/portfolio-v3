@@ -1,5 +1,5 @@
 "use client";
-import Button from "../../clickable/Button";
+import Button from "../../core/Button";
 
 function SkipToContent() {
   return (

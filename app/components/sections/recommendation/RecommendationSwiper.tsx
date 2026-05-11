@@ -6,11 +6,10 @@ import LocationIcon from "../../svg/abstract/LocationIcon";
 import { a, useSpring, useSpringRef, useTransition } from "@react-spring/web";
 import { useSpring as useThreeSpring } from "@react-spring/three";
 import { useInView } from "react-intersection-observer";
-import { percentToRadians } from "../../utils/convertion";
+import { percentToRadians } from "../../../util/string/convertion";
 import PrevIcon from "../../svg/icons/PrevIcon";
 import NextIcon from "../../svg/icons/NextIcon";
-import CustomTooltip from "../../clickable/CustomTooltip";
-import EarthThreeLoading from "../../react-three/EarthThreeLoading";
+import CustomTooltip from "../../core/CustomTooltip";
 
 export default function RecommendationSwiper({
   recommendations,
@@ -81,7 +80,7 @@ export default function RecommendationSwiper({
 
   return (
     <div
-      className="flex flex-col gap-[36px] md:flex-row justify-between recommendations-swiper my-8 md:my-2 semi-lg:mx-12 relative"
+			className="flex flex-col md:gap-9 md:flex-row justify-between recommendations-swiper my-8 md:my-2 semi-lg:mx-12 relative"
       id="recommendation-carousel"
       aria-label="recommendation carousel"
     >
@@ -135,7 +134,7 @@ export default function RecommendationSwiper({
           </div>
         ) : null}
       </a.div>
-      <div className="card-container min-h-[400px] grid place-items-center relative mr-0 md:mr-[24px] semi-lg:mr-0 px-[12px] md:px-0 isolate">
+      <div className="card-container -mt-16 min-h-[400px] grid place-items-center relative mr-0 md:mr-[24px] semi-lg:mr-0 px-[12px] md:px-0 isolate">
         {cardTransition((style, cardIndex) => (
           <RecommendationCard
             recommendation={recommendations[cardIndex]}
@@ -149,11 +148,10 @@ export default function RecommendationSwiper({
             w-[48px] aspect-square rounded-[50%] grid place-items-center
             absolute top-1/2 left-0 -translate-y-1/2 -translate-x-[12px] md:-translate-x-[36px] semi-lg:-translate-x-[60px] backdrop-blur-sm
 
-            ring-1 ring-grey-b dark:ring-grey-4
-            bg-grey-d/50 dark:bg-grey-3/50
+            ring-1 ring-grey-d dark:ring-grey-3
+            bg-grey-fb dark:bg-grey-1a
             
-            hover:ring-grey-9 dark:hover:ring-grey-5
-            hover:bg-grey-d/75 dark:hover:bg-grey-5/50
+            hover:bg-[#f9f9f9] dark:hover:bg-grey-2
 
             disabled:pointer-events-none
             disabled:opacity-0 disabled:scale-75
@@ -174,11 +172,10 @@ export default function RecommendationSwiper({
             w-[48px] aspect-square rounded-[50%] grid place-items-center 
             absolute top-1/2 right-0 -translate-y-1/2 translate-x-[12px] md:translate-x-[36px] semi-lg:translate-x-[60px] backdrop-blur-[2px]
 
-            ring-1 ring-grey-b dark:ring-grey-4
-            bg-grey-d/50 dark:bg-grey-3/50
+            ring-1 ring-grey-d dark:ring-grey-3
+            bg-grey-fb dark:bg-grey-1a
             
-            hover:ring-grey-9 dark:hover:ring-grey-5
-            hover:bg-grey-d/75 dark:hover:bg-grey-5/50
+            hover:bg-[#f9f9f9] dark:hover:bg-grey-2
 
             disabled:pointer-events-none
             disabled:opacity-0 disabled:scale-75

@@ -81,8 +81,6 @@
     }
   }
 
- 
-
   .rotating-gradient-border {
     --border-color: transparent;
     --background-color: transparent;
@@ -157,6 +155,11 @@
       transform: rotate(360deg);
     }
   }
+
+	@keyframes wave {
+		0%, 100% { transform: translateY(0); }
+		50% { transform: translateY(-6px); }
+	}
 
   /* Change Autocomplete styles in Chrome*/
   input:-webkit-autofill {

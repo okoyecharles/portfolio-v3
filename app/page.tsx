@@ -9,6 +9,7 @@ import Recommendations from "./components/sections/recommendation/Recommendation
 import Contact from "./components/sections/contact/Contact";
 import SkipToContent from "./components/sections/skip-to-content/SkipToContent";
 import Script from "next/script";
+import HomeBackground from "./components/sections/home/HomeBackground";
 
 export default function Page() {
   return (
@@ -36,6 +37,7 @@ export default function Page() {
 
       <SkipToContent />
       <Navigation />
+			<HomeBackground />
       <Home />
       <About />
       <Experience />

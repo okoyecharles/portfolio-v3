@@ -1,25 +1,37 @@
-import { SpringValue } from '@react-spring/web';
-import { Expertise } from './../../../data/experience';
+import { Experience } from "@/app/data/experience";
+import { SpringValue, TransitionFn } from "@react-spring/web";
 
 export interface ExperienceImageProps {
-  imageTransition: Function;
+  experiences: Experience[];
+  imageTransition: TransitionFn<
+    number,
+    {
+      opacity: number;
+      rotateX: number;
+      rotateY: number;
+      rotateZ: number;
+      y: string;
+    }
+  >;
 }
 
 export interface ExperienceCardProps {
-  expertise: Expertise;
+  experiences: Experience[];
+  currentIndex: number;
+  setCurrentIndex: React.Dispatch<React.SetStateAction<number>>;
   contentReveal: Record<string, SpringValue>[];
 }
 
 export interface ExperienceTimelineProps {
-  expertise: Expertise;
+  currentIndex: number;
+  experiences: Array<Experience>;
   yearTimeLineScroll: Record<string, SpringValue>;
   monthTimeLineHeight: Record<string, SpringValue>;
   monthTimeLineMarker: Record<string, SpringValue>;
 }
 
 export interface ExperienceControlProps {
-  expertiseIndex: number;
-  setExpertiseIndex: Function;
-  expertiseCount: number;
-  expertiseData: Expertise[];
+  currentIndex: number;
+  setCurrentIndex: React.Dispatch<React.SetStateAction<number>>;
+  experiences: Experience[];
 }

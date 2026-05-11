@@ -6,7 +6,9 @@ import { useInView } from "react-intersection-observer";
 import { useDispatch } from "react-redux";
 
 interface SectionProps {
+	gap?: string;
   padding?: string;
+	fillScreen?: boolean;
   sectionRef?: LegacyRef<HTMLElement>;
   children: React.ReactNode;
   name: AnchorName;
@@ -16,6 +18,8 @@ interface SectionProps {
 export default function Section({
   children,
   padding,
+	gap,
+	fillScreen = false,
   sectionRef,
   name,
   id
@@ -28,16 +32,19 @@ export default function Section({
   const dispatch = useDispatch();
   useEffect(() => {
     if (inView) dispatch(update(name));
-  }, [inView]);
+  }, [inView, dispatch, name]);
 
   return (
     <>
       <section
         id={`${id}`}
         ref={sectionRef || null}
-        className={`w-full max-w-screen-lg mx-auto flex flex-col text-grey-6 dark:text-grey-9 relative overflow-hidden px-6 md:px-8 leading-[1.5] ${
+        className={`container mx-auto flex flex-col text-grey-6 dark:text-grey-9 relative px-6 md:px-8 leading-[1.5] ${
           padding ? padding : "py-6 md:py-8"
-        }`}
+        } ${fillScreen ? "min-h-screen" : ""}`}
+				style={{
+          gap: gap
+        }}
       >
         {children}
         <div ref={ref} className="section-observer absolute top-[50vh] w-0 left-1/2" />

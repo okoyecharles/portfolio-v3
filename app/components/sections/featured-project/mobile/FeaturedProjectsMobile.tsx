@@ -1,27 +1,35 @@
 import FeaturedProjectProps from "../props";
 import "swiper/css/effect-cards";
 import animation from "../../../animations/animations";
-import { a, to, useSpring } from "@react-spring/web";
-import { useObservedSprings } from "../../../utils/useObservedSpring";
+import { a, to, useSpring, useSpringRef } from "@react-spring/web";
+import { useObservedSprings } from "../../../../hooks/useObservedSprings";
 import FeaturedProjectSwiper from "./FeaturedProjectSwiper";
 
 export default function FeaturedProjectsMobile(props: FeaturedProjectProps) {
-  const {
-    observedRef,
-    springAnimate: [layoutTransformSpring, layoutOpacitySpring],
-  } = useObservedSprings(
-    [...animation.layout.revealSlow.start],
-    [...animation.layout.revealSlow.end.map((x) => x())],
-    [useSpring, useSpring]
-  );
+  const transformRef = useSpringRef();
+  const opacityRef = useSpringRef();
+
+  const layoutTransform = useSpring({
+    ref: transformRef,
+    from: animation.layout.revealSlow.start[0],
+    ...animation.layout.revealSlow.end[0](),
+  });
+
+  const layoutOpacity = useSpring({
+    ref: opacityRef,
+    from: animation.layout.revealSlow.start[1],
+    ...animation.layout.revealSlow.end[1](),
+  });
+
+  const { observedRef } = useObservedSprings([transformRef, opacityRef]);
 
   return (
     <a.div
       className="md:hidden"
       ref={observedRef}
       style={{
-        transform: to(layoutTransformSpring.y, (y) => `translateY(${y}px)`),
-        opacity: to(layoutOpacitySpring.opacity, (op: number) => `${op}`),
+        transform: to(layoutTransform.y, (y) => `translateY(${y}px)`),
+        opacity: to(layoutOpacity.opacity, (op: number) => `${op}`),
       }}
     >
       <FeaturedProjectSwiper {...props} />

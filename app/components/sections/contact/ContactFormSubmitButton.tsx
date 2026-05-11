@@ -1,7 +1,7 @@
 import { ContactFormSubmitButtonProps } from "@/app/components/sections/contact/props";
 import { a, useSpringRef, useTransition } from "@react-spring/web";
 import { useEffect } from "react";
-import Button from "@/app/components/clickable/Button";
+import Button from "@/app/components/core/Button";
 import Loading from "@/app/components/svg/icons/Loading";
 import PlaneIcon from "@/app/components/svg/icons/PlaneIcon";
 

@@ -7,9 +7,7 @@ export default function RecommendationControl({
   recommendationIndex,
   setRecommedationIndex,
 }: RecommendationControlProps) {
-  const recommendationTabTriggerRefs = recommendations.map(() =>
-    useRef<HTMLButtonElement>(null)
-  );
+  const recommendationTabTriggerRefs = useRef<(HTMLButtonElement | null)[]>([]);
   function handleKeyDown(event: React.KeyboardEvent<HTMLUListElement>) {
     let newRecommendationIndex = -1;
     if (event.key === "ArrowLeft") {
@@ -19,7 +17,7 @@ export default function RecommendationControl({
       newRecommendationIndex = (recommendationIndex + 1) % recommendationCount;
     } else return;
     setRecommedationIndex(newRecommendationIndex);
-    recommendationTabTriggerRefs[newRecommendationIndex].current?.focus();
+    recommendationTabTriggerRefs.current[newRecommendationIndex]?.focus();
   }
 
   return (
@@ -37,7 +35,9 @@ export default function RecommendationControl({
               <li key={index} role="presentation">
                 <button
                   role="tab"
-                  ref={recommendationTabTriggerRefs[index]}
+									ref={(el) => {
+                    recommendationTabTriggerRefs.current[index] = el
+									}}
                   id={`recommendation-item-${index + 1}-trigger`}
                   tabIndex={index === recommendationIndex ? 0 : -1}
                   name={`item ${index + 1} - from ${recommendations[index].author}`}

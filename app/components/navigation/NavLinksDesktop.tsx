@@ -1,21 +1,18 @@
 "use client";
 import VerticalLineIcon from "../svg/abstract/VerticalLineIcon";
-import { AnchorName, SubmenuAnchor, navigationData } from "../../data/navigation";
-import { a, to, useSpring } from "@react-spring/web";
-import useScrollDirection from "../utils/useScrollDirection";
-import useActiveSection from "../utils/useActiveSection";
-import ExpandIcon from "../svg/submenu/ExpandIcon";
 import {
-  FocusEvent,
-  FocusEventHandler,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-import Link from "../clickable/Link";
-import useUserScrolling from "@/app/components/utils/useUserScrolling";
-import { toNormalCase } from "../utils/convertion";
+  AnchorName,
+  SubmenuAnchor,
+  navigationData,
+} from "../../data/navigation";
+import { a, to, useSpring } from "@react-spring/web";
+import useScrollDirection from "../../hooks/useScrollDirection";
+import useActiveSection from "../../hooks/useActiveSection";
+import ExpandIcon from "../svg/submenu/ExpandIcon";
+import { FocusEvent, useEffect, useRef, useState } from "react";
+import Link from "../core/Link";
+import useUserScrolling from "@/app/hooks/useUserScrolling";
+import { toNormalCase } from "../../util/string/convertion";
 import { SubmenuProps } from "./props";
 
 export default function NavLinksDesktop() {
@@ -60,17 +57,22 @@ export default function NavLinksDesktop() {
   });
 
   const [submenuOpen, setSubmenuOpen] = useState<AnchorName | null>(null);
-  const menuItemRefs = navigationData.anchors.map(() => useRef<HTMLAnchorElement>(null));
-  const submenuFirstItemRefs = navigationData.anchors.map(() =>
-    useRef<HTMLAnchorElement>(null)
-  );
+  // const menuItemRefs = navigationData.anchors.map(() =>
+  //   useRef<HTMLAnchorElement>(null),
+  // );
+  const menuItemRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+  // const submenuFirstItemRefs = navigationData.anchors.map(() =>
+  //   useRef<HTMLAnchorElement>(null),
+  // );
+  const submenuFirstItemRefs = useRef<(HTMLAnchorElement | null)[]>([]);
 
   function handleMenuItemKeyDown(
     event: React.KeyboardEvent<HTMLAnchorElement>,
-    index: number
+    index: number,
   ) {
     const menuItemCount = navigationData.anchors.length;
-    const hasSubmenu = navigationData.anchors[index].submenuAnchors !== undefined;
+    const hasSubmenu =
+      navigationData.anchors[index].submenuAnchors !== undefined;
 
     // opening submenus
     if (hasSubmenu) {
@@ -82,11 +84,11 @@ export default function NavLinksDesktop() {
 
     // navigating the menu
     if (event.key === "ArrowLeft") {
-      let newItemIndex = (index + (menuItemCount - 1)) % menuItemCount;
-      menuItemRefs[newItemIndex].current?.focus();
+      const newItemIndex = (index + (menuItemCount - 1)) % menuItemCount;
+      menuItemRefs.current[newItemIndex]?.focus();
     } else if (event.key === "ArrowRight") {
-      let newItemIndex = (index + 1) % menuItemCount;
-      menuItemRefs[newItemIndex].current?.focus();
+      const newItemIndex = (index + 1) % menuItemCount;
+      menuItemRefs.current[newItemIndex]?.focus();
     }
   }
   function handleMenuBarBlur(event: FocusEvent<HTMLUListElement, Element>) {
@@ -104,17 +106,17 @@ export default function NavLinksDesktop() {
   }, [scrollDirection]);
   useEffect(() => {
     if (submenuOpen) {
-      let anchorIndex = navigationData.anchors.findIndex(
-        (anchor) => anchor.name === submenuOpen
+      const anchorIndex = navigationData.anchors.findIndex(
+        (anchor) => anchor.name === submenuOpen,
       );
-      submenuFirstItemRefs[anchorIndex].current?.focus();
+      submenuFirstItemRefs.current[anchorIndex]?.focus();
     }
-  }, [submenuOpen]);
+  }, [submenuOpen, submenuFirstItemRefs]);
 
   return (
     <a.nav
       id={"main-menu"}
-      className="absolute w-fit top-8 right-8 bg-white dark:bg-grey-2 ring-1 dark:ring-0 ring-grey-ea rounded-[10px] font-medium px-6 py-[7px] gap-6 hidden md:flex items-center select-none"
+      className="absolute w-fit top-8 right-8 bg-grey-fb dark:bg-grey-1a ring-1 ring-grey-d dark:ring-grey-3 rounded-[10px] font-medium px-6 py-[7px] gap-6 hidden md:flex items-center select-none"
       style={activeNavSpring}
       aria-label={"Main Menu"}
     >
@@ -135,8 +137,10 @@ export default function NavLinksDesktop() {
           >
             <a
               href={anchor.link}
-              className="transition-colors group-hover/nav-item:text-black dark:group-hover/nav-item:text-grey-d uppercase font-visby"
-              ref={menuItemRefs[index]}
+              className="transition-colors group-hover/nav-item:text-black dark:group-hover/nav-item:text-grey-d uppercase font-visby font-semibold"
+              ref={(el) => {
+                menuItemRefs.current[index] = el;
+              }}
               onKeyDown={(event) => handleMenuItemKeyDown(event, index)}
             >
               {anchor.title}
@@ -147,7 +151,9 @@ export default function NavLinksDesktop() {
                 anchors={anchor.submenuAnchors}
                 open={anchor.name === submenuOpen}
                 setOpen={setSubmenuOpen}
-                submenuItemRef={submenuFirstItemRefs[index]}
+                submenuItemRef={(el) => {
+                  submenuFirstItemRefs.current[index] = el;
+                }}
               />
             )}
           </li>
@@ -173,7 +179,7 @@ export default function NavLinksDesktop() {
               width: to(activeSectionMarkerSpring.width, (w) => `${w}px`),
               transform: to(
                 activeSectionMarkerSpring.x,
-                (x) => `translateX(calc(${x}px)) translateY(50%)`
+                (x) => `translateX(calc(${x}px)) translateY(50%)`,
               ),
             }}
           />
@@ -216,7 +222,7 @@ function Submenu({
 
   function handleClickOutside(event: Event) {
     if (submenuRef.current && !submenuRef.current.contains(event.target)) {
-      setOpen(false);
+      setOpen(null);
     }
   }
 
@@ -247,13 +253,13 @@ function Submenu({
 
       <a.div
         id={name + "-submenu"}
-        className={`submenu-items bg-white ring-1 ring-grey-d dark:ring-0 dark:bg-grey-2 absolute w-[256px] h-[${SUBMENU_OPEN_HEIGHT}px] top-[calc(100%+31px)] rounded-[10px] -translate-x-8 py-3 font-medium`}
+        className={`submenu-items bg-grey-fb dark:bg-grey-1a ring-1 ring-grey-d dark:ring-grey-3 absolute w-[256px] h-[${SUBMENU_OPEN_HEIGHT}px] top-[calc(100%+31px)] rounded-[10px] -translate-x-8 py-3 font-medium`}
         style={{ ...openSubmenuSpring, pointerEvents: open ? "all" : "none" }}
         aria-label={submenuName}
       >
         <div className="relative translate-x-8">
-          <div className="submenu-pointer absolute w-[16.9px] h-[16.9px] bg-white ring-1 ring-grey-d dark:ring-0 dark:bg-grey-2 rotate-45 rounded-[2px] -top-[12px] -translate-y-1/2"></div>
-          <div className="bg-white dark:bg-grey-2 absolute w-[34px] h-[12px] -top-[12px] -left-[8px]"></div>
+          <div className="submenu-pointer absolute w-[16.9px] h-[16.9px] bg-grey-fb dark:bg-grey-1a ring-1 ring-inset ring-grey-d dark:ring-grey-3 rotate-45 rounded-[4px] -top-[12px] -translate-y-1/2"></div>
+          <div className="bg-grey-fb dark:bg-grey-1a absolute w-[34px] h-[12px] -top-[12px] -left-[8px]"></div>
         </div>
         <ul>
           {anchors.map((anchor, index) => (

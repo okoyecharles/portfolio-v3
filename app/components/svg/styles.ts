@@ -7,7 +7,7 @@ export const svgStyles: SVGStyles = {
   default:
     "fill-grey-4 dark:fill-grey-b hover:fill-black dark:hover:fill-grey-d transition-colors",
   icon: "group-hover/icon:fill-black dark:group-hover/icon:fill-grey-d",
-  button: "group-[.button]/button:fill-grey-d group-hover/button:fill-white",
+  button: "group-[.button]/button:fill-white/60 group-[.button-black]/button:fill-grey-8 group-hover/button:fill-white",
   toggle: `
     fill-grey-6 dark:fill-grey-9 transition-colors
     group-hover/toggle:fill-grey-1 dark:group-hover/toggle:fill-grey-d

@@ -7,7 +7,7 @@ import { useEffect, useRef } from "react";
 import InputErrorIcon from "@/app/components/svg/abstract/InputErrorIcon";
 import InputLoadingIcon from "@/app/components/svg/abstract/InputLoadingIcon";
 import InputVerifiedIcon from "@/app/components/svg/abstract/InputVerifiedIcon";
-import CustomTooltip from "../../clickable/CustomTooltip";
+import CustomTooltip from "../../core/CustomTooltip";
 
 export default function ContactFormInput({
   type = "input",

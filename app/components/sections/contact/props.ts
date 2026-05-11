@@ -1,5 +1,5 @@
 import { ChangeEventHandler, Dispatch, SetStateAction } from "react";
-import { FormValidationError } from "../../utils/validation";
+import { FormValidationError } from "../../../util/components/form/validation";
 
 export type ContactFormInputName = 'name' | 'email' | 'message';
 export type ContactFormData = Record<ContactFormInputName, string>;

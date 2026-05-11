@@ -1,9 +1,9 @@
 import { SyntheticEvent, useEffect, useRef } from "react";
 import { ContactFormSuccessModalProps } from "./props";
 import { a, useSpring } from "@react-spring/web";
-import Link from "../../clickable/Link";
+import Link from "../../core/Link";
 import { socials } from "@/app/data/navigation";
-import Button from "../../clickable/Button";
+import Button from "../../core/Button";
 import PlaneGraphicLarge from "../../svg/abstract/PlaneGraphicLarge";
 import PlaneGraphicSmall from "../../svg/abstract/PlaneGraphicSmall";
 
@@ -68,7 +68,7 @@ export default function ContactFormSuccessModal({
                 </div>
               </div>
               <header className="flex flex-col items-center md:items-start">
-                <h3 className=" font-extrabold text-[22px] md:text-[24px] leading-[1] text-grey-1 dark:text-grey-d">
+                <h3 className=" font-extrabold text-[22px] md:text-[24px] leading-[1.3] text-grey-1 dark:text-grey-d">
                   <span className="font-visby">Thanks for reaching out</span> <span className="font-black">!</span>
                 </h3>
                 <span
@@ -81,7 +81,7 @@ export default function ContactFormSuccessModal({
               </header>
               <div className="grid gap-4 my-4">
                 <p className="text-center md:text-left">
-                  I will be in touch shortly, I aim to respond to inquiries within 24
+                  I will be in touch shortly, I aim to respond to messages within 24
                   hours.
                 </p>
                 <p className="text-center md:text-left">

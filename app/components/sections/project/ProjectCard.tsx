@@ -1,11 +1,11 @@
 import moment from "moment";
-import Link from "../../clickable/Link";
+import Link from "../../core/Link";
 import NorthWestIcon from "../../svg/abstract/NorthWestIcon";
 import ProjectGithub from "../../svg/abstract/ProjectGithub";
 import ProjectLive from "../../svg/abstract/ProjectLive";
-import { formatDateTimeAttribute, formatMonthYear } from "../../utils/moment";
 import FeaturedProjectTag from "../featured-project/FeaturedProjectTag";
 import { ProjectCardLinksProps, ProjectCardProps } from "./props";
+import { formatDateTimeAttribute, formatMonthYear } from "@/app/util/dates/date";
 
 export default function ProjectCard({ project, headerRef }: ProjectCardProps) {
   const [initialDate, endDate] = project.timeRange;
@@ -18,11 +18,11 @@ export default function ProjectCard({ project, headerRef }: ProjectCardProps) {
       className={`
       h-full relative group/project-card
       p-6 flex flex-col gap-[6px] rounded-[10px]
-      bg-white dark:bg-grey-1 
+      bg-grey-fb dark:bg-grey-1 
       ring-1 ring-grey-d dark:ring-grey-2
 
-      hover:bg-grey-fb dark:hover:bg-grey-15
-      hover:ring-grey-b dark:hover:ring-grey-3
+      hover:bg-[#f9f9f9] dark:hover:bg-grey-1a
+      hover:ring-grey-d dark:hover:ring-grey-2
       focus-within:bg-grey-fb dark:focus-within:bg-grey-15
       focus-within:ring-grey-b dark:focus-within:ring-grey-3
       md:hover:-translate-y-4
