@@ -22,12 +22,12 @@ export default function FeaturedProjects() {
   }
 
   return (
-    <Section id="projects" name="projects" padding="pt-12 pb-16 md:py-8 md:pb-[224px]">
+    <Section id="projects" name="projects" padding="pt-12 pb-16 md:py-8 md:pb-[224px]" stretchScreen>
       <SectionHeader>Featured work</SectionHeader>
       <SectionDescription>
         A curated collection of my most exceptional work
       </SectionDescription>
-      <div className="featured-projects-container my-8">
+      <div className="featured-projects-container my-8 w-full">
         <FeaturedProjectViewer
           open={projectViewerOpen}
           setOpen={setProjectViewerOpen}

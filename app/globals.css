@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 @layer base {
-
   html {
     -webkit-tap-highlight-color: transparent;
     --scrollbar-bg: #fff;
@@ -166,4 +165,8 @@
     -webkit-text-fill-color: var(--input-autofill-color);
     transition: background-color 5000s ease-in-out 0s;
   }
+}
+
+#featured-projects-deck {
+  overflow: hidden;
 }

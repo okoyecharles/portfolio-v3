@@ -51,7 +51,7 @@ export default function FeaturedProjectSwiper({
         ))}
       </Swiper>
       <button
-        className="absolute w-[48px] aspect-square grid justify-center items-center rounded-[50%] top-1/2 -translate-y-1/2 left-0 -translate-x-1/4 z-10 group/icon backdrop-blur-sm
+        className="absolute w-[48px] aspect-square grid justify-center items-center rounded-[50%] top-1/2 -translate-y-1/2 left-0 translate-x-1/4 z-10 group/icon backdrop-blur-sm
 
             ring-1 ring-grey-d dark:ring-grey-3
             bg-grey-fb dark:bg-grey-1a
@@ -71,7 +71,7 @@ export default function FeaturedProjectSwiper({
         <PrevIcon />
       </button>
       <button
-        className="absolute w-[48px] aspect-square grid justify-center items-center rounded-[50%] top-1/2 -translate-y-1/2 right-0 translate-x-1/4 z-10 group/icon backdrop-blur-sm
+        className="absolute w-[48px] aspect-square grid justify-center items-center rounded-[50%] top-1/2 -translate-y-1/2 right-0 -translate-x-1/4 z-10 group/icon backdrop-blur-sm
 
             ring-1 ring-grey-d dark:ring-grey-3
             bg-grey-fb dark:bg-grey-1a

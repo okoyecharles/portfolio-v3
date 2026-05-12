@@ -13,6 +13,7 @@ interface SectionProps {
   children: React.ReactNode;
   name: AnchorName;
   id: string;
+	stretchScreen?: boolean
 }
 
 export default function Section({
@@ -22,7 +23,8 @@ export default function Section({
 	fillScreen = false,
   sectionRef,
   name,
-  id
+	id,
+	stretchScreen: stretchScreenMobile
 }: SectionProps) {
   const { ref, inView } = useInView({
     threshold: 0,
@@ -43,7 +45,8 @@ export default function Section({
           padding ? padding : "py-6 md:py-8"
         } ${fillScreen ? "min-h-screen" : ""}`}
 				style={{
-          gap: gap
+					gap: gap,
+					paddingInline: stretchScreenMobile ? "0" : undefined
         }}
       >
         {children}
