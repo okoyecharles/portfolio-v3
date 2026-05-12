@@ -25,7 +25,7 @@ export default function FeaturedProjectsMobile(props: FeaturedProjectProps) {
 
   return (
     <a.div
-      className="md:hidden"
+      className="md:hidden w-full"
       ref={observedRef}
       style={{
         transform: to(layoutTransform.y, (y) => `translateY(${y}px)`),
