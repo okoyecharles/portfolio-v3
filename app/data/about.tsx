@@ -1,5 +1,5 @@
 const aboutData = {
-	email: "okoyecharles509@gmail.com",
+	email: "contact@okoyecharles.com",
   technologies: [
     "JavaScript",
     "TypeScript",
